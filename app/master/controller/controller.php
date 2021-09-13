@@ -32,7 +32,6 @@ class controller
         header('Location:./');
     }
 
-
     //configuracion
     public static function Preferences()
     {
@@ -45,12 +44,10 @@ class controller
     //Json que se muestra en el dataTable para consultar Agente
     public static function Datatable()
     {
-
         $ReadAgente = crud::Read(query::ReadAgentes());
         while ($Resultado = mysqli_fetch_assoc($ReadAgente)) {
             $rows["data"][] = $Resultado;
         }
-
         echo json_encode($rows);
     }
 

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
     IngresarAgente();
-    ReadAgentes();
+    ReadAgentes()
 });
 
 //Ingresar Agente por ajax en el boton de dicho formulario
@@ -54,6 +54,5 @@ var ReadAgentes = function () {
         ]
     });
 }
-
 
 
