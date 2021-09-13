@@ -25,6 +25,13 @@ class controller
         lower();
     }
 
+    //Cerrar Session
+    public static function Cerrar()
+    {
+        session_destroy();
+        header('Location:./');
+    }
+
 
     //configuracion
     public static function Preferences()
@@ -36,7 +43,7 @@ class controller
     }
 
 
-    //Recibiendo Datos por metodo post usando Ajax de jquery
+    //Insertando Datos por metodo post usando Ajax de jquery
     public static function AgregarAgente()
     {
         $creador = $_SESSION['Master'];
@@ -95,12 +102,8 @@ class controller
                 ));
             }
             echo 'Agente Registrado Correctamente';
-
         } else {
             echo 'Las contraseñas no coinciden';
-
         }
     }
-
-    
 }
