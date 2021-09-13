@@ -1,7 +1,7 @@
 <div class="d-flex align-items-start">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-sm-1 col-md-2 col-lg-3 col-xl-4">
+            <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-4 my-2">
                 <div class="shadow-lg border nav flex-column nav-tabs me-5" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <button class="nav-link text-dark" id="v-pills-Consultar-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Consultar" type="button" role="tab" aria-controls="v-pills-Consultar" aria-selected="true">Consultar</button>
                     <button class="nav-link text-dark" id="v-pills-AgregarNuevoUsuario-tab" data-bs-toggle="pill" data-bs-target="#v-pills-AgregarNuevoUsuario" type="button" role="tab" aria-controls="v-pills-AgregarNuevoUsuario" aria-selected="false">Agregar Agente</button>
@@ -9,7 +9,7 @@
                     <button class="nav-link text-dark" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
                 </div>
             </div>
-            <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 shadow-lg">
+            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-8 shadow-lg my-2">
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade text-center" id="v-pills-Consultar" role="tabpanel" aria-labelledby="v-pills-Consultar-tab">
                         <h2 class="text-center">Consultar Usuarios</h2>
@@ -41,8 +41,9 @@
                     <div class="tab-pane fade" id="v-pills-AgregarNuevoUsuario" role="tabpanel" aria-labelledby="v-pills-AgregarNuevoUsuario-tab">
                         <div class="row">
                             <h2 class="text-center">Ingresar Usuarios</h2>
+                            <h6 class="text-center text-danger" id="RespuestaIngresoAgentes"></h6>
                         </div>
-                        <form action="PreferenciasAdmin" method="post" class="row">
+                        <form method="post" id="frmIngresarAgente" class="row">
                             <div class="col-12 col-md-6">
                                 <label for="user" class="form-label">Usuario:</label>
                                 <input type="text" name="user" id="user" class="form-control" placeholder="Ingrese el Usuario" required="required" pattern="[A-Za-z0-9]{1,50}" onkeypress="return event.charCode != 32"><br>
@@ -68,7 +69,7 @@
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Ingrese Pass" required="required"><br>
                                 <label for="ConfirmacionPassword" class="form-label">Confirmacion Contraseña:</label>
                                 <input type="password" name="ConfirmacionPassword" id="ConfirmacionPassword" class="form-control" placeholder="Confirme Pass" required="required"><br>
-                                <center><input type="submit" name="btnRegistrarAgente" value="Registrar" class="btn btn-success"></center>
+                                <center><button name="btnRegistrarAgente" id="btnRegistrarAgente" class="btn btn-success">Registrar</button></center>
                             </div>
                         </form>
                     </div>
