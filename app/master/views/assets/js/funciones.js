@@ -1,6 +1,7 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
     IngresarAgente();
+    ReadAgentes();
 });
 
 
@@ -35,4 +36,25 @@ let IngresarAgente = function () {
         $('#password').val('');
         $('#ConfirmacionPassword').val('');
     });
+
+
 }
+
+
+//Funcion para mostrar Datatable por Ajax
+let ReadAgentes = function () {
+    $('#TablaAgentes').DataTable({
+        "ajax": {
+            "url": "Preferences",
+            "dataSrc": "",
+        },
+        "columns": [
+            { "data": "usuario" },
+            { "data": "nombre" },
+            { "data": "apellido" },
+            { "data": "password" },
+            { "data": "admin" }
+        ]
+    });
+}
+

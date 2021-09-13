@@ -21,7 +21,8 @@ class mysql
 
         if ($mysqli = mysqli_connect_errno()) {
             echo 'Error de conexion';
-        } else {
+            
+        } elseif ($mysql->set_charset('utf8')) {
             return $mysql;
         }
     }
