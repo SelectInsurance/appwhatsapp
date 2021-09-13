@@ -38,6 +38,11 @@ class controller
     {
         higher();
         Nav();
+
+        $ReadAgente = crud::Read(query::ReadAgentes());
+        $Resultado = mysqli_fetch_assoc($ReadAgente);
+        $json =  json_encode($Resultado, JSON_UNESCAPED_UNICODE);
+
         require_once 'app\master\views\modules\preferencias\preferences.phtml';
         lower();
     }

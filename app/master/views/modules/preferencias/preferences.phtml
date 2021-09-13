@@ -3,18 +3,16 @@
         <div class="row">
             <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-4 my-2">
                 <div class="shadow-lg border nav flex-column nav-tabs me-5" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <button class="nav-link text-dark" id="v-pills-Consultar-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Consultar" type="button" role="tab" aria-controls="v-pills-Consultar" aria-selected="true">Consultar</button>
+                    <button class="nav-link text-dark active" id="v-pills-Consultar-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Consultar" type="button" role="tab" aria-controls="v-pills-Consultar" aria-selected="true">Consultar</button>
                     <button class="nav-link text-dark" id="v-pills-AgregarNuevoUsuario-tab" data-bs-toggle="pill" data-bs-target="#v-pills-AgregarNuevoUsuario" type="button" role="tab" aria-controls="v-pills-AgregarNuevoUsuario" aria-selected="false">Agregar Agente</button>
-                    <button class="nav-link text-dark active" id="v-pills-CambiarContraseña-tab" data-bs-toggle="pill" data-bs-target="#v-pills-CambiarContraseña" type="button" role="tab" aria-controls="v-pills-CambiarContraseña" aria-selected="false">Gestion Usuarios</button>
+                    <button class="nav-link text-dark" id="v-pills-CambiarContraseña-tab" data-bs-toggle="pill" data-bs-target="#v-pills-CambiarContraseña" type="button" role="tab" aria-controls="v-pills-CambiarContraseña" aria-selected="false">Gestion Usuarios</button>
                     <button class="nav-link text-dark" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
                 </div>
             </div>
             <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-8 shadow-lg my-2">
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade text-center" id="v-pills-Consultar" role="tabpanel" aria-labelledby="v-pills-Consultar-tab">
+                    <div class="tab-pane fade  show active text-center" id="v-pills-Consultar" role="tabpanel" aria-labelledby="v-pills-Consultar-tab">
                         <h2 class="text-center">Consultar Usuarios</h2>
-                        <?php //Tabla para Consultar Usuarios 
-                        ?>
                         <table class="border table table-sm table-hover table-responsive">
                             <thead>
                                 <tr>
@@ -26,15 +24,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while ($rows = mysqli_fetch_assoc($QueryConsultar)) : ?>
-                                    <tr>
-                                        <td><?= $rows['usuario'] ?></td>
-                                        <td><?= $rows['nombre'] ?></td>
-                                        <td><?= $rows['apellido'] ?></td>
-                                        <td><?= $rows['password'] ?></td>
-                                        <td><?= $rows['admin'] ?></td>
-                                    </tr>
-                                <?php endwhile; ?>
+                                    <?php 
+                                        var_dump($json);
+                                    ?>
                             </tbody>
                         </table>
                     </div>
@@ -73,7 +65,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade show active" id="v-pills-CambiarContraseña" role="tabpanel" aria-labelledby="v-pills-CambiarContraseña-tab">
+                    <div class="tab-pane fade" id="v-pills-CambiarContraseña" role="tabpanel" aria-labelledby="v-pills-CambiarContraseña-tab">
                         <h2 class="text-center">Cambiar Contraseña Usuarios</h2>
                         <div class="container-fluid">
                             <div class="row">

@@ -5,11 +5,11 @@ class  query
 {
     //Crear usuario
     public static function CreateUsuario(
-        $usuario, 
-        $password, 
-        $admin, 
+        $usuario,
+        $password,
+        $admin,
         $maestro
-    ){
+    ) {
         return "INSERT INTO Usuarios(
             usuario, 
             password, 
@@ -33,7 +33,7 @@ class  query
         $correo,
         $creador,
         $usuario
-    ){
+    ) {
         return "INSERT INTO Agentes(
                 nombre,
                 apellido,
@@ -53,5 +53,15 @@ class  query
                 '$creador',
                 '$usuario'
             )";
+    }
+
+    //Consultar Todos los Agentes y usuarios
+    public static function ReadAgentes()
+    {
+        return "
+            SELECT * FROM Agentes
+            INNER JOIN Usuarios ON 
+            Agentes.usuario = Usuarios.usuario
+            ";
     }
 }
