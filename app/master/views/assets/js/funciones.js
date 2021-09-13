@@ -4,9 +4,6 @@ $(document).ready(function () {
     ReadAgentes();
 });
 
-
-
-
 //Ingresar Agente por ajax en el boton de dicho formulario
 let IngresarAgente = function () {
     $('#btnRegistrarAgente').click(function (e) {
@@ -42,11 +39,11 @@ let IngresarAgente = function () {
 
 
 //Funcion para mostrar Datatable por Ajax
-let ReadAgentes = function () {
-    $('#TablaAgentes').DataTable({
+var ReadAgentes = function () {
+    var table = $('#TablaAgentes').DataTable({
         "ajax": {
-            "url": "Preferences",
-            "dataSrc": "",
+            "method": "POST",
+            "url": "Datatable"
         },
         "columns": [
             { "data": "usuario" },
@@ -57,4 +54,6 @@ let ReadAgentes = function () {
         ]
     });
 }
+
+
 

@@ -38,26 +38,20 @@ class controller
     {
         higher();
         Nav();
-
         require_once 'app\master\views\modules\preferencias\preferences.phtml';
-        $ReadAgente = crud::Read(query::ReadAgentes());
-        $Resultado = $ReadAgente->fetch_all();
-
-        //$Resultado = mysqli_fetch_array($ReadAgente);
-
-        //$i = 0;
-        //while ($Resultado = mysqli_fetch_assoc($ReadAgente)) {
-        //    $rows[$i]["usuario"] = $Resultado["usuario"];
-        //    $rows[$i]["nombre"] = $Resultado["nombre"];
-        //    $rows[$i]["apellido"] = $Resultado["apellido"];
-        //    $rows[$i]["password"] = $Resultado["password"];
-        //    $rows[$i]["admin"] = $Resultado["admin"];
-        //    $i++;
-        //}
-
-        print json_encode($Resultado, JSON_PRETTY_PRINT);
-
         lower();
+    }
+
+    //Json que se muestra en el dataTable para consultar Agente
+    public static function Datatable()
+    {
+
+        $ReadAgente = crud::Read(query::ReadAgentes());
+        while ($Resultado = mysqli_fetch_assoc($ReadAgente)) {
+            $rows["data"][] = $Resultado;
+        }
+
+        echo json_encode($rows);
     }
 
 
@@ -74,8 +68,8 @@ class controller
         $telefono = $_POST['telefono'];
         $direccion = $_POST['direccion'];
         $correo = $_POST['correo'];
-        $password = $_POST['password'];
-        $ConfirmacionPassword = $_POST['ConfirmacionPassword'];
+        $password = md5($_POST['password']);
+        $ConfirmacionPassword = md5($_POST['ConfirmacionPassword']);
 
         //Validacion de pass identica
         if ($password === $ConfirmacionPassword) {
