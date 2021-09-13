@@ -1,7 +1,8 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
     IngresarAgente();
-    ReadAgentes()
+    ReadAgentes();
+    CambiarContrasena()
 });
 
 //Ingresar Agente por ajax en el boton de dicho formulario
@@ -56,3 +57,19 @@ var ReadAgentes = function () {
 }
 
 
+//Funcion para Cambiar Contraseña por Ajax
+var CambiarContrasena = function () {
+    $('#btnCambiarContraseñaAgente').click(function (e) { 
+        e.preventDefault();
+
+        let Formulario = $('#frmCambioContraseña').serialize();
+        $.ajax({
+            type: "POST",
+            url: "CambiarContrasena",
+            data: Formulario,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            }
+        });
+    });
+}

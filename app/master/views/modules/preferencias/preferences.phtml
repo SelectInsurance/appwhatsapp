@@ -67,9 +67,9 @@
                         <h2 class="text-center">Cambiar Contraseña Usuarios</h2>
                         <div class="container-fluid">
                             <div class="row">
-                                <?php while ($rows = mysqli_fetch_array($QueryModificar)) : ?>
+                                <?php while ($rows = mysqli_fetch_array($Resultado)) : ?>
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                                        <form action="./Preferencias" method="post">
+                                        <form method="post" id="frmCambioContraseña">
                                             <div class="card" style="width: 18rem;">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center"><?= $rows['nombre'] ?></h5>
@@ -93,16 +93,17 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <label for="usuario1">Usuario</label>
-                                                                    <input type="text" name="usuario1" id="usuario1" class="form-control" value="<?= $rows['usuario'] ?>" readonly><br>
-                                                                    <label for="password1" class="form-label">Ingrese Nueva Contraseña</label>
-                                                                    <input type="password" name="password1" id="password1" class="form-control" placeholder="Ingrese nueva pass" required="required"><br>
-                                                                    <label for="password2" class="form-label">Confirme Nueva Contraseña</label>
-                                                                    <input type="password" name="password2" id="password2" class="form-control" placeholder="Confirme nueva pass" required="required">
+                                                                    <center><p id="RespuestaCambioContraseña"></p></center>
+                                                                    <label for="UsuarioAgenteCambioContraseña">Usuario</label>
+                                                                    <input type="text" name="UsuarioAgenteCambioContraseña" id="UsuarioAgenteCambioContraseña" class="form-control" value="<?= $rows['usuario'] ?>" readonly><br>
+                                                                    <label for="NuevaContraseña" class="form-label">Ingrese Nueva Contraseña</label>
+                                                                    <input type="password" name="NuevaContraseña" id="NuevaContraseña" class="form-control" placeholder="Ingrese nueva pass" required="required"><br>
+                                                                    <label for="ConfirmarNuevaContraseña" class="form-label">Confirme Nueva Contraseña</label>
+                                                                    <input type="password" name="ConfirmarNuevaContraseña" id="ConfirmarNuevaContraseña" class="form-control" placeholder="Confirme nueva pass" required="required">
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    <input type="submit" value="Cambiar" name="btnCambioContraseña" class="btn btn-success">
+                                                                    <button name="btnCambiarContraseñaAgente" class="btn btn-success" id="btnCambiarContraseñaAgente">Cambiar Contraseña</button>
                                                                 </div>
                                                             </div>
                                                         </div>

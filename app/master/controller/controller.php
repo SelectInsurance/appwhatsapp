@@ -37,6 +37,7 @@ class controller
     {
         higher();
         Nav();
+        $Resultado = crud::Read(query::ReadAgentes());
         require_once 'app\master\views\modules\preferencias\preferences.phtml';
         lower();
     }
@@ -114,5 +115,13 @@ class controller
         } else {
             echo 'Las contraseñas no coinciden';
         }
+    }
+
+    //Cambiando Contraseña de los Agentes usando Ajax por metodo post
+    public static function CambiarContrasena(){
+        $NuevaContraseña = $_POST['NuevaContraseña'];
+        $confirmarNuevaContraseña = $_POST['ConfirmarNuevaContraseña'];
+        $User = $_POST['UsuarioAgenteCambioContraseña'];
+
     }
 }
