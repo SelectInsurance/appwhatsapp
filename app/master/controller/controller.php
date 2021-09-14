@@ -120,10 +120,14 @@ class controller
     //Cambiando Contraseña de los Agentes usando Ajax por metodo post
     public static function CambiarContrasena()
     {
-
+        if (isset($_POST['btnCambiarContrasenaAgente'])) {
+            $User = $_POST['UsuarioAgenteCambioContrasena'];
             $NuevaContrasena = $_POST['NuevaContrasena'];
             $confirmarNuevaContrasena = $_POST['ConfirmarNuevaContrasena'];
-            $User = $_POST['UsuarioAgenteCambioContrasena'];
-            var_dump($NuevaContrasena . $confirmarNuevaContrasena . $User);
+            if ($NuevaContrasena === $confirmarNuevaContrasena) {
+                crud::Update(query::UpdatePassword($User, md5($NuevaContrasena)));
+                header('Location:./Preferences');
+            }
+        }
     }
 }

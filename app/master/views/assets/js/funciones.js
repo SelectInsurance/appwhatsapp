@@ -1,8 +1,8 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
-    CambiarContrasena();
     IngresarAgente();
     ReadAgentes();
+    CambiarContrasena();
 });
 
 //Ingresar Agente por ajax en el boton de dicho formulario
@@ -17,7 +17,7 @@ let IngresarAgente = function () {
             url: "AgregarAgente",
             data: Formulario,
             success: function (Respuesta) {
-                $('#RespuestaIngresoAgentes').html(Respuesta);
+                $('#RespuestaIngresoAgentes').css('color', 'Green').html(Respuesta);
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
@@ -62,25 +62,16 @@ var ReadAgentes = function () {
 }
 
 
-//Funcion para Cambiar Contraseña por Ajax
+//Funcion para Validar que las contraseñas coincidan
 var CambiarContrasena = function () {
-    $('#btnCambiarContrasenaAgente').click(function (e) {
-        e.preventDefault();
-
-        var Formulario = $('#frmCambioContrasena').serialize();
-        $.ajax({
-            type: "post",
-            url: "CambiarContrasena",
-            data: Formulario,
-            success: function (Respuesta) {
-                console.log(Respuesta);
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
-            }
-        });
+    $('#ConfirmarNuevaContrasena').keyup(function (e) {
+        var pass1 = $('#NuevaContrasena').val();
+        var pass2 = $('#ConfirmarNuevaContrasena').val();
+        if (pass1 == pass2) {
+            $('#MensajeCoincidencia').css('color', 'Green').html('Coinciden');
+        } else if (pass1 != pass2) {
+            $('#MensajeCoincidencia').css('color', 'Red').html('No Coinciden');
+        }
     });
 }
 

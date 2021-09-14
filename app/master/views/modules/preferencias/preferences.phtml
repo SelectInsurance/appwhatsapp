@@ -31,7 +31,7 @@
                     <div class="tab-pane fade" id="v-pills-AgregarNuevoUsuario" role="tabpanel" aria-labelledby="v-pills-AgregarNuevoUsuario-tab">
                         <div class="row">
                             <h2 class="text-center">Ingresar Usuarios</h2>
-                            <h6 class="text-center text-success" id="RespuestaIngresoAgentes"></h6>
+                            <h6 class="text-center" id="RespuestaIngresoAgentes"></h6>
                         </div>
                         <form method="post" id="frmIngresarAgente" class="row">
                             <div class="col-12 col-md-6">
@@ -67,9 +67,9 @@
                         <h2 class="text-center">Cambiar Contraseña Usuarios</h2>
                         <div class="container-fluid">
                             <div class="row">
-                                <?php while ($rows = mysqli_fetch_array($Resultado)) : ?>
+                                <?php while ($rows = mysqli_fetch_assoc($Resultado)) : ?>
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                                        <form method="post" id="frmCambioContrasena">
+                                        <form action="CambiarContrasena" method="post">
                                             <div class="card" style="width: 18rem;">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center"><?= $rows['nombre'] ?></h5>
@@ -92,7 +92,7 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <center>
-                                                                        <p id="RespuestaCambioContrasena"></p>
+                                                                        <p id="MensajeCoincidencia" style="font-size: 16px;"></p>
                                                                     </center>
                                                                     <label for="UsuarioAgenteCambioContraseña">Usuario</label>
                                                                     <input type="text" name="UsuarioAgenteCambioContrasena" id="UsuarioAgenteCambioContrasena" class="form-control" value="<?= $rows['usuario'] ?>" readonly><br>
@@ -103,7 +103,7 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    <button name="btnCambiarContrasenaAgente" class="btn btn-success" id="btnCambiarContrasenaAgente">Cambiar Contraseña</button>
+                                                                    <button type="submit" name="btnCambiarContrasenaAgente" class="btn btn-success" id="btnCambiarContrasenaAgente">Cambiar Contraseña</button>
                                                                 </div>
                                                             </div>
                                                         </div>

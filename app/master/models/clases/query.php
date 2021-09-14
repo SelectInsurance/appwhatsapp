@@ -64,4 +64,9 @@ class  query
             Agentes.usuario = Usuarios.usuario
             ";
     }
+
+    //Cambiar Contraseña del Agente
+    public static function UpdatePassword($user,$pass){
+        return "UPDATE usuarios SET password = '$pass' WHERE usuario = '$user'";
+    }
 }
