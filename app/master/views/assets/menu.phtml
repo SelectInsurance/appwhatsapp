@@ -37,13 +37,20 @@
         </div>
     </div>
 </nav>
-
-
-
 <div class="offcanvas offcanvas-start text-center my-5" tabindex="-1" id="Conversaciones" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Conversaciones</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <form action="" method="post">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Filtro" id="floatingInput" placeholder="Usuario" autocomplete="off">
+                            <label for="floatingInput"><i class="fas fa-search"></i> Filtrar</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="offcanvas-body ScrollMinimo shadow border">
         <div class="btn-group-vertical" role="group">
