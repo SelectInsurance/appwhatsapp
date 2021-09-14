@@ -45,7 +45,7 @@
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">Conversaciones</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
+    <div class="offcanvas-body ScrollMinimo shadow border">
         <div class="btn-group-vertical" role="group">
             <?php while ($rows = mysqli_fetch_assoc($consulta)) : ?>
                 <form action="SalaChat" method="post">

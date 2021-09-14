@@ -1,0 +1,38 @@
+/*Scroll pequeño*/
+.ScrollMinimo {
+  margin: 1px opx;
+  height: 300px;
+  width: 100%;
+  max-width: 400px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+/* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+
+.ScrollMinimo::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.ScrollMinimo::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+.ScrollMinimo::-webkit-scrollbar-button:increment,
+.ScrollMinimo::-webkit-scrollbar-button {
+  display: none;
+}
+
+.ScrollMinimo::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.ScrollMinimo::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.ScrollMinimo::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
