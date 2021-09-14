@@ -69,4 +69,9 @@ class  query
     public static function UpdatePassword($user,$pass){
         return "UPDATE usuarios SET password = '$pass' WHERE usuario = '$user'";
     }
+
+    //Consultar Salas de chat activas
+    public static function ReadSalaChat(){
+        return "SELECT * FROM SalasChat";
+    }
 }

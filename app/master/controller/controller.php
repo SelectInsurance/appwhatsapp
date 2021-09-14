@@ -6,13 +6,15 @@ function higher()
 {
     require_once 'app\master\views\assets\header.html';
 }
+function Nav()
+{
+    $consulta = crud::Read(query::ReadSalaChat());
+    require_once 'app\master\views\assets\menu.phtml';
+}
+
 function lower()
 {
     require_once 'app\master\views\assets\footer.html';
-}
-function Nav()
-{
-    require_once 'app\master\views\assets\menu.phtml';
 }
 
 class controller
@@ -129,5 +131,14 @@ class controller
                 header('Location:./Preferences');
             }
         }
+    }
+
+    //Sala de chat individual
+    public static function SalaChat()
+    {
+        higher();
+        Nav();
+        lower();
+        var_dump($_POST['btnAbrirChat']);
     }
 }
