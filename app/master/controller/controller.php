@@ -118,10 +118,12 @@ class controller
     }
 
     //Cambiando Contraseña de los Agentes usando Ajax por metodo post
-    public static function CambiarContrasena(){
-        $NuevaContraseña = $_POST['NuevaContraseña'];
-        $confirmarNuevaContraseña = $_POST['ConfirmarNuevaContraseña'];
-        $User = $_POST['UsuarioAgenteCambioContraseña'];
+    public static function CambiarContrasena()
+    {
 
+            $NuevaContrasena = $_POST['NuevaContrasena'];
+            $confirmarNuevaContrasena = $_POST['ConfirmarNuevaContrasena'];
+            $User = $_POST['UsuarioAgenteCambioContrasena'];
+            var_dump($NuevaContrasena . $confirmarNuevaContrasena . $User);
     }
 }

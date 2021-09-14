@@ -24,7 +24,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -69,7 +69,7 @@
                             <div class="row">
                                 <?php while ($rows = mysqli_fetch_array($Resultado)) : ?>
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                                        <form method="post" id="frmCambioContraseña">
+                                        <form method="post" id="frmCambioContrasena">
                                             <div class="card" style="width: 18rem;">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center"><?= $rows['nombre'] ?></h5>
@@ -78,12 +78,10 @@
                                                         <?= $rows['nombre'] ?> <?= $rows['apellido'] ?><br>
                                                         Contraseña: <b>*****</b><br>
                                                         es admin: <?= $rows['admin'] ?></p>
-
                                                     <!-- Button trigger modal -->
                                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal<?= $rows['usuario'] ?>">
                                                         Cambiar Contraseña
                                                     </button>
-
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="Modal<?= $rows['usuario'] ?>">
                                                         <div class="modal-dialog">
@@ -93,17 +91,19 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <center><p id="RespuestaCambioContraseña"></p></center>
+                                                                    <center>
+                                                                        <p id="RespuestaCambioContrasena"></p>
+                                                                    </center>
                                                                     <label for="UsuarioAgenteCambioContraseña">Usuario</label>
-                                                                    <input type="text" name="UsuarioAgenteCambioContraseña" id="UsuarioAgenteCambioContraseña" class="form-control" value="<?= $rows['usuario'] ?>" readonly><br>
-                                                                    <label for="NuevaContraseña" class="form-label">Ingrese Nueva Contraseña</label>
-                                                                    <input type="password" name="NuevaContraseña" id="NuevaContraseña" class="form-control" placeholder="Ingrese nueva pass" required="required"><br>
-                                                                    <label for="ConfirmarNuevaContraseña" class="form-label">Confirme Nueva Contraseña</label>
-                                                                    <input type="password" name="ConfirmarNuevaContraseña" id="ConfirmarNuevaContraseña" class="form-control" placeholder="Confirme nueva pass" required="required">
+                                                                    <input type="text" name="UsuarioAgenteCambioContrasena" id="UsuarioAgenteCambioContrasena" class="form-control" value="<?= $rows['usuario'] ?>" readonly><br>
+                                                                    <label for="NuevaContrasena" class="form-label">Ingrese Nueva Contraseña</label>
+                                                                    <input type="password" name="NuevaContrasena" id="NuevaContrasena" class="form-control" placeholder="Ingrese nueva pass" required="required"><br>
+                                                                    <label for="ConfirmarNuevaContrasena" class="form-label">Confirme Nueva Contraseña</label>
+                                                                    <input type="password" name="ConfirmarNuevaContrasena" id="ConfirmarNuevaContrasena" class="form-control" placeholder="Confirme nueva pass" required="required">
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    <button name="btnCambiarContraseñaAgente" class="btn btn-success" id="btnCambiarContraseñaAgente">Cambiar Contraseña</button>
+                                                                    <button name="btnCambiarContrasenaAgente" class="btn btn-success" id="btnCambiarContrasenaAgente">Cambiar Contraseña</button>
                                                                 </div>
                                                             </div>
                                                         </div>

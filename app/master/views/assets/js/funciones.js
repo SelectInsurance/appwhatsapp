@@ -1,8 +1,8 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
+    CambiarContrasena();
     IngresarAgente();
     ReadAgentes();
-    CambiarContrasena()
 });
 
 //Ingresar Agente por ajax en el boton de dicho formulario
@@ -18,6 +18,11 @@ let IngresarAgente = function () {
             data: Formulario,
             success: function (Respuesta) {
                 $('#RespuestaIngresoAgentes').html(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
             }
         });
 
@@ -59,17 +64,27 @@ var ReadAgentes = function () {
 
 //Funcion para Cambiar Contraseña por Ajax
 var CambiarContrasena = function () {
-    $('#btnCambiarContraseñaAgente').click(function (e) { 
+    $('#btnCambiarContrasenaAgente').click(function (e) {
         e.preventDefault();
 
-        let Formulario = $('#frmCambioContraseña').serialize();
+        var Formulario = $('#frmCambioContrasena').serialize();
         $.ajax({
-            type: "POST",
+            type: "post",
             url: "CambiarContrasena",
             data: Formulario,
             success: function (Respuesta) {
                 console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
             }
         });
     });
 }
+
+
+
+
+
