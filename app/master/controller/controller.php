@@ -138,6 +138,7 @@ class controller
     {
         higher();
         Nav();
+        require_once 'app\master\views\modules\chat\chat.phtml';
         lower();
         var_dump($_POST['btnAbrirChat']);
     }
