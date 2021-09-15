@@ -74,4 +74,17 @@ class  query
     public static function ReadSalaChat(){
         return "SELECT * FROM SalasChat";
     }
+
+
+
+    
+    //Crear AccesWebToken
+    public static function CreateAwebT($instance, $token){
+        return "INSERT INTO TokenChatApi(Instance, Token) VALUES('$instance','$token')";
+    }
+
+    //Consultar AccesWebToken
+    public static function ReadAwebT(){
+        return "SELECT * FROM TokenChatApi";
+    }
 }

@@ -136,10 +136,49 @@ class controller
     //Sala de chat individual
     public static function SalaChat()
     {
+        //Condicion para obligar a tener si o si una sala de chat
+        if (!empty($_POST['btnAbrirChat'])) {
+            higher();
+            Nav();
+            require_once 'app\master\views\modules\chat\chat.phtml';
+            lower();
+        } else {
+            header('Location:./');
+        }
+    }
+
+    //form para insertar accesweb token
+    public static function formAccesWebToken()
+    {
         higher();
         Nav();
-        require_once 'app\master\views\modules\chat\chat.phtml';
+        require_once 'app\master\views\modules\config\config.html';
+
         lower();
-        var_dump($_POST['btnAbrirChat']);
+    }
+
+    //ingreso de AccesWebToken por ajax por metodo post
+    public static function InsertAccesWebToken()
+    {
+        $instance = $_POST['instancia'];
+        $token = $_POST['token'];
+        crud::Read(query::CreateAwebT($instance, $token));
+        echo 'Registro Exitoso';
+    }
+
+    //Mostrando AccesWebToken por ajax en la tabla
+    public static function ReadAccesWebToken()
+    {
+        $Consulta = crud::Read(query::ReadAwebT());
+        $i = 0;
+        while ($rows = mysqli_fetch_assoc($Consulta)) {
+
+            $Array[$i]['idToken'] = $rows['idToken'];
+            $Array[$i]['Instance'] = $rows['Instance'];
+            $Array[$i]['Token'] = $rows['Token'];
+            $i++;
+        }
+        $json = json_encode($Array, JSON_PRETTY_PRINT);
+        print $json;
     }
 }
