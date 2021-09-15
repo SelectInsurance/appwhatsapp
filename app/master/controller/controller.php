@@ -25,7 +25,6 @@ function Nav()
     }
 
     //Salas de chat almacenadas en base de datos
-    //$consulta = crud::Read(query::ReadSalaChat());
     $consulta = crud::Read(query::ReadDialogs());
     require_once 'app\master\views\assets\menu.phtml';
 }
@@ -155,6 +154,7 @@ class controller
     {
         //Condicion para obligar a tener si o si una sala de chat
         if (!empty($_POST['btnAbrirChat'])) {
+            $SalaChat = str_replace('@c.us','',$_POST['btnAbrirChat']);
             higher();
             Nav();
             require_once 'app\master\views\modules\chat\chat.phtml';

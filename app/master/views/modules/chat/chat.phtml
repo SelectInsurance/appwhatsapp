@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <center><h4><i>Sala de Chat</i></h4></center>
+        <center><h4><i><?= $SalaChat; ?></i></h4></center>
     </div>
     <div class="row">
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
@@ -9,7 +9,7 @@
 
             </div>
             <form action="" method="post">
-                <input type="text" name="chatId" id="chatId" value="<?= $_POST['btnAbrirChat'] ?>" class="form-control" readonly>
+                <input type="text" name="chatId" id="chatId" value="<?= $SalaChat; ?>" class="form-control" readonly>
                 <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Enviar Mensaje"></textarea>
                 <input type="submit" value="Enviar" class="btn btn-outline-success my-2">
             </form>
