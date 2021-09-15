@@ -28,9 +28,18 @@ CREATE TABLE Agentes(
 
 CREATE TABLE TokenChatApi(
   idToken INT PRIMARY KEY AUTO_INCREMENT,
-  Token VARCHAR(100) NOT NULL,
-  Url VARCHAR(100) NOT NULL
+  Instance VARCHAR(100) NOT NULL,
+  Token VARCHAR(100) NOT NULL
 );
+
+
+CREATE TABLE dialogs(
+  id VARCHAR(25) PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  image TEXT NOT NULL,
+  last_time VARCHAR(25) NOT NULL
+);
+
 
 
 CREATE TABLE SalasChat(
@@ -327,4 +336,4 @@ VALUES
   INDEX(idwhatsapp),
   FOREIGN KEY mensaje(id) REFERENCES Agentes(id),
   FOREIGN KEY mensaje(idwhatsapp) REFERENCES NumeroCliente(idwhatsapp)
-);*//
+);*/

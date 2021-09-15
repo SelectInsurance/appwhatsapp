@@ -66,25 +66,31 @@ class  query
     }
 
     //Cambiar Contraseña del Agente
-    public static function UpdatePassword($user,$pass){
+    public static function UpdatePassword($user, $pass)
+    {
         return "UPDATE usuarios SET password = '$pass' WHERE usuario = '$user'";
     }
 
-    //Consultar Salas de chat activas
-    public static function ReadSalaChat(){
-        return "SELECT * FROM SalasChat";
+    //Insertar dialogs
+    public static function CreateDialogs($id,$name,$image,$last_time)
+    {
+        return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
     }
 
+    public static function ReadDialogs()
+    {
+        return "SELECT * FROM dialogs";
+    }
 
-
-    
     //Crear AccesWebToken
-    public static function CreateAwebT($instance, $token){
+    public static function CreateAwebT($instance, $token)
+    {
         return "INSERT INTO TokenChatApi(Instance, Token) VALUES('$instance','$token')";
     }
 
     //Consultar AccesWebToken
-    public static function ReadAwebT(){
-        return "SELECT * FROM TokenChatApi";
+    public static function ReadAwebT()
+    {
+        return "SELECT * FROM TokenChatApi ORDER BY idToken DESC Limit 1";
     }
 }

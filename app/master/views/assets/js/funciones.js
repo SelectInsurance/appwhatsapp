@@ -126,6 +126,8 @@ var IngresoAccessWebToken = function () {
                 console.log(error);
             }
         });
+        $('#instancia').val('');
+        $('#token').val('');
         ReadAccesWebToken();
     });
 }
