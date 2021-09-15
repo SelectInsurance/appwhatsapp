@@ -1,6 +1,8 @@
 <div class="container-fluid">
     <div class="row">
-        <center><h4><i><?= $SalaChat; ?></i></h4></center>
+        <center>
+            <h4><i><?= $SalaChat; ?></i></h4>
+        </center>
     </div>
     <div class="row">
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
@@ -10,10 +12,13 @@
             </div>
             <form action="" method="post">
                 <input type="text" name="chatId" id="chatId" value="<?= $SalaChat; ?>" class="form-control" readonly>
-                <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Enviar Mensaje"></textarea>
+                <p class="emoji-picker-container">
+                    <textarea class="form-control" cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode" type="text" name="" id="" placeholder="Enviar Mensaje"></textarea>
+                </p>
                 <input type="submit" value="Enviar" class="btn btn-outline-success my-2">
             </form>
         </div>
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
     </div>
+
 </div>
