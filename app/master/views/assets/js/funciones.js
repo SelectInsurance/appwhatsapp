@@ -5,6 +5,7 @@ $(document).ready(function () {
     CambiarContrasena();
     ReadAccesWebToken();
     IngresoAccessWebToken();
+    ActivacionEmotes();
 });
 
 //Funcion para mostrar Datatable por Ajax
@@ -133,3 +134,12 @@ var IngresoAccessWebToken = function () {
 }
 
 
+
+var ActivarEmotes = $(function () {
+    window.emojiPicker = new EmojiPicker({
+        emojiable_selector: '[data-emojiable=true]',
+        assetsPath: 'app/master/views/assets/Emoji/img',
+        popupButtonClasses: 'icon-smile'
+    });
+    window.emojiPicker.discover();
+});
