@@ -8,6 +8,7 @@ $(document).ready(function () {
     ActivarEmotes();
     ReadTransferenciaChat();
     ReadSalasChatTransferencia();
+    CreateTransferirChat();
 });
 
 //Funcion para mostrar Datatable por Ajax
@@ -65,6 +66,7 @@ let IngresarAgente = function () {
 
 
 }
+
 
 //Funcion para Validar que las contraseñas coincidan
 var CambiarContrasena = function () {
@@ -148,6 +150,7 @@ var ActivarEmotes = function () {
     });
 }
 
+
 //Consultar tabla para transferir chat
 var ReadTransferenciaChat = function () {
     var table = $('#TablaTransferirChat').DataTable({
@@ -207,18 +210,29 @@ var ReadSalasChatTransferencia = function () {
     });
 }
 
+//Transferir Sala a Agente
 var CreateTransferirChat = function() {
     $('#btnTransferirChat').click(function (e) { 
         e.preventDefault();
         
+        var form = $('#frmTransferirChat').serialize();
+
         $.ajax({
             type: "POST",
-            url: "url",
-            data: "data",
-            dataType: "dataType",
-            success: function (response) {
-                
+            url: "UpdateDialogs",
+            data: form,
+            dataType: "text",
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                $('#RespuestaTransferencia').html(Respuesta).css('color', 'Green').val();
+
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
             }
+            
         });
     });
 }

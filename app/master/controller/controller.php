@@ -228,4 +228,17 @@ class controller
         print $json;
 
     }
+
+    //Transfiriendo Sala Chat a un Agente
+    public static function UpdateDialogs(){
+
+        if (isset($_POST)) {
+            $idAgente = $_POST['IdAgenteTransferir'];
+            $name = $_POST['SeleccionSalaChat'];
+            crud::Update(query::UpdateDialogs($idAgente,$name));
+            echo 'Transferencia Exitosa';
+        }else{
+            echo 'No se pudo Transferir';
+        }
+    }
 }

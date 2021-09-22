@@ -93,4 +93,9 @@ class  query
     {
         return "SELECT * FROM TokenChatApi ORDER BY idToken DESC Limit 1";
     }
+
+    //Modificar Dialogs
+    public static function UpdateDialogs($idAgente, $name){
+        return "UPDATE dialogs set idAgentes = '$idAgente' WHERE name = '$name'";
+    }
 }
