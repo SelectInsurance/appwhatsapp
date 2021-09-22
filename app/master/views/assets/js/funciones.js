@@ -152,7 +152,7 @@ var ActivarEmotes = function () {
 var ReadTransferenciaChat = function () {
     var table = $('#TablaTransferirChat').DataTable({
         "ajax": {
-            "method": "POST",
+            "method": "GET",
             "url": "ConsultandoUsuarioATransferir"
         },
         "columns": [
@@ -204,5 +204,21 @@ var ReadSalasChatTransferencia = function () {
             );
             $('#SeleccionSalaChat').html(select);
         }
+    });
+}
+
+var CreateTransferirChat = function() {
+    $('#btnTransferirChat').click(function (e) { 
+        e.preventDefault();
+        
+        $.ajax({
+            type: "POST",
+            url: "url",
+            data: "data",
+            dataType: "dataType",
+            success: function (response) {
+                
+            }
+        });
     });
 }

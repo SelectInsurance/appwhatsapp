@@ -210,18 +210,10 @@ class controller
     //Consultando Datos del Modulo Transferir
     public static function ConsultandoUsuarioATransferir(){
         $Consulta = crud::Read(query::ReadAgentes());
-        $i = 0;
-        while ($rows = mysqli_fetch_assoc($Consulta)) {
-
-            $Array[$i]['id'] = $rows['id'];
-            $Array[$i]['nombre'] = $rows['nombre'];
-            $Array[$i]['apellido'] = $rows['apellido'];
-            $Array[$i]['usuario'] = $rows['usuario'];
-            $i++;
+        while ($Resultado = mysqli_fetch_assoc($Consulta)) {
+            $rows["data"][] = $Resultado;
         }
-        $json = json_encode($Array, JSON_PRETTY_PRINT);
-        print $json;
-
+        echo json_encode($rows);
     }
 
     //Consultando Salas de chat en etiqueta Select
