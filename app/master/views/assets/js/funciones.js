@@ -160,7 +160,7 @@ var ReadTransferenciaChat = function () {
                 consulta => {
                     tbody += `
                     <tr>
-                        <td>${consulta.id}</td>
+                        <td><input type="checkbox" name="idAgenteTransferir[]" value="${consulta.id}" class="form-check-input"></td>
                         <td>${consulta.nombre}</td>
                         <td>${consulta.apellido}</td>
                         <td>${consulta.usuario}</td>
@@ -172,6 +172,7 @@ var ReadTransferenciaChat = function () {
         }
     });
 };
+
 
 //Consultar salas de chat para transferir
 var ReadSalasChatTransferencia = function () {
