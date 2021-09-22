@@ -155,7 +155,7 @@ var ActivarEmotes = function () {
 var ReadTransferenciaChat = function () {
     var table = $('#TablaTransferirChat').DataTable({
         "ajax": {
-            "method": "GET",
+            "method": "POST",
             "url": "ConsultandoUsuarioATransferir"
         },
         "columns": [
