@@ -231,7 +231,6 @@ class controller
 
     //Transfiriendo Sala Chat a un Agente
     public static function UpdateDialogs(){
-
         if (isset($_POST)) {
             $idAgente = $_POST['IdAgenteTransferir'];
             $name = $_POST['SeleccionSalaChat'];
