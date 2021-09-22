@@ -224,6 +224,7 @@ class controller
 
     }
 
+    //Consultando Salas de chat en etiqueta Select
     public static function ConsultandoSalasChatSelector(){
         $consulta = crud::Read(query::ReadDialogs());
         $i = 0;

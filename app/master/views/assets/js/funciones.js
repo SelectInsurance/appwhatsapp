@@ -150,7 +150,20 @@ var ActivarEmotes = function () {
 
 //Consultar tabla para transferir chat
 var ReadTransferenciaChat = function () {
-    $.ajax({
+    var table = $('#TablaTransferirChat').DataTable({
+        "ajax": {
+            "method": "POST",
+            "url": "ConsultandoUsuarioATransferir"
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "nombre" },
+            { "data": "apellido" },
+            { "data": "usuario" }
+            //{ "data": "admin" }
+        ]
+    });
+    /*$.ajax({
         type: "GET",
         url: "ConsultandoUsuarioATransferir",
         success: function (Respuesta) {
@@ -170,7 +183,7 @@ var ReadTransferenciaChat = function () {
             );
             $('#TablaTransferirChat').html(tbody);
         }
-    });
+    });*/
 };
 
 
