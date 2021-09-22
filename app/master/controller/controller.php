@@ -198,4 +198,41 @@ class controller
         $json = json_encode($Array, JSON_PRETTY_PRINT);
         print $json;
     }
+
+    //Modulo Transferir chat
+    public static function TransferirChat(){
+        higher();
+        Nav();
+        require_once 'app/master/views/modules/TransferenciaChat/TransferenciaChat.phtml';
+        lower();
+    }
+
+    //Consultando Datos del Modulo Transferir
+    public static function ConsultandoUsuarioATransferir(){
+        $Consulta = crud::Read(query::ReadAgentes());
+        $i = 0;
+        while ($rows = mysqli_fetch_assoc($Consulta)) {
+
+            $Array[$i]['id'] = $rows['id'];
+            $Array[$i]['nombre'] = $rows['nombre'];
+            $Array[$i]['apellido'] = $rows['apellido'];
+            $Array[$i]['usuario'] = $rows['usuario'];
+            $i++;
+        }
+        $json = json_encode($Array, JSON_PRETTY_PRINT);
+        print $json;
+
+    }
+
+    public static function ConsultandoSalasChatSelector(){
+        $consulta = crud::Read(query::ReadDialogs());
+        $i = 0;
+        while ($rows = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['name'] = $rows['name'];
+            $i++;
+        }
+        $json = json_encode($Array, JSON_PRETTY_PRINT);
+        print $json;
+
+    }
 }

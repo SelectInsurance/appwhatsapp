@@ -5,7 +5,9 @@ $(document).ready(function () {
     CambiarContrasena();
     ReadAccesWebToken();
     IngresoAccessWebToken();
-    ActivacionEmotes();
+    ActivarEmotes();
+    ReadTransferenciaChat();
+    ReadSalasChatTransferencia();
 });
 
 //Funcion para mostrar Datatable por Ajax
@@ -134,12 +136,59 @@ var IngresoAccessWebToken = function () {
 }
 
 
-
-var ActivarEmotes = $(function () {
-    window.emojiPicker = new EmojiPicker({
-        emojiable_selector: '[data-emojiable=true]',
-        assetsPath: 'app/master/views/assets/Emoji/img',
-        popupButtonClasses: 'icon-smile'
+//Activar Emotes
+var ActivarEmotes = function () {
+    $(function () {
+        window.emojiPicker = new EmojiPicker({
+            emojiable_selector: '[data-emojiable=true]',
+            assetsPath: 'app/master/views/assets/Emoji/img',
+            popupButtonClasses: 'icon-smile'
+        });
+        window.emojiPicker.discover();
     });
-    window.emojiPicker.discover();
-});
+}
+
+//Consultar tabla para transferir chat
+var ReadTransferenciaChat = function () {
+    $.ajax({
+        type: "GET",
+        url: "ConsultandoUsuarioATransferir",
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            var tbody = '';
+            json.forEach(
+                consulta => {
+                    tbody += `
+                    <tr>
+                        <td>${consulta.id}</td>
+                        <td>${consulta.nombre}</td>
+                        <td>${consulta.apellido}</td>
+                        <td>${consulta.usuario}</td>
+                    </tr>
+                    `;
+                }
+            );
+            $('#TablaTransferirChat').html(tbody);
+        }
+    });
+};
+
+//Consultar salas de chat para transferir
+var ReadSalasChatTransferencia = function () {
+    $.ajax({
+        type: "GET",
+        url: "ConsultandoSalasChatSelector",
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            var select = '';
+            json.forEach(
+                consulta =>{
+                    select +=`
+                    <option value="${consulta.name}">${consulta.name}</option>
+                    `
+                }
+            );
+            $('#SeleccionSalaChat').html(select);
+        }
+    });
+}
