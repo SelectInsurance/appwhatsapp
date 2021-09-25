@@ -41,6 +41,7 @@ class controller
     {
         higher();
         Nav();
+        require_once 'app/master/views/modules/dashboard';
         lower();
     }
 

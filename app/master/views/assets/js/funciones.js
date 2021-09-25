@@ -234,5 +234,6 @@ var CreateTransferirChat = function() {
             }
             
         });
+        $('#IdAgenteTransferir').val('');
     });
 }
