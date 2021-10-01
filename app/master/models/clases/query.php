@@ -98,4 +98,9 @@ class  query
     public static function UpdateDialogs($idAgente, $name){
         return "UPDATE dialogs set idAgentes = '$idAgente' WHERE name = '$name'";
     }
+
+    //Consultando imagen de Dialogs
+    public static function ReadImageDialogs($id){
+        return "SELECT image FROM dialogs WHERE id = '$id'";
+    }
 }

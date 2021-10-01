@@ -155,7 +155,13 @@ class controller
     {
         //Condicion para obligar a tener si o si una sala de chat
         if (!empty($_POST['btnAbrirChat'])) {
+            $id = $_POST['btnAbrirChat'];
             $SalaChat = str_replace('@c.us','',$_POST['btnAbrirChat']);
+
+            //Imagen Guardada
+            $resultado = crud::Read(query::ReadImageDialogs($id));
+            $image = mysqli_fetch_assoc($resultado);
+
             higher();
             Nav();
             require_once 'app/master/views/modules/chat/chat.phtml';
