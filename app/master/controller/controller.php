@@ -1,10 +1,10 @@
 <?php
-require_once 'app\master\models\app_autoload.php';
+require_once 'app/master/models/app_autoload.php';
 
 //Funciones para requerir encabezado, pie de pagina y menu
 function higher()
 {
-    require_once 'app\master\views\assets\header.html';
+    require_once 'app/master/views/assets/header.html';
 }
 function Nav()
 {
@@ -26,12 +26,12 @@ function Nav()
 
     //Salas de chat almacenadas en base de datos
     $consulta = crud::Read(query::ReadDialogs());
-    require_once 'app\master\views\assets\menu.phtml';
+    require_once 'app/master/views/assets/menu.phtml';
 }
 
 function lower()
 {
-    require_once 'app\master\views\assets\footer.html';
+    require_once 'app/master/views/assets/footer.html';
 }
 
 class controller
@@ -41,6 +41,7 @@ class controller
     {
         higher();
         Nav();
+        require_once 'app/master/views/modules/dashboard/dashboard.phtml';
         lower();
     }
 
@@ -57,7 +58,7 @@ class controller
         higher();
         Nav();
         $Resultado = crud::Read(query::ReadAgentes());
-        require_once 'app\master\views\modules\preferencias\preferences.phtml';
+        require_once 'app/master/views/modules/preferencias/preferences.phtml';
         lower();
     }
 
@@ -157,7 +158,7 @@ class controller
             $SalaChat = str_replace('@c.us','',$_POST['btnAbrirChat']);
             higher();
             Nav();
-            require_once 'app\master\views\modules\chat\chat.phtml';
+            require_once 'app/master/views/modules/chat/chat.phtml';
             lower();
         } else {
             header('Location:./');
@@ -169,7 +170,7 @@ class controller
     {
         higher();
         Nav();
-        require_once 'app\master\views\modules\config\config.html';
+        require_once 'app/master/views/modules/config/config.html';
 
         lower();
     }
@@ -177,8 +178,8 @@ class controller
     //ingreso de AccesWebToken por ajax por metodo post
     public static function InsertAccesWebToken()
     {
-        $instance = $_POST['instancia'];
-        $token = $_POST['token'];
+        $instance = trim($_POST['instancia']);
+        $token = trim($_POST['token']);
         crud::Read(query::CreateAwebT($instance, $token));
         echo 'Registro Exitoso';
     }
@@ -197,5 +198,47 @@ class controller
         }
         $json = json_encode($Array, JSON_PRETTY_PRINT);
         print $json;
+    }
+
+    //Modulo Transferir chat
+    public static function TransferirChat(){
+        higher();
+        Nav();
+        require_once 'app/master/views/modules/TransferenciaChat/TransferenciaChat.phtml';
+        lower();
+    }
+
+    //Consultando Datos del Modulo Transferir
+    public static function ConsultandoUsuarioATransferir(){
+        $Consulta = crud::Read(query::ReadAgentes());
+        while ($Resultado = mysqli_fetch_assoc($Consulta)) {
+            $rows["data"][] = $Resultado;
+        }
+        echo json_encode($rows);
+    }
+
+    //Consultando Salas de chat en etiqueta Select
+    public static function ConsultandoSalasChatSelector(){
+        $consulta = crud::Read(query::ReadDialogs());
+        $i = 0;
+        while ($rows = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['name'] = $rows['name'];
+            $i++;
+        }
+        $json = json_encode($Array, JSON_PRETTY_PRINT);
+        print $json;
+
+    }
+
+    //Transfiriendo Sala Chat a un Agente
+    public static function UpdateDialogs(){
+        if (isset($_POST)) {
+            $idAgente = $_POST['IdAgenteTransferir'];
+            $name = $_POST['SeleccionSalaChat'];
+            crud::Update(query::UpdateDialogs($idAgente,$name));
+            echo 'Transferencia Exitosa';
+        }else{
+            echo 'No se pudo Transferir';
+        }
     }
 }

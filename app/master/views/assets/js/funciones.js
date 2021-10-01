@@ -5,7 +5,10 @@ $(document).ready(function () {
     CambiarContrasena();
     ReadAccesWebToken();
     IngresoAccessWebToken();
-    ActivacionEmotes();
+    ActivarEmotes();
+    ReadTransferenciaChat();
+    ReadSalasChatTransferencia();
+    CreateTransferirChat();
 });
 
 //Funcion para mostrar Datatable por Ajax
@@ -63,6 +66,7 @@ let IngresarAgente = function () {
 
 
 }
+
 
 //Funcion para Validar que las contraseñas coincidan
 var CambiarContrasena = function () {
@@ -134,12 +138,102 @@ var IngresoAccessWebToken = function () {
 }
 
 
-
-var ActivarEmotes = $(function () {
-    window.emojiPicker = new EmojiPicker({
-        emojiable_selector: '[data-emojiable=true]',
-        assetsPath: 'app/master/views/assets/Emoji/img',
-        popupButtonClasses: 'icon-smile'
+//Activar Emotes
+var ActivarEmotes = function () {
+    $(function () {
+        window.emojiPicker = new EmojiPicker({
+            emojiable_selector: '[data-emojiable=true]',
+            assetsPath: 'app/master/views/assets/Emoji/img',
+            popupButtonClasses: 'icon-smile'
+        });
+        window.emojiPicker.discover();
     });
-    window.emojiPicker.discover();
-});
+}
+
+
+//Consultar tabla para transferir chat
+var ReadTransferenciaChat = function () {
+    var table = $('#TablaTransferirChat').DataTable({
+        "ajax": {
+            "method": "POST",
+            "url": "ConsultandoUsuarioATransferir"
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "nombre" },
+            { "data": "apellido" },
+            { "data": "usuario" }
+            //{ "data": "admin" }
+        ]
+    });
+    /*$.ajax({
+        type: "GET",
+        url: "ConsultandoUsuarioATransferir",
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            var tbody = '';
+            json.forEach(
+                consulta => {
+                    tbody += `
+                    <tr>
+                        <td><input type="checkbox" name="idAgenteTransferir[]" value="${consulta.id}" class="form-check-input"></td>
+                        <td>${consulta.nombre}</td>
+                        <td>${consulta.apellido}</td>
+                        <td>${consulta.usuario}</td>
+                    </tr>
+                    `;
+                }
+            );
+            $('#TablaTransferirChat').html(tbody);
+        }
+    });*/
+};
+
+
+//Consultar salas de chat para transferir
+var ReadSalasChatTransferencia = function () {
+    $.ajax({
+        type: "GET",
+        url: "ConsultandoSalasChatSelector",
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            var select = '';
+            json.forEach(
+                consulta =>{
+                    select +=`
+                    <option value="${consulta.name}">${consulta.name}</option>
+                    `
+                }
+            );
+            $('#SeleccionSalaChat').html(select);
+        }
+    });
+}
+
+//Transferir Sala a Agente
+var CreateTransferirChat = function() {
+    $('#btnTransferirChat').click(function (e) { 
+        e.preventDefault();
+        
+        var form = $('#frmTransferirChat').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "UpdateDialogs",
+            data: form,
+            dataType: "text",
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                $('#RespuestaTransferencia').html(Respuesta).css('color', 'Green').val();
+
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+            
+        });
+        $('#IdAgenteTransferir').val('');
+    });
+}

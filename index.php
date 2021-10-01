@@ -3,7 +3,7 @@ session_start();
 
 //Master
 if (isset($_SESSION['Master'])) {
-    require_once 'app\master\controller\controller.php';
+    require_once 'app/master/controller/controller.php';
     if (isset($_GET['controller'])) {
         $controller = $_GET['controller'];
         switch ($_GET['controller']) {
@@ -29,7 +29,7 @@ if (isset($_SESSION['Master'])) {
 
     //Login
 } else {
-    require_once 'app\Login\controller\controller.php';
+    require_once 'app/Login/controller/controller.php';
     $controller = $_GET['controller'];
     if (isset($_GET['controller'])) {
         switch ($_GET['controller']) {
