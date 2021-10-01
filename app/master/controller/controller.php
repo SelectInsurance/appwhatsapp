@@ -19,7 +19,7 @@ function Nav()
         $i = 0;
 
         while ($i < $j) {
-            crud::Create(query::CreateDialogs($value[$i]['id'],$value[$i]['name'],$value[$i]['image'],$value[$i]['last_time']));
+            crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
             $i++;
         }
     }
@@ -41,6 +41,19 @@ class controller
     {
         higher();
         Nav();
+
+        //cantidad de salas de chat
+        $consulta = crud::Read(query::ReadDialogs());
+        
+        $i = 0;
+        while ($row = mysqli_fetch_array($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_name'] = $row['last_name'];
+            $i ++;
+        }
+        $conteo = count($Array);
         require_once 'app/master/views/modules/dashboard/dashboard.phtml';
         lower();
     }
@@ -156,7 +169,7 @@ class controller
         //Condicion para obligar a tener si o si una sala de chat
         if (!empty($_POST['btnAbrirChat'])) {
             $id = $_POST['btnAbrirChat'];
-            $SalaChat = str_replace('@c.us','',$_POST['btnAbrirChat']);
+            $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
 
             //Imagen Guardada
             $resultado = crud::Read(query::ReadImageDialogs($id));
@@ -207,7 +220,8 @@ class controller
     }
 
     //Modulo Transferir chat
-    public static function TransferirChat(){
+    public static function TransferirChat()
+    {
         higher();
         Nav();
         require_once 'app/master/views/modules/TransferenciaChat/TransferenciaChat.phtml';
@@ -215,7 +229,8 @@ class controller
     }
 
     //Consultando Datos del Modulo Transferir
-    public static function ConsultandoUsuarioATransferir(){
+    public static function ConsultandoUsuarioATransferir()
+    {
         $Consulta = crud::Read(query::ReadAgentes());
         while ($Resultado = mysqli_fetch_assoc($Consulta)) {
             $rows["data"][] = $Resultado;
@@ -224,7 +239,8 @@ class controller
     }
 
     //Consultando Salas de chat en etiqueta Select
-    public static function ConsultandoSalasChatSelector(){
+    public static function ConsultandoSalasChatSelector()
+    {
         $consulta = crud::Read(query::ReadDialogs());
         $i = 0;
         while ($rows = mysqli_fetch_assoc($consulta)) {
@@ -233,18 +249,23 @@ class controller
         }
         $json = json_encode($Array, JSON_PRETTY_PRINT);
         print $json;
-
     }
 
     //Transfiriendo Sala Chat a un Agente
-    public static function UpdateDialogs(){
+    public static function UpdateDialogs()
+    {
         if (isset($_POST)) {
             $idAgente = $_POST['IdAgenteTransferir'];
             $name = $_POST['SeleccionSalaChat'];
-            crud::Update(query::UpdateDialogs($idAgente,$name));
+            crud::Update(query::UpdateDialogs($idAgente, $name));
             echo 'Transferencia Exitosa';
-        }else{
+        } else {
             echo 'No se pudo Transferir';
         }
+    }
+
+    //Mostrar Cantidad Chats Asignados a Agente
+    public static function MostrarDialogsAsignadosChat(){
+        
     }
 }

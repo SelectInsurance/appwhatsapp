@@ -237,3 +237,20 @@ var CreateTransferirChat = function() {
         $('#IdAgenteTransferir').val('');
     });
 }
+
+//Cantidad Chat Asignado a Agentes
+var DatatableDialogAgente = function(){
+    var table = $('#TablaTransferirChat').DataTable({
+        "ajax": {
+            "method": "POST",
+            "url": "MostrarDialogsAsignadosChat"
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "nombre" },
+            { "data": "apellido" },
+            { "data": "usuario" }
+            //{ "data": "admin" }
+        ]
+    });
+}
