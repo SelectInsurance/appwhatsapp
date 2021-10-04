@@ -27,10 +27,12 @@ function Nav()
     //Salas de chat almacenadas en base de datos
     $consulta = crud::Read(query::ReadDialogs());
     require_once 'app/master/views/assets/menu.phtml';
+    require_once 'app/master/views/assets/contentheader.phtml';
 }
 
 function lower()
 {
+    require_once 'app/master/views/assets/contentfooter.phtml';
     require_once 'app/master/views/assets/footer.html';
 }
 
@@ -301,5 +303,31 @@ class controller
         }
         $conteo = count($Array);
         echo $conteo;
+    }
+
+    //Tabla para mostrar cantidad de chat asignados a cada agente
+    public static function TablaChatAsignadoAgente(){
+        $consulta = crud::Read(query::ReadChatAsignadosAgentes());
+
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($consulta)) {
+
+            //Logica para sacar la consulta con la funcion count de mysql
+            $Resultado = crud::Read(query::ReadConteoChatAsignadosAgentes($row['usuario']));
+            $RecibiendoArray[$i]['count'] = mysqli_fetch_assoc($Resultado);
+            foreach ($RecibiendoArray[$i]['count'] as $count) {
+                $conteo = $count;
+            }
+
+
+            $ArrayAgentes[$i]['count'] = $conteo;
+            $ArrayAgentes[$i]['usuario'] = $row['usuario'];
+            $ArrayAgentes[$i]['nombre'] = $row['nombre'];
+            $ArrayAgentes[$i]['apellido'] = $row['apellido'];
+            $i++;
+        }
+        
+        $json = json_encode($ArrayAgentes, JSON_PRETTY_PRINT);
+        print $json;
     }
 }

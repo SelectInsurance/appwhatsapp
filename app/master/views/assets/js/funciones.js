@@ -4,6 +4,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
     setInterval('MostrarCantidadSalasChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
+    TablaChatAsignadoAgente();
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -203,8 +204,8 @@ var ReadSalasChatTransferencia = function () {
             var json = JSON.parse(Respuesta);
             var select = '';
             json.forEach(
-                consulta =>{
-                    select +=`
+                consulta => {
+                    select += `
                     <option value="${consulta.name}">${consulta.name}</option>
                     `
                 }
@@ -215,10 +216,10 @@ var ReadSalasChatTransferencia = function () {
 }
 
 //Transferir Sala a Agente
-var CreateTransferirChat = function() {
-    $('#btnTransferirChat').click(function (e) { 
+var CreateTransferirChat = function () {
+    $('#btnTransferirChat').click(function (e) {
         e.preventDefault();
-        
+
         var form = $('#frmTransferirChat').serialize();
 
         $.ajax({
@@ -236,14 +237,14 @@ var CreateTransferirChat = function() {
                 console.log(status);
                 console.log(error);
             }
-            
+
         });
         $('#IdAgenteTransferir').val('');
     });
 }
 
 //Cantidad Chat Asignado a Agentes
-var DatatableDialogAgente = function(){
+var DatatableDialogAgente = function () {
     var table = $('#TablaTransferirChat').DataTable({
         "ajax": {
             "method": "POST",
@@ -260,7 +261,7 @@ var DatatableDialogAgente = function(){
 }
 
 //Mostrando Cantidad de salas de chat
-var MostrarCantidadSalasChat = function() {
+var MostrarCantidadSalasChat = function () {
     $.ajax({
         type: "POST",
         url: "CantidadSalasChat",
@@ -284,7 +285,7 @@ var MostrarCantidadSalasChatAbiertas = function () {
         success: function (Respuesta) {
             $('#CardSalasAbiertas').html(Respuesta);
         },
-        error: function(xhr, status, error){
+        error: function (xhr, status, error) {
             console.log(xhr);
             console.log(status);
             console.log(error);
@@ -292,6 +293,7 @@ var MostrarCantidadSalasChatAbiertas = function () {
     });
 }
 
+//Mostrando cantidad de salas de chat asignadas a agentes
 var MostrarCantidadSalasChatAsignadas = function () {
     $.ajax({
         type: "POST",
@@ -299,6 +301,21 @@ var MostrarCantidadSalasChatAsignadas = function () {
         success: function (Respuesta) {
             //console.log(Respuesta);
             $('#CardSalasAsignadas').html(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+var TablaChatAsignadoAgente = function () {
+    $.ajax({
+        type: "POST",
+        url: "TablaChatAsignadoAgente",
+        success: function (Respuesta) {
+            console.log(Respuesta);
         },
         error: function (xhr, status, error) {
             console.log(xhr);
