@@ -1,5 +1,9 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
+
+    setInterval('MostrarCantidadSalasChatAsignadas()', 500);
+    setInterval('MostrarCantidadSalasChat()', 500);
+    setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -252,5 +256,54 @@ var DatatableDialogAgente = function(){
             { "data": "usuario" }
             //{ "data": "admin" }
         ]
+    });
+}
+
+//Mostrando Cantidad de salas de chat
+var MostrarCantidadSalasChat = function() {
+    $.ajax({
+        type: "POST",
+        url: "CantidadSalasChat",
+        success: function (Respuesta) {
+            $('#CardSalasPendientes').html(Respuesta);
+            //console.log(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+//Mostrando Cantidad de salas de chat Abiertas
+var MostrarCantidadSalasChatAbiertas = function () {
+    $.ajax({
+        type: "POST",
+        url: "MostrandoChatAbiertos",
+        success: function (Respuesta) {
+            $('#CardSalasAbiertas').html(Respuesta);
+        },
+        error: function(xhr, status, error){
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+var MostrarCantidadSalasChatAsignadas = function () {
+    $.ajax({
+        type: "POST",
+        url: "MostrandoChatAsignados",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            $('#CardSalasAsignadas').html(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
     });
 }

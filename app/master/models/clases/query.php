@@ -103,4 +103,19 @@ class  query
     public static function ReadImageDialogs($id){
         return "SELECT image FROM dialogs WHERE id = '$id'";
     }
+
+    //Update para abrir chat
+    public static function UpdateDialogsAbrirChat($id){
+        return "UPDATE dialogs SET abierto = true WHERE id = '$id'";
+    }
+
+    //Mostrando Chat Abiertos
+    public static function ReadChatAbiertos(){
+        return "SELECT abierto FROM dialogs WHERE abierto = TRUE";
+    }
+
+    //Mostrando Chat Asignado a Agentes
+    public static function ReadChatAsignados(){
+        return "SELECT count(idAgentes) FROM whatsapp.dialogs";
+    }
 }

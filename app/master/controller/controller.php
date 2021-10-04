@@ -42,20 +42,24 @@ class controller
         higher();
         Nav();
 
-        //cantidad de salas de chat
+        require_once 'app/master/views/modules/dashboard/dashboard.phtml';
+        lower();
+    }
+
+    //Cantidad Salas de Chat
+    public static function CantidadSalasChat()
+    {
         $consulta = crud::Read(query::ReadDialogs());
-        
         $i = 0;
         while ($row = mysqli_fetch_array($consulta)) {
             $Array[$i]['id'] = $row['id'];
             $Array[$i]['name'] = $row['name'];
             $Array[$i]['image'] = $row['image'];
             $Array[$i]['last_name'] = $row['last_name'];
-            $i ++;
+            $i++;
         }
         $conteo = count($Array);
-        require_once 'app/master/views/modules/dashboard/dashboard.phtml';
-        lower();
+        echo $conteo;
     }
 
     //Cerrar Session
@@ -175,6 +179,10 @@ class controller
             $resultado = crud::Read(query::ReadImageDialogs($id));
             $image = mysqli_fetch_assoc($resultado);
 
+            //ChatAbiertos
+            crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
+
+
             higher();
             Nav();
             require_once 'app/master/views/modules/chat/chat.phtml';
@@ -265,7 +273,33 @@ class controller
     }
 
     //Mostrar Cantidad Chats Asignados a Agente
-    public static function MostrarDialogsAsignadosChat(){
-        
+    public static function MostrarDialogsAsignadosChat()
+    {
+    }
+
+    //Mostrando Cantidad chat abiertos
+    public static function MostrandoChatAbiertos()
+    {
+        $consulta = crud::Read(query::ReadChatAbiertos());
+        $i = 0;
+        while ($row = mysqli_fetch_array($consulta)) {
+            $Array[$i]['abierto'] = $row['abierto'];
+            $i++;
+        }
+        $conteo = count($Array);
+        echo $conteo;
+    }
+
+    //Mostrando Cantidad Chat Asignado a Agentes
+    public static function MostrandoChatAsignados()
+    {
+        $consulta = crud::Read(query::ReadChatAsignados());
+        $i = 0;
+        while ($row = mysqli_fetch_array($consulta)) {
+            $Array[$i]['idAgente'] = $row['idAgente'];
+            $i++;
+        }
+        $conteo = count($Array);
+        echo $conteo;
     }
 }

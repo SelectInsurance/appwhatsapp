@@ -36,6 +36,7 @@
     name VARCHAR(255) NOT NULL,
     image TEXT NOT NULL,
     last_time VARCHAR(25) NOT NULL,
+    abierto BOOLEAN DEFAULT FALSE,
     idAgentes INT(50) NULL,
     INDEX(idAgentes),
     FOREIGN KEY dialogs(idAgentes) REFERENCES Agentes(id)
