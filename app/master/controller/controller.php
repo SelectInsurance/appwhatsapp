@@ -53,7 +53,8 @@ class controller
     }
 
     //Validacion cuando ingresan al login logeados
-    public static function Login(){
+    public static function Login()
+    {
         header('Location:Inicio');
     }
 
