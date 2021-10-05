@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 //Master
 if (isset($_SESSION['Master'])) {
     require_once 'app/master/controller/controller.php';
