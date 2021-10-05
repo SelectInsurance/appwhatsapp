@@ -123,7 +123,9 @@ class  query
     public static function ReadChatAsignadosAgentes(){
         return "SELECT * FROM Agentes";
     }
+
+    //Mostrando cantidad de chats asignados de cada agente
     public static function ReadConteoChatAsignadosAgentes($user){
-        return "CALL SP_ConteoChatAsignados('$user')";
+        return "CALL SP_ConteoChatAgente('$user')";
     }
 }

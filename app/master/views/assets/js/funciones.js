@@ -4,7 +4,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
     setInterval('MostrarCantidadSalasChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
-    TablaChatAsignadoAgente();
+    setInterval('TablaChatAsignadoAgente()', 500);
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -312,10 +312,24 @@ var MostrarCantidadSalasChatAsignadas = function () {
 
 var TablaChatAsignadoAgente = function () {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "TablaChatAsignadoAgente",
         success: function (Respuesta) {
-            console.log(Respuesta);
+            let json = JSON.parse(Respuesta);
+            let tabla = '';
+            json.forEach(
+                Datos =>{
+                    tabla += `
+                        <tr>
+                            <td>${Datos.nombre}</td>
+                            <td>${Datos.apellido}</td>
+                            <td>${Datos.usuario}</td>
+                            <td>${Datos.count}</td>
+                        </tr>
+                    `
+                }
+            );
+            $('#ChatAsignadosAgentes').html(tabla);
         },
         error: function (xhr, status, error) {
             console.log(xhr);
