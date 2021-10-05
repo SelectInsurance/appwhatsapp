@@ -11,7 +11,7 @@ if (isset($_SESSION['Master'])) {
                 controller::$controller();
                 break;
         }
-    }else {
+    } else {
         header('Location:Inicio');
     }
 
@@ -31,13 +31,14 @@ if (isset($_SESSION['Master'])) {
 } else {
     require_once 'app/Login/controller/controller.php';
     $controller = $_GET['controller'];
-    if (isset($_GET['controller'])) {
-        switch ($_GET['controller']) {
-            case $controller:
+    switch ($_GET['controller']) {
+        case $controller:
+            //controller::$controller();
+            if ($_GET['controller'] == 'Login') {
                 controller::$controller();
-                break;
-        }
-    } else {
-        header('Location:Login');
+            } else {
+                header('Location:Login');
+            }
+            break;
     }
 }

@@ -40,12 +40,21 @@ class controller
 {
     //DashBoard
     public static function Inicio()
-    {
-        higher();
-        Nav();
+    {   
+        if (isset($_SESSION['Master'])) {
+            higher();
+            Nav();
+    
+            require_once 'app/master/views/modules/dashboard/dashboard.phtml';
+            lower();
+        }else {
+            header('Location:Login');
+        }
+    }
 
-        require_once 'app/master/views/modules/dashboard/dashboard.phtml';
-        lower();
+    //Validacion cuando ingresan al login logeados
+    public static function Login(){
+        header('Location:Inicio');
     }
 
     //Cantidad Salas de Chat
