@@ -319,10 +319,11 @@ var MostrarCantidadSalasChatAsignadas = function () {
 //Mostrando Agentes con sus conteos
 var TablaChatAsignadoAgente = function () {
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "TablaChatAsignadoAgente",
         success: function (Respuesta) {
             let json = JSON.parse(Respuesta);
+            //console.log();
             let tabla = '';
             json.forEach(
                 Datos =>{
@@ -331,7 +332,7 @@ var TablaChatAsignadoAgente = function () {
                             <td>${Datos.nombre}</td>
                             <td>${Datos.apellido}</td>
                             <td>${Datos.usuario}</td>
-                            <td>${Datos.count}</td>
+                            <td class="badge bg-secondary">${Datos.count}</td>
                         </tr>
                     `
                 }
