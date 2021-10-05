@@ -1,11 +1,15 @@
-<div class="container-fluid">
+<div class="container-fluid ml-5">
     <div class="row mb-3">
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
         <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8">
             <div class="container-fluid">
                 <div class="row border shadow">
                     <div class="col-2 text-start">
-                        <img src="<?php if ($image['image'] != null){ echo $image['image'];}else{echo 'app\master\views\assets\css\images\sinfoto.webp';} ?>" class="rounded-circle img-thumbnail" style="width:65px;height: auto; " alt="<?= $SalaChat; ?>">
+                        <img src="<?php if ($image['image'] != null) {
+                                        echo $image['image'];
+                                    } else {
+                                        echo 'app\master\views\assets\css\images\sinfoto.webp';
+                                    } ?>" class="rounded-circle img-thumbnail" style="width:65px;height: auto; " alt="<?= $SalaChat; ?>">
                     </div>
                     <div class="col-10 text-start mt-3">
                         <h4><i><?= $SalaChat; ?></i></h4>
@@ -15,23 +19,35 @@
         </div>
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
     </div>
-</div>
-<div class="row mb-5">
-    <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
-    <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8 shadow border">
-        <div class="CajaChat border my-2">
+    <div class="row mb-5">
+        <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
+        <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8 shadow border">
+            <div class="CajaChat border my-2">
 
-        </div>
+                <div id="datos-chat" class="m-2">
+                    <span style="color: #1c62c4;">Cristian Aguirre:</span>
+                    <span style="color: #848484;">Hola Mundo</span>
+                    <span style="float: right; font-size: 11px;"><?= $rows['fecha'] ?></span>
+                </div>
 
-        <form action="" method="post">
-            <input type="text" name="chatId" id="chatId" value="<?= $SalaChat; ?>" class="form-control" readonly>
-            <div class="emoji-picker-container">
-                <textarea class="form-control" cols="30" rows="1" data-emojiable="true" data-emoji-input="unicode" type="text" name="" id="" placeholder="Enviar Mensaje"></textarea>
             </div>
-            <button class="btn btn-outline-success my-2"><i class="far fa-paper-plane fa-2x"></i></button>
-        </form>
+            <form action="" method="post">
+                <div class="container-fluid my-2">
+                    <div class="row">
+                        <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                            <input type="text" name="chatId" id="chatId" value="<?= $SalaChat; ?>" class="form-control" readonly>
+                            <div class="emoji-picker-container mt-2">
+                                <textarea class="form-control" cols="30" rows="1" data-emojiable="true" data-emoji-input="unicode" type="text" name="" id="" placeholder="Enviar Mensaje"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1 mt-3">
+                            <button class="btn btn-outline-success"><i class="far fa-paper-plane fa-2x"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
     </div>
-    <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
-</div>
 
 </div>

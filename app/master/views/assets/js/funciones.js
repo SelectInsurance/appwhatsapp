@@ -215,6 +215,7 @@ var ReadSalasChatTransferencia = function () {
     });
 }
 
+
 //Transferir Sala a Agente
 var CreateTransferirChat = function () {
     $('#btnTransferirChat').click(function (e) {
@@ -243,6 +244,7 @@ var CreateTransferirChat = function () {
     });
 }
 
+
 //Cantidad Chat Asignado a Agentes
 var DatatableDialogAgente = function () {
     var table = $('#TablaTransferirChat').DataTable({
@@ -259,6 +261,7 @@ var DatatableDialogAgente = function () {
         ]
     });
 }
+
 
 //Mostrando Cantidad de salas de chat
 var MostrarCantidadSalasChat = function () {
@@ -277,6 +280,7 @@ var MostrarCantidadSalasChat = function () {
     });
 }
 
+
 //Mostrando Cantidad de salas de chat Abiertas
 var MostrarCantidadSalasChatAbiertas = function () {
     $.ajax({
@@ -292,6 +296,7 @@ var MostrarCantidadSalasChatAbiertas = function () {
         }
     });
 }
+
 
 //Mostrando cantidad de salas de chat asignadas a agentes
 var MostrarCantidadSalasChatAsignadas = function () {
@@ -310,6 +315,8 @@ var MostrarCantidadSalasChatAsignadas = function () {
     });
 }
 
+
+//Mostrando Agentes con sus conteos
 var TablaChatAsignadoAgente = function () {
     $.ajax({
         type: "GET",
