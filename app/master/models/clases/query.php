@@ -10,7 +10,7 @@ class  query
         $admin,
         $maestro
     ) {
-        return "INSERT INTO Usuarios(
+        return "INSERT O Usuarios(
             usuario, 
             password, 
             admin, 
@@ -34,7 +34,7 @@ class  query
         $creador,
         $usuario
     ) {
-        return "INSERT INTO Agentes(
+        return "INSERT O Agentes(
                 nombre,
                 apellido,
                 documento,
@@ -74,7 +74,7 @@ class  query
     //Insertar dialogs
     public static function CreateDialogs($id,$name,$image,$last_time)
     {
-        return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
+        return "INSERT O dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
     }
 
     public static function ReadDialogs()
@@ -85,7 +85,7 @@ class  query
     //Crear AccesWebToken
     public static function CreateAwebT($instance, $token)
     {
-        return "INSERT INTO TokenChatApi(Instance, Token) VALUES('$instance','$token')";
+        return "INSERT O TokenChatApi(Instance, Token) VALUES('$instance','$token')";
     }
 
     //Consultar AccesWebToken
@@ -127,5 +127,54 @@ class  query
     //Mostrando cantidad de chats asignados de cada agente
     public static function ReadConteoChatAsignadosAgentes($user){
         return "CALL SP_ConteoChatAgente('$user')";
+    }
+
+    //Insertar Mensajes de la api a la base de datos
+    public static function CreateAlmacenarMensajes(
+        $id,
+        $body,
+        $fromMe,
+        $self,
+        $isForwarded,
+        $author,
+        $time,
+        $chatId,
+        $messageNumber,
+        $type,
+        $senderName,
+        $quotedMsgBody,
+        $quotedMsgId,
+        $quotedMsgType,
+        $metadata,
+        $ack,
+        $chatName){
+            
+        return "
+        call 
+        SP_AlmacenarMensajes     
+        (
+        '$id',
+        '$body',
+        '$fromMe',
+        '$self',
+        '$isForwarded',
+        '$author',
+        '$time',
+        '$chatId',
+        '$messageNumber',
+        '$type',
+        '$senderName',
+        '$quotedMsgBody',
+        '$quotedMsgId',
+        '$quotedMsgType',
+        '$metadata',
+        '$ack',
+        '$chatName'
+        )";
+    }
+
+    //Mostrar Mensajes de chat individual
+    public static function ReadMensajesChat($id){
+        return "call SP_MostrarMensajesChat('$id')";
     }
 }

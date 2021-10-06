@@ -5,6 +5,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('TablaChatAsignadoAgente()', 500);
+    MostrarMensajesChat();
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -338,6 +339,27 @@ var TablaChatAsignadoAgente = function () {
                 }
             );
             $('#ChatAsignadosAgentes').html(tabla);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+
+//Mostrar Mensajes de chat individual
+var MostrarMensajesChat = function () {
+
+    let form = $('#frmMostrarChat').serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "MostrarMensajesChat",
+        data: form,
+        success: function (Respuesta) {
+            console.log(Respuesta);
         },
         error: function (xhr, status, error) {
             console.log(xhr);

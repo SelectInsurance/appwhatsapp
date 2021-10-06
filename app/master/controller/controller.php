@@ -40,14 +40,14 @@ class controller
 {
     //DashBoard
     public static function Inicio()
-    {   
+    {
         if (isset($_SESSION['Master'])) {
             higher();
             Nav();
-    
+
             require_once 'app/master/views/modules/dashboard/dashboard.phtml';
             lower();
-        }else {
+        } else {
             header('Location:Login');
         }
     }
@@ -179,6 +179,14 @@ class controller
         }
     }
 
+
+
+
+
+
+
+
+
     //Sala de chat individual
     public static function SalaChat()
     {
@@ -203,6 +211,81 @@ class controller
             header('Location:./');
         }
     }
+
+    //Mostrar Mensajes de chat individual
+    public static function MostrarMensajesChat()
+    {
+        $id =  $_POST['chatId'];
+        $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
+        $api = new ChatApi($url['Instance'], $url['Token']);
+        $data = $api->messages();
+        foreach ($data['messages'] as $messages) {
+            echo $messages['id'];
+            echo $messages['body'];
+            echo $messages['fromMe'];
+            echo $messages['self'];
+            echo $messages['isForwarded'];
+            echo $messages['author'];
+            echo $messages['time'];
+            echo $messages['chatId'];
+            echo $messages['messageNumber'];
+            echo $messages['type'];
+            echo $messages['senderName'];
+            echo $messages['quotedMsgBody'];
+            echo $messages['quotedMsgId'];
+            echo $messages['quotedMsgType'];
+            echo $messages['metadata'];
+            echo $messages['ack'];
+            echo $messages['chatName'];
+            crud::Create(query::CreateAlmacenarMensajes(
+                $messages['id'],
+                $messages['body'],
+                $messages['fromMe'],
+                $messages['self'],
+                $messages['isForwarded'],
+                $messages['author'],
+                $messages['time'],
+                $messages['chatId'],
+                $messages['messageNumber'],
+                $messages['type'],
+                $messages['senderName'],
+                $messages['quotedMsgBody'],
+                $messages['quotedMsgId'],
+                $messages['quotedMsgType'],
+                $messages['metadata'],
+                $messages['ack'],
+                $messages['chatName']
+            ));
+        }
+
+
+        var_dump($messages['messages'][1]['id']);
+
+
+
+
+
+
+
+        print $id . ' ' . json_encode($messages, JSON_PRETTY_PRINT);
+        //$consulta = crud::Read(query::ReadMensajesChat($id));
+    }
+
+    //Enviar Mensajes de chat individual
+    public static function EnviarMensajesChat()
+    {
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     //form para insertar accesweb token
     public static function formAccesWebToken()
