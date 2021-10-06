@@ -10,7 +10,7 @@ class  query
         $admin,
         $maestro
     ) {
-        return "INSERT O Usuarios(
+        return "INSERT INTO Usuarios(
             usuario, 
             password, 
             admin, 
@@ -34,7 +34,7 @@ class  query
         $creador,
         $usuario
     ) {
-        return "INSERT O Agentes(
+        return "INSERT INTO Agentes(
                 nombre,
                 apellido,
                 documento,
@@ -74,7 +74,7 @@ class  query
     //Insertar dialogs
     public static function CreateDialogs($id,$name,$image,$last_time)
     {
-        return "INSERT O dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
+        return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
     }
 
     public static function ReadDialogs()
@@ -85,7 +85,7 @@ class  query
     //Crear AccesWebToken
     public static function CreateAwebT($instance, $token)
     {
-        return "INSERT O TokenChatApi(Instance, Token) VALUES('$instance','$token')";
+        return "INSERT INTO TokenChatApi(Instance, Token) VALUES('$instance','$token')";
     }
 
     //Consultar AccesWebToken

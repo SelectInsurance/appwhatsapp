@@ -12,7 +12,6 @@ function Nav()
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
     $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
     $array = $ChatApi->Dialogs();
-
     //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
     foreach ($array as $key => $value) {
         $j = count($value);
@@ -215,60 +214,61 @@ class controller
     //Mostrar Mensajes de chat individual
     public static function MostrarMensajesChat()
     {
-        $id =  $_POST['chatId'];
-        $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
-        $api = new ChatApi($url['Instance'], $url['Token']);
-        $data = $api->messages();
-        foreach ($data['messages'] as $messages) {
-            echo $messages['id'];
-            echo $messages['body'];
-            echo $messages['fromMe'];
-            echo $messages['self'];
-            echo $messages['isForwarded'];
-            echo $messages['author'];
-            echo $messages['time'];
-            echo $messages['chatId'];
-            echo $messages['messageNumber'];
-            echo $messages['type'];
-            echo $messages['senderName'];
-            echo $messages['quotedMsgBody'];
-            echo $messages['quotedMsgId'];
-            echo $messages['quotedMsgType'];
-            echo $messages['metadata'];
-            echo $messages['ack'];
-            echo $messages['chatName'];
-            crud::Create(query::CreateAlmacenarMensajes(
-                $messages['id'],
-                $messages['body'],
-                $messages['fromMe'],
-                $messages['self'],
-                $messages['isForwarded'],
-                $messages['author'],
-                $messages['time'],
-                $messages['chatId'],
-                $messages['messageNumber'],
-                $messages['type'],
-                $messages['senderName'],
-                $messages['quotedMsgBody'],
-                $messages['quotedMsgId'],
-                $messages['quotedMsgType'],
-                $messages['metadata'],
-                $messages['ack'],
-                $messages['chatName']
-            ));
+        if (!empty($_POST['chatId'])) {
+
+            $id =  $_POST['chatId'];
+            $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
+            $api = new ChatApi($url['Instance'], $url['Token']);
+            $data = $api->messages();
+            foreach ($data['messages'] as $messages) {
+                crud::Create(query::CreateAlmacenarMensajes(
+                    $messages['id'],
+                    $messages['body'],
+                    $messages['fromMe'],
+                    $messages['self'],
+                    $messages['isForwarded'],
+                    $messages['author'],
+                    $messages['time'],
+                    $messages['chatId'],
+                    $messages['messageNumber'],
+                    $messages['type'],
+                    $messages['senderName'],
+                    $messages['quotedMsgBody'],
+                    $messages['quotedMsgId'],
+                    $messages['quotedMsgType'],
+                    $messages['metadata'],
+                    $messages['ack'],
+                    $messages['chatName']
+                ));
+            }
+    
+    
+            $consulta = crud::Read(query::ReadMensajesChat($id));
+    
+            $i = 0;
+    
+            while ($row = mysqli_fetch_assoc($consulta)) {
+                $Array[$i]['id']              =   $row['id'];
+                $Array[$i]['body']            =   $row['body'];
+                $Array[$i]['fromMe']          =   $row['fromMe'];
+                $Array[$i]['isForwarded']     =   $row['isForwarded'];
+                $Array[$i]['author']          =   $row['author'];
+                $Array[$i]['time']            =   $row['time'];
+                $Array[$i]['chatId']          =   $row['chatId'];
+                $Array[$i]['messageNumber']   =   $row['messageNumber'];
+                $Array[$i]['type']            =   $row['type'];
+                $Array[$i]['senderName']      =   $row['senderName'];
+                $Array[$i]['quotedMsgBody']   =   $row['quotedMsgBody'];
+                $Array[$i]['quotedMsgId']     =   $row['quotedMsgId'];
+                $Array[$i]['quotedMsgType']   =   $row['quotedMsgType'];
+                $Array[$i]['metadata']        =   $row['metadata'];
+                $Array[$i]['ack']             =   $row['ack'];
+                $Array[$i]['chatName']        =   $row['chatName'];
+                $i ++;
+            }
+    
+            print json_encode($Array, JSON_PRETTY_PRINT);
         }
-
-
-        var_dump($messages['messages'][1]['id']);
-
-
-
-
-
-
-
-        print $id . ' ' . json_encode($messages, JSON_PRETTY_PRINT);
-        //$consulta = crud::Read(query::ReadMensajesChat($id));
     }
 
     //Enviar Mensajes de chat individual

@@ -1,10 +1,10 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
 
-    setInterval('MostrarCantidadSalasChatAsignadas()', 500);
-    setInterval('MostrarCantidadSalasChat()', 500);
-    setInterval('MostrarCantidadSalasChatAbiertas()', 500);
-    setInterval('TablaChatAsignadoAgente()', 500);
+    setInterval('MostrarCantidadSalasChatAsignadas()', 1000);
+    setInterval('MostrarCantidadSalasChat()', 1000);
+    setInterval('MostrarCantidadSalasChatAbiertas()', 1000);
+    setInterval('TablaChatAsignadoAgente()', 1000);
     MostrarMensajesChat();
     IngresarAgente();
     ReadAgentes();
@@ -327,7 +327,7 @@ var TablaChatAsignadoAgente = function () {
             //console.log();
             let tabla = '';
             json.forEach(
-                Datos =>{
+                Datos => {
                     tabla += `
                         <tr>
                             <td>${Datos.nombre}</td>
@@ -359,7 +359,22 @@ var MostrarMensajesChat = function () {
         url: "MostrarMensajesChat",
         data: form,
         success: function (Respuesta) {
-            console.log(Respuesta);
+            //console.log(Respuesta);
+            let json = JSON.parse(Respuesta);
+            //console.log(json);
+            let conversacion = '';
+            json.forEach(
+                Datos => {
+                    conversacion += `
+                        <div class="m-2">
+                            <span class="text text-success">${Datos.author}:</span>
+                            <span style="color: #848484;">${Datos.body}</span>
+                            <span style="float: right; font-size: 11px;"></span>
+                        </div>
+                        `
+                });
+            $('#datos_chat').html(conversacion);
+            //
         },
         error: function (xhr, status, error) {
             console.log(xhr);
@@ -367,4 +382,4 @@ var MostrarMensajesChat = function () {
             console.log(error);
         }
     });
-}
+};

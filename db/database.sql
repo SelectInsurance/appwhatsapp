@@ -59,7 +59,8 @@
     quotedMsgType TEXT NOT NULL,
     metadata TEXT NOT NULL,
     ack TEXT NOT NULL,
-    chatName VARCHAR(255) NOT NULL
+    chatName VARCHAR(255) NOT NULL,
+    FechaHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 
   INSERT INTO
