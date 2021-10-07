@@ -1,11 +1,11 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
 
-    setInterval('MostrarCantidadSalasChatAsignadas()', 1000);
-    setInterval('MostrarCantidadSalasChat()', 1000);
-    setInterval('MostrarCantidadSalasChatAbiertas()', 1000);
-    setInterval('TablaChatAsignadoAgente()', 1000);
-    MostrarMensajesChat();
+    setInterval('MostrarCantidadSalasChatAsignadas()', 500);
+    setInterval('MostrarCantidadSalasChat()', 500);
+    setInterval('MostrarCantidadSalasChatAbiertas()', 500);
+    setInterval('TablaChatAsignadoAgente()', 500);
+    setInterval('MostrarMensajesChat()', 500);
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -406,7 +406,6 @@ var EnviarMensajesChat = function () {
                 console.log(error);
             }
         });
-        $('#txtCuerpoMensage').val('');
-        MostrarMensajesChat();
+        //MostrarMensajesChat();
     });
 }
