@@ -6,7 +6,6 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('TablaChatAsignadoAgente()', 500);
     setInterval('MostrarMensajesChat()', 500);
-    //MostrarSalasDeChat();
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -389,6 +388,7 @@ var MostrarMensajesChat = function () {
 };
 
 
+//////////////////////////////////////
 //Enviar mensajes de chat
 var EnviarMensajesChat = function () {
     $('#btnEnviarMensajeWhatsapp').click(function (e) {
@@ -412,4 +412,37 @@ var EnviarMensajesChat = function () {
         $('#txtCuerpoMensage').val('');
     });
 }
+
+//Enviar mensajes de chat con Enter
+var EnviarMensajesDesdeEnter = function () {
+
+    var wage = document.getElementById("txtCuerpoMensage");
+    wage.addEventListener("keydown", function (e) {
+        if (e.keyCode === 13) {
+            validate(e);
+        }
+    });
+
+
+    function validate(e) {
+        var form = $('#frmMostrarChat').serialize();
+        $.ajax({
+            type: "POST",
+            url: "EnviarMensajesChat",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+        //MostrarMensajesChat();
+        $('#txtCuerpoMensage').val('');
+    }
+
+}
+////////////////////////////////////
 
