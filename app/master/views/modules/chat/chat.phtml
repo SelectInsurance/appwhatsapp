@@ -22,7 +22,7 @@
     <div class="row mb-5">
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
         <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8 shadow border">
-            <div class="CajaChat ScrollMinimo border my-2"  id="datos_chat">
+            <div class="CajaChat border my-2"  id="datos_chat">
 
 
 
@@ -33,11 +33,11 @@
                         <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
                             <input type="text" name="chatId" id="chatId" value="<?= $SalaChat; ?>" class="form-control" readonly>
                             <div class="emoji-picker-container mt-2">
-                                <textarea class="form-control" cols="30" rows="1" data-emojiable="true" data-emoji-input="unicode" type="text" name="" id="" placeholder="Enviar Mensaje"></textarea>
+                                <textarea class="form-control" cols="30" rows="1" data-emojiable="true" data-emoji-input="unicode" type="text" name="txtCuerpoMensage" id="txtCuerpoMensage" placeholder="Enviar Mensaje"></textarea>
                             </div>
                         </div>
                         <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1 mt-3">
-                            <button class="btn btn-outline-success"><i class="far fa-paper-plane fa-1x"></i></button>
+                            <button class="btn btn-outline-success" id="btnEnviarMensajeWhatsapp"><i class="far fa-paper-plane fa-1x"></i></button>
                         </div>
                     </div>
                 </div>

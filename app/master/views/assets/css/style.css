@@ -7,7 +7,7 @@
 
 /*Scroll pequeño*/
 .ScrollMinimo {
-  /*margin: 1px opx;*/
+  margin: 1px opx;
   height: 100%;
   width: 100%;
   max-width: auto;

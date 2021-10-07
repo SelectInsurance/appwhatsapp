@@ -220,6 +220,7 @@ class controller
             $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
             $api = new ChatApi($url['Instance'], $url['Token']);
             $data = $api->messages();
+            //var_dump($data);
             foreach ($data['messages'] as $messages) {
                 crud::Create(query::CreateAlmacenarMensajes(
                     $messages['id'],
@@ -274,6 +275,14 @@ class controller
     //Enviar Mensajes de chat individual
     public static function EnviarMensajesChat()
     {
+        
+        
+        $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
+        $Api = new ChatApi($UrlToken['Instance'],$UrlToken['Token']);
+        $Phone = $_POST['chatId'];
+        $message = $_POST['txtCuerpoMensage'];
+        $Api->SendMenssage($Phone, $message);
+        echo $Phone.' '.$message;
     }
 
 

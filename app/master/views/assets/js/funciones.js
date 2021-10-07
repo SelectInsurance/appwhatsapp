@@ -15,6 +15,7 @@ $(document).ready(function () {
     ReadTransferenciaChat();
     ReadSalasChatTransferencia();
     CreateTransferirChat();
+    EnviarMensajesChat();
 });
 
 //Funcion para mostrar Datatable por Ajax
@@ -354,32 +355,58 @@ var MostrarMensajesChat = function () {
 
     let form = $('#frmMostrarChat').serialize();
 
-    $.ajax({
-        type: "POST",
-        url: "MostrarMensajesChat",
-        data: form,
-        success: function (Respuesta) {
-            //console.log(Respuesta);
-            let json = JSON.parse(Respuesta);
-            //console.log(json);
-            let conversacion = '';
-            json.forEach(
-                Datos => {
-                    conversacion += `
-                        <div class="m-2">
-                            <span class="text text-success">${Datos.author}:</span>
-                            <span style="color: #848484;">${Datos.body}</span>
-                            <span style="float: right; font-size: 11px;"></span>
-                        </div>
-                        `
-                });
-            $('#datos_chat').html(conversacion);
-            //
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-        }
-    });
+    if (form != '') {
+        $.ajax({
+            type: "POST",
+            url: "MostrarMensajesChat",
+            data: form,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                let json = JSON.parse(Respuesta);
+                //console.log(json);
+                let conversacion = '';
+                json.forEach(
+                    Datos => {
+                        conversacion += `
+                            <div class="m-2">
+                                <span class="text text-success">${Datos.author}:</span>
+                                <span style="color: #848484;">${Datos.body}</span>
+                                <span style="float: right; font-size: 11px;"></span>
+                            </div>
+                            `
+                    });
+                $('#datos_chat').html(conversacion);
+                //
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    }
 };
+
+//Enviar mensajes de chat
+var EnviarMensajesChat = function () {
+    $('#btnEnviarMensajeWhatsapp').click(function (e) {
+        e.preventDefault();
+
+        var form = $('#frmMostrarChat').serialize();
+        $.ajax({
+            type: "POST",
+            url: "EnviarMensajesChat",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+        $('#txtCuerpoMensage').text('');
+        MostrarMensajesChat();
+    });
+}
