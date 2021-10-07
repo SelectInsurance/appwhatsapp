@@ -418,7 +418,7 @@ var EnviarMensajesDesdeEnter = function () {
 
     var wage = document.getElementById("txtCuerpoMensage");
     wage.addEventListener("keydown", function (e) {
-        if (e.keyCode === 13) {
+        if (e.KeyboardEvent.keyCode === 13) {
             validate(e);
         }
     });
