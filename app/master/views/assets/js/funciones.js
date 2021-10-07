@@ -6,6 +6,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('TablaChatAsignadoAgente()', 500);
     setInterval('MostrarMensajesChat()', 500);
+    //MostrarSalasDeChat();
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -387,6 +388,7 @@ var MostrarMensajesChat = function () {
     }
 };
 
+
 //Enviar mensajes de chat
 var EnviarMensajesChat = function () {
     $('#btnEnviarMensajeWhatsapp').click(function (e) {
@@ -407,5 +409,7 @@ var EnviarMensajesChat = function () {
             }
         });
         //MostrarMensajesChat();
+        $('#txtCuerpoMensage').val('');
     });
 }
+

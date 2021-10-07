@@ -12,17 +12,20 @@ function Nav()
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
     $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
     $array = $ChatApi->Dialogs();
+
+    //var_dump($array);
+
     //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
     foreach ($array as $key => $value) {
         $j = count($value);
         $i = 0;
-
+    
         while ($i < $j) {
             crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
             $i++;
         }
     }
-
+    
     //Salas de chat almacenadas en base de datos
     $consulta = crud::Read(query::ReadDialogs());
     require_once 'app/master/views/assets/menu.phtml';
@@ -242,12 +245,12 @@ class controller
                     $messages['chatName']
                 ));
             }
-    
-    
+
+
             $consulta = crud::Read(query::ReadMensajesChat($id));
-    
+
             $i = 0;
-    
+
             while ($row = mysqli_fetch_assoc($consulta)) {
                 $Array[$i]['id']              =   $row['id'];
                 $Array[$i]['body']            =   $row['body'];
@@ -265,9 +268,9 @@ class controller
                 $Array[$i]['metadata']        =   $row['metadata'];
                 $Array[$i]['ack']             =   $row['ack'];
                 $Array[$i]['chatName']        =   $row['chatName'];
-                $i ++;
+                $i++;
             }
-    
+
             print json_encode($Array, JSON_PRETTY_PRINT);
         }
     }
@@ -275,10 +278,10 @@ class controller
     //Enviar Mensajes de chat individual
     public static function EnviarMensajesChat()
     {
-        
-        
+
+
         $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
-        $Api = new ChatApi($UrlToken['Instance'],$UrlToken['Token']);
+        $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
         $Phone = $_POST['chatId'];
         $message = $_POST['txtCuerpoMensage'];
         echo $Api->SendMenssage($Phone, $message);
