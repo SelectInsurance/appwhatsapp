@@ -406,7 +406,7 @@ var EnviarMensajesChat = function () {
                 console.log(error);
             }
         });
-        $('#txtCuerpoMensage').text('');
+        $('#txtCuerpoMensage').val('');
         MostrarMensajesChat();
     });
 }
