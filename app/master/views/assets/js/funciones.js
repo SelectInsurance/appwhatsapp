@@ -369,7 +369,7 @@ var MostrarMensajesChat = function () {
                     Datos => {
                         conversacion += `
                             <div class="m-2">
-                                <span class="text text-success">${Datos.author}:</span>
+                                <span class="text text-success">${Datos.sender}:</span>
                                 <span style="color: #848484;">${Datos.body}</span>
                                 <span style="float: right; font-size: 11px;"></span>
                             </div>

@@ -147,7 +147,8 @@ class  query
         $quotedMsgType,
         $metadata,
         $ack,
-        $chatName){
+        $chatName,
+        $sender){
             
         return "
         call 
@@ -169,7 +170,8 @@ class  query
         '$quotedMsgType',
         '$metadata',
         '$ack',
-        '$chatName'
+        '$chatName',
+        '$sender'
         )";
     }
 

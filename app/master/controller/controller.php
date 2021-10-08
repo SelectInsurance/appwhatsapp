@@ -19,13 +19,13 @@ function Nav()
     foreach ($array as $key => $value) {
         $j = count($value);
         $i = 0;
-    
+
         while ($i < $j) {
             crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
             $i++;
         }
     }
-    
+
     //Salas de chat almacenadas en base de datos
     $consulta = crud::Read(query::ReadDialogs());
     require_once 'app/master/views/assets/menu.phtml';
@@ -223,35 +223,44 @@ class controller
             $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
             $api = new ChatApi($url['Instance'], $url['Token']);
             $data = $api->messages();
-            //var_dump($data);
-            foreach ($data['messages'] as $messages) {
+
+            //cambiando ciclo foreach por ciclo while para hacer insercion a la base de datos usando 
+            //la cantidad de indices que tiene el array
+            $contador = count($data['messages']);
+            $i = 0;
+            while ($i < $contador) {
+                if ($data['messages'][$i]['author'] === $data['messages'][$i]['chatId']) {
+                    $sender[$i] = $data['messages'][$i]['author'];
+                } elseif ($data['messages'][$i]['author'] != $data['messages'][$i]['chatId']) {
+                    $sender[$i] = $_SESSION['Master'];
+                }
                 crud::Create(query::CreateAlmacenarMensajes(
-                    $messages['id'],
-                    $messages['body'],
-                    $messages['fromMe'],
-                    $messages['self'],
-                    $messages['isForwarded'],
-                    $messages['author'],
-                    $messages['time'],
-                    $messages['chatId'],
-                    $messages['messageNumber'],
-                    $messages['type'],
-                    $messages['senderName'],
-                    $messages['quotedMsgBody'],
-                    $messages['quotedMsgId'],
-                    $messages['quotedMsgType'],
-                    $messages['metadata'],
-                    $messages['ack'],
-                    $messages['chatName']
+                    $data['messages'][$i]['id'],
+                    $data['messages'][$i]['body'],
+                    $data['messages'][$i]['fromMe'],
+                    $data['messages'][$i]['self'],
+                    $data['messages'][$i]['isForwarded'],
+                    $data['messages'][$i]['author'],
+                    $data['messages'][$i]['time'],
+                    $data['messages'][$i]['chatId'],
+                    $data['messages'][$i]['messageNumber'],
+                    $data['messages'][$i]['type'],
+                    $data['messages'][$i]['senderName'],
+                    $data['messages'][$i]['quotedMsgBody'],
+                    $data['messages'][$i]['quotedMsgId'],
+                    $data['messages'][$i]['quotedMsgType'],
+                    $data['messages'][$i]['metadata'],
+                    $data['messages'][$i]['ack'],
+                    $data['messages'][$i]['chatName'],
+                    $sender[$i]
                 ));
+                $i++;
             }
 
-
             $consulta = crud::Read(query::ReadMensajesChat($id));
-
             $i = 0;
-
             while ($row = mysqli_fetch_assoc($consulta)) {
+
                 $Array[$i]['id']              =   $row['id'];
                 $Array[$i]['body']            =   $row['body'];
                 $Array[$i]['fromMe']          =   $row['fromMe'];
@@ -268,7 +277,9 @@ class controller
                 $Array[$i]['metadata']        =   $row['metadata'];
                 $Array[$i]['ack']             =   $row['ack'];
                 $Array[$i]['chatName']        =   $row['chatName'];
+                $Array[$i]['sender']          =   $row['sender'];
                 $i++;
+
             }
 
             print json_encode($Array, JSON_PRETTY_PRINT);
