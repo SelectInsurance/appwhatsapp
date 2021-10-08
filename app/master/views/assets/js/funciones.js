@@ -4,8 +4,9 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
     setInterval('MostrarCantidadSalasChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
-    setInterval('TablaChatAsignadoAgente()', 500);
     setInterval('MostrarMensajesChat()', 500);
+    TablaChatAsignadoAgente();
+    MostrarConversacionDataTable();
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -331,6 +332,7 @@ var TablaChatAsignadoAgente = function () {
                 Datos => {
                     tabla += `
                         <tr>
+                            <td><input class="form-check-input" name="idAgente" type="checkbox" value="${Datos.id}"></td>
                             <td>${Datos.nombre}</td>
                             <td>${Datos.apellido}</td>
                             <td>${Datos.usuario}</td>
@@ -446,3 +448,38 @@ var EnviarMensajesDesdeEnter = function () {
 }
 ////////////////////////////////////
 
+
+var MostrarConversacionDataTable = function(){
+    var form = $('#frmidparaconsultarDatatableConversacion').serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "MostrarConversacionesConsulta",
+        data: form,
+        success: function (Respuesta) {
+            console.log(Respuesta);
+        },
+        error: function(xhr, status, error){
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+
+
+
+
+    //var table = $('#tablaconversacion').DataTable({
+    //    "ajax": {
+    //        "method": "POST",
+    //        "url": "MostrarConversacionesConsulta"
+    //    },
+    //    "columns": [
+    //        { "data": "chatId" },
+    //        { "data": "sender" },
+    //        { "data": "messageNumber" },
+    //        { "data": "usuario" },
+    //        { "data": "body" }
+    //    ]
+    //});
+}

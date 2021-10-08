@@ -179,4 +179,9 @@ class  query
     public static function ReadMensajesChat($id){
         return "call SP_MostrarMensajesChat('$id')";
     }
+
+    //Mostrando conversacion de chat seleccionado
+    public static function ReadChatAgente($id){
+        return "CALL SP_MostrarConversacionAgente('$id')";
+    }
 }

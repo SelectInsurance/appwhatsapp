@@ -277,9 +277,8 @@ class controller
                 $Array[$i]['metadata']        =   $row['metadata'];
                 $Array[$i]['ack']             =   $row['ack'];
                 $Array[$i]['chatName']        =   $row['chatName'];
-                $Array[$i]['sender']          =   str_replace('@c.us','',$row['sender']);
+                $Array[$i]['sender']          =   str_replace('@c.us', '', $row['sender']);
                 $i++;
-
             }
 
             print json_encode($Array, JSON_PRETTY_PRINT);
@@ -287,8 +286,8 @@ class controller
     }
 
     //Mostrar Mensajes en seguimiento
-    public static function MostrarMensajesSeguimiento(){
-
+    public static function MostrarMensajesSeguimiento()
+    {
     }
 
     //Enviar Mensajes de chat individual
@@ -437,6 +436,7 @@ class controller
 
 
             $ArrayAgentes[$i]['count'] = $conteo;
+            $ArrayAgentes[$i]['id'] = $row['id'];
             $ArrayAgentes[$i]['usuario'] = $row['usuario'];
             $ArrayAgentes[$i]['nombre'] = $row['nombre'];
             $ArrayAgentes[$i]['apellido'] = $row['apellido'];
@@ -444,5 +444,45 @@ class controller
         }
         $json = json_encode($ArrayAgentes, JSON_PRETTY_PRINT);
         print $json;
+    }
+
+
+    //Modulo mostrar Conversacion Agente Seleccionado desde Dashboard
+    public static function MostrandoConversacionAgente()
+    {
+        $idAgente = $_POST['idAgente'];
+
+        higher();
+        Nav();
+        require_once 'app\master\views\modules\conversacion\conversacion.php';
+        lower();
+    }
+
+    //Consulta para dirigir al DAtatable de mostrar conversaciones
+    public static function MostrarConversacionesConsulta()
+    {
+        //if (!empty($_POST['id'])) {
+            //$ReadAgente = crud::Read(query::ReadAgentes());
+            //while ($Resultado = mysqli_fetch_assoc($ReadAgente)) {
+            //    $rows["data"][] = $Resultado;
+            //}
+            //echo json_encode($rows);
+    
+    
+    
+    
+            //$id = $_POST['id'];
+            $id = '1';
+            $Resultados = crud::Read(query::ReadChatAgente($id));
+            var_dump($Resultados);
+            while ($conversacion = mysqli_fetch_assoc($Resultados)) {
+                $rows['data'][]       =    $conversacion;
+            }
+            //var_dump($rows);
+
+            //echo json_encode($rows);
+            print json_encode($rows);
+        //}
+
     }
 }
