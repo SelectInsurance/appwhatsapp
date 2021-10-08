@@ -277,13 +277,18 @@ class controller
                 $Array[$i]['metadata']        =   $row['metadata'];
                 $Array[$i]['ack']             =   $row['ack'];
                 $Array[$i]['chatName']        =   $row['chatName'];
-                $Array[$i]['sender']          =   $row['sender'];
+                $Array[$i]['sender']          =   str_replace('@c.us','',$row['sender']);
                 $i++;
 
             }
 
             print json_encode($Array, JSON_PRETTY_PRINT);
         }
+    }
+
+    //Mostrar Mensajes en seguimiento
+    public static function MostrarMensajesSeguimiento(){
+
     }
 
     //Enviar Mensajes de chat individual
@@ -414,13 +419,6 @@ class controller
         $consulta = crud::Read(query::ReadChatAsignados());
         $row = mysqli_fetch_assoc($consulta);
         echo $row['count(idAgentes)'];
-        //$i = 0;
-        //while ($row = mysqli_fetch_array($consulta)) {
-        //    $Array[$i]['idAgente'] = $row['idAgente'];
-        //    $i++;
-        //}
-        //$conteo = count($Array);
-        //echo $conteo;
     }
 
     //Tabla para mostrar cantidad de chat asignados a cada agente
