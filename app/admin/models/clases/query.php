@@ -56,12 +56,13 @@ class  query
     }
 
     //Consultar Todos los Agentes y usuarios
-    public static function ReadAgentes()
+    public static function ReadAgentes($creador)
     {
         return "
             SELECT * FROM Agentes
             INNER JOIN Usuarios ON 
             Agentes.usuario = Usuarios.usuario
+            WHERE creador = '$creador'
             ";
     }
 
