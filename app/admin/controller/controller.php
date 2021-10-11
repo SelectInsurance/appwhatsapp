@@ -10,7 +10,7 @@ function higher()
 
 function Nav()
 {
-    require_once 'app\admin\views\assets\nav.phtml';
+    require_once 'app\admin\views\assets\menu.phtml';
 }
 
 function lower()
