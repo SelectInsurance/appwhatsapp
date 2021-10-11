@@ -56,7 +56,6 @@ class controller
         lower();
     }
 
-
     //Json que se muestra en el dataTable para consultar Agente
     public static function Datatable()
     {
@@ -66,5 +65,42 @@ class controller
             $rows["data"][] = $Resultado;
         }
         echo json_encode($rows);
+    }
+
+    //form para insertar accesweb token
+    public static function formAccesWebToken()
+    {
+        higher();
+        Nav();
+        require_once 'app\admin\views\modules\config\config.html';
+
+        lower();
+    }
+
+    //ingreso de AccesWebToken por ajax por metodo post
+    public static function InsertAccesWebToken()
+    {
+        $user = $_SESSION['Admin'];
+        $instance = trim($_POST['instancia']);
+        $token = trim($_POST['token']);
+        crud::Read(query::CreateAwebT($instance, $token, $user));
+        echo 'Registro Exitoso';
+    }
+
+    //Mostrando AccesWebToken por ajax en la tabla
+    public static function ReadAccesWebToken()
+    {
+        $user = $_SESSION['Admin'];
+        $Consulta = crud::Read(query::ReadAwebT($user));
+        $i = 0;
+        while ($rows = mysqli_fetch_assoc($Consulta)) {
+
+            $Array[$i]['idToken'] = $rows['idToken'];
+            $Array[$i]['Instance'] = $rows['Instance'];
+            $Array[$i]['Token'] = $rows['Token'];
+            $i++;
+        }
+        $json = json_encode($Array, JSON_PRETTY_PRINT);
+        print $json;
     }
 }
