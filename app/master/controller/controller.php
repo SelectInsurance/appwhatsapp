@@ -8,8 +8,9 @@ function higher()
 }
 function Nav()
 {
+    $user = $_SESSION['Master'];
     //Recibiendo Salas de chat abiertas desde la app de whatsapp
-    $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
+    $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
     $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
     $array = $ChatApi->Dialogs();
 
@@ -211,9 +212,9 @@ class controller
     public static function MostrarMensajesChat()
     {
         if (!empty($_POST['chatId'])) {
-
+            $user = $_SESSION['Master'];
             $id =  $_POST['chatId'];
-            $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
+            $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
             $api = new ChatApi($url['Instance'], $url['Token']);
             $data = $api->messages();
 
@@ -287,8 +288,8 @@ class controller
     public static function EnviarMensajesChat()
     {
 
-
-        $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT()));
+        $user = $_SESSION['Master'];
+        $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
         $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
         $Phone = $_POST['chatId'];
         $message = $_POST['txtCuerpoMensage'];
@@ -309,16 +310,18 @@ class controller
     //ingreso de AccesWebToken por ajax por metodo post
     public static function InsertAccesWebToken()
     {
+        $user = $_SESSION['Master'];
         $instance = trim($_POST['instancia']);
         $token = trim($_POST['token']);
-        crud::Read(query::CreateAwebT($instance, $token));
+        crud::Read(query::CreateAwebT($instance, $token, $user));
         echo 'Registro Exitoso';
     }
 
     //Mostrando AccesWebToken por ajax en la tabla
     public static function ReadAccesWebToken()
     {
-        $Consulta = crud::Read(query::ReadAwebT());
+        $user = $_SESSION['Master'];
+        $Consulta = crud::Read(query::ReadAwebT($user));
         $i = 0;
         while ($rows = mysqli_fetch_assoc($Consulta)) {
 

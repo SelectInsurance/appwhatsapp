@@ -83,15 +83,15 @@ class  query
     }
 
     //Crear AccesWebToken
-    public static function CreateAwebT($instance, $token)
+    public static function CreateAwebT($instance, $token, $user)
     {
-        return "INSERT INTO TokenChatApi(Instance, Token) VALUES('$instance','$token')";
+        return "INSERT INTO TokenChatApi(Instance, Token, user) VALUES('$instance','$token','$user')";
     }
 
     //Consultar AccesWebToken
-    public static function ReadAwebT()
+    public static function ReadAwebT($user)
     {
-        return "SELECT * FROM TokenChatApi ORDER BY idToken DESC Limit 1";
+        return "SELECT * FROM TokenChatApi WHERE user = '$user' ORDER BY idToken DESC Limit 1";
     }
 
     //Modificar Dialogs

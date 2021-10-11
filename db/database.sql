@@ -28,7 +28,8 @@
   CREATE TABLE TokenChatApi(
     idToken INT PRIMARY KEY AUTO_INCREMENT,
     Instance VARCHAR(100) NOT NULL,
-    Token VARCHAR(100) NOT NULL
+    Token VARCHAR(100) NOT NULL,
+    user VARCHAR(55) NOT NULL
   );
 
   CREATE TABLE dialogs(
