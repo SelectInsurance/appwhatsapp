@@ -458,7 +458,7 @@ class controller
         lower();
     }
 
-    
+
     //Consulta para dirigir al DAtatable de mostrar conversaciones
     public static function MostrarConversacionesConsulta()
     {
@@ -476,7 +476,7 @@ class controller
 
             print json_encode($rows, JSON_PRETTY_PRINT);
 
-/*             $id = $_POST['id'];
+            /*   $id = $_POST['id'];
             $Resultados = crud::Read(query::ReadChatAgente($id));
             $conversacion = mysqli_fetch_assoc($Resultados);
             print json_encode($conversacion, JSON_PRETTY_PRINT);
