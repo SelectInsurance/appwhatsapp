@@ -18,7 +18,17 @@ if (isset($_SESSION['Master'])) {
 
     //Admin
 } elseif (isset($_SESSION['Admin'])) {
-
+    require_once 'app\admin\controller\controller.php';
+    if (isset($_GET['controller'])) {
+        $controller = $_GET['controller'];
+        switch ($_GET['controller']) {
+            case $controller:
+                controller::$controller();
+                break;
+        }
+    } else {
+        header('Location:Inicio');
+    }
     echo $_SESSION['Admin'];
 
     //Asistente
