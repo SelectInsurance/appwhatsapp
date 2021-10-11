@@ -448,38 +448,55 @@ var EnviarMensajesDesdeEnter = function () {
 }
 ////////////////////////////////////
 
-
-var MostrarConversacionDataTable = function(){
+//Agregando Tabla para mostrar las conversaciones
+var MostrarConversacionDataTable = function () {
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();
 
+if (form != '') {
     $.ajax({
         type: "POST",
         url: "MostrarConversacionesConsulta",
         data: form,
         success: function (Respuesta) {
             console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            console.log(json);
+            var table = '';
+            json.forEach(
+                Datos => {
+                    table += `
+                        <tr>
+                            <td>${Datos.chatId}</td>
+                            <td>${Datos.sender}</td>
+                            <td>${Datos.messageNumber}</td>
+                            <td>${Datos.body}</td>
+                        </tr>
+                    `
+                }
+            );
+            $('#tablaconversacion').html(table);
+
         },
-        error: function(xhr, status, error){
+        error: function (xhr, status, error) {
             console.log(xhr);
             console.log(status);
             console.log(error);
         }
     });
+}
+    
 
-
-
-
-    //var table = $('#tablaconversacion').DataTable({
-    //    "ajax": {
-    //        "method": "POST",
-    //        "url": "MostrarConversacionesConsulta"
-    //    },
-    //    "columns": [
-    //        { "data": "chatId" },
-    //        { "data": "sender" },
-    //        { "data": "messageNumber" },
-    //        { "data": "usuario" },
-    //        { "data": "body" }
-    //    ]
-    //});
+    /*     var table = $('#tablaconversacion').DataTable({
+            "ajax": {
+                "method": "POST",
+                "url": "MostrarConversacionesConsulta"
+            },
+            "columns": [
+                { "data": "chatId" },
+                { "data": "sender" },
+                { "data": "messageNumber" },
+                { "data": "body" }
+                //{ "data": "admin" }
+            ]
+        }); */
 }

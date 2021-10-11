@@ -458,31 +458,40 @@ class controller
         lower();
     }
 
+    
     //Consulta para dirigir al DAtatable de mostrar conversaciones
     public static function MostrarConversacionesConsulta()
     {
-        //if (!empty($_POST['id'])) {
-            //$ReadAgente = crud::Read(query::ReadAgentes());
-            //while ($Resultado = mysqli_fetch_assoc($ReadAgente)) {
-            //    $rows["data"][] = $Resultado;
-            //}
-            //echo json_encode($rows);
-    
-    
-    
-    
-            //$id = $_POST['id'];
-            $id = '1';
+        if (!empty($_POST['id'])) {
+            $id = $_POST['id'];
             $Resultados = crud::Read(query::ReadChatAgente($id));
-            var_dump($Resultados);
+            $i = 0;
             while ($conversacion = mysqli_fetch_assoc($Resultados)) {
-                $rows['data'][]       =    $conversacion;
+                $rows[$i]['chatId']  =    $conversacion['chatId'];    
+                $rows[$i]['sender']  =    $conversacion['sender'];  
+                $rows[$i]['messageNumber']  =    $conversacion['messageNumber'];  
+                $rows[$i]['body']  =    $conversacion['body'];
+                $i ++;
             }
-            //var_dump($rows);
 
-            //echo json_encode($rows);
-            print json_encode($rows);
-        //}
+            print json_encode($rows, JSON_PRETTY_PRINT);
 
+/*             $id = $_POST['id'];
+            $Resultados = crud::Read(query::ReadChatAgente($id));
+            $conversacion = mysqli_fetch_assoc($Resultados);
+            print json_encode($conversacion, JSON_PRETTY_PRINT);
+            $i = 0;
+            while ($conversacion = mysqli_fetch_assoc($Resultados)) {
+                $rows["data"][] = $conversacion;
+            }
+            
+            print json_encode($rows, JSON_PRETTY_PRINT); */
+
+
+
+
+
+
+        }
     }
 }
