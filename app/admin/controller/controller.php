@@ -47,11 +47,24 @@ class controller
     }
 
     //Preferencias
-    public static function Preferencias(){
+    public static function Preferences()
+    {
         higher();
         Nav();
 
         require_once 'app\admin\views\modules\Preferencias\preferences.phtml';
         lower();
+    }
+
+
+    //Json que se muestra en el dataTable para consultar Agente
+    public static function Datatable()
+    {
+        $creador = $_SESSION['Admin'];
+        $ReadAgente = crud::Read(query::ReadAgentes($creador));
+        while ($Resultado = mysqli_fetch_assoc($ReadAgente)) {
+            $rows["data"][] = $Resultado;
+        }
+        echo json_encode($rows);
     }
 }
