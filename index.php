@@ -29,7 +29,6 @@ if (isset($_SESSION['Master'])) {
     } else {
         header('Location:Inicio');
     }
-    echo $_SESSION['Admin'];
 
     //Asistente
 } elseif (isset($_SESSION['Asistant'])) {

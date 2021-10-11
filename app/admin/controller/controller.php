@@ -1,6 +1,6 @@
 <?php
 
-
+require_once 'app\admin\models\app_autoload.php';
 
 //Funciones para requerir encabezado, pie de pagina y menu
 function higher()
@@ -26,7 +26,7 @@ class controller
     {
         higher();
         Nav();
-        require_once 'app\admin\views\modules\inicio.phtml';
+        require_once 'app\admin\views\modules\Inicio\inicio.phtml';
 
         lower();
     }
@@ -44,5 +44,14 @@ class controller
     {
         session_destroy();
         header('Location:./');
+    }
+
+    //Preferencias
+    public static function Preferencias(){
+        higher();
+        Nav();
+
+        require_once 'app\admin\views\modules\Preferencias\preferences.phtml';
+        lower();
     }
 }
