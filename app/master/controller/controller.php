@@ -181,14 +181,7 @@ class controller
         }
     }
 
-
-
-
-
-
-
-
-
+    
     //Sala de chat individual
     public static function SalaChat()
     {
@@ -302,17 +295,6 @@ class controller
         echo $Api->SendMenssage($Phone, $message);
         //echo $Phone.' '.$message;
     }
-
-
-
-
-
-
-
-
-
-
-
 
     //form para insertar accesweb token
     public static function formAccesWebToken()
@@ -467,10 +449,10 @@ class controller
             $Resultados = crud::Read(query::ReadChatAgente($id));
             $i = 0;
             while ($conversacion = mysqli_fetch_assoc($Resultados)) {
-                $rows[$i]['chatId']  =    $conversacion['chatId'];    
-                $rows[$i]['sender']  =    $conversacion['sender'];  
+                $rows[$i]['chatId']         =    $conversacion['chatId'];    
+                $rows[$i]['sender']         =    $conversacion['sender'];  
                 $rows[$i]['messageNumber']  =    $conversacion['messageNumber'];  
-                $rows[$i]['body']  =    $conversacion['body'];
+                $rows[$i]['body']           =    $conversacion['body'];
                 $i ++;
             }
 
@@ -487,11 +469,8 @@ class controller
             
             print json_encode($rows, JSON_PRETTY_PRINT); */
 
-
-
-
-
-
+        }else {
+            header('Location:Inicio');
         }
     }
 }
