@@ -181,7 +181,7 @@ class controller
         }
     }
 
-    
+
     //Sala de chat individual
     public static function SalaChat()
     {
@@ -432,12 +432,16 @@ class controller
     //Modulo mostrar Conversacion Agente Seleccionado desde Dashboard
     public static function MostrandoConversacionAgente()
     {
-        $idAgente = $_POST['idAgente'];
+        if (!empty($_POST['idAgente'])) {
+            $idAgente = $_POST['idAgente'];
 
-        higher();
-        Nav();
-        require_once 'app\master\views\modules\conversacion\conversacion.php';
-        lower();
+            higher();
+            Nav();
+            require_once 'app\master\views\modules\conversacion\conversacion.php';
+            lower();
+        }else {
+            header('Location:Inicio');
+        }
     }
 
 
@@ -449,11 +453,11 @@ class controller
             $Resultados = crud::Read(query::ReadChatAgente($id));
             $i = 0;
             while ($conversacion = mysqli_fetch_assoc($Resultados)) {
-                $rows[$i]['chatId']         =    $conversacion['chatId'];    
-                $rows[$i]['sender']         =    $conversacion['sender'];  
-                $rows[$i]['messageNumber']  =    $conversacion['messageNumber'];  
+                $rows[$i]['chatId']         =    $conversacion['chatId'];
+                $rows[$i]['sender']         =    $conversacion['sender'];
+                $rows[$i]['messageNumber']  =    $conversacion['messageNumber'];
                 $rows[$i]['body']           =    $conversacion['body'];
-                $i ++;
+                $i++;
             }
 
             print json_encode($rows, JSON_PRETTY_PRINT);
@@ -468,8 +472,7 @@ class controller
             }
             
             print json_encode($rows, JSON_PRETTY_PRINT); */
-
-        }else {
+        } else {
             header('Location:Inicio');
         }
     }
