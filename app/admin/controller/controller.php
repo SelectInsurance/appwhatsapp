@@ -51,7 +51,8 @@ class controller
     {
         higher();
         Nav();
-
+        $user = $_SESSION['Admin'];
+        $Resultado = crud::Read(query::ReadAgentes($user));
         require_once 'app\admin\views\modules\Preferencias\preferences.phtml';
         lower();
     }
@@ -65,6 +66,84 @@ class controller
             $rows["data"][] = $Resultado;
         }
         echo json_encode($rows);
+    }
+
+    //Insertando Datos por metodo post usando Ajax de jquery
+    public static function AgregarAgente()
+    {
+        $creador = $_SESSION['Master'];
+        $user = $_POST['user'];
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $documento = $_POST['documento'];
+        $admin = boolval($_POST['admin']);
+        $master = boolval($_POST['master']);
+        $telefono = $_POST['telefono'];
+        $direccion = $_POST['direccion'];
+        $correo = $_POST['correo'];
+        $password = md5($_POST['password']);
+        $ConfirmacionPassword = md5($_POST['ConfirmacionPassword']);
+
+        //Validacion de pass identica
+        if ($password === $ConfirmacionPassword) {
+
+
+            //Validacion de usuario master o no
+            if ($master === TRUE) {
+                crud::Create(query::CreateUsuario(
+                    $user,
+                    $password,
+                    TRUE,
+                    TRUE
+                ));
+
+                crud::Create(query::CreateAgente(
+                    $nombre,
+                    $apellido,
+                    $documento,
+                    $telefono,
+                    $direccion,
+                    $correo,
+                    $creador,
+                    $user
+                ));
+            } else {
+                crud::Create(query::CreateUsuario(
+                    $user,
+                    $password,
+                    $admin,
+                    $master
+                ));
+
+                crud::Create(query::CreateAgente(
+                    $nombre,
+                    $apellido,
+                    $documento,
+                    $telefono,
+                    $direccion,
+                    $correo,
+                    $creador,
+                    $user
+                ));
+            }
+            echo 'Agente Registrado Correctamente';
+        } else {
+            echo 'Las contraseñas no coinciden';
+        }
+    }
+
+    //Cambiando Contraseña de los Agentes usando Ajax por metodo post
+    public static function CambiarContrasena()
+    {
+        if (isset($_POST['btnCambiarContrasenaAgente'])) {
+            $User = $_POST['UsuarioAgenteCambioContrasena'];
+            $NuevaContrasena = $_POST['NuevaContrasena'];
+            $confirmarNuevaContrasena = $_POST['ConfirmarNuevaContrasena'];
+            if ($NuevaContrasena === $confirmarNuevaContrasena) {
+                crud::Update(query::UpdatePassword($User, md5($NuevaContrasena)));
+                header('Location:./Preferences');
+            }
+        }
     }
 
     //form para insertar accesweb token
