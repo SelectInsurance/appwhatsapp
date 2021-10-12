@@ -90,9 +90,9 @@ class  query
     }
 
     //Consultar AccesWebToken
-    public static function ReadAwebT()
+    public static function ReadAwebT($user)
     {
-        return "SELECT * FROM TokenChatApi ORDER BY idToken DESC Limit 1";
+        return "SELECT * FROM TokenChatApi WHERE user = '$user' ORDER BY idToken DESC Limit 1";
     }
 
     //Modificar Dialogs
