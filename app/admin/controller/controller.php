@@ -29,8 +29,9 @@ function Nav()
         }
     }
 
+    $user = $_SESSION['Admin'];
     //Salas de chat almacenadas en base de datos
-    $consulta = crud::Read(query::ReadDialogs());
+    $consulta = crud::Read(query::ReadDialogs($user));
 
 
     require_once 'app\admin\views\assets\menu.phtml';

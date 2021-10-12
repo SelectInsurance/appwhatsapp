@@ -1,7 +1,4 @@
-DROP PROCEDURE IF EXISTS SP_MostrarMensajesChat;
-
-delimiter ;
-
+use whatsapp;
 DROP PROCEDURE IF EXISTS SP_MostrarMensajesChat;
 
 delimiter //

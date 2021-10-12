@@ -78,9 +78,9 @@ class  query
         return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
     }
 
-    public static function ReadDialogs()
+    public static function ReadDialogs($user)
     {
-        return "SELECT * FROM dialogs";
+        return "call SP_CreateDialogs('$user')";
     }
 
     //Crear AccesWebToken

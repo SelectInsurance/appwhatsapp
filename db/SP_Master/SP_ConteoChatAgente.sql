@@ -1,3 +1,5 @@
+use whatsapp;
+
 DROP PROCEDURE IF EXISTS SP_ConteoChatAgente;
 delimiter $$
 CREATE PROCEDURE SP_ConteoChatAgente(in v_usuario VARCHAR(255))
