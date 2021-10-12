@@ -250,7 +250,7 @@ class controller
                 if ($data['messages'][$i]['author'] === $data['messages'][$i]['chatId']) {
                     $sender[$i] = $data['messages'][$i]['author'];
                 } elseif ($data['messages'][$i]['author'] != $data['messages'][$i]['chatId']) {
-                    $sender[$i] = $_SESSION['Master'];
+                    $sender[$i] = $_SESSION['Admin'];
                 }
                 crud::Create(query::CreateAlmacenarMensajes(
                     $data['messages'][$i]['id'],

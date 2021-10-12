@@ -369,13 +369,23 @@ var MostrarMensajesChat = function () {
                 let conversacion = '';
                 json.forEach(
                     Datos => {
-                        conversacion += `
+                        if (Datos.sender == 'master' || Datos.sender == 'admin' || Datos.sender == 'regular') {
+                            conversacion += `
+                                <div class="m-2 text-end">
+                                <span style="color: #848484;">${Datos.body}</span>
+                                <span class="text text-success">: ${Datos.sender}</span>
+                                    <span style="float: right; font-size: 11px;"></span>
+                                </div>
+                                `
+                        } else {
+                            conversacion += `
                             <div class="m-2">
                                 <span class="text text-success">${Datos.sender}:</span>
                                 <span style="color: #848484;">${Datos.body}</span>
                                 <span style="float: right; font-size: 11px;"></span>
                             </div>
                             `
+                        }
                     });
                 $('#datos_chat').html(conversacion);
                 //

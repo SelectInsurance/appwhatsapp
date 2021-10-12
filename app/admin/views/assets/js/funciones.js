@@ -80,8 +80,6 @@ var ReadAccesWebToken = function () {
 }
 
 
-
-
 //Mostrar Mensajes de chat individual
 var MostrarMensajesChat = function () {
 
@@ -99,13 +97,23 @@ var MostrarMensajesChat = function () {
                 let conversacion = '';
                 json.forEach(
                     Datos => {
-                        conversacion += `
+                        if (Datos.sender == 'master' || Datos.sender == 'admin' || Datos.sender == 'regular') {
+                            conversacion += `
+                                <div class="m-2 text-end">
+                                <span style="color: #848484;">${Datos.body}</span>
+                                <span class="text text-success">: ${Datos.sender}</span>
+                                    <span style="float: right; font-size: 11px;"></span>
+                                </div>
+                                `
+                        } else {
+                            conversacion += `
                             <div class="m-2">
                                 <span class="text text-success">${Datos.sender}:</span>
                                 <span style="color: #848484;">${Datos.body}</span>
                                 <span style="float: right; font-size: 11px;"></span>
                             </div>
                             `
+                        }
                     });
                 $('#datos_chat').html(conversacion);
                 //
@@ -182,19 +190,19 @@ var EnviarMensajesDesdeEnter = function () {
 var MostrarConversacionDataTable = function () {
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();
 
-if (form != '') {
-    $.ajax({
-        type: "POST",
-        url: "MostrarConversacionesConsulta",
-        data: form,
-        success: function (Respuesta) {
-            console.log(Respuesta);
-            var json = JSON.parse(Respuesta);
-            console.log(json);
-            var table = '';
-            json.forEach(
-                Datos => {
-                    table += `
+    if (form != '') {
+        $.ajax({
+            type: "POST",
+            url: "MostrarConversacionesConsulta",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                console.log(json);
+                var table = '';
+                json.forEach(
+                    Datos => {
+                        table += `
                         <tr>
                             <td>${Datos.chatId}</td>
                             <td>${Datos.sender}</td>
@@ -202,19 +210,19 @@ if (form != '') {
                             <td>${Datos.body}</td>
                         </tr>
                     `
-                }
-            );
-            $('#tablaconversacion').html(table);
+                    }
+                );
+                $('#tablaconversacion').html(table);
 
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-        }
-    });
-}
-    
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    }
+
 
     /*     var table = $('#tablaconversacion').DataTable({
             "ajax": {
