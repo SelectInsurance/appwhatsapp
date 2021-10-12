@@ -4,6 +4,7 @@ $(document).ready(function () {
     IngresoAccessWebToken();
     ReadAccesWebToken();
     setInterval('MostrarMensajesChat()', 500);
+    ValidacionCantidadMaximaCaracteres();
     EnviarMensajesChat();
 });
 
@@ -102,7 +103,7 @@ var MostrarMensajesChat = function () {
                                 <div class="m-2 text-end">
                                 <span style="color: #848484;">${Datos.body}</span>
                                 <span class="text text-success">: ${Datos.sender}</span>
-                                    <span style="float: right; font-size: 11px;"></span>
+                                <span style="float: right; font-size: 11px;"></span>
                                 </div>
                                 `
                         } else {
@@ -150,6 +151,30 @@ var EnviarMensajesChat = function () {
         });
         //MostrarMensajesChat();
         $('#txtCuerpoMensage').val('');
+    });
+}
+
+//Validacion de maxima cantidad de caracteres
+var ValidacionCantidadMaximaCaracteres = function () {
+    $('#CantidadCaracteresMaximos').text('80 carácteres restantes');
+    $('#txtCuerpoMensage').keydown(function () {
+        var max = 80;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#CantidadCaracteresMaximos').text('Has llegado al límite');// Aquí enviamos el mensaje a mostrar          
+            $('#CantidadCaracteresMaximos').addClass('text-danger');
+            $('#txtCuerpoMensage').addClass('is-invalid');
+            $('#inputsubmit').addClass('disabled');
+            document.getElementById('inputsubmit').disabled = true;
+        }
+        else {
+            var ch = max - len;
+            $('#CantidadCaracteresMaximos').text(ch + ' carácteres restantes');
+            $('#CantidadCaracteresMaximos').removeClass('text-danger');
+            $('#txtCuerpoMensage').removeClass('is-invalid');
+            $('#inputsubmit').removeClass('disabled');
+            document.getElementById('inputsubmit').disabled = false;
+        }
     });
 }
 

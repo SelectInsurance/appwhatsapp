@@ -5,6 +5,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarMensajesChat()', 500);
+    ValidacionCantidadMaximaCaracteres();
     TablaChatAsignadoAgente();
     MostrarConversacionDataTable();
     IngresarAgente();
@@ -425,6 +426,30 @@ var EnviarMensajesChat = function () {
     });
 }
 
+//Validacion de maxima cantidad de caracteres
+var ValidacionCantidadMaximaCaracteres = function () {
+    $('#CantidadCaracteresMaximos').text('80 carácteres restantes');
+    $('#txtCuerpoMensage').keydown(function () {
+        var max = 80;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#CantidadCaracteresMaximos').text('Has llegado al límite');// Aquí enviamos el mensaje a mostrar          
+            $('#CantidadCaracteresMaximos').addClass('text-danger');
+            $('#txtCuerpoMensage').addClass('is-invalid');
+            $('#inputsubmit').addClass('disabled');
+            document.getElementById('inputsubmit').disabled = true;
+        }
+        else {
+            var ch = max - len;
+            $('#CantidadCaracteresMaximos').text(ch + ' carácteres restantes');
+            $('#CantidadCaracteresMaximos').removeClass('text-danger');
+            $('#txtCuerpoMensage').removeClass('is-invalid');
+            $('#inputsubmit').removeClass('disabled');
+            document.getElementById('inputsubmit').disabled = false;
+        }
+    });
+}
+
 //Enviar mensajes de chat con Enter
 var EnviarMensajesDesdeEnter = function () {
 
@@ -462,19 +487,19 @@ var EnviarMensajesDesdeEnter = function () {
 var MostrarConversacionDataTable = function () {
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();
 
-if (form != '') {
-    $.ajax({
-        type: "POST",
-        url: "MostrarConversacionesConsulta",
-        data: form,
-        success: function (Respuesta) {
-            console.log(Respuesta);
-            var json = JSON.parse(Respuesta);
-            console.log(json);
-            var table = '';
-            json.forEach(
-                Datos => {
-                    table += `
+    if (form != '') {
+        $.ajax({
+            type: "POST",
+            url: "MostrarConversacionesConsulta",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                console.log(json);
+                var table = '';
+                json.forEach(
+                    Datos => {
+                        table += `
                         <tr>
                             <td>${Datos.chatId}</td>
                             <td>${Datos.sender}</td>
@@ -482,19 +507,19 @@ if (form != '') {
                             <td>${Datos.body}</td>
                         </tr>
                     `
-                }
-            );
-            $('#tablaconversacion').html(table);
+                    }
+                );
+                $('#tablaconversacion').html(table);
 
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-        }
-    });
-}
-    
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    }
+
 
     /*     var table = $('#tablaconversacion').DataTable({
             "ajax": {
