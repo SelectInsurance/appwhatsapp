@@ -295,6 +295,7 @@ class controller
                 $Array[$i]['metadata']        =   $row['metadata'];
                 $Array[$i]['ack']             =   $row['ack'];
                 $Array[$i]['chatName']        =   $row['chatName'];
+                $Array[$i]['FechaHora']       =   $row['FechaHora'];
                 $Array[$i]['sender']          =   str_replace('@c.us', '', $row['sender']);
                 $i++;
             }

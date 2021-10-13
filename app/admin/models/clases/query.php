@@ -177,7 +177,8 @@ class  query
     }
 
     //Mostrar Mensajes de chat individual
-    public static function ReadMensajesChat($id){
+    public static function ReadMensajesChat($id)
+    {
         return "call SP_MostrarMensajesChat('$id')";
     }
 
