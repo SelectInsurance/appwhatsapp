@@ -49,7 +49,7 @@ class controller
 
             //Logica para cerrar chat
             if (isset($_POST['btnCerrarChat'])) {
-                $id = $_POST['btnCerrarChat'].'@c.us';
+                $id = $_POST['btnCerrarChat'] . '@c.us';
                 crud::Update(query::UpdateDialogsCerrarChat($id));
             }
 
@@ -403,6 +403,14 @@ class controller
         }
         $conteo = count($Array);
         echo $conteo;
+    }
+
+    //Mostrando Cantidad Chat Cerrados
+    public static function MostrandoChatCerrados()
+    {
+        $Consulta = crud::Read(query::ReadConteoChatCerrados());
+        $resultado = mysqli_fetch_assoc($Consulta);
+        echo $resultado['v_conteo'];
     }
 
 

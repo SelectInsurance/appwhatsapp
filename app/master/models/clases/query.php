@@ -141,6 +141,11 @@ class  query
         return "CALL SP_ConteoChatAgente('$user')";
     }
 
+    //Mostrando Cantidad de chats cerrados
+    public static function ReadConteoChatCerrados(){
+        return "CALL SP_ConteoChatCerrados";
+    }
+
     //Insertar Mensajes de la api a la base de datos
     public static function CreateAlmacenarMensajes(
         $id,

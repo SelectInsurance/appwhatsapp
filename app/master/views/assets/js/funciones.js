@@ -4,6 +4,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
     setInterval('MostrarCantidadSalasChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
+    setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarMensajesChat()', 500);
     ValidacionCantidadMaximaCaracteres();
     TablaChatAsignadoAgente();
@@ -301,6 +302,25 @@ var MostrarCantidadSalasChatAbiertas = function () {
     });
 }
 
+
+//Mostrando cantidad de Salaas de chat Cerradas
+
+var MostrarCantidadSalasChatCerradas = function () {
+    $.ajax({
+        type: "POST",
+        url: "MostrandoChatCerrados",
+        dataType: "text",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            $('#CardSalasCerradas').html(Respuesta);
+        },
+        error: function(xhr, status, error){
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
 
 
 
