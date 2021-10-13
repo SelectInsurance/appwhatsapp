@@ -45,6 +45,7 @@ class controller
     public static function Inicio()
     {
         if (isset($_SESSION['Master'])) {
+
             higher();
             Nav();
 
@@ -183,8 +184,8 @@ class controller
     }
 
 
-    //Sala de chat individual
-    public static function SalaChat()
+    //Abrir Sala de chat individual
+    public static function AbrirSalaChat()
     {
         //Condicion para obligar a tener si o si una sala de chat
         if (!empty($_POST['btnAbrirChat'])) {
@@ -397,6 +398,36 @@ class controller
         echo $conteo;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //Mostrando Cantidad Chat Asignado a Agentes
     public static function MostrandoChatAsignados()
     {
@@ -442,7 +473,7 @@ class controller
             Nav();
             require_once 'app\master\views\modules\conversacion\conversacion.php';
             lower();
-        }else {
+        } else {
             header('Location:Inicio');
         }
     }

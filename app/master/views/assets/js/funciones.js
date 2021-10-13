@@ -302,6 +302,42 @@ var MostrarCantidadSalasChatAbiertas = function () {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Mostrando cantidad de salas de chat asignadas a agentes
 var MostrarCantidadSalasChatAsignadas = function () {
     $.ajax({

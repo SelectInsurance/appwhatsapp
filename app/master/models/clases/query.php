@@ -72,7 +72,7 @@ class  query
     }
 
     //Insertar dialogs
-    public static function CreateDialogs($id,$name,$image,$last_time)
+    public static function CreateDialogs($id, $name, $image, $last_time)
     {
         return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
     }
@@ -95,37 +95,44 @@ class  query
     }
 
     //Modificar Dialogs
-    public static function UpdateDialogs($idAgente, $name){
+    public static function UpdateDialogs($idAgente, $name)
+    {
         return "UPDATE dialogs set idAgentes = '$idAgente' WHERE name = '$name'";
     }
 
     //Consultando imagen de Dialogs
-    public static function ReadImageDialogs($id){
+    public static function ReadImageDialogs($id)
+    {
         return "SELECT image FROM dialogs WHERE id = '$id'";
     }
 
     //Update para abrir chat
-    public static function UpdateDialogsAbrirChat($id){
+    public static function UpdateDialogsAbrirChat($id)
+    {
         return "UPDATE dialogs SET abierto = true WHERE id = '$id'";
     }
 
     //Mostrando Chat Abiertos
-    public static function ReadChatAbiertos(){
+    public static function ReadChatAbiertos()
+    {
         return "SELECT abierto FROM dialogs WHERE abierto = TRUE";
     }
 
     //Mostrando Chat Asignado a Agentes
-    public static function ReadChatAsignados(){
+    public static function ReadChatAsignados()
+    {
         return "SELECT count(idAgentes) FROM whatsapp.dialogs";
     }
 
     //Mostrando Agentes con su cantidad de Chat Asignados
-    public static function ReadChatAsignadosAgentes(){
+    public static function ReadChatAsignadosAgentes()
+    {
         return "SELECT * FROM Agentes";
     }
 
     //Mostrando cantidad de chats asignados de cada agente
-    public static function ReadConteoChatAsignadosAgentes($user){
+    public static function ReadConteoChatAsignadosAgentes($user)
+    {
         return "CALL SP_ConteoChatAgente('$user')";
     }
 
@@ -148,8 +155,9 @@ class  query
         $metadata,
         $ack,
         $chatName,
-        $sender){
-            
+        $sender
+    ) {
+
         return "
         call 
         SP_AlmacenarMensajes     
@@ -176,12 +184,14 @@ class  query
     }
 
     //Mostrar Mensajes de chat individual
-    public static function ReadMensajesChat($id){
+    public static function ReadMensajesChat($id)
+    {
         return "call SP_MostrarMensajesChat('$id')";
     }
 
     //Mostrando conversacion de chat seleccionado
-    public static function ReadChatAgente($id){
+    public static function ReadChatAgente($id)
+    {
         return "CALL SP_MostrarConversacionAgente('$id')";
     }
 }
