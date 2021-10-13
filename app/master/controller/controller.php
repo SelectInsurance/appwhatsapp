@@ -451,6 +451,8 @@ class controller
         echo $row['count(idAgentes)'];
     }
 
+
+    ///////////////////////////////////////////////////////////////////
     //Tabla para mostrar cantidad de chat asignados a cada agente
     public static function TablaChatAsignadoAgente()
     {
@@ -459,25 +461,26 @@ class controller
         $i = 0;
         while ($row = mysqli_fetch_assoc($consulta)) {
 
-            //Logica para sacar la consulta con la funcion count de mysql
-            $Resultado = crud::Read(query::ReadConteoChatAsignadosAgentes($row['usuario']));
-            foreach (mysqli_fetch_assoc($Resultado) as $count) {
-                $conteo = $count;
-            }
-
-
-            $ArrayAgentes[$i]['count'] = $conteo;
+            //Consultando Agente
             $ArrayAgentes[$i]['id'] = $row['id'];
             $ArrayAgentes[$i]['usuario'] = $row['usuario'];
             $ArrayAgentes[$i]['nombre'] = $row['nombre'];
             $ArrayAgentes[$i]['apellido'] = $row['apellido'];
+
+
+            //Logica para sacar la consulta con la funcion count de mysql
+            $ConteoChat = crud::Read(query::ReadConteoChatPendientes($row['usuario']));
+            $conteo = mysqli_fetch_assoc($ConteoChat);
+            $ArrayAgentes[$i]['ChatAbiertos'] = $conteo['v_cantidadChatAbiertos'];
+            $ArrayAgentes[$i]['ChatPendiente'] = $conteo['v_cantidadChatPendiente'];
             $i++;
         }
+        //var_dump($ArrayAgentes);
         $json = json_encode($ArrayAgentes, JSON_PRETTY_PRINT);
         print $json;
     }
-
-
+    //////////////////////////////////////////////////////////////////
+    //
     //Modulo mostrar Conversacion Agente Seleccionado desde Dashboard
     public static function MostrandoConversacionAgente()
     {

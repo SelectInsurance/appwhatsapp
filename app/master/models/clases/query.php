@@ -137,7 +137,7 @@ class  query
     }
 
     //Mostrando cantidad de chats asignados de cada agente
-    public static function ReadConteoChatAsignadosAgentes($user)
+    public static function ReadConteoChatPendientes($user)
     {
         return "CALL SP_ConteoChatAgente('$user')";
     }

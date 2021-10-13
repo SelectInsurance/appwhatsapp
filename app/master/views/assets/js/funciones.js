@@ -6,8 +6,8 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarMensajesChat()', 500);
-    ValidacionCantidadMaximaCaracteres();
     TablaChatAsignadoAgente();
+    ValidacionCantidadMaximaCaracteres();
     MostrarConversacionDataTable();
     IngresarAgente();
     ReadAgentes();
@@ -304,7 +304,6 @@ var MostrarCantidadSalasChatAbiertas = function () {
 
 
 //Mostrando cantidad de Salaas de chat Cerradas
-
 var MostrarCantidadSalasChatCerradas = function () {
     $.ajax({
         type: "POST",
@@ -314,7 +313,7 @@ var MostrarCantidadSalasChatCerradas = function () {
             //console.log(Respuesta);
             $('#CardSalasCerradas').html(Respuesta);
         },
-        error: function(xhr, status, error){
+        error: function (xhr, status, error) {
             console.log(xhr);
             console.log(status);
             console.log(error);
@@ -389,11 +388,12 @@ var TablaChatAsignadoAgente = function () {
                 Datos => {
                     tabla += `
                         <tr>
-                            <td><input class="form-check-input" name="idAgente" type="checkbox" value="${Datos.id}"></td>
+                            <td><input class="form-check-input" name="idAgente[]" type="checkbox" value="${Datos.id}"></td>
                             <td>${Datos.nombre}</td>
                             <td>${Datos.apellido}</td>
                             <td>${Datos.usuario}</td>
-                            <td class="badge bg-secondary">${Datos.count}</td>
+                            <td><span class="badge bg-danger rounded-pill">${Datos.ChatPendiente}</span></td>
+                            <td><span class="badge bg-warning rounded-pill">${Datos.ChatAbiertos}</span></td>
                         </tr>
                     `
                 }
