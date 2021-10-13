@@ -46,6 +46,13 @@ class controller
     {
         if (isset($_SESSION['Master'])) {
 
+
+            //Logica para cerrar chat
+            if (isset($_POST['btnCerrarChat'])) {
+                $id = $_POST['btnCerrarChat'].'@c.us';
+                crud::Update(query::UpdateDialogsCerrarChat($id));
+            }
+
             higher();
             Nav();
 
