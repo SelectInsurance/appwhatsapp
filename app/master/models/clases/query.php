@@ -113,7 +113,8 @@ class  query
     }
 
     //Update para cerrar chat
-    public static function UpdateDialogsCerrarChat($id){
+    public static function UpdateDialogsCerrarChat($id)
+    {
         return "UPDATE dialogs SET abierto = FALSE  WHERE id = '$id'";
     }
 
