@@ -25,7 +25,7 @@ require_once 'app/Login/models/app_autoload.php';
                     $_SESSION['Asistant'] = $user;
                     header('Location:./');
                 }else {
-                    echo 'Usuario o Contraseña invalido';
+                    echo '<center class="text-danger"><b>Usuario o Contraseña invalido</b></center>';
                 }
             }
             require_once 'app/Login/views/assets/footer.html';
