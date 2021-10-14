@@ -388,11 +388,6 @@ class controller
         }
     }
 
-    //Mostrar Cantidad Chats Asignados a Agente
-    public static function MostrarDialogsAsignadosChat()
-    {
-    }
-
     //Mostrando Cantidad chat abiertos
     public static function MostrandoChatAbiertos()
     {
