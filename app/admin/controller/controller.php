@@ -129,31 +129,6 @@ class controller
         }
     }
 
-    //Sala de chat individual
-    public static function SalaChat()
-    {
-        //Condicion para obligar a tener si o si una sala de chat
-        if (!empty($_POST['btnAbrirChat'])) {
-            $id = $_POST['btnAbrirChat'];
-            $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
-
-            //Imagen Guardada
-            $resultado = crud::Read(query::ReadImageDialogs($id));
-            $image = mysqli_fetch_assoc($resultado);
-
-            //ChatAbiertos
-            crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
-
-
-            higher();
-            Nav();
-            require_once 'app\admin\views\modules\chat\chat.phtml';
-            lower();
-        } else {
-            header('Location:./');
-        }
-    }
-
     //Cambiando Contraseña de los Agentes usando Ajax por metodo post
     public static function CambiarContrasena()
     {
@@ -168,6 +143,12 @@ class controller
         }
     }
 
+
+
+
+
+
+    //TODO LO RELACIONADO CON EL ACCES WEB TOKEN
     //form para insertar accesweb token
     public static function formAccesWebToken()
     {
@@ -203,6 +184,50 @@ class controller
         }
         $json = json_encode($Array, JSON_PRETTY_PRINT);
         print $json;
+    }
+    /////////////////////////////////////
+
+
+
+
+
+    //tODO LO RELACIONADO CON LOS CONTEOS DE CHAT
+    //Mostrando Cantidad chat abiertos
+    public static function MostrandoChatAbiertos()
+    {
+
+    }
+    ///////////////////////////////////////
+
+
+
+
+
+
+    //TODO LO RELACIONADO CON EL CHAT
+    //Sala de chat individual
+    public static function SalaChat()
+    {
+        //Condicion para obligar a tener si o si una sala de chat
+        if (!empty($_POST['btnAbrirChat'])) {
+            $id = $_POST['btnAbrirChat'];
+            $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
+
+            //Imagen Guardada
+            $resultado = crud::Read(query::ReadImageDialogs($id));
+            $image = mysqli_fetch_assoc($resultado);
+
+            //ChatAbiertos
+            crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
+
+
+            higher();
+            Nav();
+            require_once 'app\admin\views\modules\chat\chat.phtml';
+            lower();
+        } else {
+            header('Location:./');
+        }
     }
 
     //Mostrar Mensajes de chat individual
@@ -276,6 +301,7 @@ class controller
             print json_encode($Array, JSON_PRETTY_PRINT);
         }
     }
+
     //Enviar Mensajes de chat individual
     public static function EnviarMensajesChat()
     {
@@ -288,4 +314,5 @@ class controller
         echo $Api->SendMenssage($Phone, $message);
         //echo $Phone.' '.$message;
     }
+    ///////////////////////////////////
 }

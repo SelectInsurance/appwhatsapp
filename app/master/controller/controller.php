@@ -69,22 +69,6 @@ class controller
         header('Location:Inicio');
     }
 
-    //Cantidad Salas de Chat
-    public static function CantidadSalasChat()
-    {
-        $consulta = crud::Read(query::ReadDialogs());
-        $i = 0;
-        while ($row = mysqli_fetch_array($consulta)) {
-            $Array[$i]['id'] = $row['id'];
-            $Array[$i]['name'] = $row['name'];
-            $Array[$i]['image'] = $row['image'];
-            $Array[$i]['last_name'] = $row['last_name'];
-            $i++;
-        }
-        $conteo = count($Array);
-        echo $conteo;
-    }
-
     //Cerrar Session
     public static function Cerrar()
     {
@@ -191,6 +175,8 @@ class controller
     }
 
 
+
+    //TODO LO RELACIONADO A LOS CHAT
     //Abrir Sala de chat individual
     public static function AbrirSalaChat()
     {
@@ -288,11 +274,6 @@ class controller
         }
     }
 
-    //Mostrar Mensajes en seguimiento
-    public static function MostrarMensajesSeguimiento()
-    {
-    }
-
     //Enviar Mensajes de chat individual
     public static function EnviarMensajesChat()
     {
@@ -306,6 +287,29 @@ class controller
         //echo $Phone.' '.$message;
     }
 
+    //Cantidad Salas de Chat
+    public static function CantidadSalasChat()
+    {
+        $consulta = crud::Read(query::ReadDialogs());
+        $i = 0;
+        while ($row = mysqli_fetch_array($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_name'] = $row['last_name'];
+            $i++;
+        }
+        $conteo = count($Array);
+        echo $conteo;
+    }
+
+    ///////////////////////////////////////
+
+
+
+
+
+    //ACA COMIENZA TODO LO DEL ACCES WEB TOKEN
     //form para insertar accesweb token
     public static function formAccesWebToken()
     {
@@ -342,7 +346,13 @@ class controller
         $json = json_encode($Array, JSON_PRETTY_PRINT);
         print $json;
     }
+    //////////////////////////////////////////
 
+
+
+
+
+    //TODO LO RELACIONADO CON LA TRANSFERENCIA DE SALAS DE CHAT
     //Modulo Transferir chat
     public static function TransferirChat()
     {
@@ -387,7 +397,13 @@ class controller
             echo 'No se pudo Transferir';
         }
     }
+    /////////////////////////////////////////////
 
+
+
+
+
+    //TODO LO RELACIONADO A LOS CONTEOS DEL CHAT
     //Mostrando Cantidad chat abiertos
     public static function MostrandoChatAbiertos()
     {
@@ -401,44 +417,6 @@ class controller
         echo $conteo;
     }
 
-    //Mostrando Cantidad Chat Cerrados
-    public static function MostrandoChatCerrados()
-    {
-        $Consulta = crud::Read(query::ReadConteoChatCerrados());
-        $resultado = mysqli_fetch_assoc($Consulta);
-        echo $resultado['v_conteo'];
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //Mostrando Cantidad Chat Asignado a Agentes
     public static function MostrandoChatAsignados()
     {
@@ -446,6 +424,46 @@ class controller
         $row = mysqli_fetch_assoc($consulta);
         echo $row['count(idAgentes)'];
     }
+
+    //Mostrando Cantidad Chat Cerrados
+    public static function MostrandoChatCerrados()
+    {
+        $Consulta = crud::Read(query::ReadConteoChatCerrados());
+        $resultado = mysqli_fetch_assoc($Consulta);
+        echo $resultado['v_conteo'];
+    }
+    //////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     ///////////////////////////////////////////////////////////////////
@@ -494,8 +512,9 @@ class controller
     }
 
     //logica para mostrar la cantidad de salas de chat asignadas al Agente o al asistente
-    public static function ReadDialogsAsignadosAgente(){
-        $id = $_POST['id']; 
+    public static function ReadDialogsAsignadosAgente()
+    {
+        $id = $_POST['id'];
         $consulta = crud::Read(query::ReadDialogsAgente($id));
 
         $i = 0;
