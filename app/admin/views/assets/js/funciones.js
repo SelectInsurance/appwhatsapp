@@ -5,8 +5,10 @@ $(document).ready(function () {
     IngresoAccessWebToken();
     ReadAccesWebToken();
     setInterval('MostrarMensajesChat()', 500);
+    setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     ValidacionCantidadMaximaCaracteres();
     EnviarMensajesChat();
+    MostrarCantidadSalasChatAbiertas();
 });
 
 
@@ -117,55 +119,10 @@ var ReadAccesWebToken = function () {
 }
 
 
-//Mostrar Mensajes de chat individual
-var MostrarMensajesChat = function () {
-
-    let form = $('#frmMostrarChat').serialize();
-
-    if (form != '') {
-        $.ajax({
-            type: "POST",
-            url: "MostrarMensajesChat",
-            data: form,
-            success: function (Respuesta) {
-                //console.log(Respuesta);
-                let json = JSON.parse(Respuesta);
-                //console.log(json);
-                let conversacion = '';
-                json.forEach(
-                    Datos => {
-                        if (Datos.sender == 'master' || Datos.sender == 'admin' || Datos.sender == 'regular') {
-                            conversacion += `                            
-                                <div class="m-2">
-                                    <span class="text text-success">${Datos.sender}</span>
-                                    <span>${Datos.body}</span>
-                                    <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
-                                </div>
-                                `
-                        } else {
-                            conversacion += `
-                            <div class="m-2">
-                                <span class="text text-danger">${Datos.sender}</span>
-                                <span>${Datos.body}</span>
-                                <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
-                            </div>
-                            `
-                        }
-                    });
-                $('#datos_chat').html(conversacion);
-                //
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
-            }
-        });
-    }
-};
 
 
-//////////////////////////////////////
+
+//TODO LO RELACIONADO CON EL CHAT
 //Enviar mensajes de chat
 var EnviarMensajesChat = function () {
     $('#btnEnviarMensajeWhatsapp').click(function (e) {
@@ -214,6 +171,53 @@ var ValidacionCantidadMaximaCaracteres = function () {
     });
 }
 
+//Mostrar Mensajes de chat individual
+var MostrarMensajesChat = function () {
+
+    let form = $('#frmMostrarChat').serialize();
+
+    if (form != '') {
+        $.ajax({
+            type: "POST",
+            url: "MostrarMensajesChat",
+            data: form,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                let json = JSON.parse(Respuesta);
+                //console.log(json);
+                let conversacion = '';
+                json.forEach(
+                    Datos => {
+                        if (Datos.sender == 'master' || Datos.sender == 'admin' || Datos.sender == 'regular') {
+                            conversacion += `                            
+                                <div class="m-2">
+                                    <span class="text text-success">${Datos.sender}</span>
+                                    <span>${Datos.body}</span>
+                                    <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
+                                </div>
+                                `
+                        } else {
+                            conversacion += `
+                            <div class="m-2">
+                                <span class="text text-danger">${Datos.sender}</span>
+                                <span>${Datos.body}</span>
+                                <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
+                            </div>
+                            `
+                        }
+                    });
+                $('#datos_chat').html(conversacion);
+                //
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    }
+};
+
 //Enviar mensajes de chat con Enter
 var EnviarMensajesDesdeEnter = function () {
 
@@ -246,6 +250,31 @@ var EnviarMensajesDesdeEnter = function () {
 
 }
 ////////////////////////////////////
+
+
+
+
+//TODO LO RELACIONADO CON LOS CONTEOS
+//Mostrando Cantidad de salas de chat Abiertas
+var MostrarCantidadSalasChatAbiertas = function () {
+    $.ajax({
+        type: "POST",
+        url: "MostrandoChatAbiertos",
+        success: function (Respuesta) {
+            $('#CardSalasAbiertas').html(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+///////////////////////////////////////
+
+
+
+
 
 //Agregando Tabla para mostrar las conversaciones
 var MostrarConversacionDataTable = function () {

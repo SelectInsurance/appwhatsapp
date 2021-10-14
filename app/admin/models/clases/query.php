@@ -111,8 +111,8 @@ class  query
     }
 
     //Mostrando Chat Abiertos
-    public static function ReadChatAbiertos(){
-        return "SELECT abierto FROM dialogs WHERE abierto = TRUE";
+    public static function ReadChatAbiertos($user){
+        return "CALL SP_ConteoChatAbiertosAdmin('$user')";
     }
 
     //Mostrando Chat Asignado a Agentes
