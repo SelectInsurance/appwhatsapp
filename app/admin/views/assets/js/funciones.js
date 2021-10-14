@@ -1,12 +1,12 @@
 $(document).ready(function () {
     console.log('Hola desde jquery seccion admin');
+    setInterval('MostrarMensajesChat()', 500);
+    setInterval('MostrarCantidadSalasChatAbiertas()', 500);
+    setInterval('MostrarCantidadSalasChatCerradas()', 500);
     ReadAgentes();
     IngresarAgente();
     IngresoAccessWebToken();
     ReadAccesWebToken();
-    setInterval('MostrarMensajesChat()', 500);
-    setInterval('MostrarCantidadSalasChatAbiertas()', 500);
-    setInterval('MostrarCantidadSalasChatCerradas()', 500);
     ValidacionCantidadMaximaCaracteres();
     EnviarMensajesChat();
     MostrarCantidadSalasChatAbiertas();
