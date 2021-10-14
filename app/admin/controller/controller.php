@@ -50,7 +50,7 @@ class controller
     {
         higher();
         Nav();
-        require_once 'app\admin\views\modules\Inicio\inicio.phtml';
+        require_once 'app\admin\views\modules\dashboard\dashboard.phtml';
 
         lower();
     }
