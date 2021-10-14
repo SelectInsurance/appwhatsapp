@@ -302,7 +302,6 @@ class controller
         $conteo = count($Array);
         echo $conteo;
     }
-
     ///////////////////////////////////////
 
 
@@ -432,41 +431,7 @@ class controller
         $resultado = mysqli_fetch_assoc($Consulta);
         echo $resultado['v_conteo'];
     }
-    //////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ///////////////////////////////////////////////////////////////////
     //Tabla para mostrar cantidad de chat asignados a cada agente
     public static function TablaChatAsignadoAgente()
     {
@@ -493,8 +458,12 @@ class controller
         $json = json_encode($ArrayAgentes, JSON_PRETTY_PRINT);
         print $json;
     }
-    //////////////////////////////////////////////////////////////////
-    //
+    //////////////////////////////////////////
+
+
+
+
+
     //Modulo mostrar Conversacion Agente Seleccionado desde Dashboard
     public static function MostrandoConversacionAgente()
     {
