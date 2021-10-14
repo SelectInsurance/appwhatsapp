@@ -484,9 +484,9 @@ var EnviarMensajesChat = function () {
 
 //Validacion de maxima cantidad de caracteres
 var ValidacionCantidadMaximaCaracteres = function () {
-    $('#CantidadCaracteresMaximos').text('80 carácteres restantes');
+    $('#CantidadCaracteresMaximos').text('60 carácteres restantes');
     $('#txtCuerpoMensage').keydown(function () {
-        var max = 80;
+        var max = 60;
         var len = $(this).val().length;
         if (len >= max) {
             $('#CantidadCaracteresMaximos').text('Has llegado al límite');// Aquí enviamos el mensaje a mostrar          
