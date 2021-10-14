@@ -8,7 +8,8 @@ $(document).ready(function () {
     setInterval('MostrarMensajesChat()', 500);
     TablaChatAsignadoAgente();
     ValidacionCantidadMaximaCaracteres();
-    MostrarConversacionDataTable();
+    ReadDialogsAsignadosAgente();
+    //MostrarConversacionDataTable();
     IngresarAgente();
     ReadAgentes();
     CambiarContrasena();
@@ -544,10 +545,51 @@ var EnviarMensajesDesdeEnter = function () {
 
 
 
+//Mostrando Salas de chat Asignadas
+var ReadDialogsAsignadosAgente = function () {
 
+    var form = $('#frmidparaconsultarDatatableConversacion').serialize();
+    if (form != '') {
+        $.ajax({
+            type: "POST",
+            url: "ReadDialogsAsignadosAgente",
+            data: form,
+            success: function (Respuesta) {
+                var json = JSON.parse(Respuesta);
+                var tabla = '';
+                json.forEach(
+                    Datos => {
+                        tabla +=`
+                            <tr>
+                                <td>${Datos.id}</td>
+                                <td>${Datos.name}</td>
+                                <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${Datos.abierto}</td>
+                            </tr>
+                        `
+                    }
+                );
+                $('#tabladialogs').html(tabla);
+
+
+
+
+                console.log(json);
+
+
+
+            },
+            error: function(xhr, status, error){
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    }
+}
 
 //Agregando Tabla para mostrar las conversaciones
-var MostrarConversacionDataTable = function () {
+/* var MostrarConversacionDataTable = function () {
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();
 
     if (form != '') {
@@ -597,4 +639,4 @@ var MostrarConversacionDataTable = function () {
                 //{ "data": "admin" }
             ]
         }); */
-}
+//}

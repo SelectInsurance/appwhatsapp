@@ -205,4 +205,9 @@ class  query
     {
         return "CALL SP_MostrarConversacionAgente('$id')";
     }
+
+    //Mostrando salas de chat asignadas a un agente o asistente especifico
+    public static function ReadDialogsAgente($id){
+        return "SELECT * FROM dialogs WHERE idAgentes = '$id'";
+    }
 }

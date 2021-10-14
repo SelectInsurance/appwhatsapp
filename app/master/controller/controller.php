@@ -486,15 +486,34 @@ class controller
     public static function MostrandoConversacionAgente()
     {
         if (!empty($_POST['idAgente'])) {
-            $idAgente = $_POST['idAgente'];
-
             higher();
             Nav();
-            require_once 'app\master\views\modules\conversacion\conversacion.php';
+            foreach ($_POST['idAgente'] as $Array) {
+                $idAgente = $Array;
+            }
+            require_once 'app\master\views\modules\conversacion\conversacion.phtml';
             lower();
         } else {
             header('Location:Inicio');
         }
+    }
+
+    //logica para mostrar la cantidad de salas de chat asignadas al Agente o al asistente
+    public static function ReadDialogsAsignadosAgente(){
+        $id = $_POST['id']; 
+        $consulta = crud::Read(query::ReadDialogsAgente($id));
+
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($consulta)) {
+            $array[$i]['id']        =  str_replace('@c.us', '', $row['id']);
+            $array[$i]['name']      =   $row['name'];
+            $array[$i]['image']     =   $row['image'];
+            $array[$i]['last_time'] =   $row['last_time'];
+            $array[$i]['abierto']   =   $row['abierto'];
+            $array[$i]['idAgentes'] =   $row['idAgentes'];
+            $i++;
+        }
+        print json_encode($array, JSON_PRETTY_PRINT);
     }
 
 
