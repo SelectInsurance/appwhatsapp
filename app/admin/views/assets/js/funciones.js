@@ -1,6 +1,7 @@
 $(document).ready(function () {
     console.log('Hola desde jquery seccion admin');
     ReadAgentes();
+    IngresarAgente();
     IngresoAccessWebToken();
     ReadAccesWebToken();
     setInterval('MostrarMensajesChat()', 500);
@@ -20,10 +21,45 @@ var ReadAgentes = function () {
             { "data": "usuario" },
             { "data": "nombre" },
             { "data": "apellido" },
-            { "data": "password" },
-            { "data": "admin" }
+            { "data": "password" }
         ]
     });
+}
+
+//Ingresar Agente por ajax en el boton de dicho formulario
+let IngresarAgente = function () {
+    $('#btnRegistrarAgente').click(function (e) {
+        e.preventDefault();
+
+
+        let Formulario = $('#frmIngresarAgente').serialize();
+        $.ajax({
+            type: "POST",
+            url: "AgregarAgente",
+            data: Formulario,
+            success: function (Respuesta) {
+                $('#RespuestaIngresoAgentes').css('color', 'Green').html(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+
+        //Limpiando vasillas y desmarcando checkbox
+        $('#user').val('');
+        $('#nombre').val('');
+        $('#apellido').val('');
+        $('#documento').val('');
+        $('#telefono').val('');
+        $('#direccion').val('');
+        $('#correo').val('');
+        $('#password').val('');
+        $('#ConfirmacionPassword').val('');
+    });
+
+
 }
 
 //Ingreso de AccesWebToken
