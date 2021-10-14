@@ -119,16 +119,6 @@ class  query
         return "CALL SP_ConteoChatAbiertosAdmin('$user')";
     }
 
-    //Mostrando Chat Asignado a Agentes
-    public static function ReadChatAsignados()
-    {
-        return "SELECT count(idAgentes) FROM whatsapp.dialogs";
-    }
-
-
-
-
-
 
     //TODO LO RELACIONADO CON LOS CONTEOS
     //Mostrando cantidad de chats asignados de cada agente
@@ -142,6 +132,13 @@ class  query
     {
         return "SELECT * FROM Agentes";
     }
+
+    //Mostrando Chat Asignado a Agentes
+    public static function ReadChatAsignados($user)
+    {
+        return "CALL SP_ConteoChatAsignadosAdmin('$user')";
+    }
+
 
     //Mostrando Cantidad de chats cerrados
     public static function ReadConteoChatCerrados($user)

@@ -209,6 +209,16 @@ class controller
         $resultado = mysqli_fetch_assoc($Consulta);
         echo $resultado['v_conteo'];
     }
+
+    //Mostrando Cantidad Chat Asignado a Agentes
+    public static function MostrandoChatAsignados()
+    {
+        $user = $_SESSION['Admin'];
+        $consulta = crud::Read(query::ReadChatAsignados($user));
+        $row = mysqli_fetch_assoc($consulta);
+        echo $row;
+    }
+
     ///////////////////////////////////////
 
 

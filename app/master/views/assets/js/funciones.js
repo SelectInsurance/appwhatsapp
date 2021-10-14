@@ -162,6 +162,9 @@ var ActivarEmotes = function () {
 }
 
 
+
+
+//TODO LO RELACIONADO CON LA TRANSFERENCIA DE CHAT
 //Consultar tabla para transferir chat
 var ReadTransferenciaChat = function () {
     var table = $('#TablaTransferirChat').DataTable({
@@ -249,6 +252,11 @@ var CreateTransferirChat = function () {
         $('#IdAgenteTransferir').val('');
     });
 }
+//////////////////////////////////////////////
+
+
+
+
 
 
 //Cantidad Chat Asignado a Agentes
@@ -321,39 +329,6 @@ var MostrarCantidadSalasChatCerradas = function () {
         }
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
