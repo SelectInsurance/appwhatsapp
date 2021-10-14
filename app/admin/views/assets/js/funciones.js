@@ -6,6 +6,7 @@ $(document).ready(function () {
     ReadAccesWebToken();
     setInterval('MostrarMensajesChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
+    setInterval('MostrarCantidadSalasChatCerradas()', 500);
     ValidacionCantidadMaximaCaracteres();
     EnviarMensajesChat();
     MostrarCantidadSalasChatAbiertas();
@@ -262,6 +263,24 @@ var MostrarCantidadSalasChatAbiertas = function () {
         url: "MostrandoChatAbiertos",
         success: function (Respuesta) {
             $('#CardSalasAbiertas').html(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+//Mostrando cantidad de Salaas de chat Cerradas
+var MostrarCantidadSalasChatCerradas = function () {
+    $.ajax({
+        type: "POST",
+        url: "MostrandoChatCerrados",
+        dataType: "text",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            $('#CardSalasCerradas').html(Respuesta);
         },
         error: function (xhr, status, error) {
             console.log(xhr);

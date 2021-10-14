@@ -200,6 +200,15 @@ class controller
         $Array = mysqli_fetch_assoc($Resultados);
         print $Array['v_conteo'];
     }
+
+    //Mostrando Cantidad Chat Cerrados
+    public static function MostrandoChatCerrados()
+    {
+        $user = $_SESSION['Admin'];
+        $Consulta = crud::Read(query::ReadConteoChatCerrados($user));
+        $resultado = mysqli_fetch_assoc($Consulta);
+        echo $resultado['v_conteo'];
+    }
     ///////////////////////////////////////
 
 
