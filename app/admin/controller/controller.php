@@ -216,9 +216,8 @@ class controller
         $user = $_SESSION['Admin'];
         $consulta = crud::Read(query::ReadChatAsignados($user));
         $row = mysqli_fetch_assoc($consulta);
-        echo $row;
+        print $row['v_conteo'];
     }
-
     ///////////////////////////////////////
 
 

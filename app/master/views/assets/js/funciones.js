@@ -259,6 +259,9 @@ var CreateTransferirChat = function () {
 
 
 
+
+
+//TODO LO RELACIONADO CON LOS CONTEOS
 //Cantidad Chat Asignado a Agentes
 var DatatableDialogAgente = function () {
     var table = $('#TablaTransferirChat').DataTable({
@@ -331,8 +334,6 @@ var MostrarCantidadSalasChatCerradas = function () {
 }
 
 
-
-
 //Mostrando cantidad de salas de chat asignadas a agentes
 var MostrarCantidadSalasChatAsignadas = function () {
     $.ajax({
@@ -383,6 +384,12 @@ var TablaChatAsignadoAgente = function () {
         }
     });
 }
+///////////////////////////////////////////
+
+
+
+
+
 
 
 //Mostrar Mensajes de chat individual

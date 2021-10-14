@@ -3,6 +3,7 @@ $(document).ready(function () {
     setInterval('MostrarMensajesChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
+    setInterval('MostrarCantidadSalasChatAsignadas()', 500);
     ReadAgentes();
     IngresarAgente();
     IngresoAccessWebToken();
@@ -289,6 +290,24 @@ var MostrarCantidadSalasChatCerradas = function () {
         }
     });
 }
+
+//Mostrando cantidad de salas de chat asignadas a agentes
+var MostrarCantidadSalasChatAsignadas = function () {
+    $.ajax({
+        type: "POST",
+        url: "MostrandoChatAsignados",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            $('#CardSalasAsignadas').html(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
 ///////////////////////////////////////
 
 
