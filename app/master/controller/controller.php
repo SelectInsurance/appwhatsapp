@@ -416,6 +416,26 @@ class controller
         echo $conteo;
     }
 
+    //logica para mostrar la cantidad de salas de chat asignadas al Agente o al asistente
+    public static function ReadDialogsAsignadosAgente()
+    {
+        $id = $_POST['id'];
+        $consulta = crud::Read(query::ReadDialogsAgente($id));
+
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($consulta)) {
+            $array[$i]['id']        =  str_replace('@c.us', '', $row['id']);
+            $array[$i]['name']      =   $row['name'];
+            $array[$i]['image']     =   $row['image'];
+            $array[$i]['last_time'] =   $row['last_time'];
+            $array[$i]['abierto']   =   $row['abierto'];
+            $array[$i]['idAgentes'] =   $row['idAgentes'];
+            $i++;
+        }
+        print json_encode($array, JSON_PRETTY_PRINT);
+    }
+
+
     //Mostrando Cantidad Chat Asignado a Agentes
     public static function MostrandoChatAsignados()
     {
@@ -479,26 +499,6 @@ class controller
             header('Location:Inicio');
         }
     }
-
-    //logica para mostrar la cantidad de salas de chat asignadas al Agente o al asistente
-    public static function ReadDialogsAsignadosAgente()
-    {
-        $id = $_POST['id'];
-        $consulta = crud::Read(query::ReadDialogsAgente($id));
-
-        $i = 0;
-        while ($row = mysqli_fetch_assoc($consulta)) {
-            $array[$i]['id']        =  str_replace('@c.us', '', $row['id']);
-            $array[$i]['name']      =   $row['name'];
-            $array[$i]['image']     =   $row['image'];
-            $array[$i]['last_time'] =   $row['last_time'];
-            $array[$i]['abierto']   =   $row['abierto'];
-            $array[$i]['idAgentes'] =   $row['idAgentes'];
-            $i++;
-        }
-        print json_encode($array, JSON_PRETTY_PRINT);
-    }
-
 
     //Consulta para dirigir al DAtatable de mostrar conversaciones
     public static function MostrarConversacionesConsulta()

@@ -364,4 +364,23 @@ class controller
         //echo $Phone.' '.$message;
     }
     ///////////////////////////////////
+
+
+    //TODO LO RELACIONADO CON  MOSTRAR CONVERSACIONES EN TABLAS
+    //Modulo mostrar Conversacion Agente Seleccionado desde Dashboard
+    public static function MostrandoConversacionAgente()
+    {
+        if (!empty($_POST['idAgente'])) {
+            higher();
+            Nav();
+            foreach ($_POST['idAgente'] as $Array) {
+                $idAgente = $Array;
+            }
+            require_once 'app\admin\views\modules\conversacion\conversacion.phtml';
+            lower();
+        } else {
+            header('Location:Inicio');
+        }
+    }
+    ////////////////////////////////////////
 }
