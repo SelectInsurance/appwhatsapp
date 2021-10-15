@@ -392,7 +392,7 @@ var TablaChatAsignadoAgente = function () {
 
 
 
-
+//TODO LO RELACIONADO CON CHAT
 //Mostrar Mensajes de chat individual
 var MostrarMensajesChat = function () {
 
@@ -440,10 +440,9 @@ var MostrarMensajesChat = function () {
     }
 };
 
-
-//////////////////////////////////////
 //Enviar mensajes de chat
 var EnviarMensajesChat = function () {
+    Typing();
     $('#btnEnviarMensajeWhatsapp').click(function (e) {
         e.preventDefault();
 
@@ -476,16 +475,16 @@ var ValidacionCantidadMaximaCaracteres = function () {
             $('#CantidadCaracteresMaximos').text('Has llegado al límite');// Aquí enviamos el mensaje a mostrar          
             $('#CantidadCaracteresMaximos').addClass('text-danger');
             $('#txtCuerpoMensage').addClass('is-invalid');
-            $('#inputsubmit').addClass('disabled');
-            document.getElementById('inputsubmit').disabled = true;
+            $('#btnEnviarMensajeWhatsapp').addClass('disabled');
+            document.getElementById('btnEnviarMensajeWhatsapp').disabled = true;
         }
         else {
             var ch = max - len;
             $('#CantidadCaracteresMaximos').text(ch + ' carácteres restantes');
             $('#CantidadCaracteresMaximos').removeClass('text-danger');
             $('#txtCuerpoMensage').removeClass('is-invalid');
-            $('#inputsubmit').removeClass('disabled');
-            document.getElementById('inputsubmit').disabled = false;
+            $('#btnEnviarMensajeWhatsapp').removeClass('disabled');
+            document.getElementById('btnEnviarMensajeWhatsapp').disabled = false;
         }
     });
 }
@@ -521,8 +520,30 @@ var EnviarMensajesDesdeEnter = function () {
     }
 
 }
-////////////////////////////////////
 
+//Mostrando Escribiendo y enviar mensaje
+var Typing = function () {
+    $('#txtCuerpoMensage').keyup(function (e) {
+
+        var form = $('#frmMostrarChat').serialize();
+        //var Escritura = $(this).val();
+        //console.log(Escritura);
+        $.ajax({
+            type: "POST",
+            url: "MostrarEscribiendoaCliente",
+            data: form,
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    });
+}
+////////////////////////////////////
 
 
 
@@ -542,7 +563,7 @@ var ReadDialogsAsignadosAgente = function () {
                 var tabla = '';
                 json.forEach(
                     Datos => {
-                        tabla +=`
+                        tabla += `
                             <tr>
                                 <td>${Datos.id}</td>
                                 <td>${Datos.name}</td>
@@ -562,7 +583,7 @@ var ReadDialogsAsignadosAgente = function () {
 
 
             },
-            error: function(xhr, status, error){
+            error: function (xhr, status, error) {
                 console.log(xhr);
                 console.log(status);
                 console.log(error);

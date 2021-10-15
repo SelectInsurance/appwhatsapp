@@ -10,16 +10,19 @@ class ChatApi
         $this->token = $token;
     }
 
-    //Metodo para envio de mensajes
-    public function SendMenssage($phone, $body)
+    //Metodo para enviar Escribiendo
+    public function typing($phone)
     {
         $data = [
+            'chatId' => $phone.'@c.us',
             'phone' => $phone,
-            'body' => $body,
+            'on' => true,
+            'duration' => 1
         ];
 
         $json = json_encode($data);
-        $url = $this->instance . 'message?token=' . $this->token;
+
+        $url = $this->instance . 'typing?chatId=' . $phone . '@c.us&token=' . $this->token;
 
         $options = stream_context_create([
             'http' => [
@@ -31,6 +34,29 @@ class ChatApi
         $result = file_get_contents($url, false, $options);
         return $result;
     }
+
+    //Metodo para envio de mensajes
+    public function SendMenssage($phone, $body)
+    {
+        $data = [
+            'phone' => $phone,
+            'body' => $body,
+        ];
+
+        $json = json_encode($data);
+
+        $url = $this->instance . 'message?token=' . $this->token;
+        $options = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-type: application/json',
+                'content' => $json
+            ]
+        ]);
+        $result = file_get_contents($url, false, $options);
+        return $result;
+    }
+
 
     //Metodo para Consultar salas de chat
     public function Dialogs()

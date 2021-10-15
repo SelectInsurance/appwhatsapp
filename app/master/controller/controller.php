@@ -202,6 +202,9 @@ class controller
         }
     }
 
+
+
+
     //Mostrar Mensajes de chat individual
     public static function MostrarMensajesChat()
     {
@@ -273,6 +276,41 @@ class controller
             print json_encode($Array, JSON_PRETTY_PRINT);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Mostrando mensaje Escribiendo a el cliente
+    public static function MostrarEscribiendoaCliente()
+    {
+        $user = $_SESSION['Master'];
+        $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+        $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
+        $Phone = $_POST['chatId'];
+        $message = $_POST['txtCuerpoMensage'];
+        echo $Api->typing($Phone);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     //Enviar Mensajes de chat individual
     public static function EnviarMensajesChat()
