@@ -113,18 +113,17 @@ class  query
         return "UPDATE dialogs SET abierto = true WHERE id = '$id'";
     }
 
-    //Mostrando Chat Abiertos
-    public static function ReadChatAbiertos($user)
-    {
-        return "CALL SP_ConteoChatAbiertosAdmin('$user')";
-    }
-
-
     //TODO LO RELACIONADO CON LOS CONTEOS
     //Mostrando cantidad de chats asignados de cada agente
     public static function ReadConteoChatAsignadosAgentes($user)
     {
         return "CALL SP_ConteoChatAgente('$user')";
+    }
+
+    //Mostrando Chat Abiertos
+    public static function ReadChatAbiertos($user)
+    {
+        return "CALL SP_ConteoChatAbiertosAdmin('$user')";
     }
 
     //Mostrando Agentes con su cantidad de Chat Asignados
@@ -151,14 +150,10 @@ class  query
     {
         return "CALL SP_ConteoChatAgente('$user')";
     }
-
     ////////////////////////////////////////////////////
 
 
-
-
-
-
+    //TODO LO RELACIONADO CON EL CHAT
     //Insertar Mensajes de la api a la base de datos
     public static function CreateAlmacenarMensajes(
         $id,
@@ -216,5 +211,12 @@ class  query
     public static function ReadChatAgente($id)
     {
         return "CALL SP_MostrarConversacionAgente('$id')";
+    }
+
+
+    //Mostrando salas de chat asignadas a un agente o asistente especifico
+    public static function ReadDialogsAgente($id)
+    {
+        return "SELECT * FROM dialogs WHERE idAgentes = '$id'";
     }
 }
