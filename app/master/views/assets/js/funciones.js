@@ -229,6 +229,7 @@ var ReadSalasChatTransferencia = function () {
 var CreateTransferirChat = function () {
     $('#btnTransferirChat').click(function (e) {
         e.preventDefault();
+        $('#RespuestaTransferencia').html('');
 
         var form = $('#frmTransferirChat').serialize();
 
