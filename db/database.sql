@@ -65,6 +65,12 @@
     sender VARCHAR(255) NOT NULL
   );
 
+CREATE TABLE MensajeDespedida(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  cuerpo VARCHAR(255) NOT NULL,
+  usuario VARCHAR(55) NOT NULL,
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 
 DROP Procedure IF EXISTS SP_ConteoChatAsignadosAdmin;

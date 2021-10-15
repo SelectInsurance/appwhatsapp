@@ -77,6 +77,7 @@ class  query
         return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
     }
 
+    //Buscando dialogs
     public static function ReadDialogs()
     {
         return "SELECT * FROM dialogs";
@@ -112,6 +113,12 @@ class  query
         return "UPDATE dialogs SET abierto = true WHERE id = '$id'";
     }
 
+    //Update para ingresar mensaje antes de cerrar Chat
+    public static function ReadMensajeDespedidaChat()
+    {
+        return "SELECT * FROM MensajeDespedida ORDER BY id DESC LIMIT 1";
+    }
+
     //Update para cerrar chat
     public static function UpdateDialogsCerrarChat($id)
     {
@@ -143,7 +150,8 @@ class  query
     }
 
     //Mostrando Cantidad de chats cerrados
-    public static function ReadConteoChatCerrados(){
+    public static function ReadConteoChatCerrados()
+    {
         return "CALL SP_ConteoChatCerrados";
     }
 
@@ -207,7 +215,8 @@ class  query
     }
 
     //Mostrando salas de chat asignadas a un agente o asistente especifico
-    public static function ReadDialogsAgente($id){
+    public static function ReadDialogsAgente($id)
+    {
         return "SELECT * FROM dialogs WHERE idAgentes = '$id'";
     }
 }

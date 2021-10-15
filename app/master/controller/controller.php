@@ -49,8 +49,20 @@ class controller
 
             //Logica para cerrar chat
             if (isset($_POST['btnCerrarChat'])) {
+
                 $id = $_POST['btnCerrarChat'] . '@c.us';
                 crud::Update(query::UpdateDialogsCerrarChat($id));
+
+                //Envio de mensaje pregrabado
+                $resultados = crud::Read(query::ReadMensajeDespedidaChat());
+                $mensajeDespedida = mysqli_fetch_assoc($resultados);
+
+                $user = $_SESSION['Master'];
+                $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+                $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
+                $Phone = $_POST['chatId'];
+                $message = $mensajeDespedida['cuerpo'];
+                echo $Api->SendMenssage($Phone, $message);
             }
 
             higher();
@@ -202,9 +214,6 @@ class controller
         }
     }
 
-
-
-
     //Mostrar Mensajes de chat individual
     public static function MostrarMensajesChat()
     {
@@ -277,18 +286,6 @@ class controller
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     //Mostrando mensaje Escribiendo a el cliente
     public static function MostrarEscribiendoaCliente()
     {
@@ -298,19 +295,7 @@ class controller
         $Phone = $_POST['chatId'];
         $message = $_POST['txtCuerpoMensage'];
         echo $Api->typing($Phone);
-
     }
-
-
-
-
-
-
-
-
-
-
-
 
     //Enviar Mensajes de chat individual
     public static function EnviarMensajesChat()
@@ -339,6 +324,21 @@ class controller
         }
         $conteo = count($Array);
         echo $conteo;
+    }
+
+    //Mostrar Mensaje de Despedida
+    public static function MensajeDeDespedida(){
+        higher();
+        Nav();
+
+        require_once 'app\master\views\modules\mensajefinal\mensajedespedida.phtml';
+
+        lower();
+    }
+
+    //Ingreso de Mensaje de Despedida
+    public static function CreateMensajeDespedida(){
+
     }
     ///////////////////////////////////////
 
