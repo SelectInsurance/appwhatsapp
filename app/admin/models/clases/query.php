@@ -128,9 +128,9 @@ class  query
     }
 
     //Mostrando Agentes con su cantidad de Chat Asignados
-    public static function ReadChatAsignadosAgentes()
+    public static function ReadChatAsignadosAgentes($user)
     {
-        return "SELECT * FROM Agentes";
+        return "SELECT * FROM Agentes WHERE creador = '$user'";
     }
 
     //Mostrando Chat Asignado a Agentes
@@ -144,6 +144,12 @@ class  query
     public static function ReadConteoChatCerrados($user)
     {
         return "CALL SP_ConteoChatCerradosAdmin('$user')";
+    }
+
+    //Mostrando cantidad de chats asignados de cada agente
+    public static function ReadConteoChatPendientes($user)
+    {
+        return "CALL SP_ConteoChatAgente('$user')";
     }
 
     ////////////////////////////////////////////////////

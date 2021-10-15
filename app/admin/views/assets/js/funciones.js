@@ -4,6 +4,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
+    TablaChatAsignadoAgente();
     ReadAgentes();
     IngresarAgente();
     IngresoAccessWebToken();
@@ -308,6 +309,38 @@ var MostrarCantidadSalasChatAsignadas = function () {
     });
 }
 
+//Mostrando Agentes con sus conteos en tabla de dashboard
+var TablaChatAsignadoAgente = function () {
+    $.ajax({
+        type: "POST",
+        url: "TablaChatAsignadoAgente",
+        success: function (Respuesta) {
+            let json = JSON.parse(Respuesta);
+            //console.log();
+            let tabla = '';
+            json.forEach(
+                Datos => {
+                    tabla += `
+                        <tr>
+                            <td><input class="form-check-input" name="idAgente[]" type="checkbox" value="${Datos.id}"></td>
+                            <td>${Datos.nombre}</td>
+                            <td>${Datos.apellido}</td>
+                            <td>${Datos.usuario}</td>
+                            <td><span class="badge bg-danger rounded-pill">${Datos.ChatPendiente}</span></td>
+                            <td><span class="badge bg-warning rounded-pill">${Datos.ChatAbiertos}</span></td>
+                        </tr>
+                    `
+                }
+            );
+            $('#ChatAsignadosAgentes').html(tabla);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
 ///////////////////////////////////////
 
 
