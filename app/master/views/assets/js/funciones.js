@@ -6,9 +6,11 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarMensajesChat()', 500);
+    MostrarMensajesDespedida();
     TablaChatAsignadoAgente();
     ValidacionCantidadMaximaCaracteres();
     ReadDialogsAsignadosAgente();
+    InsertarMensajeDespedida();
     //MostrarConversacionDataTable();
     IngresarAgente();
     ReadAgentes();
@@ -443,6 +445,34 @@ var MostrarMensajesChat = function () {
 //Enviar mensajes de chat
 var EnviarMensajesChat = function () {
     Typing();
+
+    var wage = document.getElementById("txtCuerpoMensage");
+    wage.addEventListener("keydown", function (e) {
+        if (e.KeyboardEvent.keyCode === 13) {
+            validate(e);
+        }
+    });
+
+
+    function validate(e) {
+        var form = $('#frmMostrarChat').serialize();
+        $.ajax({
+            type: "POST",
+            url: "EnviarMensajesChat",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+        //MostrarMensajesChat();
+        $('#txtCuerpoMensage').val('');
+    }
+    
     $('#btnEnviarMensajeWhatsapp').click(function (e) {
         e.preventDefault();
 
@@ -492,32 +522,7 @@ var ValidacionCantidadMaximaCaracteres = function () {
 //Enviar mensajes de chat con Enter
 var EnviarMensajesDesdeEnter = function () {
 
-    var wage = document.getElementById("txtCuerpoMensage");
-    wage.addEventListener("keydown", function (e) {
-        if (e.KeyboardEvent.keyCode === 13) {
-            validate(e);
-        }
-    });
 
-
-    function validate(e) {
-        var form = $('#frmMostrarChat').serialize();
-        $.ajax({
-            type: "POST",
-            url: "EnviarMensajesChat",
-            data: form,
-            success: function (Respuesta) {
-                console.log(Respuesta);
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
-            }
-        });
-        //MostrarMensajesChat();
-        $('#txtCuerpoMensage').val('');
-    }
 
 }
 
@@ -541,6 +546,56 @@ var Typing = function () {
                 console.log(error);
             }
         });
+    });
+}
+
+//Ingreso Mensaje de Despedida
+var InsertarMensajeDespedida = function (){
+    $('#btnIngresarMensajeDespedida').click(function (e) { 
+        e.preventDefault();
+        
+        var form = $('#formMensajeDespedida').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "CreateMensajeDespedida",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+        $('#txtMensajeDespedida').val('');
+        MostrarMensajesDespedida();
+
+    });
+}
+
+//Mostrando Tabla Mensaje Despedida
+var MostrarMensajesDespedida = function () {
+    $.ajax({
+        type: "GET",
+        url: "MostrandoMensajeDespedida",
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            var tabla = '';
+            json.forEach(
+                Datos=>{
+                    tabla += `
+                    <tr>
+                        <td>${Datos.cuerpo}</td>
+                        <td>${Datos.fecha}</td>
+                        <td>${Datos.usuario}</td>
+                    </tr>
+                    `
+                }
+            );
+            $('#tablaMostrarMensajeDespedida').html(tabla);
+        }
     });
 }
 ////////////////////////////////////

@@ -327,18 +327,44 @@ class controller
     }
 
     //Mostrar Mensaje de Despedida
-    public static function MensajeDeDespedida(){
+    public static function MensajeDeDespedida()
+    {
         higher();
         Nav();
-
+        $usuario = $_SESSION['Master'];
         require_once 'app\master\views\modules\mensajefinal\mensajedespedida.phtml';
 
         lower();
     }
 
     //Ingreso de Mensaje de Despedida
-    public static function CreateMensajeDespedida(){
+    public static function CreateMensajeDespedida()
+    {
+        $cuerpo =  $_POST['txtMensajeDespedida'];
+        $usuario = $_SESSION['Master'];
+        $success = crud::Create(query::CreateMensajeDespedida($cuerpo, $usuario));
+        if ($success != null) {
+            echo 'Registro Exitoso';
+        } else {
+            echo 'Error';
+        }
+    }
 
+    //Mostrar Mensaje de Despedida
+    public static function MostrandoMensajeDespedida()
+    {
+        $consulta = crud::Read(query::ReadMensajeDespedida());
+
+        $i = 0;
+        while ($resultados = mysqli_fetch_assoc($consulta)) {
+
+            $Array[$i]['cuerpo'] = $resultados['cuerpo'];
+            $Array[$i]['usuario'] = $resultados['usuario'];
+            $Array[$i]['fecha'] = $resultados['fecha'];
+            $i++;
+        }
+
+        print json_encode($Array, JSON_PRETTY_PRINT);
     }
     ///////////////////////////////////////
 
