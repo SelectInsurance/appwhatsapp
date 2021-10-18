@@ -444,7 +444,6 @@ var MostrarMensajesChat = function () {
 
 //Enviar mensajes de chat
 var EnviarMensajesChat = function () {
-    Typing();
 
     var wage = document.getElementById("txtCuerpoMensage");
     wage.addEventListener("keydown", function (e) {
@@ -472,7 +471,7 @@ var EnviarMensajesChat = function () {
         //MostrarMensajesChat();
         $('#txtCuerpoMensage').val('');
     }
-    
+
     $('#btnEnviarMensajeWhatsapp').click(function (e) {
         e.preventDefault();
 
