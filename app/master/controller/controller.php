@@ -23,7 +23,7 @@ function Nav()
 
         while ($i < $j) {
             crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
-            crud::Update(query::UpdateImageDialogs($value[$i]['id'],$value[$i]['image']));
+            crud::Update(query::UpdateImageDialogs($value[$i]['id'], $value[$i]['image']));
             $i++;
         }
     }
@@ -51,8 +51,6 @@ class controller
             //Logica para cerrar chat
             if (isset($_POST['btnCerrarChat'])) {
 
-                $id = $_POST['btnCerrarChat'] . '@c.us';
-                crud::Update(query::UpdateDialogsCerrarChat($id));
 
                 //Envio de mensaje pregrabado
                 $resultados = crud::Read(query::ReadMensajeDespedidaChat());
@@ -63,7 +61,16 @@ class controller
                 $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
                 $Phone = $_POST['chatId'];
                 $message = $mensajeDespedida['cuerpo'];
-                echo $Api->SendMenssage($Phone, $message);
+                $Phone = $_POST['btnCerrarChat'];
+                $Api->SendMenssage($Phone, $message);
+
+
+
+
+
+                //Cerrando chat abierto
+                $id = $_POST['btnCerrarChat'] . '@c.us';
+                crud::Update(query::UpdateDialogsCerrarChat($id));
             }
 
             higher();
@@ -90,12 +97,13 @@ class controller
     }
 
     //Reiniciando instancia para actualizar fotos y estados de whatsapp
-    public static function ReiniciarEstancia(){
+    public static function ReiniciarEstancia()
+    {
         $user = $_SESSION['Master'];
         $consultaAWToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
-        $api = new ChatApi($consultaAWToken['Instance'],$consultaAWToken['Token']);
+        $api = new ChatApi($consultaAWToken['Instance'], $consultaAWToken['Token']);
         $respuesta = $api->RebootInstance();
-        print ($respuesta);
+        print($respuesta);
     }
 
     //configuracion
