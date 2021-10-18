@@ -1,12 +1,13 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
-    setInterval('UpdateInstance()', 300000);
+    setInterval('UpdateInstance()', 360000);
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
     setInterval('MostrarCantidadSalasChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarMensajesChat()', 500);
     MostrarMensajesDespedida();
+    DeleteMensajeDespedida();
     TablaChatAsignadoAgente();
     ValidacionCantidadMaximaCaracteres();
     ReadDialogsAsignadosAgente();
@@ -594,7 +595,6 @@ var MostrarMensajesDespedida = function () {
         success: function (Respuesta) {
             var json = JSON.parse(Respuesta);
             if (json != null) {
-
                 var tabla = '';
                 json.forEach(
                     Datos => {
@@ -603,6 +603,7 @@ var MostrarMensajesDespedida = function () {
                                 <td>${Datos.cuerpo}</td>
                                 <td>${Datos.fecha}</td>
                                 <td>${Datos.usuario}</td>
+                                <td><button class="btn btn-outline-danger" id="btnEliminarMensajeDespedida" type="button" name="btnEliminarMensajeDespedida" title="Eliminar Despedida" value="${Datos.id}"><i class="far fa-trash-alt"></i></button></td>
                             </tr>
                             `
                     }
@@ -610,6 +611,29 @@ var MostrarMensajesDespedida = function () {
                 $('#tablaMostrarMensajeDespedida').html(tabla);
             }
         }
+    });
+}
+
+//Eliminando Mensaje de Despedida
+var DeleteMensajeDespedida = function () {
+    $('#btnEliminarMensajeDespedida').click(function (e) { 
+        e.preventDefault();
+        console.log('probando desde funciones de js');
+
+        //var form = $('#form_MensajeDespedida').serialize();
+        //$.ajax({
+        //    type: "POST",
+        //    url: "DeleteMensajeDespedida",
+        //    data: form,
+        //    success: function (Respuesta) {
+        //        console.log(Respuesta);
+        //    },
+        //    error: function (xhr, status, error){
+        //        console.log(xhr);
+        //        console.log(status);
+        //        console.log(error);
+        //    }
+        //});
     });
 }
 ////////////////////////////////////
