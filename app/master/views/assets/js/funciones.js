@@ -445,14 +445,6 @@ var MostrarMensajesChat = function () {
 //Enviar mensajes de chat
 var EnviarMensajesChat = function () {
 
-    var wage = document.getElementById("txtCuerpoMensage");
-    wage.addEventListener("keydown", function (e) {
-        if (e.KeyboardEvent.keyCode === 13) {
-            validate(e);
-        }
-    });
-
-
     function validate(e) {
         var form = $('#frmMostrarChat').serialize();
         $.ajax({
@@ -520,9 +512,13 @@ var ValidacionCantidadMaximaCaracteres = function () {
 
 //Enviar mensajes de chat con Enter
 var EnviarMensajesDesdeEnter = function () {
-
-
-
+    var wage = document.getElementById("txtCuerpoMensage");
+    wage.addEventListener("keydown", function (e) {
+        if (e.KeyboardEvent.keyCode === 13) {
+            validate(e);
+        }
+    });
+    EnviarMensajesChat();
 }
 
 //Mostrando Escribiendo y enviar mensaje
@@ -549,10 +545,10 @@ var Typing = function () {
 }
 
 //Ingreso Mensaje de Despedida
-var InsertarMensajeDespedida = function (){
-    $('#btnIngresarMensajeDespedida').click(function (e) { 
+var InsertarMensajeDespedida = function () {
+    $('#btnIngresarMensajeDespedida').click(function (e) {
         e.preventDefault();
-        
+
         var form = $('#formMensajeDespedida').serialize();
 
         $.ajax({
@@ -581,19 +577,22 @@ var MostrarMensajesDespedida = function () {
         url: "MostrandoMensajeDespedida",
         success: function (Respuesta) {
             var json = JSON.parse(Respuesta);
-            var tabla = '';
-            json.forEach(
-                Datos=>{
-                    tabla += `
-                    <tr>
-                        <td>${Datos.cuerpo}</td>
-                        <td>${Datos.fecha}</td>
-                        <td>${Datos.usuario}</td>
-                    </tr>
-                    `
-                }
-            );
-            $('#tablaMostrarMensajeDespedida').html(tabla);
+            if (json != null) {
+
+                var tabla = '';
+                json.forEach(
+                    Datos => {
+                        tabla += `
+                            <tr>
+                                <td>${Datos.cuerpo}</td>
+                                <td>${Datos.fecha}</td>
+                                <td>${Datos.usuario}</td>
+                            </tr>
+                            `
+                    }
+                );
+                $('#tablaMostrarMensajeDespedida').html(tabla);
+            }
         }
     });
 }
