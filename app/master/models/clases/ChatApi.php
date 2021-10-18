@@ -14,7 +14,7 @@ class ChatApi
     public function typing($phone)
     {
         $data = [
-            'chatId' => $phone.'@c.us',
+            'chatId' => $phone . '@c.us',
             'phone' => $phone,
             'on' => true,
             'duration' => 1
@@ -31,6 +31,22 @@ class ChatApi
                 'content' => $json
             ]
         ]);
+        $result = file_get_contents($url, false, $options);
+        return $result;
+    }
+
+    //Metodo para Reiniciar instancia
+    public function RebootInstance()
+    {
+        $url = $this->instance . 'reboot?token=' . $this->token;
+
+        $options = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-type: application/json'
+            ]
+        ]);
+
         $result = file_get_contents($url, false, $options);
         return $result;
     }

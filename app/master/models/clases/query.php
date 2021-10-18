@@ -77,6 +77,11 @@ class  query
         return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
     }
 
+    //Actualizar Imagen Dialogs
+    public static function UpdateImageDialogs($id, $image){
+        return "UPDATE dialogs SET image = '$image' WHERE id = '$id'";
+    }
+
     //Buscando dialogs
     public static function ReadDialogs()
     {

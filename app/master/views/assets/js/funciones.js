@@ -1,6 +1,6 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
-
+    setInterval('UpdateInstance()', 300000);
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
     setInterval('MostrarCantidadSalasChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
@@ -24,7 +24,23 @@ $(document).ready(function () {
     EnviarMensajesChat();
 });
 
-//Funcion para mostrar Datatable por Ajax
+//Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
+var UpdateInstance = function () {
+    $.ajax({
+        type: "POST",
+        url: "ReiniciarEstancia",
+        success: function (Respuesta) {
+            console.log('Reinicio Exitoso de la instancia '+Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+//Funcion para mostrar Datatable con los Agentes por Ajax
 var ReadAgentes = function () {
     var table = $('#TablaAgentes').DataTable({
         "ajax": {

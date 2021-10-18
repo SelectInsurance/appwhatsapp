@@ -23,6 +23,7 @@ function Nav()
 
         while ($i < $j) {
             crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
+            crud::Update(query::UpdateImageDialogs($value[$i]['id'],$value[$i]['image']));
             $i++;
         }
     }
@@ -86,6 +87,15 @@ class controller
     {
         session_destroy();
         header('Location:./');
+    }
+
+    //Reiniciando instancia para actualizar fotos y estados de whatsapp
+    public static function ReiniciarEstancia(){
+        $user = $_SESSION['Master'];
+        $consultaAWToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+        $api = new ChatApi($consultaAWToken['Instance'],$consultaAWToken['Token']);
+        $respuesta = $api->RebootInstance();
+        print ($respuesta);
     }
 
     //configuracion
