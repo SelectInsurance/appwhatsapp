@@ -39,15 +39,7 @@ class ChatApi
     public function RebootInstance()
     {
         $url = $this->instance . 'reboot?token=' . $this->token;
-
-        $options = stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => 'Content-type: application/json'
-            ]
-        ]);
-
-        $result = file_get_contents($url, false, $options);
+        $result = file_get_contents($url, false);
         return $result;
     }
 
