@@ -308,15 +308,17 @@ var ReadSalasChatTransferencia = function () {
         url: "ConsultandoSalasChatSelector",
         success: function (Respuesta) {
             var json = JSON.parse(Respuesta);
-            var select = '';
-            json.forEach(
-                consulta => {
-                    select += `
-                    <option value="${consulta.name}">${consulta.name}</option>
-                    `
-                }
-            );
-            $('#SeleccionSalaChat').html(select);
+            if (json != null) {
+                var select = '';
+                json.forEach(
+                    consulta => {
+                        select += `
+                        <option value="${consulta.name}">${consulta.name}</option>
+                        `
+                    }
+                );
+                $('#SeleccionSalaChat').html(select);
+            }
         }
     });
 }
