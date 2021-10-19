@@ -684,9 +684,9 @@ var ReadDialogsAsignadosAgente = function () {
 }
 
 var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
-    $('#btnAbrirConversacionSeleccionada').click(function (e) { 
+    $('#btnAbrirConversacionSeleccionada').click(function (e) {
         e.preventDefault();
-        
+
         var form = $('#frmMostrarConversacionSeleccionada').serialize();
 
         $.ajax({
@@ -694,9 +694,33 @@ var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
             url: "MostrarConversacionDialogAsignadoAgente",
             data: form,
             success: function (Respuesta) {
-                console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                let conversacion = '';
+                json.forEach(
+                    Datos => {
+                        if (Datos.sender == 'master' || Datos.sender == 'admin' || Datos.sender == 'regular') {
+                            conversacion += `                            
+                                <div class="m-2">
+                                    <span class="text text-success">${Datos.sender}</span>
+                                    <span>${Datos.body}</span>
+                                    <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
+                                </div>
+                                `
+                        } else {
+                            conversacion += `
+                            <div class="m-2">
+                                <span class="text text-danger">${Datos.sender}</span>
+                                <span>${Datos.body}</span>
+                                <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
+                            </div>
+                            `
+                        }
+                    });
+                $('#MostrandoConversacionChatSeleccionado').html(conversacion);
+
+
             },
-            error: function(xhr, status, error){
+            error: function (xhr, status, error) {
                 console.log(xhr);
                 console.log(status);
                 console.log(error);
@@ -704,6 +728,8 @@ var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
         });
     });
 }
+
+//////////////////////////////////////
 //Agregando Tabla para mostrar las conversaciones
 /* var MostrarConversacionDataTable = function () {
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();

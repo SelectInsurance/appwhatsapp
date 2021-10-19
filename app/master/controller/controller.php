@@ -387,7 +387,8 @@ class controller
     }
 
     //Eliminar Mensaje de Despedida
-    public static function DeleteMensajeDespedida(){
+    public static function DeleteMensajeDespedida()
+    {
         echo 'Prueba';
     }
     ///////////////////////////////////////
@@ -571,7 +572,7 @@ class controller
 
 
 
-
+    //TODO LO RELACIONADO CON LOS CHATS ABIERTOS DESDE DASHBOARD
     //Modulo mostrar dialogs Asignados Agente Seleccionado desde Dashboard
     public static function MostrandoDialogAsignadoAgente()
     {
@@ -589,9 +590,39 @@ class controller
     }
 
     //Modulo mostrar conversacion de dialog seleccionado desde conversaciones
-    public static function MostrarConversacionDialogAsignadoAgente(){
+    public static function MostrarConversacionDialogAsignadoAgente()
+    {
         $id = $_POST['idRadio'];
-        var_dump($id);
+        foreach ($id as $indice) {
+            $chatId = $indice;
+        }
+
+        $consulta = crud::Read(query::ReadMensajesChat($chatId));
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($consulta)) {
+
+            $Array[$i]['id']              =   $row['id'];
+            $Array[$i]['body']            =   $row['body'];
+            $Array[$i]['fromMe']          =   $row['fromMe'];
+            $Array[$i]['isForwarded']     =   $row['isForwarded'];
+            $Array[$i]['author']          =   $row['author'];
+            $Array[$i]['time']            =   $row['time'];
+            $Array[$i]['chatId']          =   $row['chatId'];
+            $Array[$i]['messageNumber']   =   $row['messageNumber'];
+            $Array[$i]['type']            =   $row['type'];
+            $Array[$i]['senderName']      =   $row['senderName'];
+            $Array[$i]['quotedMsgBody']   =   $row['quotedMsgBody'];
+            $Array[$i]['quotedMsgId']     =   $row['quotedMsgId'];
+            $Array[$i]['quotedMsgType']   =   $row['quotedMsgType'];
+            $Array[$i]['metadata']        =   $row['metadata'];
+            $Array[$i]['ack']             =   $row['ack'];
+            $Array[$i]['chatName']        =   $row['chatName'];
+            $Array[$i]['FechaHora']       =   $row['FechaHora'];
+            $Array[$i]['sender']          =   str_replace('@c.us', '', $row['sender']);
+            $i++;
+        }
+
+        print json_encode($Array, JSON_PRETTY_PRINT);
     }
 
     //Consulta para dirigir al DAtatable de mostrar conversaciones
@@ -625,4 +656,5 @@ class controller
             header('Location:Inicio');
         }
     }
+    ///////////////////////////////////////////
 }
