@@ -658,15 +658,27 @@ var ReadDialogsAsignadosAgente = function () {
                     var tabla = '';
                     json.forEach(
                         Datos => {
-                            tabla += `
-                            <tr>
-                                <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
-                                <td>${Datos.id}</td>
-                                <td>${Datos.name}</td>
-                                <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
-                                <td>${Datos.abierto}</td>
-                            </tr>
-                            `
+                            if (Datos.image != '') {
+                                tabla += `
+                                <tr>
+                                    <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                                `
+                            }else {
+                                tabla += `
+                                <tr>
+                                    <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="app/master/views/assets/css/images/sinfoto.webp" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                                `
+                            }
                         }
                     );
                     $('#tabladialogs').html(tabla);
