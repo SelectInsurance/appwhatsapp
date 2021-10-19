@@ -389,7 +389,13 @@ class controller
     //Eliminar Mensaje de Despedida
     public static function DeleteMensajeDespedida()
     {
-        echo 'Prueba';
+        $Array = $_POST['EliminarMensajeDespedida'];
+        foreach ($Array as $indice) {
+            $id =  $indice;
+        }
+        crud::Delete(query::DeleteMensajeDespedida($id));
+        echo 'Mensaje Eliminado con Exito';
+
     }
     ///////////////////////////////////////
 

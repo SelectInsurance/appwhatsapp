@@ -604,7 +604,7 @@ var MostrarMensajesDespedida = function () {
                                 <td>${Datos.cuerpo}</td>
                                 <td>${Datos.fecha}</td>
                                 <td>${Datos.usuario}</td>
-                                <td><button class="btn btn-outline-danger" id="btnEliminarMensajeDespedida" type="button" name="btnEliminarMensajeDespedida" title="Eliminar Despedida" value="${Datos.id}"><i class="far fa-trash-alt"></i></button></td>
+                                <td><input type="checkbox" name="EliminarMensajeDespedida[]" class="form-check-input" value="${Datos.id}"></td>
                             </tr>
                             `
                     }
@@ -619,22 +619,23 @@ var MostrarMensajesDespedida = function () {
 var DeleteMensajeDespedida = function () {
     $('#btnEliminarMensajeDespedida').click(function (e) {
         e.preventDefault();
-        console.log('probando desde funciones de js');
+        //console.log('probando desde funciones de js');
 
-        //var form = $('#form_MensajeDespedida').serialize();
-        //$.ajax({
-        //    type: "POST",
-        //    url: "DeleteMensajeDespedida",
-        //    data: form,
-        //    success: function (Respuesta) {
-        //        console.log(Respuesta);
-        //    },
-        //    error: function (xhr, status, error){
-        //        console.log(xhr);
-        //        console.log(status);
-        //        console.log(error);
-        //    }
-        //});
+        var form = $('#form_MensajeDespedida').serialize();
+        $.ajax({
+            type: "POST",
+            url: "DeleteMensajeDespedida",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error){
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+        MostrarMensajesDespedida();
     });
 }
 ////////////////////////////////////

@@ -235,4 +235,9 @@ class  query
     public static function ReadMensajeDespedida(){
         return "SELECT * FROM MensajeDespedida";
     }
+
+    //Eliminando mensaje de despedida
+    public static function DeleteMensajeDespedida($id){
+        return "DELETE FROM mensajedespedida WHERE id = '$id'";
+    }
 }
