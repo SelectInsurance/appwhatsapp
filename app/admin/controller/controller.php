@@ -447,9 +447,10 @@ class controller
     public static function UpdateDialogs()
     {
         if (isset($_POST)) {
+            $user = $_SESSION['Admin'];
             $idAgente = $_POST['IdAgenteTransferir'];
             $name = $_POST['SeleccionSalaChat'];
-            crud::Update(query::UpdateDialogs($idAgente, $name));
+            crud::Update(query::UpdateDialogs($idAgente, $name, $user));
             echo 'Transferencia Exitosa';
         } else {
             echo 'No se pudo Transferir';

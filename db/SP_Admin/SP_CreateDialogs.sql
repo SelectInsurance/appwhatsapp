@@ -8,6 +8,6 @@ BEGIN
 DECLARE v_id INT;
 SET v_id = (SELECT id FROM Agentes WHERE usuario = v_user);
 
-SELECT * FROM dialogs  WHERE idAgentes = v_id;
+SELECT * FROM dialogs  WHERE idAgentes = v_id OR Asignador = v_user;
 
 END //

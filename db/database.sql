@@ -38,6 +38,7 @@
     image TEXT NOT NULL,
     last_time VARCHAR(25) NOT NULL,
     abierto BOOLEAN DEFAULT FALSE,
+    Asignador VARCHAR(255) DEFAULT NULL,
     idAgentes INT(50) NULL,
     INDEX(idAgentes),
     FOREIGN KEY dialogs(idAgentes) REFERENCES Agentes(id)
@@ -199,9 +200,10 @@ BEGIN
 DECLARE v_id INT;
 SET v_id = (SELECT id FROM Agentes WHERE usuario = v_user);
 
-SELECT * FROM dialogs  WHERE idAgentes = v_id;
+SELECT * FROM dialogs  WHERE idAgentes = v_id OR Asignador = v_user;
 
 END //
+
 
 
 

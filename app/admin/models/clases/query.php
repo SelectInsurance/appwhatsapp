@@ -96,9 +96,9 @@ class  query
     }
 
     //Modificar Dialogs
-    public static function UpdateDialogs($idAgente, $name)
+    public static function UpdateDialogs($idAgente, $name, $user)
     {
-        return "UPDATE dialogs set idAgentes = '$idAgente' WHERE name = '$name'";
+        return "UPDATE dialogs set idAgentes = '$idAgente', Asignador = '$user' WHERE name = '$name'";
     }
 
     //Consultando imagen de Dialogs
