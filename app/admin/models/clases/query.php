@@ -220,6 +220,12 @@ class  query
         return "SELECT * FROM dialogs WHERE idAgentes = '$id'";
     }
 
+    //Insertando Datos a la tabla MensajeDespedida
+    public static function CreateMensajeDespedida($cuerpo, $usuario)
+    {
+        return "INSERT INTO MensajeDespedida(cuerpo, usuario) VALUES('$cuerpo','$usuario')";
+    }
+
     //Update para ingresar mensaje antes de cerrar Chat
     public static function ReadMensajeDespedidaChat($user)
     {

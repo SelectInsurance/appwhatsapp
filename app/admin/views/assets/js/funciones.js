@@ -4,6 +4,9 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
+    InsertarMensajeDespedida();
+    MostrarMensajesDespedida();
+    DeleteMensajeDespedida();
     CreateTransferirChat();
     ReadTransferenciaChat();
     ReadSalasChatTransferencia();
@@ -223,7 +226,7 @@ var MostrarMensajesChat = function () {
             }
         });
     }
-};
+}
 
 //Enviar mensajes de chat con Enter
 var EnviarMensajesDesdeEnter = function () {
@@ -255,6 +258,82 @@ var EnviarMensajesDesdeEnter = function () {
         $('#txtCuerpoMensage').val('');
     }
 
+}
+
+//Ingreso Mensaje de Despedida
+var InsertarMensajeDespedida = function () {
+    $('#btnIngresarMensajeDespedida').click(function (e) {
+        e.preventDefault();
+
+        var form = $('#formMensajeDespedida').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "CreateMensajeDespedida",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+        $('#txtMensajeDespedida').val('');
+        MostrarMensajesDespedida();
+
+    });
+}
+
+//Mostrando Tabla Mensaje Despedida
+var MostrarMensajesDespedida = function () {
+    $.ajax({
+        type: "GET",
+        url: "MostrandoMensajeDespedida",
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            if (json != null) {
+                var tabla = '';
+                json.forEach(
+                    Datos => {
+                        tabla += `
+                            <tr>
+                                <td>${Datos.cuerpo}</td>
+                                <td>${Datos.fecha}</td>
+                                <td>${Datos.usuario}</td>
+                                <td><button class="btn btn-outline-danger" id="btnEliminarMensajeDespedida" type="button" name="btnEliminarMensajeDespedida" title="Eliminar Despedida" value="${Datos.id}"><i class="far fa-trash-alt"></i></button></td>
+                            </tr>
+                            `
+                    }
+                );
+                $('#tablaMostrarMensajeDespedida').html(tabla);
+            }
+        }
+    });
+}
+
+//Eliminando Mensaje de Despedida
+var DeleteMensajeDespedida = function () {
+    $('#btnEliminarMensajeDespedida').click(function (e) {
+        e.preventDefault();
+        console.log('probando desde funciones de js');
+
+        //var form = $('#form_MensajeDespedida').serialize();
+        //$.ajax({
+        //    type: "POST",
+        //    url: "DeleteMensajeDespedida",
+        //    data: form,
+        //    success: function (Respuesta) {
+        //        console.log(Respuesta);
+        //    },
+        //    error: function (xhr, status, error){
+        //        console.log(xhr);
+        //        console.log(status);
+        //        console.log(error);
+        //    }
+        //});
+    });
 }
 ////////////////////////////////////
 
