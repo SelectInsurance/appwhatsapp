@@ -48,11 +48,42 @@ class controller
     //DashBoard
     public static function Inicio()
     {
-        higher();
-        Nav();
-        require_once 'app\admin\views\modules\dashboard\dashboard.phtml';
+        if (isset($_SESSION['Admin'])) {
 
-        lower();
+
+            //Logica para cerrar chat
+            if (isset($_POST['btnCerrarChat'])) {
+
+                $user = $_SESSION['Admin'];
+                //Envio de mensaje pregrabado
+                $resultados = crud::Read(query::ReadMensajeDespedidaChat($user));
+                $mensajeDespedida = mysqli_fetch_assoc($resultados);
+
+
+                $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+                $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
+                $Phone = $_POST['chatId'];
+                $message = $mensajeDespedida['cuerpo'];
+                $Phone = $_POST['btnCerrarChat'];
+                $Api->SendMenssage($Phone, $message);
+
+
+
+
+
+                //Cerrando chat abierto
+                $id = $_POST['btnCerrarChat'] . '@c.us';
+                crud::Update(query::UpdateDialogsCerrarChat($id));
+            }
+
+            higher();
+            Nav();
+
+            require_once 'app\admin\views\modules\dashboard\dashboard.phtml';
+            lower();
+        } else {
+            header('Location:Login');
+        }
     }
 
 

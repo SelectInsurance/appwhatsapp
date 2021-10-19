@@ -6,7 +6,7 @@
                     <button class="nav-link text-dark active" id="v-pills-Consultar-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Consultar" type="button" role="tab" aria-controls="v-pills-Consultar" aria-selected="true">Consultar</button>
                     <button class="nav-link text-dark" id="v-pills-AgregarNuevoUsuario-tab" data-bs-toggle="pill" data-bs-target="#v-pills-AgregarNuevoUsuario" type="button" role="tab" aria-controls="v-pills-AgregarNuevoUsuario" aria-selected="false">Agregar Asistentes</button>
                     <button class="nav-link text-dark" id="v-pills-CambiarContraseña-tab" data-bs-toggle="pill" data-bs-target="#v-pills-CambiarContraseña" type="button" role="tab" aria-controls="v-pills-CambiarContraseña" aria-selected="false">Gestion Usuarios</button>
-                    <button class="nav-link text-dark" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
+                    <button class="nav-link text-dark" id="v-pills-MensajeDespedida-tab" data-bs-toggle="pill" data-bs-target="#v-pills-MensajeDespedida" type="button" role="tab" aria-controls="v-pills-MensajeDespedida" aria-selected="false">Mensaje Final</button>
                 </div>
             </div>
             <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 shadow-lg my-1">
@@ -111,6 +111,47 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-MensajeDespedida" role="tabpanel" aria-labelledby="v-pills-MensajeDespedida-tab">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"></div>
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 ml-5 text-end">
+                                    <h2><i>Mensaje de despedida</i></h2>
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"></div>
+                            </div>
+                            <div class="row">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <form id="formMensajeDespedida">
+                                                <input type="text" class="form-control my-2" value="<?= $user ?>" readonly>
+                                                <textarea name="txtMensajeDespedida" class="form-control my-2" id="txtMensajeDespedida" cols="30" rows="10" placeholder="ingrese mensaje de despedida"></textarea>
+                                                <button class="btn btn-outline-dark my-3" id="btnIngresarMensajeDespedida">Ingresar</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-12 col-sm-6 table-responsive border" style="overflow:scroll; height:300px; width:400px;">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mensajes</th>
+                                                        <th>Fecha Hora</th>
+                                                        <th>Creador</th>
+                                                        <th>Accion</th>
+                                                    </tr>
+                                                </thead>
+                                                <form id="form_MensajeDespedida">
+                                                    <tbody id="tablaMostrarMensajeDespedida">
+
+                                                    </tbody>
+                                                </form>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

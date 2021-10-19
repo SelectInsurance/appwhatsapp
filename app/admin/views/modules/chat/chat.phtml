@@ -8,7 +8,7 @@
                         <img src="<?php if ($image['image'] != null) {
                                         echo $image['image'];
                                     } else {
-                                        echo 'app\master\views\assets\css\images\sinfoto.webp';
+                                        echo 'app\admin\views\assets\css\images\sinfoto.webp';
                                     } ?>" class="rounded-circle img-thumbnail" style="width:65px;height: auto; " alt="<?= $SalaChat; ?>">
                     </div>
                     <div class="col-10 text-start mt-3">
@@ -17,7 +17,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
+        <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2 mt-3">
+            <form action="Inicio" method="POST">
+                <button class="btn btn-outline-danger" value="<?= $SalaChat; ?>" name="btnCerrarChat" type="submit">Cerrar Chat</button>
+            </form>
+        </div>
     </div>
     <div class="row mb-5">
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
@@ -34,7 +38,7 @@
                             <input type="text" name="chatId" id="chatId" value="<?= $SalaChat; ?>" class="form-control" readonly>
                             <div class="emoji-picker-container mt-2">
                                 <!--<input class="form-control" data-emojiable="true" data-emoji-input="unicode" type="text" name="txtCuerpoMensage" id="txtCuerpoMensage" placeholder="Enviar Mensaje">-->
-                                <input class="form-control" maxlength="60" type="text" name="txtCuerpoMensage" id="txtCuerpoMensage" placeholder="Enviar Mensaje">
+                                <input class="form-control" maxlength="60" type="text" autocomplete="off" name="txtCuerpoMensage" id="txtCuerpoMensage" placeholder="Enviar Mensaje">
                                 <p id="CantidadCaracteresMaximos" class="help-block"></p>
                             </div>
                         </div>

@@ -219,4 +219,10 @@ class  query
     {
         return "SELECT * FROM dialogs WHERE idAgentes = '$id'";
     }
+
+    //Mostrando Ultimo Mensaje de Despedida
+    public static function ReadMensajeDespedida($user)
+    {
+        return "SELECT * FROM MensajeDespedida WHERE usuario = '$user'";
+    }
 }
