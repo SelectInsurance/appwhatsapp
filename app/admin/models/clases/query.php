@@ -220,9 +220,22 @@ class  query
         return "SELECT * FROM dialogs WHERE idAgentes = '$id'";
     }
 
-    //Mostrando Ultimo Mensaje de Despedida
+    //Update para ingresar mensaje antes de cerrar Chat
+    public static function ReadMensajeDespedidaChat($user)
+    {
+        return "SELECT * FROM MensajeDespedida WHERE usuario = '$user' ORDER BY id DESC LIMIT 1";
+    }
+
+
+    //Mostrando Ultimo Mensaje de Despedida en la tabla
     public static function ReadMensajeDespedida($user)
     {
         return "SELECT * FROM MensajeDespedida WHERE usuario = '$user'";
+    }
+
+    //Update para cerrar chat
+    public static function UpdateDialogsCerrarChat($id)
+    {
+        return "UPDATE dialogs SET abierto = FALSE  WHERE id = '$id'";
     }
 }
