@@ -404,4 +404,57 @@ class controller
     }
 
     ////////////////////////////////////////
+
+
+
+
+    //TODO LO RELACIONADO CON LA TRANSFERENCIA DE SALAS DE CHAT
+    //Modulo Transferir chat
+    public static function TransferirChat()
+    {
+        higher();
+        Nav();
+        require_once 'app/admin/views/modules/TransferenciaChat/TransferenciaChat.phtml';
+        lower();
+    }
+
+    //Consultando Datos del Modulo Transferir
+    public static function ConsultandoUsuarioATransferir()
+    {
+        $user = $_SESSION['Admin'];
+        $Consulta = crud::Read(query::ReadAgentes($user));
+        while ($Resultado = mysqli_fetch_assoc($Consulta)) {
+            $rows["data"][] = $Resultado;
+        }
+        echo json_encode($rows);
+    }
+
+    //Consultando Salas de chat en etiqueta Select
+    public static function ConsultandoSalasChatSelector()
+    {
+        $user = $_SESSION['Admin'];
+        $consulta = crud::Read(query::ReadDialogs($user));
+        $i = 0;
+        while ($rows = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['name'] = $rows['name'];
+            $i++;
+        }
+        $json = json_encode($Array, JSON_PRETTY_PRINT);
+        print $json;
+    }
+
+    //Transfiriendo Sala Chat a un Agente
+    public static function UpdateDialogs()
+    {
+        if (isset($_POST)) {
+            $idAgente = $_POST['IdAgenteTransferir'];
+            $name = $_POST['SeleccionSalaChat'];
+            crud::Update(query::UpdateDialogs($idAgente, $name));
+            echo 'Transferencia Exitosa';
+        } else {
+            echo 'No se pudo Transferir';
+        }
+    }
+    /////////////////////////////////////////////
+
 }

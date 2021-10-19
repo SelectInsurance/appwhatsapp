@@ -4,6 +4,9 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
+    CreateTransferirChat();
+    ReadTransferenciaChat();
+    ReadSalasChatTransferencia();
     ReadDialogsAsignadosAgente();
     TablaChatAsignadoAgente();
     ReadAgentes();
@@ -254,6 +257,104 @@ var EnviarMensajesDesdeEnter = function () {
 
 }
 ////////////////////////////////////
+
+
+
+
+//TODO LO RELACIONADO CON LA TRANSFERENCIA DE CHAT
+//Consultar tabla para transferir chat
+var ReadTransferenciaChat = function () {
+    var table = $('#TablaTransferirChat').DataTable({
+        "ajax": {
+            "method": "POST",
+            "url": "ConsultandoUsuarioATransferir"
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "nombre" },
+            { "data": "apellido" },
+            { "data": "usuario" }
+            //{ "data": "admin" }
+        ]
+    });
+    /*$.ajax({
+        type: "GET",
+        url: "ConsultandoUsuarioATransferir",
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            var tbody = '';
+            json.forEach(
+                consulta => {
+                    tbody += `
+                    <tr>
+                        <td><input type="checkbox" name="idAgenteTransferir[]" value="${consulta.id}" class="form-check-input"></td>
+                        <td>${consulta.nombre}</td>
+                        <td>${consulta.apellido}</td>
+                        <td>${consulta.usuario}</td>
+                    </tr>
+                    `;
+                }
+            );
+            $('#TablaTransferirChat').html(tbody);
+        }
+    });*/
+};
+
+
+//Consultar salas de chat para transferir
+var ReadSalasChatTransferencia = function () {
+    $.ajax({
+        type: "GET",
+        url: "ConsultandoSalasChatSelector",
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            var select = '';
+            json.forEach(
+                consulta => {
+                    select += `
+                    <option value="${consulta.name}">${consulta.name}</option>
+                    `
+                }
+            );
+            $('#SeleccionSalaChat').html(select);
+        }
+    });
+}
+
+
+//Transferir Sala a Agente
+var CreateTransferirChat = function () {
+    $('#btnTransferirChat').click(function (e) {
+        e.preventDefault();
+        $('#RespuestaTransferencia').html('');
+
+        var form = $('#frmTransferirChat').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "UpdateDialogs",
+            data: form,
+            dataType: "text",
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                $('#RespuestaTransferencia').html(Respuesta).css('color', 'Green').val();
+
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+
+        });
+        $('#IdAgenteTransferir').val('');
+    });
+}
+//////////////////////////////////////////////
+
+
+
+
 
 
 
