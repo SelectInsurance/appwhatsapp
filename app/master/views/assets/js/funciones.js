@@ -6,6 +6,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarMensajesChat()', 500);
+    ReadConversacionDialogSeleccionadoTablaConversaciones();
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
     TablaChatAsignadoAgente();
@@ -658,18 +659,19 @@ var ReadDialogsAsignadosAgente = function () {
                     json.forEach(
                         Datos => {
                             tabla += `
-                                <tr>
-                                    <td>${Datos.id}</td>
-                                    <td>${Datos.name}</td>
-                                    <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
-                                    <td>${Datos.abierto}</td>
-                                </tr>
+                            <tr>
+                                <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
+                                <td>${Datos.id}</td>
+                                <td>${Datos.name}</td>
+                                <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${Datos.abierto}</td>
+                            </tr>
                             `
                         }
                     );
                     $('#tabladialogs').html(tabla);
                 } else {
-                    $('#txtNoTieneConversacionesAsignadas').css('color','Red').html('No hay Salas Asignadas');
+                    $('#txtNoTieneConversacionesAsignadas').css('color', 'Red').html('No hay Salas Asignadas');
                 }
             },
             error: function (xhr, status, error) {
@@ -681,6 +683,27 @@ var ReadDialogsAsignadosAgente = function () {
     }
 }
 
+var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
+    $('#btnAbrirConversacionSeleccionada').click(function (e) { 
+        e.preventDefault();
+        
+        var form = $('#frmMostrarConversacionSeleccionada').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "MostrarConversacionDialogAsignadoAgente",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function(xhr, status, error){
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    });
+}
 //Agregando Tabla para mostrar las conversaciones
 /* var MostrarConversacionDataTable = function () {
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();

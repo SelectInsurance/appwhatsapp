@@ -572,8 +572,8 @@ class controller
 
 
 
-    //Modulo mostrar Conversacion Agente Seleccionado desde Dashboard
-    public static function MostrandoConversacionAgente()
+    //Modulo mostrar dialogs Asignados Agente Seleccionado desde Dashboard
+    public static function MostrandoDialogAsignadoAgente()
     {
         if (!empty($_POST['idAgente'])) {
             higher();
@@ -586,6 +586,12 @@ class controller
         } else {
             header('Location:Inicio');
         }
+    }
+
+    //Modulo mostrar conversacion de dialog seleccionado desde conversaciones
+    public static function MostrarConversacionDialogAsignadoAgente(){
+        $id = $_POST['idRadio'];
+        var_dump($id);
     }
 
     //Consulta para dirigir al DAtatable de mostrar conversaciones
