@@ -18,7 +18,7 @@ $(document).ready(function () {
     CambiarContrasena();
     ReadAccesWebToken();
     IngresoAccessWebToken();
-    ActivarEmotes();
+    //ActivarEmotes();
     ReadTransferenciaChat();
     ReadSalasChatTransferencia();
     CreateTransferirChat();
@@ -31,7 +31,7 @@ var UpdateInstance = function () {
         type: "POST",
         url: "ReiniciarEstancia",
         success: function (Respuesta) {
-            console.log('Reinicio Exitoso de la instancia '+Respuesta);
+            console.log('Reinicio Exitoso de la instancia ' + Respuesta);
         },
         error: function (xhr, status, error) {
             console.log(xhr);
@@ -616,7 +616,7 @@ var MostrarMensajesDespedida = function () {
 
 //Eliminando Mensaje de Despedida
 var DeleteMensajeDespedida = function () {
-    $('#btnEliminarMensajeDespedida').click(function (e) { 
+    $('#btnEliminarMensajeDespedida').click(function (e) {
         e.preventDefault();
         console.log('probando desde funciones de js');
 
@@ -641,7 +641,7 @@ var DeleteMensajeDespedida = function () {
 
 
 
-
+//TODO LO RELACIONADO CON CONSULTAR CHAT
 //Mostrando Salas de chat Asignadas
 var ReadDialogsAsignadosAgente = function () {
 
@@ -653,28 +653,24 @@ var ReadDialogsAsignadosAgente = function () {
             data: form,
             success: function (Respuesta) {
                 var json = JSON.parse(Respuesta);
-                var tabla = '';
-                json.forEach(
-                    Datos => {
-                        tabla += `
-                            <tr>
-                                <td>${Datos.id}</td>
-                                <td>${Datos.name}</td>
-                                <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
-                                <td>${Datos.abierto}</td>
-                            </tr>
-                        `
-                    }
-                );
-                $('#tabladialogs').html(tabla);
-
-
-
-
-                console.log(json);
-
-
-
+                if (json != null) {
+                    var tabla = '';
+                    json.forEach(
+                        Datos => {
+                            tabla += `
+                                <tr>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                            `
+                        }
+                    );
+                    $('#tabladialogs').html(tabla);
+                } else {
+                    $('#txtNoTieneConversacionesAsignadas').css('color','Red').html('No hay Salas Asignadas');
+                }
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
