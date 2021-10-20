@@ -100,7 +100,7 @@ class controller
     public static function MostrarMensajesChat()
     {
         if (!empty($_POST['chatId'])) {
-            $user = $_SESSION['Admin'];
+            $user = $_SESSION['Asistant'];
             $id =  $_POST['chatId'];
             $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
             $api = new ChatApi($url['Instance'], $url['Token']);
@@ -114,7 +114,7 @@ class controller
                 if ($data['messages'][$i]['author'] === $data['messages'][$i]['chatId']) {
                     $sender[$i] = $data['messages'][$i]['author'];
                 } elseif ($data['messages'][$i]['author'] != $data['messages'][$i]['chatId']) {
-                    $sender[$i] = $_SESSION['Admin'];
+                    $sender[$i] = $_SESSION['Asistant'];
                 }
                 crud::Create(query::CreateAlmacenarMensajes(
                     $data['messages'][$i]['id'],

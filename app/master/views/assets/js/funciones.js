@@ -1,14 +1,15 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
+    EnviarMensajesChat();
+    setInterval('MostrarMensajesChat()', 3000);
     setInterval('UpdateInstance()', 360000);
-    setInterval('MostrarCantidadSalasChatAsignadas()', 500);
-    setInterval('MostrarCantidadSalasChat()', 500);
-    setInterval('MostrarCantidadSalasChatAbiertas()', 500);
+    setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
+    setInterval('MostrarCantidadSalasChat()', 3000);
+    setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
-    setInterval('MostrarMensajesChat()', 500);
     setInterval('TablaChatAsignadoAgente()', 30000)
 
-    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
+    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 3000);
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
     ValidacionCantidadMaximaCaracteres();
@@ -24,7 +25,6 @@ $(document).ready(function () {
     ReadTransferenciaChat();
     ReadSalasChatTransferencia();
     CreateTransferirChat();
-    EnviarMensajesChat();
 });
 
 //Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
@@ -231,16 +231,23 @@ var ReadSalasChatTransferencia = function () {
         type: "GET",
         url: "ConsultandoSalasChatSelector",
         success: function (Respuesta) {
-            var json = JSON.parse(Respuesta);
-            var select = '';
-            json.forEach(
-                consulta => {
-                    select += `
-                    <option value="${consulta.name}">${consulta.name}</option>
-                    `
-                }
-            );
-            $('#SeleccionSalaChat').html(select);
+            if (Respuesta != 'null') {
+                var json = JSON.parse(Respuesta);
+                var select = '';
+                json.forEach(
+                    consulta => {
+                        select += `
+                        <option value="${consulta.name}">${consulta.name}</option>
+                        `
+                    }
+                );
+                $('#SeleccionSalaChat').html(select);
+            } 
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
         }
     });
 }

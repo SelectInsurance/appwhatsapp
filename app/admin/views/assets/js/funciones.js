@@ -1,5 +1,6 @@
 $(document).ready(function () {
     console.log('Hola desde jquery seccion admin');
+    EnviarMensajesChat();
     setInterval('MostrarMensajesChat()', 500);
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
@@ -17,7 +18,6 @@ $(document).ready(function () {
     IngresoAccessWebToken();
     ReadAccesWebToken();
     ValidacionCantidadMaximaCaracteres();
-    EnviarMensajesChat();
     MostrarCantidadSalasChatAbiertas();
 });
 
