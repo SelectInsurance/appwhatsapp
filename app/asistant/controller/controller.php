@@ -55,4 +55,17 @@ class controller
         require_once 'app\asistant\views\modules\dashboard\dashboard.phtml';
         lower();
     }
+
+    //Validacion cuando ingresan al login logeados
+    public static function Login()
+    {
+        header('Location:Inicio');
+    }
+    
+    //Cerrar Session
+    public static function Cerrar()
+    {
+        session_destroy();
+        header('Location:./');
+    }
 }
