@@ -1,7 +1,7 @@
 $(document).ready(function () {
     console.log('Hola desde Jquery usando rol Asistente');
     EnviarMensajesChat();
-    setInterval('MostrarMensajesChat()', 500);
+    setInterval('MostrarMensajesChat()', 3000);
     ValidacionCantidadMaximaCaracteres();
 });
 

@@ -1,10 +1,10 @@
 $(document).ready(function () {
     console.log('Hola desde jquery seccion admin');
     EnviarMensajesChat();
-    setInterval('MostrarMensajesChat()', 500);
-    setInterval('MostrarCantidadSalasChatAbiertas()', 500);
-    setInterval('MostrarCantidadSalasChatCerradas()', 500);
-    setInterval('MostrarCantidadSalasChatAsignadas()', 500);
+    setInterval('MostrarMensajesChat()', 3000);
+    setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
+    setInterval('MostrarCantidadSalasChatCerradas()', 3000);
+    setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
     TablaChatAsignadoAgente();
     InsertarMensajeDespedida();
     MostrarMensajesDespedida();
