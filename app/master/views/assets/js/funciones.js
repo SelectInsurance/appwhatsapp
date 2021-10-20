@@ -6,10 +6,10 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarMensajesChat()', 500);
+    setInterval('TablaChatAsignadoAgente()', 500);
     ReadConversacionDialogSeleccionadoTablaConversaciones();
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
-    TablaChatAsignadoAgente();
     ValidacionCantidadMaximaCaracteres();
     ReadDialogsAsignadosAgente();
     InsertarMensajeDespedida();
@@ -373,7 +373,7 @@ var MostrarCantidadSalasChatAsignadas = function () {
 }
 
 
-//Mostrando Agentes con sus conteos
+//Mostrando tabla del dashboard
 var TablaChatAsignadoAgente = function () {
     $.ajax({
         type: "POST",
@@ -384,7 +384,30 @@ var TablaChatAsignadoAgente = function () {
             let tabla = '';
             json.forEach(
                 Datos => {
-                    tabla += `
+                    if (Datos.ChatPendiente != '0' && Datos.ChatAbiertos == '0') {
+                        tabla += `
+                        <tr>
+                            <td><input class="form-check-input" name="idAgente[]" type="checkbox" value="${Datos.id}"></td>
+                            <td>${Datos.nombre}</td>
+                            <td>${Datos.apellido}</td>
+                            <td>${Datos.usuario}</td>
+                            <td><span class="badge bg-danger rounded-pill">${Datos.ChatPendiente}</span></td>
+                            <td><span>${Datos.ChatAbiertos}</span></td>
+                        </tr>
+                    `
+                    } else if (Datos.ChatAbiertos != '0' && Datos.ChatPendiente == '0') {
+                        tabla += `
+                        <tr>
+                            <td><input class="form-check-input" name="idAgente[]" type="checkbox" value="${Datos.id}"></td>
+                            <td>${Datos.nombre}</td>
+                            <td>${Datos.apellido}</td>
+                            <td>${Datos.usuario}</td>
+                            <td><span>${Datos.ChatPendiente}</span></td>
+                            <td><span class="badge bg-warning rounded-pill">${Datos.ChatAbiertos}</span></td>
+                        </tr>
+                    `
+                    } else if (Datos.ChatAbiertos != '0' && Datos.ChatPendiente != '0') {
+                        tabla += `
                         <tr>
                             <td><input class="form-check-input" name="idAgente[]" type="checkbox" value="${Datos.id}"></td>
                             <td>${Datos.nombre}</td>
@@ -394,6 +417,18 @@ var TablaChatAsignadoAgente = function () {
                             <td><span class="badge bg-warning rounded-pill">${Datos.ChatAbiertos}</span></td>
                         </tr>
                     `
+                    } else if(Datos.ChatAbiertos == '0' && Datos.ChatPendiente == '0') {
+                        tabla += `
+                    <tr>
+                        <td><input class="form-check-input" name="idAgente[]" type="checkbox" value="${Datos.id}"></td>
+                        <td>${Datos.nombre}</td>
+                        <td>${Datos.apellido}</td>
+                        <td>${Datos.usuario}</td>
+                        <td><span>${Datos.ChatPendiente}</span></td>
+                        <td><span>${Datos.ChatAbiertos}</span></td>
+                    </tr>
+                `
+                    }
                 }
             );
             $('#ChatAsignadosAgentes').html(tabla);
@@ -629,7 +664,7 @@ var DeleteMensajeDespedida = function () {
             success: function (Respuesta) {
                 console.log(Respuesta);
             },
-            error: function (xhr, status, error){
+            error: function (xhr, status, error) {
                 console.log(xhr);
                 console.log(status);
                 console.log(error);
@@ -669,7 +704,7 @@ var ReadDialogsAsignadosAgente = function () {
                                     <td>${Datos.abierto}</td>
                                 </tr>
                                 `
-                            }else {
+                            } else {
                                 tabla += `
                                 <tr>
                                     <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
