@@ -395,7 +395,6 @@ class controller
         }
         crud::Delete(query::DeleteMensajeDespedida($id));
         echo 'Mensaje Eliminado con Exito';
-
     }
     ///////////////////////////////////////
 
@@ -602,6 +601,49 @@ class controller
         foreach ($id as $indice) {
             $chatId = $indice;
         }
+
+        
+        $user = $_SESSION['Master'];
+        $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+        $api = new ChatApi($url['Instance'], $url['Token']);
+        $data = $api->messages();
+        //var_dump($data);
+
+        //cambiando ciclo foreach por ciclo while para hacer insercion a la base de datos usando 
+        //la cantidad de indices que tiene el array
+        $contador = count($data['messages']);
+        $i = 0;
+        while ($i < $contador) {
+            if ($data['messages'][$i]['author'] === $data['messages'][$i]['chatId']) {
+                $sender[$i] = $data['messages'][$i]['author'];
+            } elseif ($data['messages'][$i]['author'] != $data['messages'][$i]['chatId']) {
+                $sender[$i] = $_SESSION['Master'];
+            }
+            crud::Create(query::CreateAlmacenarMensajes(
+                $data['messages'][$i]['id'],
+                $data['messages'][$i]['body'],
+                $data['messages'][$i]['fromMe'],
+                $data['messages'][$i]['self'],
+                $data['messages'][$i]['isForwarded'],
+                $data['messages'][$i]['author'],
+                $data['messages'][$i]['time'],
+                $data['messages'][$i]['chatId'],
+                $data['messages'][$i]['messageNumber'],
+                $data['messages'][$i]['type'],
+                $data['messages'][$i]['senderName'],
+                $data['messages'][$i]['quotedMsgBody'],
+                $data['messages'][$i]['quotedMsgId'],
+                $data['messages'][$i]['quotedMsgType'],
+                $data['messages'][$i]['metadata'],
+                $data['messages'][$i]['ack'],
+                $data['messages'][$i]['chatName'],
+                $sender[$i]
+            ));
+            $i++;
+        }
+
+
+
 
         $consulta = crud::Read(query::ReadMensajesChat($chatId));
         $i = 0;

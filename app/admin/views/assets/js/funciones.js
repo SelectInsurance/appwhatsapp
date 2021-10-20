@@ -4,7 +4,7 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarCantidadSalasChatAsignadas()', 500);
-    setInterval('TablaChatAsignadoAgente()', 1000);
+    TablaChatAsignadoAgente();
     InsertarMensajeDespedida();
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
@@ -536,7 +536,7 @@ var TablaChatAsignadoAgente = function () {
                             <td><span class="badge bg-warning rounded-pill">${Datos.ChatAbiertos}</span></td>
                         </tr>
                     `
-                    } else if(Datos.ChatAbiertos == '0' && Datos.ChatPendiente == '0') {
+                    } else if (Datos.ChatAbiertos == '0' && Datos.ChatPendiente == '0') {
                         tabla += `
                     <tr>
                         <td><input class="form-check-input" name="idAgente[]" type="checkbox" value="${Datos.id}"></td>

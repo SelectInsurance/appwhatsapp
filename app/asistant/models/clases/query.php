@@ -83,16 +83,10 @@ class  query
         return "call SP_CreateDialogs('$user')";
     }
 
-    //Crear AccesWebToken
-    public static function CreateAwebT($instance, $token, $user)
-    {
-        return "INSERT INTO TokenChatApi(Instance, Token, user) VALUES('$instance','$token','$user')";
-    }
-
     //Consultar AccesWebToken
     public static function ReadAwebT($user)
     {
-        return "SELECT * FROM TokenChatApi WHERE User = '$user' ORDER BY idToken DESC Limit 1";
+        return "CALL SP_ReadAccesWebToken('$user')";
     }
 
     //Modificar Dialogs

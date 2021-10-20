@@ -6,8 +6,9 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 500);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('MostrarMensajesChat()', 500);
-    setInterval('TablaChatAsignadoAgente()', 500);
-    ReadConversacionDialogSeleccionadoTablaConversaciones();
+    setInterval('TablaChatAsignadoAgente()', 30000)
+
+    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
     ValidacionCantidadMaximaCaracteres();
@@ -417,7 +418,7 @@ var TablaChatAsignadoAgente = function () {
                             <td><span class="badge bg-warning rounded-pill">${Datos.ChatAbiertos}</span></td>
                         </tr>
                     `
-                    } else if(Datos.ChatAbiertos == '0' && Datos.ChatPendiente == '0') {
+                    } else if (Datos.ChatAbiertos == '0' && Datos.ChatPendiente == '0') {
                         tabla += `
                     <tr>
                         <td><input class="form-check-input" name="idAgente[]" type="checkbox" value="${Datos.id}"></td>
@@ -497,7 +498,7 @@ var MostrarMensajesChat = function () {
 
 //Enviar mensajes de chat
 var EnviarMensajesChat = function () {
-
+    TablaChatAsignadoAgente();
     function validate(e) {
         var form = $('#frmMostrarChat').serialize();
         $.ajax({
@@ -734,7 +735,6 @@ var ReadDialogsAsignadosAgente = function () {
 var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
     $('#btnAbrirConversacionSeleccionada').click(function (e) {
         e.preventDefault();
-
         var form = $('#frmMostrarConversacionSeleccionada').serialize();
 
         $.ajax({
