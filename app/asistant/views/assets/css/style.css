@@ -1,3 +1,10 @@
+/*imagen de fondo asistente*/
+.ImagenCaroucelFondo {
+  background-image: url(../wallpaper/TAPIZ.webp);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 /*caja del chat*/
 .CajaChat {
   margin: 1px opx;
@@ -35,8 +42,3 @@
 .CajaChat::-webkit-scrollbar-track {
   border-radius: 10px;
 }
-
-
-
-
-
