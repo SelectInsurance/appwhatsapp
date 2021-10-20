@@ -33,7 +33,17 @@ if (isset($_SESSION['Master'])) {
     //Asistente
 } elseif (isset($_SESSION['Asistant'])) {
 
-    echo $_SESSION['Asistant'];
+    require_once 'app\asistant\controller\controller.php';
+    if (isset($_GET['controller'])) {
+        $controller = $_GET['controller'];
+        switch ($_GET['controller']) {
+            case $controller:
+                controller::$controller();
+                break;
+        }
+    } else {
+        header('Location:Inicio');
+    }
 
     //Login
 } else {
