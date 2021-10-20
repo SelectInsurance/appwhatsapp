@@ -172,7 +172,7 @@ class controller
     public static function EnviarMensajesChat()
     {
 
-        $user = $_SESSION['Admin'];
+        $user = $_SESSION['Asistant'];
         $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
         $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
         $Phone = $_POST['chatId'];

@@ -167,16 +167,16 @@ var ValidacionCantidadMaximaCaracteres = function () {
             $('#CantidadCaracteresMaximos').text('Has llegado al límite');// Aquí enviamos el mensaje a mostrar          
             $('#CantidadCaracteresMaximos').addClass('text-danger');
             $('#txtCuerpoMensage').addClass('is-invalid');
-            $('#inputsubmit').addClass('disabled');
-            document.getElementById('inputsubmit').disabled = true;
+            $('#btnEnviarMensajeWhatsapp').addClass('disabled');
+            document.getElementById('btnEnviarMensajeWhatsapp').disabled = true;
         }
         else {
             var ch = max - len;
             $('#CantidadCaracteresMaximos').text(ch + ' carácteres restantes');
             $('#CantidadCaracteresMaximos').removeClass('text-danger');
             $('#txtCuerpoMensage').removeClass('is-invalid');
-            $('#inputsubmit').removeClass('disabled');
-            document.getElementById('inputsubmit').disabled = false;
+            $('#btnEnviarMensajeWhatsapp').removeClass('disabled');
+            document.getElementById('btnEnviarMensajeWhatsapp').disabled = false;
         }
     });
 }
