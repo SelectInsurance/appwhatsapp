@@ -3,14 +3,9 @@ $(document).ready(function () {
     EnviarMensajesChat();
     setInterval('MostrarMensajesChat()', 3000);
     ValidacionCantidadMaximaCaracteres();
+
+    PruebaToastDesdeJquery();//Toast
 });
-
-
-
-
-
-
-
 
 
 
@@ -145,3 +140,17 @@ var EnviarMensajesDesdeEnter = function () {
 
 }
 ////////////////////////////////////
+
+
+//TOAST O NOTIFICACIONES DE MESAJES PRUEBA
+//Probando Toast Desde Jquery
+var PruebaToastDesdeJquery = function () {
+    var MiToast = document.getElementById('liveToast');
+    //$('#PruebaToast').click(function (e) {
+        //e.preventDefault();
+        var toast = new bootstrap.Toast(MiToast);
+
+        toast.show();
+    //});
+}
+//////////////////////////////////
