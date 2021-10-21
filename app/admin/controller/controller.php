@@ -52,19 +52,19 @@ class controller
 
 
             //Logica para cerrar chat
-            if (isset($_POST['btnCerrarChat'])) {
-
+            if (isset($_POST['btnCerrarChatConMensaje'])) {
                 $user = $_SESSION['Admin'];
+
+
                 //Envio de mensaje pregrabado
                 $resultados = crud::Read(query::ReadMensajeDespedidaChat($user));
                 $mensajeDespedida = mysqli_fetch_assoc($resultados);
-
 
                 $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
                 $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
                 $Phone = $_POST['chatId'];
                 $message = $mensajeDespedida['cuerpo'];
-                $Phone = $_POST['btnCerrarChat'];
+                $Phone = $_POST['btnCerrarChatConMensaje'];
                 $Api->SendMenssage($Phone, $message);
 
 
@@ -72,6 +72,10 @@ class controller
 
 
                 //Cerrando chat abierto
+                $id = $_POST['btnCerrarChatConMensaje'] . '@c.us';
+                crud::Update(query::UpdateDialogsCerrarChat($id));
+            } elseif (isset($_POST['btnCerrarChat'])) {
+
                 $id = $_POST['btnCerrarChat'] . '@c.us';
                 crud::Update(query::UpdateDialogsCerrarChat($id));
             }
