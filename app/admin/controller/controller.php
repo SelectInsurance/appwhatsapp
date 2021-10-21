@@ -236,6 +236,20 @@ class controller
         print $Array['v_conteo'];
     }
 
+    //Mostrar si el cliente esta conectado o no
+    public static function MostrarEstadoConectado()
+    {
+        if (!empty($_POST['chatId'])) {
+            $phone = $_POST['chatId'];
+            $user = $_SESSION['Admin'];
+
+            $AccesWebToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+            $ChatApi = new ChatApi($AccesWebToken['Instance'], $AccesWebToken['Token']);
+
+            print $ChatApi->userStatus($phone)['status'];
+        }
+    }
+
     //Mostrando Cantidad Chat Cerrados
     public static function MostrandoChatCerrados()
     {

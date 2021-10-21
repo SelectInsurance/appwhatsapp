@@ -500,7 +500,7 @@ var MostrarMensajesChat = function () {
             }
         });
 
-
+        //Mostrar Cliente Conectado
         $.ajax({
             type: "POST",
             url: "MostrarEstadoConectado",
@@ -508,9 +508,9 @@ var MostrarMensajesChat = function () {
             success: function (Respuesta) {
                 //var json = JSON.parse(Respuesta);
                 if (Respuesta === 'available') {
-                    $('#statusCliente').css('color','green').html('•');
-                }else if(Respuesta === 'unavailable'){
-                    $('#statusCliente').css('color','red').html('•');
+                    $('#statusCliente').css('color', 'green').html('•');
+                } else if (Respuesta === 'unavailable') {
+                    $('#statusCliente').css('color', 'red').html('•');
                 }
             },
             error: function (xhr, status, error) {

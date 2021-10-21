@@ -225,8 +225,29 @@ var MostrarMensajesChat = function () {
                 console.log(error);
             }
         });
+
+
+        $.ajax({
+            type: "POST",
+            url: "MostrarEstadoConectado",
+            data: form,
+            success: function (Respuesta) {
+                //var json = JSON.parse(Respuesta);
+                if (Respuesta === 'available') {
+                    $('#statusCliente').css('color','green').html('•');
+                }else if(Respuesta === 'unavailable'){
+                    $('#statusCliente').css('color','red').html('•');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+
+            }
+        });
     }
-}
+};
 
 //Enviar mensajes de chat con Enter
 var EnviarMensajesDesdeEnter = function () {
