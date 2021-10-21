@@ -50,10 +50,45 @@ class controller
     //DashBoard
     public static function Inicio()
     {
-        higher();
-        Nav();
-        require_once 'app\asistant\views\modules\dashboard\dashboard.phtml';
-        lower();
+        //if (isset($_SESSiON['Asistant'])) {
+
+            //Logica para cerrar chat
+            if (isset($_POST['btnCerrarChatConMensaje'])) {
+                $user = $_SESSION['Asistant'];
+
+
+                //Envio de mensaje pregrabado
+                $resultados = crud::Read(query::ReadMensajeDespedidaChat($user));
+                $mensajeDespedida = mysqli_fetch_assoc($resultados);
+
+                $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+                $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
+                $Phone = $_POST['chatId'];
+                $message = $mensajeDespedida['cuerpo'];
+                $Phone = $_POST['btnCerrarChatConMensaje'];
+                $Api->SendMenssage($Phone, $message);
+
+
+
+
+
+                //Cerrando chat abierto
+                $id = $_POST['btnCerrarChatConMensaje'] . '@c.us';
+                crud::Update(query::UpdateDialogsCerrarChat($id));
+            } elseif (isset($_POST['btnCerrarChat'])) {
+
+                $id = $_POST['btnCerrarChat'] . '@c.us';
+                crud::Update(query::UpdateDialogsCerrarChat($id));
+            }
+
+
+            higher();
+            Nav();
+            require_once 'app\asistant\views\modules\dashboard\dashboard.phtml';
+            lower();
+        //} else {
+            header('Location:Login');
+        //}
     }
 
     //Validacion cuando ingresan al login logeados

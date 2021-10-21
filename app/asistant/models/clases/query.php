@@ -223,7 +223,7 @@ class  query
     //Update para ingresar mensaje antes de cerrar Chat
     public static function ReadMensajeDespedidaChat($user)
     {
-        return "SELECT * FROM MensajeDespedida WHERE usuario = '$user' ORDER BY id DESC LIMIT 1";
+        return "CALL SP_ReadMensajeDespedidaCreador('$user')";
     }
 
 
