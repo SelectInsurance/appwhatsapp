@@ -305,6 +305,20 @@ class controller
         }
     }
 
+    //Mostrar si el cliente esta conectado o no
+    public static function MostrarEstadoConectado()
+    {
+        if (!empty($_POST['chatId'])) {
+        $phone = $_POST['chatId'];
+        $user = $_SESSION['Master'];
+
+        $AccesWebToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+        $ChatApi = new ChatApi($AccesWebToken['Instance'], $AccesWebToken['Token']);
+
+        print $ChatApi->userStatus($phone)['status'];
+        }
+    }
+
     //Mostrando mensaje Escribiendo a el cliente
     public static function MostrarEscribiendoaCliente()
     {
@@ -602,7 +616,7 @@ class controller
             $chatId = $indice;
         }
 
-        
+
         $user = $_SESSION['Master'];
         $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
         $api = new ChatApi($url['Instance'], $url['Token']);

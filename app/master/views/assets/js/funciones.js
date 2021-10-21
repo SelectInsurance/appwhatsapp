@@ -8,7 +8,6 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
     setInterval('MostrarCantidadSalasChatCerradas()', 500);
     setInterval('TablaChatAsignadoAgente()', 30000)
-
     setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 3000);
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
@@ -242,7 +241,7 @@ var ReadSalasChatTransferencia = function () {
                     }
                 );
                 $('#SeleccionSalaChat').html(select);
-            } 
+            }
         },
         error: function (xhr, status, error) {
             console.log(xhr);
@@ -498,6 +497,27 @@ var MostrarMensajesChat = function () {
                 console.log(xhr);
                 console.log(status);
                 console.log(error);
+            }
+        });
+
+
+        $.ajax({
+            type: "POST",
+            url: "MostrarEstadoConectado",
+            data: form,
+            success: function (Respuesta) {
+                //var json = JSON.parse(Respuesta);
+                if (Respuesta === 'available') {
+                    $('#statusCliente').css('color','green').html('•');
+                }else if(Respuesta === 'unavailable'){
+                    $('#statusCliente').css('color','red').html('•');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+
             }
         });
     }

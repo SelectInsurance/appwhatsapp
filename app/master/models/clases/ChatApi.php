@@ -10,6 +10,15 @@ class ChatApi
         $this->token = $token;
     }
 
+    //Metodo para Mostrar Estado conectado o desconectadoe en cliente
+    public function userStatus($phone)
+    {
+        $url = $this->instance . 'userStatus?token=' . $this->token . '&phone='.$phone;
+        $result = file_get_contents($url);
+        $Dialogs = json_decode($result, true);
+        return $Dialogs;
+    }
+
     //Metodo para enviar Escribiendo
     public function typing($phone)
     {
