@@ -50,7 +50,7 @@ class controller
     //DashBoard
     public static function Inicio()
     {
-        //if (isset($_SESSiON['Asistant'])) {
+        if (isset($_SESSION['Asistant'])) {
 
             //Logica para cerrar chat
             if (isset($_POST['btnCerrarChatConMensaje'])) {
@@ -86,9 +86,9 @@ class controller
             Nav();
             require_once 'app\asistant\views\modules\dashboard\dashboard.phtml';
             lower();
-        //} else {
+        } else {
             header('Location:Login');
-        //}
+        }
     }
 
     //Validacion cuando ingresan al login logeados
