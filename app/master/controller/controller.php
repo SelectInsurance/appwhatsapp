@@ -49,19 +49,19 @@ class controller
 
 
             //Logica para cerrar chat
-            if (isset($_POST['btnCerrarChat'])) {
+            if (isset($_POST['btnCerrarChatConMensaje'])) {
+                $user = $_SESSION['Master'];
 
 
                 //Envio de mensaje pregrabado
-                $resultados = crud::Read(query::ReadMensajeDespedidaChat());
+                $resultados = crud::Read(query::ReadMensajeDespedidaChat($user));
                 $mensajeDespedida = mysqli_fetch_assoc($resultados);
 
-                $user = $_SESSION['Master'];
                 $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
                 $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
                 $Phone = $_POST['chatId'];
                 $message = $mensajeDespedida['cuerpo'];
-                $Phone = $_POST['btnCerrarChat'];
+                $Phone = $_POST['btnCerrarChatConMensaje'];
                 $Api->SendMenssage($Phone, $message);
 
 
@@ -69,6 +69,10 @@ class controller
 
 
                 //Cerrando chat abierto
+                $id = $_POST['btnCerrarChatConMensaje'] . '@c.us';
+                crud::Update(query::UpdateDialogsCerrarChat($id));
+            } elseif (isset($_POST['btnCerrarChat'])) {
+
                 $id = $_POST['btnCerrarChat'] . '@c.us';
                 crud::Update(query::UpdateDialogsCerrarChat($id));
             }
@@ -212,6 +216,7 @@ class controller
     {
         //Condicion para obligar a tener si o si una sala de chat
         if (!empty($_POST['btnAbrirChat'])) {
+            $user = $_SESSION['Master'];
             $id = $_POST['btnAbrirChat'];
             $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
 
@@ -222,6 +227,8 @@ class controller
             //ChatAbiertos
             crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
 
+            //Mostrando mensaje de despedida en el modal de cerrar chat
+            $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
 
             higher();
             Nav();
@@ -309,13 +316,13 @@ class controller
     public static function MostrarEstadoConectado()
     {
         if (!empty($_POST['chatId'])) {
-        $phone = $_POST['chatId'];
-        $user = $_SESSION['Master'];
+            $phone = $_POST['chatId'];
+            $user = $_SESSION['Master'];
 
-        $AccesWebToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
-        $ChatApi = new ChatApi($AccesWebToken['Instance'], $AccesWebToken['Token']);
+            $AccesWebToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+            $ChatApi = new ChatApi($AccesWebToken['Instance'], $AccesWebToken['Token']);
 
-        print $ChatApi->userStatus($phone)['status'];
+            print $ChatApi->userStatus($phone)['status'];
         }
     }
 
