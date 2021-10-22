@@ -40,6 +40,7 @@ function lower()
     require_once 'app/master/views/assets/footer.html';
 }
 
+
 class controller
 {
     //DashBoard
