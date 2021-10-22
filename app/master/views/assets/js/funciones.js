@@ -24,7 +24,43 @@ $(document).ready(function () {
     ReadTransferenciaChat();
     ReadSalasChatTransferencia();
     CreateTransferirChat();
+    Tooltip();
 });
+
+//Funcion para personalizar el tooltip
+var Tooltip = function () {
+    var cardTotal = document.getElementById('cardTotal')
+    var tooltip = new bootstrap.Tooltip(cardTotal, {
+        boundary: document.body, // or document.querySelector('#boundary')
+        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+    });
+
+    var cardAbiertos = document.getElementById('cardAbiertos')
+    var tooltip = new bootstrap.Tooltip(cardAbiertos, {
+        boundary: document.body, // or document.querySelector('#boundary')
+        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+    });
+
+    var cardCerrados = document.getElementById('cardCerrados')
+    var tooltip = new bootstrap.Tooltip(cardCerrados, {
+        boundary: document.body, // or document.querySelector('#boundary')
+        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+    });
+
+    var cardAsignados = document.getElementById('cardAsignados')
+    var tooltip = new bootstrap.Tooltip(cardAsignados, {
+        boundary: document.body, // or document.querySelector('#boundary')
+        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+    });
+
+    var carSeguimiento = document.getElementById('carSeguimiento')
+    var tooltip = new bootstrap.Tooltip(carSeguimiento, {
+        boundary: document.body, // or document.querySelector('#boundary')
+        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+    });
+}
+
+
 
 //Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
 var UpdateInstance = function () {

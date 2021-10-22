@@ -14,16 +14,18 @@
                 <div class="row">
                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"></div>
                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+
+                        <div class="card text-white bg-danger mb-3" id="cardTotal" style="max-width: 18rem;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cantidad Chat Total">
                             <div class="card-header"><i class="far fa-comments fa-2x"></i></div>
                             <div class="card-body">
-                                <h5 class="card-title">Pendientes</h5>
+                                <h5 class="card-title">Total</h5>
                                 <p class="card-text" id="CardSalasPendientes"></p>
                             </div>
                         </div>
+
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                        <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                        <div class="card text-white bg-warning mb-3" id="cardAbiertos" style="max-width: 18rem;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cantidad Chat Abiertos">
                             <div class="card-header"><i class="far fa-comment-alt fa-2x"></i></div>
                             <div class="card-body">
                                 <h5 class="card-title">Abiertos</h5>
@@ -32,7 +34,7 @@
                         </div>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                        <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card text-white bg-secondary mb-3" id="cardCerrados" style="max-width: 18rem;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cantidad Chat Resueltos">
                             <div class="card-header"><i class="fas fa-power-off fa-2x"></i></div>
                             <div class="card-body">
                                 <h5 class="card-title">Cerrados</h5>
@@ -41,7 +43,7 @@
                         </div>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                        <div class="card text-white bg-success mb-3" id="cardAsignados" style="max-width: 18rem;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cantidad Chat Asignados">
                             <div class="card-header"><i class="far fa-user fa-2x"></i></div>
                             <div class="card-body">
                                 <h5 class="card-title">Asignados</h5>
@@ -50,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                        <div class="card text-white bg-primary mb-3" id="carSeguimiento" style="max-width: 18rem;" data-bs-toggle="tooltip" data-bs-placement="top" title="Cantidad Chat Seguimiento">
                             <div class="card-header"><i class="far fa-comment fa-2x"></i></div>
                             <div class="card-body">
                                 <h5 class="card-title">en Seguimiento</h5>
