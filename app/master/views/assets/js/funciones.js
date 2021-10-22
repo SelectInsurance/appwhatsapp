@@ -45,7 +45,7 @@ var Tooltip = function () {
         });
     }
 
-    
+
     var cardCerrados = document.getElementById('cardCerrados')
     if (cardCerrados != null) {
         var tooltip = new bootstrap.Tooltip(cardCerrados, {
@@ -70,14 +70,54 @@ var Tooltip = function () {
         });
     }
 
+}
+//Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
+var UpdateInstance = function () {
+    $.ajax({
+        type: "POST",
+        url: "ReiniciarEstancia",
+        success: function (Respuesta) {
+            console.log('Reinicio Exitoso de la instancia ' + Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
 
-    //Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
-    var UpdateInstance = function () {
+//Funcion para mostrar Datatable con los Agentes por Ajax
+var ReadAgentes = function () {
+    var table = $('#TablaAgentes').DataTable({
+        "ajax": {
+            "method": "POST",
+            "url": "Datatable"
+        },
+        "columns": [
+            { "data": "usuario" },
+            { "data": "nombre" },
+            { "data": "apellido" },
+            { "data": "password" },
+            { "data": "admin" }
+        ]
+    });
+}
+
+
+//Ingresar Agente por ajax en el boton de dicho formulario
+let IngresarAgente = function () {
+    $('#btnRegistrarAgente').click(function (e) {
+        e.preventDefault();
+
+
+        let Formulario = $('#frmIngresarAgente').serialize();
         $.ajax({
             type: "POST",
-            url: "ReiniciarEstancia",
+            url: "AgregarAgente",
+            data: Formulario,
             success: function (Respuesta) {
-                console.log('Reinicio Exitoso de la instancia ' + Respuesta);
+                $('#RespuestaIngresoAgentes').css('color', 'Green').html(Respuesta);
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
@@ -85,98 +125,81 @@ var Tooltip = function () {
                 console.log(error);
             }
         });
-    }
 
-    //Funcion para mostrar Datatable con los Agentes por Ajax
-    var ReadAgentes = function () {
-        var table = $('#TablaAgentes').DataTable({
-            "ajax": {
-                "method": "POST",
-                "url": "Datatable"
-            },
-            "columns": [
-                { "data": "usuario" },
-                { "data": "nombre" },
-                { "data": "apellido" },
-                { "data": "password" },
-                { "data": "admin" }
-            ]
-        });
-    }
+        //Limpiando vasillas y desmarcando checkbox
+        $('#user').val('');
+        $('#nombre').val('');
+        $('#apellido').val('');
+        $('#documento').val('');
+        $('#admin').prop('checked', false);
+        $('#master').prop('checked', false);
+        $('#telefono').val('');
+        $('#direccion').val('');
+        $('#correo').val('');
+        $('#password').val('');
+        $('#ConfirmacionPassword').val('');
+    });
 
 
-    //Ingresar Agente por ajax en el boton de dicho formulario
-    let IngresarAgente = function () {
-        $('#btnRegistrarAgente').click(function (e) {
-            e.preventDefault();
+}
 
 
-            let Formulario = $('#frmIngresarAgente').serialize();
-            $.ajax({
-                type: "POST",
-                url: "AgregarAgente",
-                data: Formulario,
-                success: function (Respuesta) {
-                    $('#RespuestaIngresoAgentes').css('color', 'Green').html(Respuesta);
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(error);
-                }
-            });
-
-            //Limpiando vasillas y desmarcando checkbox
-            $('#user').val('');
-            $('#nombre').val('');
-            $('#apellido').val('');
-            $('#documento').val('');
-            $('#admin').prop('checked', false);
-            $('#master').prop('checked', false);
-            $('#telefono').val('');
-            $('#direccion').val('');
-            $('#correo').val('');
-            $('#password').val('');
-            $('#ConfirmacionPassword').val('');
-        });
+//Funcion para Validar que las contraseñas coincidan
+var CambiarContrasena = function () {
+    $('#ConfirmarNuevaContrasena').keyup(function (e) {
+        var pass1 = $('#NuevaContrasena').val();
+        var pass2 = $('#ConfirmarNuevaContrasena').val();
+        if (pass1 == pass2) {
+            $('#MensajeCoincidencia').css('color', 'Green').html('Coinciden');
+        } else if (pass1 != pass2) {
+            $('#MensajeCoincidencia').css('color', 'Red').html('No Coinciden');
+        }
+    });
+}
 
 
-    }
-
-
-    //Funcion para Validar que las contraseñas coincidan
-    var CambiarContrasena = function () {
-        $('#ConfirmarNuevaContrasena').keyup(function (e) {
-            var pass1 = $('#NuevaContrasena').val();
-            var pass2 = $('#ConfirmarNuevaContrasena').val();
-            if (pass1 == pass2) {
-                $('#MensajeCoincidencia').css('color', 'Green').html('Coinciden');
-            } else if (pass1 != pass2) {
-                $('#MensajeCoincidencia').css('color', 'Red').html('No Coinciden');
-            }
-        });
-    }
-
-
-    //Read AccesWebToken
-    var ReadAccesWebToken = function () {
-        $.ajax({
-            type: "GET",
-            url: "ReadAccesWebToken",
-            success: function (Respuesta) {
-                let json = JSON.parse(Respuesta);
-                let tbody = '';
-                json.forEach(
-                    Consulta => {
-                        tbody += `
+//Read AccesWebToken
+var ReadAccesWebToken = function () {
+    $.ajax({
+        type: "GET",
+        url: "ReadAccesWebToken",
+        success: function (Respuesta) {
+            let json = JSON.parse(Respuesta);
+            let tbody = '';
+            json.forEach(
+                Consulta => {
+                    tbody += `
                         <tr>
                             <td>${Consulta.idToken}</td>
                             <td>${Consulta.Instance}</td>
                             <td>${Consulta.Token}</td>
                         </tr>
                         `
-                    });
-                $('#TablaTokenChatApi').html(tbody);
+                });
+            $('#TablaTokenChatApi').html(tbody);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+
+//Ingreso de AccesWebToken
+var IngresoAccessWebToken = function () {
+    $('#btnIngresoAccesWebToken').click(function (e) {
+        e.preventDefault();
+        var form = $('#frmAccesWebToken').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "InsertAccesWebToken",
+            data: form,
+            success: function (Respuesta) {
+                $('#RespuestaIngresoToken').html(Respuesta)
+                console.log(Respuesta);
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
@@ -184,49 +207,25 @@ var Tooltip = function () {
                 console.log(error);
             }
         });
-    }
-
-
-    //Ingreso de AccesWebToken
-    var IngresoAccessWebToken = function () {
-        $('#btnIngresoAccesWebToken').click(function (e) {
-            e.preventDefault();
-            var form = $('#frmAccesWebToken').serialize();
-
-            $.ajax({
-                type: "POST",
-                url: "InsertAccesWebToken",
-                data: form,
-                success: function (Respuesta) {
-                    $('#RespuestaIngresoToken').html(Respuesta)
-                    console.log(Respuesta);
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(error);
-                }
-            });
-            $('#instancia').val('');
-            $('#token').val('');
-            ReadAccesWebToken();
-        });
-    }
-
-
-    //Activar Emotes
-    var ActivarEmotes = function () {
-        $(function () {
-            window.emojiPicker = new EmojiPicker({
-                emojiable_selector: '[data-emojiable=true]',
-                assetsPath: 'app/master/views/assets/Emoji/img',
-                popupButtonClasses: 'icon-smile'
-            });
-            window.emojiPicker.discover();
-        });
-    }
-
+        $('#instancia').val('');
+        $('#token').val('');
+        ReadAccesWebToken();
+    });
 }
+
+
+//Activar Emotes
+var ActivarEmotes = function () {
+    $(function () {
+        window.emojiPicker = new EmojiPicker({
+            emojiable_selector: '[data-emojiable=true]',
+            assetsPath: 'app/master/views/assets/Emoji/img',
+            popupButtonClasses: 'icon-smile'
+        });
+        window.emojiPicker.discover();
+    });
+}
+
 
 
 //TODO LO RELACIONADO CON LA TRANSFERENCIA DE CHAT
@@ -816,6 +815,33 @@ var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
             data: form,
             success: function (Respuesta) {
                 var json = JSON.parse(Respuesta);
+                if (json != null) {
+                    var tabla = '';
+                    json.forEach(
+                        Datos => {
+                            if (Datos.image != '') {
+                                tabla += `
+                                <tr>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                                `
+                            } else {
+                                tabla += `
+                                <tr>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="app/master/views/assets/css/images/sinfoto.webp" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                                `
+                            }
+                        }
+                    );
+                    $('#tablaConversacionSeleccionada').html(tabla);
+                }
                 let conversacion = '';
                 json.forEach(
                     Datos => {
