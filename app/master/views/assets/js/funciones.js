@@ -60,8 +60,6 @@ var Tooltip = function () {
     });
 }
 
-
-
 //Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
 var UpdateInstance = function () {
     $.ajax({
