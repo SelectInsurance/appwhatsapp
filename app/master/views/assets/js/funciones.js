@@ -755,7 +755,6 @@ var DeleteMensajeDespedida = function () {
 var ReadDialogsAsignadosAgente = function () {
 
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();
-    console.log(form);
     if (form != '') {
         $.ajax({
             type: "POST",
