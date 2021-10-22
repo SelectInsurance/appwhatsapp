@@ -6,9 +6,9 @@ $(document).ready(function () {
     setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
     setInterval('MostrarCantidadSalasChat()', 3000);
     setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
-    setInterval('MostrarCantidadSalasChatCerradas()', 500);
+    setInterval('MostrarCantidadSalasChatCerradas()', 3000);
     setInterval('TablaChatAsignadoAgente()', 30000)
-    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 3000);
+    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
     ValidacionCantidadMaximaCaracteres();
