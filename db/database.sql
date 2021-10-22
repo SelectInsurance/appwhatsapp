@@ -73,331 +73,208 @@ CREATE TABLE MensajeDespedida(
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
+
+
 DROP PROCEDURE IF EXISTS SP_FiltrarSala;
 
-DELIMITER / / CREATE PROCEDURE SP_FiltrarSala(IN v_datos VARCHAR(255)) BEGIN
-SELECT
-  *
-FROM
-  dialogs
-WHERE
-  id LIKE concat(v_datos, '%')
-  OR name LIKE concat(v_datos, '%');
+DELIMITER // 
+CREATE PROCEDURE SP_FiltrarSala(IN v_datos VARCHAR(255))
 
-END / / DROP Procedure IF EXISTS SP_ReadMensajeDespedidaCreador;
+BEGIN
 
-DELIMITER / / CREATE Procedure SP_ReadMensajeDespedidaCreador(IN v_usuario VARCHAR(255)) BEGIN DECLARE v_asistant VARCHAR(255);
+SELECT * FROM dialogs WHERE id LIKE concat(v_datos, '%') OR name LIKE concat(v_datos, '%');
 
-SET
-  v_asistant = (
-    SELECT
-      creador
-    FROM
-      Agentes
-    WHERE
-      usuario = v_usuario
-  );
+END // 
 
-SELECT
-  *
-FROM
-  MensajeDespedida
-WHERE
-  usuario = v_asistant
-ORDER BY
-  id DESC
-LIMIT
-  1;
 
-END / / DROP Procedure IF EXISTS SP_ConteoChatAsignadosAdmin;
 
-DELIMITER / / CREATE Procedure SP_ConteoChatAsignadosAdmin(IN v_user VARCHAR(55)) BEGIN DECLARE v_id INT;
 
+
+DROP Procedure IF EXISTS SP_ReadMensajeDespedidaCreador;
+
+DELIMITER // 
+CREATE Procedure SP_ReadMensajeDespedidaCreador(IN v_usuario VARCHAR(255)) BEGIN DECLARE v_asistant VARCHAR(255);
+
+SET v_asistant = (SELECT creador FROM Agentes WHERE usuario = v_usuario);
+
+SELECT * FROM MensajeDespedida WHERE usuario = v_asistant ORDER BY id DESC LIMIT 1;
+
+END // 
+
+
+
+
+DROP Procedure IF EXISTS SP_ConteoChatAsignadosAdmin;
+
+DELIMITER // 
+CREATE Procedure SP_ConteoChatAsignadosAdmin(IN v_user VARCHAR(55)) 
+BEGIN 
+DECLARE v_id INT;
 DECLARE v_conteo INT;
 
-SET
-  v_id = (
-    SELECT
-      id
-    FROM
-      Agentes
-    WHERE
-      usuario = v_user
-  );
+SET v_id = (SELECT id FROM Agentes WHERE usuario = v_user);
 
-SET
-  v_conteo = (
-    SELECT
-      COUNT(idAgentes)
-    FROM
-      dialogs
-    WHERE
-      idAgentes = v_id
-  );
+SET v_conteo = (SELECT COUNT(idAgentes) FROM dialogs WHERE idAgentes = v_id);
 
-SELECT
-  v_conteo;
+SELECT v_conteo;
+END // 
 
-END / / DROP PROCEDURE IF EXISTS SP_ConteoChatAbiertosAdmin;
 
-DELIMITER / / CREATE PROCEDURE SP_ConteoChatAbiertosAdmin(in v_usuario VARCHAR(255)) BEGIN DECLARE v_id INT;
 
+
+DROP PROCEDURE IF EXISTS SP_ConteoChatAbiertosAdmin;
+DELIMITER // 
+CREATE PROCEDURE SP_ConteoChatAbiertosAdmin(in v_usuario VARCHAR(255)) 
+BEGIN 
+DECLARE v_id INT;
 DECLARE v_conteo INT;
+SET v_id = ( SELECT id FROM Agentes WHERE usuario = v_usuario);
 
-SET
-  v_id = (
-    SELECT
-      id
-    FROM
-      Agentes
-    WHERE
-      usuario = v_usuario
-  );
+SET v_conteo = (SELECT count(abierto) FROM dialogs WHERE idAgentes = v_id AND abierto = TRUE);
+select v_conteo;
+END // 
 
-SET
-  v_conteo = (
-    SELECT
-      count(abierto)
-    FROM
-      dialogs
-    WHERE
-      idAgentes = v_id
-      AND abierto = TRUE
-  );
 
-select
-  v_conteo;
 
-END / / DROP PROCEDURE IF EXISTS SP_AlmacenarMensajes;
 
-delimiter / / CREATE PROCEDURE SP_AlmacenarMensajes (
-  in v_id VARCHAR(255),
-  in v_body TEXT,
-  in v_fromMe BOOLEAN,
-  in v_self INT,
-  in v_isForwarded INT,
-  in v_author VARCHAR(100),
-  in v_time INT,
-  in v_chatId VARCHAR(100),
-  in v_messageNumber INT,
-  in v_type VARCHAR(55),
-  in v_senderName VARCHAR(255),
-  in v_quotedMsgBody TEXT,
-  in v_quotedMsgId TEXT,
-  in v_quotedMsgType TEXT,
-  in v_metadata TEXT,
-  in v_ack TEXT,
-  in v_chatName VARCHAR(255),
-  in v_sender VARCHAR(255)
-) BEGIN
-INSERT INTO
-  messages(
-    id,
-    body,
-    fromMe,
-    self,
-    isForwarded,
-    author,
-    time,
-    chatId,
-    messageNumber,
-    type,
-    senderName,
-    quotedMsgBody,
-    quotedMsgId,
-    quotedMsgType,
-    metadata,
-    ack,
-    chatName,
-    sender
-  )
-VALUES
-(
-    v_id,
-    v_body,
-    v_fromMe,
-    v_self,
-    v_isForwarded,
-    v_author,
-    v_time,
-    v_chatId,
-    v_messageNumber,
-    v_type,
-    v_senderName,
-    v_quotedMsgBody,
-    v_quotedMsgId,
-    v_quotedMsgType,
-    v_metadata,
-    v_ack,
-    v_chatName,
-    v_sender
-  );
 
-END / / DROP PROCEDURE IF EXISTS SP_ConteoChatAgente;
 
-delimiter $ $ CREATE PROCEDURE SP_ConteoChatAgente(in v_usuario VARCHAR(255)) BEGIN DECLARE v_id INT;
+DROP PROCEDURE IF EXISTS SP_AlmacenarMensajes;
 
+delimiter // 
+CREATE PROCEDURE SP_AlmacenarMensajes (in v_id VARCHAR(255),in v_body TEXT,in v_fromMe BOOLEAN,in v_self INT,in v_isForwarded INT,in v_author VARCHAR(100),in v_time INT,in v_chatId VARCHAR(100),in v_messageNumber INT,in v_type VARCHAR(55),in v_senderName VARCHAR(255),in v_quotedMsgBody TEXT,in v_quotedMsgId TEXT,in v_quotedMsgType TEXT,in v_metadata TEXT,in v_ack TEXT,in v_chatName VARCHAR(255),in v_sender VARCHAR(255)) 
+BEGIN
+INSERT INTOmessages(id,body,fromMe,self,isForwarded,author,time,chatId,messageNumber,type,senderName,quotedMsgBody,quotedMsgId,quotedMsgType,metadata,ack,chatName,sender) VALUES(v_id,v_body,v_fromMe,v_self,v_isForwarded,v_author,v_time,v_chatId,v_messageNumber,v_type,v_senderName,v_quotedMsgBody,v_quotedMsgId,v_quotedMsgType,v_metadata,v_ack,v_chatName,v_sender);
+
+END //
+
+
+
+
+
+
+DROP PROCEDURE IF EXISTS SP_ConteoChatAgente;
+
+delimiter //
+CREATE PROCEDURE SP_ConteoChatAgente(in v_usuario VARCHAR(255)) 
+BEGIN 
+DECLARE v_id INT;
 DECLARE v_cantidadChatAbiertos INT;
-
 DECLARE v_cantidadChatPendiente INT;
 
-SET
-  v_id = (
-    SELECT
-      id
-    FROM
-      Agentes
-    WHERE
-      usuario = v_usuario
-  );
+SET v_id = (SELECT id FROM Agentes WHERE usuario = v_usuario);
+SET v_cantidadChatAbiertos = (SELECT count(abierto) FROM dialogs WHERe idAgentes = v_id AND abierto = 1);
+SET v_cantidadChatPendiente = (SELECT count(abierto) FROM dialogs WHERE idAgentes = v_id AND abierto = 0);
 
-SET
-  v_cantidadChatAbiertos = (
-    SELECT
-      count(abierto)
-    FROM
-      dialogs
-    WHERE
-      idAgentes = v_id
-      AND abierto = 1
-  );
+SELECT v_cantidadChatAbiertos, v_cantidadChatPendiente;
 
-SET
-  v_cantidadChatPendiente = (
-    SELECT
-      count(abierto)
-    FROM
-      dialogs
-    WHERE
-      idAgentes = v_id
-      AND abierto = 0
-  );
+END //
 
-SELECT
-  v_cantidadChatAbiertos,
-  v_cantidadChatPendiente;
 
-END $ $ delimiter;
+
+
+
 
 DROP PROCEDURE IF EXISTS SP_ConteoChatAsignados;
 
-delimiter $ $ CREATE PROCEDURE SP_ConteoChatAsignados() BEGIN DECLARE v_conteo INT;
+delimiter $$ 
+CREATE PROCEDURE SP_ConteoChatAsignados() 
+BEGIN 
+DECLARE v_conteo INT;
 
-SET
-  v_conteo = (
-    SELECT
-      COUNT(idAgentes)
-    FROM
-      dialogs
-  );
+SET v_conteo = (SELECT COUNT(idAgentes) FROM dialogs);
 
-SELECT
-  v_conteo;
+SELECT v_conteo; 
+END $$ 
 
-END $ $ delimiter;
+
+
+
+
 
 DROP PROCEDURE IF EXISTS SP_MostrarMensajesChat;
 
-delimiter / / CREATE PROCEDURE SP_MostrarMensajesChat(in v_id TEXT) BEGIN
-SELECT
-  *
-FROM
-  messages
-WHERE
-  id like concat('%', v_id, '%')
-ORDER BY
-  messageNumber DESC;
+delimiter // 
+CREATE PROCEDURE SP_MostrarMensajesChat(in v_id TEXT) 
 
-END / / delimiter;
+BEGIN
+SELECT * FROM messages WHERE id like concat('%', v_id, '%') ORDER BY messageNumber DESC;
+END // 
+
+
+
+
+
 
 DROP PROCEDURE IF EXISTS SP_MostrarConversacionAgente;
 
-delimiter / / CREATE PROCEDURE SP_MostrarConversacionAgente(in v_id TEXT) BEGIN DECLARE v_idDialogs TEXT;
+delimiter // 
+CREATE PROCEDURE SP_MostrarConversacionAgente(in v_id TEXT) 
+BEGIN 
+DECLARE v_idDialogs TEXT;
 
-SET
-  v_idDialogs = (
-    SELECT
-      id
-    FROM
-      dialogs
-    WHERE
-      idAgentes = v_id
-  );
+SET v_idDialogs = (SELECT id FROM dialogs WHERE idAgentes = v_id);
 
-SELECT
-  *
-FROM
-  messages
-WHERE
-  chatId = v_idDialogs
-ORDER BY
-  messageNumber DESC;
+SELECT * FROM messages WHERE chatId = v_idDialogs ORDER BY messageNumber DESC;
+END // 
 
-END / / DROP PROCEDURE IF EXISTS SP_CreateDialogs;
 
-DELIMITER / / CREATE PROCEDURE SP_CreateDialogs(IN v_user VARCHAR(255)) BEGIN DECLARE v_id INT;
 
-SET
-  v_id = (
-    SELECT
-      id
-    FROM
-      Agentes
-    WHERE
-      usuario = v_user
-  );
 
-SELECT
-  *
-FROM
-  dialogs
-WHERE
-  idAgentes = v_id
-  OR Asignador = v_user;
 
-END / / DROP PROCEDURE IF EXISTS SP_ConteoChatCerrados;
 
-DELIMITER / / CREATE PROCEDURE SP_ConteoChatCerrados() BEGIN DECLARE v_conteo INT;
 
-SET
-  v_conteo = (
-    SELECT
-      COUNT(abierto)
-    FROM
-      dialogs
-    WHERE
-      abierto = 0
-  );
 
-SELECT
-  v_conteo;
+DROP PROCEDURE IF EXISTS SP_CreateDialogs;
 
-END / / DROP Procedure IF EXISTS SP_ReadAccesWebToken;
+DELIMITER // 
+CREATE PROCEDURE SP_CreateDialogs(IN v_user VARCHAR(255)) 
+BEGIN 
+DECLARE v_id INT;
 
-DELIMITER / / CREATE Procedure SP_ReadAccesWebToken(IN v_user VARCHAR(55)) BEGIN DECLARE v_creador VARCHAR(255);
+SET v_id = (SELECT id FROM Agentes WHERE usuario = v_user);
+SELECT * FROM dialogs WHERE idAgentes = v_id OR Asignador = v_user;
+END // 
 
-SET
-  v_creador = (
-    SELECT
-      creador
-    FROM
-      Agentes
-    WHERE
-      usuario = v_user
-  );
 
-SELECT
-  *
-FROM
-  TokenChatApi
-WHERE
-  user = v_creador
-ORDER BY
-  idToken DESC
-Limit
-  1;
 
-END / /
+DROP PROCEDURE IF EXISTS SP_ConteoChatCerrados;
+
+DELIMITER // 
+CREATE PROCEDURE SP_ConteoChatCerrados() 
+BEGIN 
+DECLARE v_conteo INT;
+
+SET v_conteo = (SELECT COUNT(abierto) FROM dialogs WHERE abierto = 0);
+
+SELECT v_conteo;
+
+END //  
+
+
+
+
+DROP Procedure IF EXISTS SP_ReadAccesWebToken;
+
+DELIMITER // 
+CREATE Procedure SP_ReadAccesWebToken(IN v_user VARCHAR(55)) 
+BEGIN 
+DECLARE v_creador VARCHAR(255);
+
+SET v_creador = (SELECT creador FROM Agentes WHERE usuario = v_user);
+
+SELECT * FROM TokenChatApi WHERE user = v_creador ORDER BY idToken DESC Limit 1;
+
+END //
+
+
+
+
+
+
+
 INSERT INTO
   Usuarios(usuario, password, admin, maestro)
 VALUES

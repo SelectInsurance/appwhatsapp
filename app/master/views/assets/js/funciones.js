@@ -30,83 +30,54 @@ $(document).ready(function () {
 //Funcion para personalizar el tooltip
 var Tooltip = function () {
     var cardTotal = document.getElementById('cardTotal')
-    var tooltip = new bootstrap.Tooltip(cardTotal, {
-        boundary: document.body, // or document.querySelector('#boundary')
-        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-    });
+    if (cardTotal != null) {
+        var tooltip = new bootstrap.Tooltip(cardTotal, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
 
     var cardAbiertos = document.getElementById('cardAbiertos')
-    var tooltip = new bootstrap.Tooltip(cardAbiertos, {
-        boundary: document.body, // or document.querySelector('#boundary')
-        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-    });
+    if (cardAbiertos != null) {
+        var tooltip = new bootstrap.Tooltip(cardAbiertos, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
 
+    
     var cardCerrados = document.getElementById('cardCerrados')
-    var tooltip = new bootstrap.Tooltip(cardCerrados, {
-        boundary: document.body, // or document.querySelector('#boundary')
-        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-    });
+    if (cardCerrados != null) {
+        var tooltip = new bootstrap.Tooltip(cardCerrados, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
 
     var cardAsignados = document.getElementById('cardAsignados')
-    var tooltip = new bootstrap.Tooltip(cardAsignados, {
-        boundary: document.body, // or document.querySelector('#boundary')
-        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-    });
+    if (cardAsignados != null) {
+        var tooltip = new bootstrap.Tooltip(cardAsignados, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
 
     var carSeguimiento = document.getElementById('carSeguimiento')
-    var tooltip = new bootstrap.Tooltip(carSeguimiento, {
-        boundary: document.body, // or document.querySelector('#boundary')
-        template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-    });
-}
-
-//Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
-var UpdateInstance = function () {
-    $.ajax({
-        type: "POST",
-        url: "ReiniciarEstancia",
-        success: function (Respuesta) {
-            console.log('Reinicio Exitoso de la instancia ' + Respuesta);
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-        }
-    });
-}
-
-//Funcion para mostrar Datatable con los Agentes por Ajax
-var ReadAgentes = function () {
-    var table = $('#TablaAgentes').DataTable({
-        "ajax": {
-            "method": "POST",
-            "url": "Datatable"
-        },
-        "columns": [
-            { "data": "usuario" },
-            { "data": "nombre" },
-            { "data": "apellido" },
-            { "data": "password" },
-            { "data": "admin" }
-        ]
-    });
-}
+    if (carSeguimiento != null) {
+        var tooltip = new bootstrap.Tooltip(carSeguimiento, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
 
 
-//Ingresar Agente por ajax en el boton de dicho formulario
-let IngresarAgente = function () {
-    $('#btnRegistrarAgente').click(function (e) {
-        e.preventDefault();
-
-
-        let Formulario = $('#frmIngresarAgente').serialize();
+    //Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
+    var UpdateInstance = function () {
         $.ajax({
             type: "POST",
-            url: "AgregarAgente",
-            data: Formulario,
+            url: "ReiniciarEstancia",
             success: function (Respuesta) {
-                $('#RespuestaIngresoAgentes').css('color', 'Green').html(Respuesta);
+                console.log('Reinicio Exitoso de la instancia ' + Respuesta);
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
@@ -114,81 +85,98 @@ let IngresarAgente = function () {
                 console.log(error);
             }
         });
+    }
 
-        //Limpiando vasillas y desmarcando checkbox
-        $('#user').val('');
-        $('#nombre').val('');
-        $('#apellido').val('');
-        $('#documento').val('');
-        $('#admin').prop('checked', false);
-        $('#master').prop('checked', false);
-        $('#telefono').val('');
-        $('#direccion').val('');
-        $('#correo').val('');
-        $('#password').val('');
-        $('#ConfirmacionPassword').val('');
-    });
-
-
-}
-
-
-//Funcion para Validar que las contraseñas coincidan
-var CambiarContrasena = function () {
-    $('#ConfirmarNuevaContrasena').keyup(function (e) {
-        var pass1 = $('#NuevaContrasena').val();
-        var pass2 = $('#ConfirmarNuevaContrasena').val();
-        if (pass1 == pass2) {
-            $('#MensajeCoincidencia').css('color', 'Green').html('Coinciden');
-        } else if (pass1 != pass2) {
-            $('#MensajeCoincidencia').css('color', 'Red').html('No Coinciden');
-        }
-    });
-}
+    //Funcion para mostrar Datatable con los Agentes por Ajax
+    var ReadAgentes = function () {
+        var table = $('#TablaAgentes').DataTable({
+            "ajax": {
+                "method": "POST",
+                "url": "Datatable"
+            },
+            "columns": [
+                { "data": "usuario" },
+                { "data": "nombre" },
+                { "data": "apellido" },
+                { "data": "password" },
+                { "data": "admin" }
+            ]
+        });
+    }
 
 
-//Read AccesWebToken
-var ReadAccesWebToken = function () {
-    $.ajax({
-        type: "GET",
-        url: "ReadAccesWebToken",
-        success: function (Respuesta) {
-            let json = JSON.parse(Respuesta);
-            let tbody = '';
-            json.forEach(
-                Consulta => {
-                    tbody += `
+    //Ingresar Agente por ajax en el boton de dicho formulario
+    let IngresarAgente = function () {
+        $('#btnRegistrarAgente').click(function (e) {
+            e.preventDefault();
+
+
+            let Formulario = $('#frmIngresarAgente').serialize();
+            $.ajax({
+                type: "POST",
+                url: "AgregarAgente",
+                data: Formulario,
+                success: function (Respuesta) {
+                    $('#RespuestaIngresoAgentes').css('color', 'Green').html(Respuesta);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+
+            //Limpiando vasillas y desmarcando checkbox
+            $('#user').val('');
+            $('#nombre').val('');
+            $('#apellido').val('');
+            $('#documento').val('');
+            $('#admin').prop('checked', false);
+            $('#master').prop('checked', false);
+            $('#telefono').val('');
+            $('#direccion').val('');
+            $('#correo').val('');
+            $('#password').val('');
+            $('#ConfirmacionPassword').val('');
+        });
+
+
+    }
+
+
+    //Funcion para Validar que las contraseñas coincidan
+    var CambiarContrasena = function () {
+        $('#ConfirmarNuevaContrasena').keyup(function (e) {
+            var pass1 = $('#NuevaContrasena').val();
+            var pass2 = $('#ConfirmarNuevaContrasena').val();
+            if (pass1 == pass2) {
+                $('#MensajeCoincidencia').css('color', 'Green').html('Coinciden');
+            } else if (pass1 != pass2) {
+                $('#MensajeCoincidencia').css('color', 'Red').html('No Coinciden');
+            }
+        });
+    }
+
+
+    //Read AccesWebToken
+    var ReadAccesWebToken = function () {
+        $.ajax({
+            type: "GET",
+            url: "ReadAccesWebToken",
+            success: function (Respuesta) {
+                let json = JSON.parse(Respuesta);
+                let tbody = '';
+                json.forEach(
+                    Consulta => {
+                        tbody += `
                         <tr>
                             <td>${Consulta.idToken}</td>
                             <td>${Consulta.Instance}</td>
                             <td>${Consulta.Token}</td>
                         </tr>
                         `
-                });
-            $('#TablaTokenChatApi').html(tbody);
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-        }
-    });
-}
-
-
-//Ingreso de AccesWebToken
-var IngresoAccessWebToken = function () {
-    $('#btnIngresoAccesWebToken').click(function (e) {
-        e.preventDefault();
-        var form = $('#frmAccesWebToken').serialize();
-
-        $.ajax({
-            type: "POST",
-            url: "InsertAccesWebToken",
-            data: form,
-            success: function (Respuesta) {
-                $('#RespuestaIngresoToken').html(Respuesta)
-                console.log(Respuesta);
+                    });
+                $('#TablaTokenChatApi').html(tbody);
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
@@ -196,26 +184,49 @@ var IngresoAccessWebToken = function () {
                 console.log(error);
             }
         });
-        $('#instancia').val('');
-        $('#token').val('');
-        ReadAccesWebToken();
-    });
-}
+    }
 
 
-//Activar Emotes
-var ActivarEmotes = function () {
-    $(function () {
-        window.emojiPicker = new EmojiPicker({
-            emojiable_selector: '[data-emojiable=true]',
-            assetsPath: 'app/master/views/assets/Emoji/img',
-            popupButtonClasses: 'icon-smile'
+    //Ingreso de AccesWebToken
+    var IngresoAccessWebToken = function () {
+        $('#btnIngresoAccesWebToken').click(function (e) {
+            e.preventDefault();
+            var form = $('#frmAccesWebToken').serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "InsertAccesWebToken",
+                data: form,
+                success: function (Respuesta) {
+                    $('#RespuestaIngresoToken').html(Respuesta)
+                    console.log(Respuesta);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                }
+            });
+            $('#instancia').val('');
+            $('#token').val('');
+            ReadAccesWebToken();
         });
-        window.emojiPicker.discover();
-    });
+    }
+
+
+    //Activar Emotes
+    var ActivarEmotes = function () {
+        $(function () {
+            window.emojiPicker = new EmojiPicker({
+                emojiable_selector: '[data-emojiable=true]',
+                assetsPath: 'app/master/views/assets/Emoji/img',
+                popupButtonClasses: 'icon-smile'
+            });
+            window.emojiPicker.discover();
+        });
+    }
+
 }
-
-
 
 
 //TODO LO RELACIONADO CON LA TRANSFERENCIA DE CHAT
@@ -745,6 +756,7 @@ var DeleteMensajeDespedida = function () {
 var ReadDialogsAsignadosAgente = function () {
 
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();
+    console.log(form);
     if (form != '') {
         $.ajax({
             type: "POST",
