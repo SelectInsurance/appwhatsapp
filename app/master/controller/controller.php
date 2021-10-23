@@ -695,6 +695,25 @@ class controller
         print json_encode($Array, JSON_PRETTY_PRINT);
     }
 
+    //Consultando los datos recibidos por el input de dialogs mostrados en la tabla
+    public static function FiltrarDatosTabla()
+    {
+        $valor = $_POST['SearchDialogs'];
+        $resultado = crud::Read(query::ReadFiltrarSala($valor));
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($resultado)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_time'] = $row['last_time'];
+            $Array[$i]['abierto'] = $row['abierto'];
+            $Array[$i]['Asignador'] = $row['Asignador'];
+            $Array[$i]['idAgentes'] = $row['idAgentes'];
+            $i++;
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+
     //Consulta para dirigir al DAtatable de mostrar conversaciones
     public static function MostrarConversacionesConsulta()
     {

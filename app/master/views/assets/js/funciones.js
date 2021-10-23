@@ -25,6 +25,7 @@ $(document).ready(function () {
     ReadSalasChatTransferencia();
     CreateTransferirChat();
     Tooltip();
+    SearchDialogs();
 });
 
 //Funcion para personalizar el tooltip
@@ -875,7 +876,37 @@ var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
     });
 }
 
+var SearchDialogs = function () {
+    $('#SearchDialogs').keyup(function (e) {
+        var TeclasPrecionadas = $('#frmFiltrarSearchDialogs').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "FiltrarDatosTabla",
+            data: TeclasPrecionadas,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    });
+}
+
 //////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 //Agregando Tabla para mostrar las conversaciones
 /* var MostrarConversacionDataTable = function () {
     var form = $('#frmidparaconsultarDatatableConversacion').serialize();

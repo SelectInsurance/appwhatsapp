@@ -240,4 +240,9 @@ class  query
     public static function DeleteMensajeDespedida($id){
         return "DELETE FROM mensajedespedida WHERE id = '$id'";
     }
+
+    //Filtrar dialogs por agente
+    public static function ReadFiltrarSala($datos){
+        return "Call SP_FiltrarSala('$datos')";
+    }
 }
