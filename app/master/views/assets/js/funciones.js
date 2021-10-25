@@ -25,10 +25,86 @@ $(document).ready(function () {
     CreateTransferirChat();
     Tooltip();
     SearchDialogs();
+    MostrarTablaChatAcumulado();
 });
 
 //AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
 //Funcion para Mostrar Tabla en conteo total chat
+var MostrarTablaChatAcumulado = function () {
+    $('#FiltroTablaTotal').keyup(function (e) {
+        var form = $('#frmFiltrarTotalSala').serialize();
+        $.ajax({
+            type: "POST",
+            url: "MostrarTablaChatAcumulado",
+            data: form,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                if (json !== 'null') {
+                    var tbody = '';
+                    json.forEach(
+                        consulta => {
+                            if (consulta.Asignador == null) {
+                                var SinAsignar = 'Sin Asignar';
+                            }
+                            tbody += `
+                                <tr>
+                                    <td>${consulta.id}</td>
+                                    <td>${consulta.name}</td>
+                                    <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${SinAsignar}</td>
+                                    <td>${consulta.idAgentes}</td>
+                                    <td><a href="" class="btn btn-success btn-sm"><i class="far fa-share-square"></i><a></td>
+                                </tr>
+                                `;
+                        }
+                    )
+                    $('#TablaChatAcumulado').html(tbody);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "MostrarTablaChatAcumulado",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            if (json !== 'null') {
+                var tbody = '';
+                json.forEach(
+                    consulta => {
+                        if (consulta.Asignador == null) {
+                            var SinAsignar = 'Sin Asignar';
+                        }
+                        tbody += `
+                            <tr>
+                                <td>${consulta.id}</td>
+                                <td>${consulta.name}</td>
+                                <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${SinAsignar}</td>
+                                <td>${consulta.idAgentes}</td>
+                                <td><a href="" class="btn btn-success btn-sm"><i class="far fa-share-square"></i><a></td>
+                            </tr>
+                            `;
+                    }
+                )
+                $('#TablaChatAcumulado').html(tbody);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
 
 
 
@@ -376,7 +452,6 @@ var MostrarCantidadSalasChat = function () {
     });
 }
 
-
 //Mostrando Cantidad de salas de chat Abiertas
 var MostrarCantidadSalasChatAbiertas = function () {
     $.ajax({
@@ -501,7 +576,7 @@ var TablaChatAsignadoAgente = function () {
 
 //Mostrando tabla del modal del dashboard
 var TablaModalTotalDashboard = function () {
-    
+
 }
 ///////////////////////////////////////////
 

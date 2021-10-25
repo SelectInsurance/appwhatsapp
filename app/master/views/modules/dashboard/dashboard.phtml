@@ -129,16 +129,16 @@
                 <h5 class="modal-title" id="InfoModalTotal">Total de Salas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body table-responsive">
-                Total
-                <table class="table table-hover text-center">
+            <div class="modal-body table-responsive CajaChat">
+                <table class="table table-hover text-center border shadow">
                     <thead>
                         <tr>
                             <th></th>
                             <th></th>
-                            <th></th>
-                            <th></th>
-                            <th><input type="text" name="" class="form-control" id="" placeholder="Ingrese Id"></th>
+                            <th colspan="3"><label for="FiltroTablaTotal">Ingrese Criterios de Busqueda</label></th>
+                            <th>
+                                <form id="frmFiltrarTotalSala"><input type="text" name="FiltroTablaTotal" class="form-control" id="FiltroTablaTotal" placeholder="Ingrese Id"></form>
+                            </th>
                         </tr>
                         <tr>
                             <th>Id</th>
@@ -146,9 +146,10 @@
                             <th>Image</th>
                             <th>Asignador</th>
                             <th>Asignado a</th>
+                            <th>Abrir Sala</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="TablaChatAcumulado">
 
                     </tbody>
                     <tfoot>

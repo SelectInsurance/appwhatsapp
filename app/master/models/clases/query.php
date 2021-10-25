@@ -88,6 +88,12 @@ class  query
         return "SELECT * FROM dialogs";
     }
 
+    //Buscando dialogs filtrando por like
+    public static function ReadDialogsFiltrando($datos)
+    {
+        return "SELECT * FROM dialogs WHERE name LIKE '$datos%' OR id LIKE '$datos%'";
+    }
+
     //Crear AccesWebToken
     public static function CreateAwebT($instance, $token, $user)
     {

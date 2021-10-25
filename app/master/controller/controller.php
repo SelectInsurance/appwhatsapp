@@ -532,7 +532,38 @@ class controller
         $conteo = count($Array);
         echo $conteo;
     }
-/* 
+
+    //Mostrar Tabla Dialogs totales
+    public static function MostrarTablaChatAcumulado()
+    {
+        $datos = $_POST['FiltroTablaTotal'];
+        //echo $datos;
+        if (!empty($datos)) {
+            $consulta = crud::Read(query::ReadDialogsFiltrando($datos));
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($consulta)) {
+                $Array[$i]['id'] = $row['id'];
+                $Array[$i]['name'] = $row['name'];
+                $Array[$i]['image'] = $row['image'];
+                $Array[$i]['Asignador'] = $row['Asignador'];
+                $Array[$i]['idAgentes'] = $row['idAgentes'];
+                $i++;
+            }
+        } else if(empty($datos)) {
+            $consulta = crud::Read(query::ReadDialogs());
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($consulta)) {
+                $Array[$i]['id'] = $row['id'];
+                $Array[$i]['name'] = $row['name'];
+                $Array[$i]['image'] = $row['image'];
+                $Array[$i]['Asignador'] = $row['Asignador'];
+                $Array[$i]['idAgentes'] = $row['idAgentes'];
+                $i++;
+            }
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+    /* 
     //logica para mostrar la cantidad de salas de chat asignadas al Agente o al asistente
     public static function ReadDialogsAsignadosAgente()
     {
@@ -714,7 +745,7 @@ class controller
                 $Array[$i]['idAgentes'] =   $row['idAgentes'];
                 $i++;
             }
-        } elseif(empty($valor)) {
+        } elseif (empty($valor)) {
             $resultado = crud::Read(query::ReadDialogsAgente($id));
             $i = 0;
             while ($row = mysqli_fetch_assoc($resultado)) {
