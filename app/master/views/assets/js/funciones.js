@@ -27,6 +27,13 @@ $(document).ready(function () {
     SearchDialogs();
 });
 
+//AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
+//Funcion para Mostrar Tabla en conteo total chat
+
+
+
+//
+
 //Funcion para personalizar el tooltip
 var Tooltip = function () {
     var cardTotal = document.getElementById('cardTotal')
