@@ -6,9 +6,9 @@
             <label id="txtNoTieneConversacionesAsignadas"></label>
         </div>
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2">
-            <form id="frmidparaconsultarDatatableConversacion">
+<!--             <form id="frmidparaconsultarDatatableConversacion">
                 <input type="text" name="id" value="<?= $idAgente ?>" class="form-control" readonly>
-            </form>
+            </form> -->
         </div>
     </div>
 
@@ -24,6 +24,7 @@
                     <div class="col-2"></div>
                     <div class="col-4">
                         <form id="frmFiltrarSearchDialogs">
+                            <input type="text" name="idAgente" value="<?= $idAgente ?>" class="form-control" readonly>
                             <input type="text" class="form-control m-2" name="SearchDialogs" id="SearchDialogs" placeholder="Buscar">
                         </form>
                     </div>

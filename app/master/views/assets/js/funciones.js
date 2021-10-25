@@ -12,7 +12,6 @@ $(document).ready(function () {
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
     ValidacionCantidadMaximaCaracteres();
-    ReadDialogsAsignadosAgente();
     InsertarMensajeDespedida();
     //MostrarConversacionDataTable();
     IngresarAgente();
@@ -753,57 +752,6 @@ var DeleteMensajeDespedida = function () {
 
 //TODO LO RELACIONADO CON CONSULTAR CHAT
 //Mostrando Salas de chat Asignadas
-var ReadDialogsAsignadosAgente = function () {
-
-    var form = $('#frmidparaconsultarDatatableConversacion').serialize();
-    if (form != '') {
-        $.ajax({
-            type: "POST",
-            url: "ReadDialogsAsignadosAgente",
-            data: form,
-            success: function (Respuesta) {
-                var json = JSON.parse(Respuesta);
-                if (json != null) {
-                    var tabla = '';
-                    json.forEach(
-                        Datos => {
-                            if (Datos.image != '') {
-                                tabla += `
-                                <tr>
-                                    <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
-                                    <td>${Datos.id}</td>
-                                    <td>${Datos.name}</td>
-                                    <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
-                                    <td>${Datos.abierto}</td>
-                                </tr>
-                                `
-                            } else {
-                                tabla += `
-                                <tr>
-                                    <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
-                                    <td>${Datos.id}</td>
-                                    <td>${Datos.name}</td>
-                                    <td><img src="app/master/views/assets/css/images/sinfoto.webp" class="img-thumbnail rounded" width="40px"></td>
-                                    <td>${Datos.abierto}</td>
-                                </tr>
-                                `
-                            }
-                        }
-                    );
-                    $('#tabladialogs').html(tabla);
-                } else {
-                    $('#txtNoTieneConversacionesAsignadas').css('color', 'Red').html('No hay Salas Asignadas');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
-            }
-        });
-    }
-}
-
 var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
     $('#btnAbrirConversacionSeleccionada').click(function (e) {
         e.preventDefault();
@@ -876,16 +824,93 @@ var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
     });
 }
 
+//Mostrando Salas de chat Asignadas y Filtradas por nombre o id
 var SearchDialogs = function () {
+    var TeclasPrecionadas = $('#frmFiltrarSearchDialogs').serialize();
+    $.ajax({
+        type: "POST",
+        url: "FiltrarDatosTabla",
+        data: TeclasPrecionadas,
+        success: function (Respuesta) {
+            var json = JSON.parse(Respuesta);
+            if (json != null) {
+                var tabla = '';
+                json.forEach(
+                    Datos => {
+                        if (Datos.image != '') {
+                            tabla += `
+                                <tr>
+                                    <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                                `
+                        } else {
+                            tabla += `
+                                <tr>
+                                    <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="app/master/views/assets/css/images/sinfoto.webp" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                                `
+                        }
+                    }
+                );
+                $('#tabladialogs').html(tabla);
+            } else {
+                $('#txtNoTieneConversacionesAsignadas').css('color', 'Red').html('No hay Salas Asignadas');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+
     $('#SearchDialogs').keyup(function (e) {
         var TeclasPrecionadas = $('#frmFiltrarSearchDialogs').serialize();
-
         $.ajax({
             type: "POST",
             url: "FiltrarDatosTabla",
             data: TeclasPrecionadas,
             success: function (Respuesta) {
-                console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                if (json != null) {
+                    var tabla = '';
+                    json.forEach(
+                        Datos => {
+                            if (Datos.image != '') {
+                                tabla += `
+                                <tr>
+                                    <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                                `
+                            } else {
+                                tabla += `
+                                <tr>
+                                    <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
+                                    <td>${Datos.id}</td>
+                                    <td>${Datos.name}</td>
+                                    <td><img src="app/master/views/assets/css/images/sinfoto.webp" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${Datos.abierto}</td>
+                                </tr>
+                                `
+                            }
+                        }
+                    );
+                    $('#tabladialogs').html(tabla);
+                } else {
+                    $('#txtNoTieneConversacionesAsignadas').css('color', 'Red').html('No hay Salas Asignadas');
+                }
             },
             error: function (xhr, status, error) {
                 console.log(xhr);

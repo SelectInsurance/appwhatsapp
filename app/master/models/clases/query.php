@@ -242,7 +242,7 @@ class  query
     }
 
     //Filtrar dialogs por agente
-    public static function ReadFiltrarSala($datos){
-        return "Call SP_FiltrarSala('$datos')";
+    public static function ReadFiltrarSala($datos, $id){
+        return "call SP_FiltrarSala('$datos','$id')";
     }
 }

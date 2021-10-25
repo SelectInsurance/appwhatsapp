@@ -532,7 +532,7 @@ class controller
         $conteo = count($Array);
         echo $conteo;
     }
-
+/* 
     //logica para mostrar la cantidad de salas de chat asignadas al Agente o al asistente
     public static function ReadDialogsAsignadosAgente()
     {
@@ -551,7 +551,7 @@ class controller
         }
         print json_encode($array, JSON_PRETTY_PRINT);
     }
-
+ */
 
     //Mostrando Cantidad Chat Asignado a Agentes
     public static function MostrandoChatAsignados()
@@ -700,17 +700,33 @@ class controller
     public static function FiltrarDatosTabla()
     {
         $valor = $_POST['SearchDialogs'];
-        $resultado = crud::Read(query::ReadFiltrarSala($valor));
-        $i = 0;
-        while ($row = mysqli_fetch_assoc($resultado)) {
-            $Array[$i]['id'] = $row['id'];
-            $Array[$i]['name'] = $row['name'];
-            $Array[$i]['image'] = $row['image'];
-            $Array[$i]['last_time'] = $row['last_time'];
-            $Array[$i]['abierto'] = $row['abierto'];
-            $Array[$i]['Asignador'] = $row['Asignador'];
-            $Array[$i]['idAgentes'] = $row['idAgentes'];
-            $i++;
+        $id = $_POST['idAgente'];
+        if (!empty($valor)) {
+            $resultado = crud::Read(query::ReadFiltrarSala($valor, $id));
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($resultado)) {
+                $Array[$i]['id']        =   $row['id'];
+                $Array[$i]['name']      =   $row['name'];
+                $Array[$i]['image']     =   $row['image'];
+                $Array[$i]['last_time'] =   $row['last_time'];
+                $Array[$i]['abierto']   =   $row['abierto'];
+                $Array[$i]['Asignador'] =   $row['Asignador'];
+                $Array[$i]['idAgentes'] =   $row['idAgentes'];
+                $i++;
+            }
+        } elseif(empty($valor)) {
+            $resultado = crud::Read(query::ReadDialogsAgente($id));
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($resultado)) {
+                $Array[$i]['id']        =   $row['id'];
+                $Array[$i]['name']      =   $row['name'];
+                $Array[$i]['image']     =   $row['image'];
+                $Array[$i]['last_time'] =   $row['last_time'];
+                $Array[$i]['abierto']   =   $row['abierto'];
+                $Array[$i]['Asignador'] =   $row['Asignador'];
+                $Array[$i]['idAgentes'] =   $row['idAgentes'];
+                $i++;
+            }
         }
         print json_encode($Array, JSON_PRETTY_PRINT);
     }
