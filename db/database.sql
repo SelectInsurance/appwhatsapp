@@ -90,6 +90,12 @@ END //
 
 
 
+DELIMITER //
+CREATE PROCEDURE SP_MostrarDialogsTotales()
+BEGIN
+    SELECT * FROM dialogs;
+END //
+
 
 
 DROP Procedure IF EXISTS SP_ReadMensajeDespedidaCreador;

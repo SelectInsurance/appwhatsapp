@@ -498,6 +498,11 @@ var TablaChatAsignadoAgente = function () {
         }
     });
 }
+
+//Mostrando tabla del modal del dashboard
+var TablaModalTotalDashboard = function () {
+    
+}
 ///////////////////////////////////////////
 
 
@@ -526,17 +531,17 @@ var MostrarMensajesChat = function () {
                         if (Datos.sender == 'master' || Datos.sender == 'admin' || Datos.sender == 'regular') {
                             conversacion += `                            
                                 <div class="m-2">
-                                    <span class="text text-success">${Datos.sender}</span>
-                                    <span>${Datos.body}</span>
-                                    <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
+                                    <span style="color:#82ccdd;">${Datos.sender}</span>
+                                    <span class="shadow" style="background-color:#dfe4ea; padding:5px; border-radius:10px;">${Datos.body}</span></br>
+                                    <span class="text-white" style="font-size: 11px;">${Datos.FechaHora}</span></br>
                                 </div>
                                 `
                         } else {
                             conversacion += `
                             <div class="m-2">
-                                <span class="text text-danger">${Datos.sender}</span>
-                                <span>${Datos.body}</span>
-                                <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
+                                <span style="color:#e55039;">${Datos.sender}</span>
+                                <span class="shadow" style="background-color:#dfe4ea; padding:5px; border-radius:10px;">${Datos.body}</span></br>
+                                <span class="text-white" style="font-size: 11px;">${Datos.FechaHora}</span></br>
                             </div>
                             `
                         }
