@@ -511,7 +511,7 @@ var MostrarMensajesChat = function () {
             url: "MostrarMensajesChat",
             data: form,
             success: function (Respuesta) {
-                //console.log(Respuesta);
+                console.log(Respuesta);
                 let json = JSON.parse(Respuesta);
                 //console.log(json);
                 let conversacion = '';
