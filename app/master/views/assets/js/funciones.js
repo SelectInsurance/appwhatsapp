@@ -929,7 +929,7 @@ var SearchDialogs = function () {
                             tabla += `
                                 <tr>
                                     <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
-                                    <td>${Datos.id}</td>
+                                    <td><b>${Datos.id}</b></td>
                                     <td>${Datos.name}</td>
                                     <td><img src="${Datos.image}" class="img-thumbnail rounded" width="40px"></td>
                                     <td>${Datos.abierto}</td>
@@ -939,7 +939,7 @@ var SearchDialogs = function () {
                             tabla += `
                                 <tr>
                                     <td><input class="form-check-input" type="radio" name="idRadio[]" id="idRadio[]" value="${Datos.id}"></td>
-                                    <td>${Datos.id}</td>
+                                    <td><b>${Datos.id}</b></td>
                                     <td>${Datos.name}</td>
                                     <td><img src="app/master/views/assets/css/images/sinfoto.webp" class="img-thumbnail rounded" width="40px"></td>
                                     <td>${Datos.abierto}</td>
