@@ -1,10 +1,8 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
 
-    $.ajaxSetup({ "cache": false });//Manejo de cache
-    $('#CodigoPais').select2({
-        tags: true
-    });//llamando al componente select de la libreria select2 de jquery
+    $.ajaxSetup({ "cache": false });//Manejo de cache de Jquery
+    $('#CodigoPais').select2({ tags: true });//llamando al componente select de la libreria select2 de jquery
 
 
     EnviarMensajesChat();
@@ -127,6 +125,8 @@ var MostrarModalTablaChatAcumulado = function () {
 
 //Funcion para personalizar el tooltip
 var Tooltip = function () {
+
+    //ToolTips de las Cards del Dashboard
     var cardTotal = document.getElementById('cardTotal')
     if (cardTotal != null) {
         var tooltip = new bootstrap.Tooltip(cardTotal, {
@@ -167,6 +167,33 @@ var Tooltip = function () {
             template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
+    //
+
+    //Tooltips de el menu de la Derecha
+    var OpcionDashBoardMenu = document.getElementById('OpcionDashBoardMenu')
+    if (OpcionDashBoardMenu != null) {
+        var tooltip = new bootstrap.Tooltip(OpcionDashBoardMenu, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+
+    var OpcionMensajeFinalMenu = document.getElementById('OpcionMensajeFinalMenu')
+    if (OpcionMensajeFinalMenu != null) {
+        var tooltip = new bootstrap.Tooltip(OpcionMensajeFinalMenu, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+
+    var OpcionAddWhatsappMenu = document.getElementById('OpcionAddWhatsappMenu')
+    if (OpcionAddWhatsappMenu != null) {
+        var tooltip = new bootstrap.Tooltip(OpcionAddWhatsappMenu, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+    //
 
 }
 //Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
