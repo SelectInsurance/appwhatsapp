@@ -222,50 +222,26 @@ class controller
         lower();
     }
 
-    public static function AddSalaChat()
-    {
-
-
-        //Condicion para obligar a tener si o si una sala de chat
-        if (isset($_POST['btnAddSalaChat'])) {
-
-
-            $user = $_SESSION['Master'];
-            $codigo = $_POST['CodigoPais'];
-            $telefono = $_POST['NumeroCliente'];
-            $phone = $codigo.$telefono;
-            var_dump($phone);
-
-
-            $SalaChat = $codigo.$telefono;
-
-            //Imagen Guardada
-            //$resultado = crud::Read(query::ReadImageDialogs($id));
-            //$image = mysqli_fetch_assoc($resultado);
-
-            //ChatAbiertos
-            crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
-
-            //Mostrando mensaje de despedida en el modal de cerrar chat
-            $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
-
-            higher();
-            Nav();
-            require_once 'app/master/views/modules/chat/chat.phtml';
-            lower();
-        } else {
-            header('Location:./');
-        }
-    }
-
     //Abrir Sala de chat individual
     public static function AbrirSalaChat()
     {
         //Condicion para obligar a tener si o si una sala de chat
-        if (!empty($_POST['btnAbrirChat'])) {
-            $user = $_SESSION['Master'];
-            $id = $_POST['btnAbrirChat'];
-            $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
+        if (!empty($_POST['btnAbrirChat']) || isset($_POST['btnAddSalaChat'])) {
+
+            //Condicion para Agregar nuevo chat o no
+            if (!empty($_POST['NumeroCliente'])) {
+                $user = $_SESSION['Master'];
+                $id = $_POST['CodigoPais'].$_POST['NumeroCliente'].'@c.us';
+                $SalaChat = $_POST['CodigoPais'].$_POST['NumeroCliente'];
+            }else {
+                $user = $_SESSION['Master'];
+                $id = $_POST['btnAbrirChat'];
+                $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
+            }
+
+
+
+
 
             //Imagen Guardada
             $resultado = crud::Read(query::ReadImageDialogs($id));
