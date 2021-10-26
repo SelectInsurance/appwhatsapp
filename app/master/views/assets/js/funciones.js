@@ -131,7 +131,7 @@ var Tooltip = function () {
     if (cardTotal != null) {
         var tooltip = new bootstrap.Tooltip(cardTotal, {
             boundary: document.body, // or document.querySelector('#boundary')
-            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
 
@@ -139,7 +139,7 @@ var Tooltip = function () {
     if (cardAbiertos != null) {
         var tooltip = new bootstrap.Tooltip(cardAbiertos, {
             boundary: document.body, // or document.querySelector('#boundary')
-            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
 
@@ -148,7 +148,7 @@ var Tooltip = function () {
     if (cardCerrados != null) {
         var tooltip = new bootstrap.Tooltip(cardCerrados, {
             boundary: document.body, // or document.querySelector('#boundary')
-            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
 
@@ -156,7 +156,7 @@ var Tooltip = function () {
     if (cardAsignados != null) {
         var tooltip = new bootstrap.Tooltip(cardAsignados, {
             boundary: document.body, // or document.querySelector('#boundary')
-            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
 
@@ -164,7 +164,7 @@ var Tooltip = function () {
     if (carSeguimiento != null) {
         var tooltip = new bootstrap.Tooltip(carSeguimiento, {
             boundary: document.body, // or document.querySelector('#boundary')
-            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
     //
@@ -174,7 +174,7 @@ var Tooltip = function () {
     if (OpcionDashBoardMenu != null) {
         var tooltip = new bootstrap.Tooltip(OpcionDashBoardMenu, {
             boundary: document.body, // or document.querySelector('#boundary')
-            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="tooltip TooltipColorAzul" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
 
@@ -182,7 +182,7 @@ var Tooltip = function () {
     if (OpcionMensajeFinalMenu != null) {
         var tooltip = new bootstrap.Tooltip(OpcionMensajeFinalMenu, {
             boundary: document.body, // or document.querySelector('#boundary')
-            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="tooltip TooltipColorAzul" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
 
@@ -190,7 +190,7 @@ var Tooltip = function () {
     if (OpcionAddWhatsappMenu != null) {
         var tooltip = new bootstrap.Tooltip(OpcionAddWhatsappMenu, {
             boundary: document.body, // or document.querySelector('#boundary')
-            template: '<div class="tooltip TooltipColores" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="tooltip TooltipColorAzul" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         });
     }
     //
