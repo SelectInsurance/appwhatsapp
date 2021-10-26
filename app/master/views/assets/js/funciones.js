@@ -1,5 +1,12 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
+
+    $.ajaxSetup({ "cache": false });//Manejo de cache
+    $('#CodigoPais').select2({
+        tags: true
+    });//llamando al componente select de la libreria select2 de jquery
+
+
     EnviarMensajesChat();
     setInterval('MostrarMensajesChat()', 3000);
     setInterval('UpdateInstance()', 360000);

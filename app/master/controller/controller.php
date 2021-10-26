@@ -212,6 +212,16 @@ class controller
 
 
     //TODO LO RELACIONADO A LOS CHAT
+
+    // add Sala de chat individual
+    public static function AddSala()
+    {
+        higher();
+        Nav();
+        require_once 'app\master\views\modules\addChat\addChat.phtml';
+        lower();
+    }
+
     //Abrir Sala de chat individual
     public static function AbrirSalaChat()
     {
