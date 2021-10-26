@@ -222,6 +222,42 @@ class controller
         lower();
     }
 
+    public static function AddSalaChat()
+    {
+
+
+        //Condicion para obligar a tener si o si una sala de chat
+        if (isset($_POST['btnAddSalaChat'])) {
+
+
+            $user = $_SESSION['Master'];
+            $codigo = $_POST['CodigoPais'];
+            $telefono = $_POST['NumeroCliente'];
+            $phone = $codigo.$telefono;
+            var_dump($phone);
+
+
+            $SalaChat = $codigo.$telefono;
+
+            //Imagen Guardada
+            //$resultado = crud::Read(query::ReadImageDialogs($id));
+            //$image = mysqli_fetch_assoc($resultado);
+
+            //ChatAbiertos
+            crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
+
+            //Mostrando mensaje de despedida en el modal de cerrar chat
+            $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
+
+            higher();
+            Nav();
+            require_once 'app/master/views/modules/chat/chat.phtml';
+            lower();
+        } else {
+            header('Location:./');
+        }
+    }
+
     //Abrir Sala de chat individual
     public static function AbrirSalaChat()
     {
@@ -584,7 +620,7 @@ class controller
             foreach ($id as $indice) {
                 $id =  $indice;
             }
-            
+
 
 
             $user = $_SESSION['Master'];
@@ -597,7 +633,7 @@ class controller
 
             //Mostrando mensaje de despedida en el modal de cerrar chat
             $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
-            
+
 
             higher();
             Nav();
