@@ -549,7 +549,7 @@ class controller
                 $Array[$i]['idAgentes'] = $row['idAgentes'];
                 $i++;
             }
-        } else if(empty($datos)) {
+        } else if (empty($datos)) {
             $consulta = crud::Read(query::ReadDialogs());
             $i = 0;
             while ($row = mysqli_fetch_assoc($consulta)) {
@@ -563,26 +563,40 @@ class controller
         }
         print json_encode($Array, JSON_PRETTY_PRINT);
     }
-    /* 
-    //logica para mostrar la cantidad de salas de chat asignadas al Agente o al asistente
-    public static function ReadDialogsAsignadosAgente()
-    {
-        $id = $_POST['id'];
-        $consulta = crud::Read(query::ReadDialogsAgente($id));
 
-        $i = 0;
-        while ($row = mysqli_fetch_assoc($consulta)) {
-            $array[$i]['id']        =  str_replace('@c.us', '', $row['id']);
-            $array[$i]['name']      =   $row['name'];
-            $array[$i]['image']     =   $row['image'];
-            $array[$i]['last_time'] =   $row['last_time'];
-            $array[$i]['abierto']   =   $row['abierto'];
-            $array[$i]['idAgentes'] =   $row['idAgentes'];
-            $i++;
+    //Mostrar Sala Chat por Id desde Modal
+    public static function ConsultandoSalaDesdeModalTotal()
+    {
+        if (!empty($_POST['btnIdConsultarSala'])) {
+            $id = $_POST['btnIdConsultarSala'];
+
+            //sacando el indice usando foreach
+            foreach ($id as $indice) {
+                $id =  $indice;
+            }
+            
+
+
+            $user = $_SESSION['Master'];
+            $id = $indice;
+            $SalaChat = str_replace('@c.us', '', $indice);
+
+            //Imagen Guardada
+            $resultado = crud::Read(query::ReadImageDialogs($id));
+            $image = mysqli_fetch_assoc($resultado);
+
+            //Mostrando mensaje de despedida en el modal de cerrar chat
+            $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
+            
+
+            higher();
+            Nav();
+            require_once 'app\master\views\modules\chat\chat.phtml';
+            lower();
+        } else {
+            header('Location:Inicio');
         }
-        print json_encode($array, JSON_PRETTY_PRINT);
     }
- */
 
     //Mostrando Cantidad Chat Asignado a Agentes
     public static function MostrandoChatAsignados()

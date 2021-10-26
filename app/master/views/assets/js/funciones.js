@@ -25,12 +25,12 @@ $(document).ready(function () {
     CreateTransferirChat();
     Tooltip();
     SearchDialogs();
-    MostrarTablaChatAcumulado();
+    MostrarModalTablaChatAcumulado();
 });
 
 //AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
 //Funcion para Mostrar Tabla en conteo total chat
-var MostrarTablaChatAcumulado = function () {
+var MostrarModalTablaChatAcumulado = function () {
     $('#FiltroTablaTotal').keyup(function (e) {
         var form = $('#frmFiltrarTotalSala').serialize();
         $.ajax({
@@ -54,7 +54,11 @@ var MostrarTablaChatAcumulado = function () {
                                     <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
                                     <td>${SinAsignar}</td>
                                     <td>${consulta.idAgentes}</td>
-                                    <td><a href="" class="btn btn-success btn-sm"><i class="far fa-share-square"></i><a></td>
+                                    <td>
+                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                    </form>
+                                    </td>
                                 </tr>
                                 `;
                         }
@@ -90,7 +94,11 @@ var MostrarTablaChatAcumulado = function () {
                                 <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
                                 <td>${SinAsignar}</td>
                                 <td>${consulta.idAgentes}</td>
-                                <td><a href="" class="btn btn-success btn-sm"><i class="far fa-share-square"></i><a></td>
+                                <td>
+                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                </form>
+                                </td>
                             </tr>
                             `;
                     }
