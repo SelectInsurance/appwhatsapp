@@ -1,11 +1,14 @@
-<div class="container">
-    <div class="row my-5">
-        <div class="col-12 col-sm-6 col-md-2 col-lg-3 col-xl-3"></div>
-        <div class="col-12 col-sm-6 col-md-8 col-lg-6 col-xl-6 border shadow">
-            <h5 class="text-center">Agrega telefono con su respectivo pais</h5>
-            <form action="Chat" method="post">
+<form action="Chat" method="post">
+    <div class="container">
+        <div class="row text-center ml-5">
+            <h2 class="ml-5">Agregar Whatsapp   <i class="fab fa-whatsapp"></i></h2>
+        </div>
+        <div class="row my-5">
+            <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
+            <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
+            <div class="col-12 col-sm-3 col-md-2 col-lg-2 col-xl-2 border shadow">
                 <label for="CodigoPais">Codigo Pais</label>
-                <select name="CodigoPais" id="CodigoPais" class="form-select form-select-lg">
+                <select name="CodigoPais" id="CodigoPais" class="form-select">
                     <option value="93">Afganistán</option>
                     <option value="355">Albania</option>
                     <option value="213">Argelia</option>
@@ -230,11 +233,13 @@
                     <option value="260">Zambia</option>
                     <option value="263">Zimbabue</option>
                 </select>
-                <label for="NumeroCliente" class="m-2">Ingrese numero del Cliente:</label>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 border shadow">
+                <label for="NumeroCliente">Ingrese numero del Cliente:</label>
                 <input type="text" name="NumeroCliente" id="NumeroCliente" class="form-control" placeholder="Ingrese el telefono del cliente">
-                <input type="submit" value="Agregar" class="btn btn-success my-2">
-            </form>
+                <input type="submit" value="Agregar" class="btn btn-success m-3">
+            </div>
+            <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
         </div>
-        <div class="col-12 col-sm-6 col-md-2 col-lg-3 col-xl-3"></div>
     </div>
-</div>
+</form>
