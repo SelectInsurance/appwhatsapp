@@ -26,7 +26,6 @@ $(document).ready(function () {
     IngresoAccessWebToken();
     //ActivarEmotes();
     ReadTransferenciaChat();
-    ReadSalasChatTransferencia();
     CreateTransferirChat();
     Tooltip();
     SearchDialogs();
@@ -391,34 +390,6 @@ var ReadTransferenciaChat = function () {
         }
     });*/
 };
-
-
-//Consultar salas de chat para transferir
-var ReadSalasChatTransferencia = function () {
-    $.ajax({
-        type: "GET",
-        url: "ConsultandoSalasChatSelector",
-        success: function (Respuesta) {
-            if (Respuesta != 'null') {
-                var json = JSON.parse(Respuesta);
-                var select = '';
-                json.forEach(
-                    consulta => {
-                        select += `
-                        <option value="${consulta.name}">${consulta.name}</option>
-                        `
-                    }
-                );
-                $('#SeleccionSalaChat').html(select);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-        }
-    });
-}
 
 
 //Transferir Sala a Agente

@@ -212,7 +212,6 @@ class controller
 
 
     //TODO LO RELACIONADO A LOS CHAT
-
     // add Sala de chat individual
     public static function AddSala()
     {
@@ -494,8 +493,11 @@ class controller
     //Modulo Transferir chat
     public static function TransferirChat()
     {
+        $id = str_replace('@c.us', '', $_GET['Id']);
         higher();
         Nav();
+
+        
         require_once 'app/master/views/modules/TransferenciaChat/TransferenciaChat.phtml';
         lower();
     }
@@ -510,26 +512,13 @@ class controller
         echo json_encode($rows);
     }
 
-    //Consultando Salas de chat en etiqueta Select
-    public static function ConsultandoSalasChatSelector()
-    {
-        $consulta = crud::Read(query::ReadDialogs());
-        $i = 0;
-        while ($rows = mysqli_fetch_assoc($consulta)) {
-            $Array[$i]['name'] = $rows['name'];
-            $i++;
-        }
-        $json = json_encode($Array, JSON_PRETTY_PRINT);
-        print $json;
-    }
-
     //Transfiriendo Sala Chat a un Agente
     public static function UpdateDialogs()
     {
         if (isset($_POST)) {
             $idAgente = $_POST['IdAgenteTransferir'];
-            $name = $_POST['SeleccionSalaChat'];
-            crud::Update(query::UpdateDialogs($idAgente, $name));
+            $id = $_POST['chatId'].'@c.us';
+            crud::Update(query::UpdateDialogs($idAgente, $id));
             echo 'Transferencia Exitosa';
         } else {
             echo 'No se pudo Transferir';
