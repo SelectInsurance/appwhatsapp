@@ -7,7 +7,6 @@ use Aws\ElasticBeanstalk\ElasticBeanstalkClient;
 use Aws\Exception\AwsException;
 
 
-
 session_start();
 //Master
 if (isset($_SESSION['Master'])) {
@@ -20,7 +19,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        //header('Location:Inicio');
+        header('Location:Inicio');
     }
 
 
@@ -36,7 +35,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        //header('Location:Inicio');
+        header('Location:Inicio');
     }
 
     //Asistente
@@ -51,7 +50,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        //header('Location:Inicio');
+        header('Location:Inicio');
     }
 
     //Login
@@ -64,7 +63,7 @@ if (isset($_SESSION['Master'])) {
             if ($_GET['controller'] == 'Login') {
                 controller::$controller();
             } else {
-                //header('Location:Login');
+                header('Location:Login');
             }
             break;
     }
