@@ -47,7 +47,7 @@ if (isset($_SESSION['Master'])) {
 
     //Login
 } else {
-    require_once 'app/Login/controller/controller.php';
+    require_once 'app\Login\controller\controller.php';
     $controller = $_GET['controller'];
     switch ($_GET['controller']) {
         case $controller:
