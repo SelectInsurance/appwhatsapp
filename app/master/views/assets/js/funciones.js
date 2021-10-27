@@ -2,18 +2,18 @@ $(document).ready(function () {
     console.log('Hola desde jquery');
 
     //$.ajaxSetup({ "cache": false });//Manejo de cache de Jquery
-    $('#CodigoPais').select2({ tags: true });//llamando al componente select de la libreria select2 de jquery
+    //$('#CodigoPais').select2({ tags: true });//llamando al componente select de la libreria select2 de jquery
 
 
     EnviarMensajesChat();
-    setInterval('MostrarMensajesChat()', 3000);
-    setInterval('UpdateInstance()', 360000);
-    setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
-    setInterval('MostrarCantidadSalasChat()', 3000);
-    setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
-    setInterval('MostrarCantidadSalasChatCerradas()', 3000);
-    setInterval('TablaChatAsignadoAgente()', 30000)
-    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
+    //setInterval('MostrarMensajesChat()', 3000);
+    //setInterval('UpdateInstance()', 360000);
+    //setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
+    //setInterval('MostrarCantidadSalasChat()', 3000);
+    //setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
+    //setInterval('MostrarCantidadSalasChatCerradas()', 3000);
+    //setInterval('TablaChatAsignadoAgente()', 30000)
+    //setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
     ValidacionCantidadMaximaCaracteres();
