@@ -1,7 +1,13 @@
 <?php
 require_once 'vendor\autoload.php';
+use Spipu\Html2Pdf\Html2Pdf;
+
+use Aws\Sdk;
 use Aws\ElasticBeanstalk\ElasticBeanstalkClient;
 use Aws\Exception\AwsException;
+
+
+
 session_start();
 //Master
 if (isset($_SESSION['Master'])) {

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     console.log('Hola desde jquery');
 
-    $.ajaxSetup({ "cache": false });//Manejo de cache de Jquery
+    //$.ajaxSetup({ "cache": false });//Manejo de cache de Jquery
     $('#CodigoPais').select2({ tags: true });//llamando al componente select de la libreria select2 de jquery
 
 
