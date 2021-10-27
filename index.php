@@ -11,7 +11,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        header('Location:?controllerInicio');
+        header('Location:?controller=Inicio');
     }
 
 
@@ -27,7 +27,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        header('Location:?controllerInicio');
+        header('Location:?controller=Inicio');
     }
 
     //Asistente
@@ -42,7 +42,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        header('Location:?controllerInicio');
+        header('Location:?controller=Inicio');
     }
 
     //Login
