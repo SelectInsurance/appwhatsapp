@@ -6,14 +6,14 @@ $(document).ready(function () {
 
 
     EnviarMensajesChat();
-    //setInterval('MostrarMensajesChat()', 3000);
-    //setInterval('UpdateInstance()', 360000);
-    //setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
-    //setInterval('MostrarCantidadSalasChat()', 3000);
-    //setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
-    //setInterval('MostrarCantidadSalasChatCerradas()', 3000);
-    //setInterval('TablaChatAsignadoAgente()', 30000)
-    //setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
+    setInterval('MostrarMensajesChat()', 360000);
+    setInterval('UpdateInstance()', 360000);
+    setInterval('MostrarCantidadSalasChatAsignadas()', 360000);
+    setInterval('MostrarCantidadSalasChat()', 360000);
+    setInterval('MostrarCantidadSalasChatAbiertas()', 360000);
+    setInterval('MostrarCantidadSalasChatCerradas()', 360000);
+    setInterval('TablaChatAsignadoAgente()', 360000)
+    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 360000);
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
     ValidacionCantidadMaximaCaracteres();
