@@ -11,7 +11,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        header('Location:Inicio');
+        header('Location:?controllerInicio');
     }
 
 
@@ -27,7 +27,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        header('Location:Inicio');
+        header('Location:?controllerInicio');
     }
 
     //Asistente
@@ -42,7 +42,7 @@ if (isset($_SESSION['Master'])) {
                 break;
         }
     } else {
-        header('Location:Inicio');
+        header('Location:?controllerInicio');
     }
 
     //Login
@@ -55,7 +55,7 @@ if (isset($_SESSION['Master'])) {
             if ($_GET['controller'] == 'Login') {
                 controller::$controller();
             } else {
-                header('Location:Login');
+                header('Location:?controller=Login');
             }
             break;
     }
