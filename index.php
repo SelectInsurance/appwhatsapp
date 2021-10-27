@@ -1,4 +1,7 @@
 <?php
+require_once 'vendor\autoload.php';
+use Aws\ElasticBeanstalk\ElasticBeanstalkClient;
+use Aws\Exception\AwsException;
 session_start();
 //Master
 if (isset($_SESSION['Master'])) {
