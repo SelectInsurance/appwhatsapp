@@ -625,6 +625,7 @@ class controller
         echo $resultado['v_conteo'];
     }
 
+    
     //Tabla para mostrar cantidad de chat asignados a cada agente
     public static function TablaChatAsignadoAgente()
     {
