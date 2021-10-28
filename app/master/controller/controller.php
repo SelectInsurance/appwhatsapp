@@ -603,6 +603,11 @@ class controller
 
     }
 
+    //Mostrar tabla Dialogs Cerrados
+    public static function MostrarTablaChatCerrados(){
+        echo $_POST['FiltroTablaCerrados'];
+    }
+
     //Mostrar Sala Chat por Id desde Modal
     public static function ConsultandoSalaDesdeModalTotal()
     {

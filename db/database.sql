@@ -75,6 +75,16 @@ CREATE TABLE MensajeDespedida(
 
 
 
+DROP PROCEDURE IF EXISTS SP_FiltrarSalaCerrados;
+
+DELIMITER $$
+CREATE PROCEDURE SP_FiltrarSalaCerrados(IN v_datos VARCHAR(255))
+BEGIN 
+    SELECT * FROM dialogs WHERE abierto = 0 AND (name LIKE CONCAT(v_datos, '%') OR id LIKE CONCAT(v_datos, '%'));
+END$$
+
+
+
 
 DROP PROCEDURE IF EXISTS SP_FiltrarSalaAbiertos;
 
@@ -84,6 +94,8 @@ BEGIN
 
     SELECT * FROM dialogs WHERE abierto = 1 AND (name LIKE concat(v_datos, '%')  || id LIKE concat(v_datos, '%'));
 END $$
+
+
 
 
 
@@ -100,11 +112,16 @@ END //
 
 
 
+
+
+
 DELIMITER //
 CREATE PROCEDURE SP_MostrarDialogsTotales()
 BEGIN
     SELECT * FROM dialogs;
 END //
+
+
 
 
 
@@ -118,6 +135,8 @@ SET v_asistant = (SELECT creador FROM Agentes WHERE usuario = v_usuario);
 SELECT * FROM MensajeDespedida WHERE usuario = v_asistant ORDER BY id DESC LIMIT 1;
 
 END // 
+
+
 
 
 
@@ -140,6 +159,8 @@ END //
 
 
 
+
+
 DROP PROCEDURE IF EXISTS SP_ConteoChatAbiertosAdmin;
 DELIMITER // 
 CREATE PROCEDURE SP_ConteoChatAbiertosAdmin(in v_usuario VARCHAR(255)) 
@@ -157,6 +178,8 @@ END //
 
 
 
+
+
 DROP PROCEDURE IF EXISTS SP_AlmacenarMensajes;
 
 delimiter // 
@@ -165,6 +188,8 @@ BEGIN
 
 INSERT INTO messages(id, body, fromMe, self, isForwarded, author, time, chatId, messageNumber, type, senderName, quotedMsgBody, quotedMsgId, quotedMsgType, metadata, ack, chatName, sender) VALUES( v_id, v_body, v_fromMe, v_self, v_isForwarded, v_author, v_time, v_chatId, v_messageNumber, v_type, v_senderName, v_quotedMsgBody, v_quotedMsgId, v_quotedMsgType, v_metadata, v_ack, v_chatName, v_sender);
 END // 
+
+
 
 
 
@@ -192,6 +217,8 @@ END //
 
 
 
+
+
 DROP PROCEDURE IF EXISTS SP_ConteoChatAsignados;
 
 delimiter $$ 
@@ -209,6 +236,8 @@ END $$
 
 
 
+
+
 DROP PROCEDURE IF EXISTS SP_MostrarMensajesChat;
 
 delimiter // 
@@ -217,6 +246,8 @@ CREATE PROCEDURE SP_MostrarMensajesChat(in v_id TEXT)
 BEGIN
 SELECT * FROM messages WHERE id like concat('%', v_id, '%') ORDER BY messageNumber DESC;
 END // 
+
+
 
 
 
@@ -242,6 +273,8 @@ END //
 
 
 
+
+
 DROP PROCEDURE IF EXISTS SP_CreateDialogs;
 
 DELIMITER // 
@@ -252,6 +285,10 @@ DECLARE v_id INT;
 SET v_id = (SELECT id FROM Agentes WHERE usuario = v_user);
 SELECT * FROM dialogs WHERE idAgentes = v_id OR Asignador = v_user;
 END // 
+
+
+
+
 
 
 
@@ -271,6 +308,10 @@ END //
 
 
 
+
+
+
+
 DROP Procedure IF EXISTS SP_ReadAccesWebToken;
 
 DELIMITER // 
@@ -283,6 +324,9 @@ SET v_creador = (SELECT creador FROM Agentes WHERE usuario = v_user);
 SELECT * FROM TokenChatApi WHERE user = v_creador ORDER BY idToken DESC Limit 1;
 
 END //
+
+
+
 
 
 

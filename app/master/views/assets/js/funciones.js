@@ -31,6 +31,7 @@ $(document).ready(function () {
     SearchDialogs();
     MostrarModalTablaChatAcumulado();
     setInterval('MostrarModalTablaChatAbierto()', 3000);
+    MostrarModalTablaChatCerrados();
 });
 
 //AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
@@ -177,7 +178,7 @@ var MostrarModalTablaChatAbierto = function () {
         type: "POST",
         url: "MostrarTablaChatAbiertos",
         success: function (Respuesta) {
-            console.log(Respuesta);
+            //console.log(Respuesta);
             var json = JSON.parse(Respuesta);
             if (json !== 'null') {
                 var tbody = '';
@@ -218,6 +219,28 @@ var MostrarModalTablaChatAbierto = function () {
             console.log(status);
             console.log(error);
         }
+    });
+}
+
+//Funcion para mostrar Tabla en conteo Cerrados chat
+var MostrarModalTablaChatCerrados = function () {
+    $('#FiltroTablaCerrados').keyup(function (e) { 
+        var form = $('#frmFiltrarCerradosSala').serialize();
+        $.ajax({
+            type: "POST",
+            url: "MostrarTablaChatCerrados",
+            data: form,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+
+
     });
 }
 //
