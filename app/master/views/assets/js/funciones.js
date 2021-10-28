@@ -32,6 +32,7 @@ $(document).ready(function () {
     MostrarModalTablaChatAcumulado();
     setInterval('MostrarModalTablaChatAbierto()', 3000);
     MostrarModalTablaChatCerrados();
+    MostrarModalTablaChatAsignados();
 });
 
 //AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
@@ -314,6 +315,108 @@ var MostrarModalTablaChatCerrados = function () {
 
                     });
                 $('#TablaChatCerradosAcumulado').html(tbody);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+//Funcion para mostrar Tabla en conteo Asignados chat
+var MostrarModalTablaChatAsignados = function () {
+    $('#FiltroTablaAsignados').keyup(function (e) {
+        var form = $('#frmFiltrarAsignadosSala').serialize();
+        $.ajax({
+            type: "POST",
+            url: "MostrarTablaChatAsignados",
+            data: form,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                if (json !== 'null') {
+                    var tbody = '';
+                    json.forEach(
+                        consulta => {
+                            if (consulta.Asignador == null) {
+                                var SinAsignar = 'Sin Asignar';
+                            } else {
+                                var SinAsignar = consulta.Asignador;
+                            }
+
+                            if (consulta.idAgentes == null) {
+                                var SinAgentes = 'Sin Agentes';
+                            } else {
+                                var SinAgentes = consulta.idAgentes;
+                            }
+                            tbody += `
+                                <tr>
+                                    <td>${consulta.id}</td>
+                                    <td>${consulta.name}</td>
+                                    <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${SinAsignar}</td>
+                                    <td>${SinAgentes}</td>
+                                    <td>
+                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                    </form>
+                                    </td>
+                                </tr>
+                                `;
+
+                        });
+                    $('#TablaChatAsignadosAcumulado').html(tbody);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+
+
+    });
+    $.ajax({
+        type: "POST",
+        url: "MostrarTablaChatAsignados",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            if (json !== 'null') {
+                var tbody = '';
+                json.forEach(
+                    consulta => {
+                        if (consulta.Asignador == null) {
+                            var SinAsignar = 'Sin Asignar';
+                        } else {
+                            var SinAsignar = consulta.Asignador;
+                        }
+
+                        if (consulta.idAgentes == null) {
+                            var SinAgentes = 'Sin Agentes';
+                        } else {
+                            var SinAgentes = consulta.idAgentes;
+                        }
+                        tbody += `
+                            <tr>
+                                <td>${consulta.id}</td>
+                                <td>${consulta.name}</td>
+                                <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${SinAsignar}</td>
+                                <td>${SinAgentes}</td>
+                                <td>
+                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                </form>
+                                </td>
+                            </tr>
+                            `;
+
+                    });
+                $('#TablaChatAsignadosAcumulado').html(tbody);
             }
         },
         error: function (xhr, status, error) {

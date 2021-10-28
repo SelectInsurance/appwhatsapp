@@ -106,6 +106,12 @@ class  query
         return "CALL SP_FiltrarSalaCerrados('$datos')";
     }
 
+    //Buscando dialogs filtrando por like chat Asignados
+    public static function ReadDialogsFiltrandoAsignados($datos)
+    {
+        return "CALL SP_FiltrarSalaAsignados('$datos')";
+    }
+
     //Crear AccesWebToken
     public static function CreateAwebT($instance, $token, $user)
     {

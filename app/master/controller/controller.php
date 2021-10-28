@@ -597,7 +597,7 @@ class controller
             $Array[$i]['last_time'] = $row['last_time'];
             $Array[$i]['abierto'] = $row['abierto'];
             $Array[$i]['Asignador'] = $row['Asignador'];
-            $Array[$i]['idAgente'] = $row['idAgente'];
+            $Array[$i]['idAgentes'] = $row['idAgentes'];
             $i++;
         }
         print json_encode($Array, JSON_PRETTY_PRINT);
@@ -622,7 +622,30 @@ class controller
             $Array[$i]['last_time'] = $row['last_time'];
             $Array[$i]['abierto'] = $row['abierto'];
             $Array[$i]['Asignador'] = $row['Asignador'];
-            $Array[$i]['idAgente'] = $row['idAgente'];
+            $Array[$i]['idAgentes'] = $row['idAgentes'];
+            $i++;
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+
+    //Mostrar tabla Dialogs Asignados
+    public static function MostrarTablaChatAsignados()
+    {
+        $datos = '';
+        if (isset($_POST['FiltroTablaAsignados'])) {
+            $datos = $_POST['FiltroTablaAsignados'];
+        }
+        $consulta = crud::Read(query::ReadDialogsFiltrandoAsignados($datos));
+        $i = 0;
+        $Array = array();
+        while ($row = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_time'] = $row['last_time'];
+            $Array[$i]['abierto'] = $row['abierto'];
+            $Array[$i]['Asignador'] = $row['Asignador'];
+            $Array[$i]['idAgentes'] = $row['idAgentes'];
             $i++;
         }
         print json_encode($Array, JSON_PRETTY_PRINT);

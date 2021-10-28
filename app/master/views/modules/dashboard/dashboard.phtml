@@ -265,12 +265,33 @@
                 <h5 class="modal-title" id="InfoModalAsignados">Total de Salas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Asignados
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-body table-responsive CajaChat">
+                <table class="table table-hover table-light table-striped text-center border shadow">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th colspan="3"><label for="FiltroTablaAsignados">Ingrese Criterios de Busqueda</label></th>
+                            <th>
+                                <form id="frmFiltrarAsignadosSala"><input type="text" name="FiltroTablaAsignados" class="form-control" id="FiltroTablaAsignados" placeholder="Ingrese Id"></form>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Image</th>
+                            <th>Asignador</th>
+                            <th>Asignado a</th>
+                            <th>Abrir Sala</th>
+                        </tr>
+                    </thead>
+                    <tbody id="TablaChatAsignadosAcumulado">
+
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
