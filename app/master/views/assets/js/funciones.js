@@ -31,30 +31,39 @@ $(document).ready(function () {
 //Aqui estan todas las funciones con set interval
 var SettIntervals = function () {
 
+    setInterval('MostrarMensajesChat()', 3000);
     var interval = setInterval('MostrarMensajesChat()', 3000);
     clearInterval(interval);
 
+    setInterval('UpdateInstance()', 360000);
     var interval = setInterval('UpdateInstance()', 360000);
     clearInterval(interval);
 
+    setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
     var interval = setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
     clearInterval(interval);
 
+    setInterval('MostrarCantidadSalasChat()', 3000);
     var interval = setInterval('MostrarCantidadSalasChat()', 3000);
     clearInterval(interval);
 
+    setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
     var interval = setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
     clearInterval(interval);
 
+    setInterval('MostrarCantidadSalasChatCerradas()', 3000);
     var interval = setInterval('MostrarCantidadSalasChatCerradas()', 3000);
     clearInterval(interval);
 
+    setInterval('TablaChatAsignadoAgente()', 30000);
     var interval = setInterval('TablaChatAsignadoAgente()', 30000);
     clearInterval(interval);
 
+    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
     var interval = setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
     clearInterval(interval);
 
+    setInterval('MostrarModalTablaChatAbierto()', 3000);
     var interval = setInterval('MostrarModalTablaChatAbierto()', 3000);
     clearInterval(interval);
 }
