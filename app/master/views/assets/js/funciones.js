@@ -7,17 +7,7 @@ $(document).ready(function () {
 
     EnviarMensajesChat();
 
-    clearInterval(setInterval('MostrarMensajesChat()', 3000));
-
-
-
-    clearInterval(setInterval('UpdateInstance()', 360000));
-    clearInterval(setInterval('MostrarCantidadSalasChatAsignadas()', 3000));
-    clearInterval(setInterval('MostrarCantidadSalasChat()', 3000));
-    clearInterval(setInterval('MostrarCantidadSalasChatAbiertas()', 3000));
-    clearInterval(setInterval('MostrarCantidadSalasChatCerradas()', 3000));
-    clearInterval(setInterval('TablaChatAsignadoAgente()', 30000));
-    clearInterval(setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500));
+    SettIntervals();
     MostrarMensajesDespedida();
     DeleteMensajeDespedida();
     ValidacionCantidadMaximaCaracteres();
@@ -34,10 +24,41 @@ $(document).ready(function () {
     Tooltip();
     SearchDialogs();
     MostrarModalTablaChatAcumulado();
-    setInterval('MostrarModalTablaChatAbierto()', 3000);
     MostrarModalTablaChatCerrados();
     MostrarModalTablaChatAsignados();
 });
+
+//Aqui estan todas las funciones con set interval
+var SettIntervals = function () {
+
+    var interval = setInterval('MostrarMensajesChat()', 3000);
+    clearInterval(interval);
+
+    var interval = setInterval('UpdateInstance()', 360000);
+    clearInterval(interval);
+
+    var interval = setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
+    clearInterval(interval);
+
+    var interval = setInterval('MostrarCantidadSalasChat()', 3000);
+    clearInterval(interval);
+
+    var interval = setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
+    clearInterval(interval);
+
+    var interval = setInterval('MostrarCantidadSalasChatCerradas()', 3000);
+    clearInterval(interval);
+
+    var interval = setInterval('TablaChatAsignadoAgente()', 30000);
+    clearInterval(interval);
+
+    var interval = setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
+    clearInterval(interval);
+
+    var interval = setInterval('MostrarModalTablaChatAbierto()', 3000);
+    clearInterval(interval);
+}
+//
 
 //AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
 //Funcion para Mostrar Tabla en conteo total chat
