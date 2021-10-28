@@ -28,7 +28,7 @@ $(document).ready(function () {
     MostrarModalTablaChatAsignados();
 });
 
-//Aqui estan todas las funciones con set interval
+//AQUI ENCONTRARAS TODOS LOS SETINTERVAL
 var SettIntervals = function () {
 
     setInterval('MostrarMensajesChat()', 3000);
