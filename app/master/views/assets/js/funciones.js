@@ -154,7 +154,7 @@ var MostrarModalTablaChatAbierto = function () {
                                     <td>${SinAsignar}</td>
                                     <td>${SinAgentes}</td>
                                     <td>
-                                    <form action="ConsultandoSalaDesdeModalAbierto" method="post">
+                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
                                     <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                     </form>
                                     </td>
@@ -202,7 +202,7 @@ var MostrarModalTablaChatAbierto = function () {
                                 <td>${SinAsignar}</td>
                                 <td>${SinAgentes}</td>
                                 <td>
-                                <form action="ConsultandoSalaDesdeModalAbierto" method="post">
+                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
                                 <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                 </form>
                                 </td>
@@ -220,7 +220,6 @@ var MostrarModalTablaChatAbierto = function () {
         }
     });
 }
-
 //
 
 //Funcion para personalizar el tooltip
