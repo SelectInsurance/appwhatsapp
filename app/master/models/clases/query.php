@@ -100,6 +100,12 @@ class  query
         return "CALL SP_FiltrarSalaAbiertos('$datos')";
     }
 
+    //Buscando dialogs filtrando por like chat Cerrados
+    public static function ReadDialogsFiltrandoCerrados($datos)
+    {
+        return "CALL SP_FiltrarSalaCerrados('$datos')";
+    }
+
     //Crear AccesWebToken
     public static function CreateAwebT($instance, $token, $user)
     {

@@ -230,9 +230,9 @@ class controller
             //Condicion para Agregar nuevo chat o no
             if (!empty($_POST['NumeroCliente'])) {
                 $user = $_SESSION['Master'];
-                $id = $_POST['CodigoPais'].$_POST['NumeroCliente'].'@c.us';
-                $SalaChat = $_POST['CodigoPais'].$_POST['NumeroCliente'];
-            }else {
+                $id = $_POST['CodigoPais'] . $_POST['NumeroCliente'] . '@c.us';
+                $SalaChat = $_POST['CodigoPais'] . $_POST['NumeroCliente'];
+            } else {
                 $user = $_SESSION['Master'];
                 $id = $_POST['btnAbrirChat'];
                 $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
@@ -497,7 +497,7 @@ class controller
         higher();
         Nav();
 
-        
+
         require_once 'app/master/views/modules/TransferenciaChat/TransferenciaChat.phtml';
         lower();
     }
@@ -517,7 +517,7 @@ class controller
     {
         if (isset($_POST['SeleccionSalaChat'])) {
             $idAgente = $_POST['IdAgenteTransferir'];
-            $id = $_POST['SeleccionSalaChat'].'@c.us';
+            $id = $_POST['SeleccionSalaChat'] . '@c.us';
             crud::Update(query::UpdateDialogs($idAgente, $id));
             echo 'Transferencia Exitosa';
         } else {
@@ -579,7 +579,8 @@ class controller
     }
 
     //Mostrar Tabla Dialogs Abiertos
-    public static function MostrarTablaChatAbiertos(){
+    public static function MostrarTablaChatAbiertos()
+    {
         //echo $_POST['FiltroTablaAbiertos'];
         $datos = '';
         if (isset($_POST['FiltroTablaAbiertos'])) {
@@ -600,12 +601,31 @@ class controller
             $i++;
         }
         print json_encode($Array, JSON_PRETTY_PRINT);
-
     }
 
     //Mostrar tabla Dialogs Cerrados
-    public static function MostrarTablaChatCerrados(){
-        echo $_POST['FiltroTablaCerrados'];
+    public static function MostrarTablaChatCerrados()
+    {
+
+        $datos = '';
+        if (isset($_POST['FiltroTablaCerrados'])) {
+            $datos = $_POST['FiltroTablaCerrados'];
+        }
+
+        $consulta = crud::Read(query::ReadDialogsFiltrandoCerrados($datos));
+        $i = 0;
+        $Array = array();
+        while ($row = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_time'] = $row['last_time'];
+            $Array[$i]['abierto'] = $row['abierto'];
+            $Array[$i]['Asignador'] = $row['Asignador'];
+            $Array[$i]['idAgente'] = $row['idAgente'];
+            $i++;
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
     }
 
     //Mostrar Sala Chat por Id desde Modal
@@ -658,7 +678,7 @@ class controller
         echo $resultado['v_conteo'];
     }
 
-    
+
     //Tabla para mostrar cantidad de chat asignados a cada agente
     public static function TablaChatAsignadoAgente()
     {
