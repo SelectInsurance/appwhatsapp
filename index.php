@@ -1,5 +1,8 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", "On");
+
 //Master
 if (isset($_SESSION['Master'])) {
     require_once 'app/master/controller/controller.php';
@@ -47,7 +50,10 @@ if (isset($_SESSION['Master'])) {
 
     //Login
 } else {
-    require_once 'app\Login\controller\controller.php';
+    echo "ss";
+
+    require_once 'app/Login/controller/controller.php';
+    //exit();
     $controller = $_GET['controller'];
     switch ($_GET['controller']) {
         case $controller:
@@ -60,3 +66,10 @@ if (isset($_SESSION['Master'])) {
             break;
     }
 }
+
+
+
+
+
+
+

@@ -19,7 +19,9 @@ class mysql
     {
         $mysql = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
 
-        if ($mysql->mysqli_connect_errno) {
+        error_reporting(0);
+        
+        if (isset($mysql->mysqli_connect_errno)) {
             echo 'Error de conexion';
             
         } elseif ($mysql->set_charset('utf8')) {

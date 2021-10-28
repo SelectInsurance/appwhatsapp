@@ -38,6 +38,7 @@ CREATE TABLE dialogs(
   image TEXT NOT NULL,
   last_time VARCHAR(25) NOT NULL,
   abierto BOOLEAN DEFAULT FALSE,
+  seguimiento BOOLEAN DEFAULT FALSE,
   Asignador VARCHAR(255) DEFAULT NULL,
   idAgentes INT(50) NULL,
   INDEX(idAgentes),
