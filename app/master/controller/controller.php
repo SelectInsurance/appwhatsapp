@@ -547,7 +547,10 @@ class controller
     //Mostrar Tabla Dialogs totales
     public static function MostrarTablaChatAcumulado()
     {
-        $datos = $_POST['FiltroTablaTotal'];
+        $datos = '';
+        if (isset($_POST['FiltroTablaTotal'])) {
+            $datos = $_POST['FiltroTablaTotal'];
+        }
         //echo $datos;
         if (!empty($datos)) {
             $consulta = crud::Read(query::ReadDialogsFiltrando($datos));
