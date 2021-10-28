@@ -578,6 +578,31 @@ class controller
         print json_encode($Array, JSON_PRETTY_PRINT);
     }
 
+    //Mostrar Tabla Dialogs Abiertos
+    public static function MostrarTablaChatAbiertos(){
+        //echo $_POST['FiltroTablaAbiertos'];
+        $datos = '';
+        if (isset($_POST['FiltroTablaAbiertos'])) {
+            $datos = $_POST['FiltroTablaAbiertos'];
+        }
+        $consulta = crud::Read(query::ReadDialogsFiltrandoAbiertos($datos));
+        $i = 0;
+
+        $Array = array();
+        while ($row = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_time'] = $row['last_time'];
+            $Array[$i]['abierto'] = $row['abierto'];
+            $Array[$i]['Asignador'] = $row['Asignador'];
+            $Array[$i]['idAgente'] = $row['idAgente'];
+            $i++;
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+
+    }
+
     //Mostrar Sala Chat por Id desde Modal
     public static function ConsultandoSalaDesdeModalTotal()
     {

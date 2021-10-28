@@ -88,10 +88,16 @@ class  query
         return "SELECT * FROM dialogs";
     }
 
-    //Buscando dialogs filtrando por like
+    //Buscando dialogs filtrando por like chat Total
     public static function ReadDialogsFiltrando($datos)
     {
         return "SELECT * FROM dialogs WHERE name LIKE '$datos%' OR id LIKE '$datos%'";
+    }
+
+    //Buscando dialogs filtrando por like chat Abiertos
+    public static function ReadDialogsFiltrandoAbiertos($datos)
+    {
+        return "CALL SP_FiltrarSalaAbiertos('$datos')";
     }
 
     //Crear AccesWebToken

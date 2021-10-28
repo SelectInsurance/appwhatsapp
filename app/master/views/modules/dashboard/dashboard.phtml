@@ -158,7 +158,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -176,11 +176,35 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Abiertos
+                <table class="table table-hover text-center border shadow">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th colspan="3"><label for="FiltroTablaAbiertos">Ingrese Criterios de Busqueda</label></th>
+                            <th>
+                                <form id="frmFiltrarAbiertosSala"><input type="text" name="FiltroTablaAbiertos" class="form-control" id="FiltroTablaAbiertos" placeholder="Ingrese Id"></form>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Image</th>
+                            <th>Asignador</th>
+                            <th>Asignado a</th>
+                            <th>Abrir Sala</th>
+                        </tr>
+                    </thead>
+                    <tbody id="TablaChatAbiertosAcumulado">
+
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

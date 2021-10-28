@@ -30,6 +30,7 @@ $(document).ready(function () {
     Tooltip();
     SearchDialogs();
     MostrarModalTablaChatAcumulado();
+    setInterval('MostrarModalTablaChatAbierto()', 3000);
 });
 
 //AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
@@ -118,7 +119,107 @@ var MostrarModalTablaChatAcumulado = function () {
     });
 }
 
+//Funcion para mostrar Tabla en conteo Abierto chat
+var MostrarModalTablaChatAbierto = function () {
+    $('#FiltroTablaAbiertos').keyup(function (e) {
+        var frm = $('#frmFiltrarAbiertosSala').serialize();
 
+        $.ajax({
+            type: "POST",
+            url: "MostrarTablaChatAbiertos",
+            data: frm,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                if (json !== 'null') {
+                    var tbody = '';
+                    json.forEach(
+                        consulta => {
+                            if (consulta.Asignador == null) {
+                                var SinAsignar = 'Sin Asignar';
+                            } else {
+                                var SinAsignar = consulta.Asignador;
+                            }
+
+                            if (consulta.idAgentes == null) {
+                                var SinAgentes = 'Sin Agentes';
+                            } else {
+                                var SinAgentes = consulta.idAgentes;
+                            }
+                            tbody += `
+                                <tr>
+                                    <td>${consulta.id}</td>
+                                    <td>${consulta.name}</td>
+                                    <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${SinAsignar}</td>
+                                    <td>${SinAgentes}</td>
+                                    <td>
+                                    <form action="ConsultandoSalaDesdeModalAbierto" method="post">
+                                    <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                    </form>
+                                    </td>
+                                </tr>
+                                `;
+                        }
+                    )
+                    $('#TablaChatAbiertosAcumulado').html(tbody);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "MostrarTablaChatAbiertos",
+        success: function (Respuesta) {
+            console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            if (json !== 'null') {
+                var tbody = '';
+                json.forEach(
+                    consulta => {
+                        if (consulta.Asignador == null) {
+                            var SinAsignar = 'Sin Asignar';
+                        } else {
+                            var SinAsignar = consulta.Asignador;
+                        }
+
+                        if (consulta.idAgentes == null) {
+                            var SinAgentes = 'Sin Agentes';
+                        } else {
+                            var SinAgentes = consulta.idAgentes;
+                        }
+                        tbody += `
+                            <tr>
+                                <td>${consulta.id}</td>
+                                <td>${consulta.name}</td>
+                                <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${SinAsignar}</td>
+                                <td>${SinAgentes}</td>
+                                <td>
+                                <form action="ConsultandoSalaDesdeModalAbierto" method="post">
+                                <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                </form>
+                                </td>
+                            </tr>
+                            `;
+                    }
+                )
+                $('#TablaChatAbiertosAcumulado').html(tbody);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
 
 //
 
