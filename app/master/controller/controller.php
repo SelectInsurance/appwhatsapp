@@ -283,13 +283,11 @@ class controller
                     $chatId = trim($data['messages'][$i]['chatId']);
                 if ($author == $chatId) {
                     $sender[$i] = $author;
-                    echo 'No Dentro Aqui </br>';
                 } else {
-                    echo 'Dentro aqui </br>';
                     $sender[$i] = $_SESSION['Master'];
                 }
                 
-                crud::Create(query::CreateAlmacenarMensajes(
+                $resultado[$i] =crud::Create(query::CreateAlmacenarMensajes(
                     $data['messages'][$i]['id'],
                     $data['messages'][$i]['body'],
                     $data['messages'][$i]['fromMe'],
@@ -309,6 +307,12 @@ class controller
                     $data['messages'][$i]['chatName'],
                     $sender[$i]
                 ));
+
+                if ($resultado[$i] == true) {
+                    echo 'Mensaje Guardado Correctamente </br>';
+                }else {
+                    echo 'Error al guardar el mensaje </br>';
+                }
                 $i++;
             }
 
