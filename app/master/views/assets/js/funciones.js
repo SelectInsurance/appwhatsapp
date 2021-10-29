@@ -847,7 +847,7 @@ var MostrarCantidadSalasChatAsignadas = function () {
         type: "POST",
         url: "MostrandoChatAsignados",
         success: function (Respuesta) {
-            //console.log(Respuesta);
+            console.log(Respuesta);
             $('#CardSalasAsignadas').html(Respuesta);
         },
         error: function (xhr, status, error) {
