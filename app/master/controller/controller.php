@@ -848,8 +848,6 @@ class controller
             $valor = $_POST['SearchDialogs'];
             $id = $_POST['idAgente'];
         }
-
-
         if (!empty($valor)) {
             $resultado = crud::Read(query::ReadFiltrarSala($valor, $id));
             $i = 0;
@@ -867,6 +865,7 @@ class controller
         } elseif (empty($valor)) {
             $resultado = crud::Read(query::ReadDialogsAgente($id));
             $i = 0;
+            $Array = array();
             while ($row = mysqli_fetch_assoc($resultado)) {
                 $Array[$i]['id']        =   $row['id'];
                 $Array[$i]['name']      =   $row['name'];
