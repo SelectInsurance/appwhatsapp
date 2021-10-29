@@ -224,10 +224,6 @@ class controller
     //Abrir Sala de chat individual
     public static function AbrirSalaChat()
     {
-        session_start();
-        error_reporting(E_ALL);
-        ini_set("display_errors", "On");
-
         //Condicion para obligar a tener si o si una sala de chat
         if (!empty($_POST['btnAbrirChat']) || isset($_POST['btnAddSalaChat'])) {
 
