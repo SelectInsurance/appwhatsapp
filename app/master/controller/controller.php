@@ -224,6 +224,10 @@ class controller
     //Abrir Sala de chat individual
     public static function AbrirSalaChat()
     {
+        session_start();
+        error_reporting(E_ALL);
+        ini_set("display_errors", "On");
+
         //Condicion para obligar a tener si o si una sala de chat
         if (!empty($_POST['btnAbrirChat']) || isset($_POST['btnAddSalaChat'])) {
 
@@ -237,10 +241,6 @@ class controller
                 $id = $_POST['btnAbrirChat'];
                 $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
             }
-
-
-
-
 
             //Imagen Guardada
             $resultado = crud::Read(query::ReadImageDialogs($id));
@@ -383,7 +383,7 @@ class controller
             $Array[$i]['name'] = $row['name'];
             $Array[$i]['image'] = $row['image'];
             $Array[$i]['last_name'] = '';
-            
+
             if (isset($row['last_name'])) {
                 $Array[$i]['last_name'] = $row['last_name'];
             }
@@ -697,7 +697,7 @@ class controller
         if (!empty($consulta)) {
             $row = mysqli_fetch_assoc($consulta);
             echo $row['count(idAgentes)'];
-        }else {
+        } else {
             echo '0';
         }
     }
