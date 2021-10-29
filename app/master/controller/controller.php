@@ -264,7 +264,7 @@ class controller
     //Mostrar Mensajes de chat individual
     public static function MostrarMensajesChat()
     {
-        //if (!empty($_POST['chatId'])) {
+        if (!empty($_POST['chatId'])) {
             $user = $_SESSION['Master'];
             //$id =  $_POST['chatId'];
             $id =  '573166857000@c.us';
@@ -307,13 +307,6 @@ class controller
                     $data['messages'][$i]['chatName'],
                     $sender[$i]
                 ));
-                var_dump($resultado[$i]);
-                if ($resultado[$i] == true) {
-                    echo 'Mensaje Guardado Correctamente </br>';
-                }else {
-                    echo 'Error al guardar el mensaje </br>';
-                }
-
                 $i++;
             }
 
@@ -341,9 +334,8 @@ class controller
                 $Array[$i]['sender']          =   str_replace('@c.us', '', $row['sender']);
                 $i++;
             }
-
             print json_encode($Array, JSON_PRETTY_PRINT);
-        //}
+        }
     }
 
     //Mostrar si el cliente esta conectado o no
