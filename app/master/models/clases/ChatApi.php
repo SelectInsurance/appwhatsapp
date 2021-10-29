@@ -91,8 +91,7 @@ class ChatApi
         $instanceId = $this->instance;
         $url = $instanceId . 'messages?token=' . $token;
         $result = file_get_contents($url); // Send a request
-        return $result;
-        //$data = json_decode($result, 1); // Parse JSON
-        //return $data;
+        $data = json_decode($result, 1); // Parse JSON
+        return $data;
     }
 }
