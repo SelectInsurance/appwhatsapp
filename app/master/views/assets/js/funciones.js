@@ -23,9 +23,9 @@ $(document).ready(function () {
     CreateTransferirChat();
     Tooltip();
     SearchDialogs();
-    MostrarModalTablaChatAcumulado();
+/*     MostrarModalTablaChatAcumulado();
     MostrarModalTablaChatCerrados();
-    MostrarModalTablaChatAsignados();
+    MostrarModalTablaChatAsignados(); */
 });
 
 //AQUI ENCONTRARAS TODOS LOS SETINTERVAL
