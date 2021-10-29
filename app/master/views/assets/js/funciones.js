@@ -135,6 +135,14 @@ var MostrarModalTablaChatAcumulado = function () {
                     consulta => {
                         if (consulta.Asignador == null) {
                             var SinAsignar = 'Sin Asignar';
+                        } else {
+                            var SinAsignar = consulta.Asignador;
+                        }
+
+                        if (consulta.idAgentes == null) {
+                            var idAgentes = 'Sin Asignar';
+                        } else {
+                            var idAgentes = consulta.idAgentes;
                         }
                         tbody += `
                             <tr>
