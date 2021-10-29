@@ -8,10 +8,14 @@ class mysql {
 
     public function __construct()
     {
-        $this->host = 'localhost';
+        $this->host = 'bjltfumjhs9ag3a7kytq-mysql.services.clever-cloud.com';
+        $this->user = 'uur3yy29dlbzjbte';
+        $this->pass = 'JD50xv9dhQ7NP5Yl2WtV';
+        $this->db = 'bjltfumjhs9ag3a7kytq'; 
+/*         $this->host = 'localhost';
         $this->user = 'root';
         $this->pass = '';
-        $this->db = 'whatsapp';
+        $this->db = 'whatsapp'; */
     }
 
     public function Conexion()
