@@ -277,6 +277,7 @@ class controller
             //la cantidad de indices que tiene el array
             $contador = count($data['messages']);
             $i = 0;
+            $sender = array();
             while ($i < $contador) {
                     $author = $data['messages'][$i]['author'];
                     $chatId = $data['messages'][$i]['chatId'];
