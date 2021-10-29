@@ -266,8 +266,8 @@ class controller
     {
         if (!empty($_POST['chatId'])) {
             $user = $_SESSION['Master'];
-            //$id =  $_POST['chatId'];
-            $id =  '573166857000@c.us';
+            $id =  $_POST['chatId'];
+            //$id =  '573166857000@c.us';
             $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
             $api = new ChatApi($url['Instance'], $url['Token']);
             $data = $api->messages();
