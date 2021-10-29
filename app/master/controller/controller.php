@@ -421,9 +421,8 @@ class controller
     public static function MostrandoMensajeDespedida()
     {
         $consulta = crud::Read(query::ReadMensajeDespedida());
-
-        if (!empty($consulta)) {
             $i = 0;
+            $Array = array();
             while ($resultados = mysqli_fetch_assoc($consulta)) {
                 $Array[$i]['id'] = $resultados['id'];
                 $Array[$i]['cuerpo'] = $resultados['cuerpo'];
@@ -433,7 +432,6 @@ class controller
             }
     
             print json_encode($Array, JSON_PRETTY_PRINT);
-        }
     }
 
     //Eliminar Mensaje de Despedida
