@@ -399,7 +399,7 @@ class controller
         higher();
         Nav();
         $usuario = $_SESSION['Master'];
-        require_once 'app\master\views\modules\mensajefinal\mensajedespedida.phtml';
+        require_once 'app/master/views/modules/mensajefinal/mensajedespedida.phtml';
 
         lower();
     }
