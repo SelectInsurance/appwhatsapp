@@ -545,6 +545,7 @@ class controller
         $consulta = '';
         $consulta = crud::Read(query::ReadChatAbiertos());
         $i = 0;
+        $Array = array();
         while ($row = mysqli_fetch_array($consulta)) {
             $Array[$i]['abierto'] = $row['abierto'];
             $i++;
