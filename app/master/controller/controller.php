@@ -422,16 +422,18 @@ class controller
     {
         $consulta = crud::Read(query::ReadMensajeDespedida());
 
-        $i = 0;
-        while ($resultados = mysqli_fetch_assoc($consulta)) {
-            $Array[$i]['id'] = $resultados['id'];
-            $Array[$i]['cuerpo'] = $resultados['cuerpo'];
-            $Array[$i]['usuario'] = $resultados['usuario'];
-            $Array[$i]['fecha'] = $resultados['fecha'];
-            $i++;
+        if (!empty($consulta)) {
+            $i = 0;
+            while ($resultados = mysqli_fetch_assoc($consulta)) {
+                $Array[$i]['id'] = $resultados['id'];
+                $Array[$i]['cuerpo'] = $resultados['cuerpo'];
+                $Array[$i]['usuario'] = $resultados['usuario'];
+                $Array[$i]['fecha'] = $resultados['fecha'];
+                $i++;
+            }
+    
+            print json_encode($Array, JSON_PRETTY_PRINT);
         }
-
-        print json_encode($Array, JSON_PRETTY_PRINT);
     }
 
     //Eliminar Mensaje de Despedida

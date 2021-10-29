@@ -1142,8 +1142,8 @@ var MostrarMensajesDespedida = function () {
         type: "GET",
         url: "MostrandoMensajeDespedida",
         success: function (Respuesta) {
-            if (Respuesta != null) {
             var json = JSON.parse(Respuesta);
+            if (json != null) {
                 var tabla = '';
                 json.forEach(
                     Datos => {
