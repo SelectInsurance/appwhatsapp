@@ -684,7 +684,7 @@ class controller
 
             higher();
             Nav();
-            require_once 'app\master\views\modules\chat\chat.phtml';
+            require_once 'app/master/views/modules/chat/chat.phtml';
             lower();
         } else {
             header('Location:Inicio');
