@@ -281,7 +281,7 @@ class controller
                     $author = $data['messages'][$i]['author'];
                     $chatId = $data['messages'][$i]['chatId'];
                     echo 'si author: '. $author . ' es == a '.$chatId .' deberia entrar en la primera condcion </br>';
-                    echo 'si author: '. $author . ' es !=a '.$chatId .' deberia entrar en la segunda condcion </br>';
+                    echo 'si author: '. $author . ' es != a '.$chatId .' deberia entrar en la segunda condcion </br>';
                     echo $chatId . '<br>';
                 if ($author === $chatId) {
                     $sender[$i] = $author;
