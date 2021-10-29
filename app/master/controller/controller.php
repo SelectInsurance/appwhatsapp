@@ -278,8 +278,12 @@ class controller
             $contador = count($data['messages']);
             $i = 0;
             while ($i < $contador) {
-                if ($data['messages'][$i]['author'] == $data['messages'][$i]['chatId']) {
-                    $sender[$i] = $data['messages'][$i]['chatId'];
+                    $author = $data['messages'][$i]['author'];
+                    $chatId = $data['messages'][$i]['chatId'];
+                    echo $author . '<br>';
+                    echo $chatId . '<br>';
+                if ($author === $chatId) {
+                    $sender[$i] = $author;
                 } else {
                     $sender[$i] = $_SESSION['Master'];
                 }
