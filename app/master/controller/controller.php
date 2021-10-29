@@ -695,12 +695,8 @@ class controller
     public static function MostrandoChatAsignados()
     {
         $consulta = crud::Read(query::ReadChatAsignados());
-        if (!empty($consulta)) {
             $row = mysqli_fetch_assoc($consulta);
             echo $row['count(idAgentes)'];
-        } else {
-            echo '0';
-        }
     }
 
     //Mostrando Cantidad Chat Cerrados
