@@ -217,7 +217,7 @@ class controller
     {
         higher();
         Nav();
-        require_once 'app\master\views\modules\addChat\addChat.phtml';
+        require_once 'app/master/views/modules/addChat/addChat.phtml';
         lower();
     }
 
