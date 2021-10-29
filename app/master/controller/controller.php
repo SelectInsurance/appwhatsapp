@@ -283,7 +283,9 @@ class controller
                     $chatId = trim($data['messages'][$i]['chatId']);
                 if ($author == $chatId) {
                     $sender[$i] = $author;
+                    echo 'No Dentro Aqui';
                 } else {
+                    echo 'Dentro aqui';
                     $sender[$i] = $_SESSION['Master'];
                 }
                 
@@ -307,8 +309,6 @@ class controller
                     $data['messages'][$i]['chatName'],
                     $sender[$i]
                 ));
-
-                echo $sender[$i]. '</br>';
                 $i++;
             }
 
