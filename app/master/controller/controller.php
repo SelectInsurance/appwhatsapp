@@ -542,6 +542,7 @@ class controller
     //Mostrando Cantidad chat abiertos
     public static function MostrandoChatAbiertos()
     {
+        $consulta = '';
         $consulta = crud::Read(query::ReadChatAbiertos());
         $i = 0;
         while ($row = mysqli_fetch_array($consulta)) {
