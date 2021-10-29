@@ -23,9 +23,6 @@ $(document).ready(function () {
     CreateTransferirChat();
     Tooltip();
     SearchDialogs();
-/*     MostrarModalTablaChatAcumulado();
-    MostrarModalTablaChatCerrados();
-    MostrarModalTablaChatAsignados(); */
 });
 
 //AQUI ENCONTRARAS TODOS LOS SETINTERVAL
@@ -65,6 +62,20 @@ var SettIntervals = function () {
 
     setInterval('MostrarModalTablaChatAbierto()', 3000);
     var interval = setInterval('MostrarModalTablaChatAbierto()', 3000);
+    clearInterval(interval);
+
+
+
+    setInterval('MostrarModalTablaChatAcumulado()', 3000);
+    var interval = setInterval('MostrarModalTablaChatAcumulado()', 3000);
+    clearInterval(interval);
+
+    setInterval('MostrarModalTablaChatCerrados()', 3000);
+    var interval = setInterval('MostrarModalTablaChatCerrados()', 3000);
+    clearInterval(interval);
+
+    setInterval('MostrarModalTablaChatAsignado()', 3000);
+    var interval = setInterval('MostrarModalTablaChatAsignado()', 3000);
     clearInterval(interval);
 }
 //
