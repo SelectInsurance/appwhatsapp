@@ -279,8 +279,8 @@ class controller
             $i = 0;
             $sender = array();
             while ($i < $contador) {
-                    $author = $data['messages'][$i]['author'];
-                    $chatId = $data['messages'][$i]['chatId'];
+                    $author = trim($data['messages'][$i]['author']);
+                    $chatId = trim($data['messages'][$i]['chatId']);
                 if ($author === $chatId) {
                     $sender[$i] = $author;
                 } else {
