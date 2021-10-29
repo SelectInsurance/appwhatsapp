@@ -3,8 +3,8 @@ require_once 'app/Login/models/app_autoload.php';
     class controller  
     {
         public static function Login(){
-            require_once 'app\Login\views\assets\header.html';
-            require_once 'app\Login\views\modules\login.phtml';
+            require_once 'app/Login/views/assets/header.html';
+            require_once 'app/Login/views/modules/login.phtml';
 
             if (isset($_POST['btnIniciarSession'])) {
 
@@ -28,6 +28,6 @@ require_once 'app/Login/models/app_autoload.php';
                     echo '<center class="text-danger"><b>Usuario o Contraseña invalido</b></center>';
                 }
             }
-            require_once 'app\Login\views\assets\footer.html';
+            require_once 'app/Login/views/assets/footer.html';
         }
     }
