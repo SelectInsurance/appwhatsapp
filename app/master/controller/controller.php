@@ -305,7 +305,7 @@ class controller
                     $data['messages'][$i]['chatName'],
                     $sender[$i]
                 ));
-                echo $sender[$i];
+                echo $sender[$i]. '</br>';
                 $i++;
             }
 
