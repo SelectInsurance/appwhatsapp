@@ -87,6 +87,8 @@ var MostrarModalTablaChatAcumulado = function () {
                         consulta => {
                             if (consulta.Asignador == null) {
                                 var SinAsignar = 'Sin Asignar';
+                            }else{
+                                var SinAsignar = consulta.Asignador;
                             }
                             tbody += `
                                 <tr>
@@ -925,11 +927,6 @@ var TablaChatAsignadoAgente = function () {
             console.log(error);
         }
     });
-}
-
-//Mostrando tabla del modal del dashboard
-var TablaModalTotalDashboard = function () {
-
 }
 ///////////////////////////////////////////
 
