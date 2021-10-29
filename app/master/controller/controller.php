@@ -271,16 +271,16 @@ class controller
             $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
             $api = new ChatApi($url['Instance'], $url['Token']);
             $data = $api->messages();
-            var_dump($data['messages']);
+            //var_dump($data['messages']);
 
             //cambiando ciclo foreach por ciclo while para hacer insercion a la base de datos usando 
             //la cantidad de indices que tiene el array
             $contador = count($data['messages']);
             $i = 0;
             while ($i < $contador) {
-                if ($data['messages'][$i]['author'] === $data['messages'][$i]['chatId']) {
+                if ($data['messages'][$i]['author'] == $data['messages'][$i]['chatId']) {
                     $sender[$i] = $data['messages'][$i]['author'];
-                } elseif ($data['messages'][$i]['author'] != $data['messages'][$i]['chatId']) {
+                } else {
                     $sender[$i] = $_SESSION['Master'];
                 }
                 crud::Create(query::CreateAlmacenarMensajes(
@@ -331,7 +331,7 @@ class controller
                 $i++;
             }
 
-            //print json_encode($Array, JSON_PRETTY_PRINT);
+            print json_encode($Array, JSON_PRETTY_PRINT);
         //}
     }
 
