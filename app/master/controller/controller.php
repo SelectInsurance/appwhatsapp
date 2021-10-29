@@ -307,12 +307,13 @@ class controller
                     $data['messages'][$i]['chatName'],
                     $sender[$i]
                 ));
-
+                var_dump($resultado[$i]);
                 if ($resultado[$i] == true) {
                     echo 'Mensaje Guardado Correctamente </br>';
                 }else {
                     echo 'Error al guardar el mensaje </br>';
                 }
+
                 $i++;
             }
 
