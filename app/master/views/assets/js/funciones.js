@@ -1142,6 +1142,7 @@ var MostrarMensajesDespedida = function () {
         type: "GET",
         url: "MostrandoMensajeDespedida",
         success: function (Respuesta) {
+            console.log(Respuesta);
             if (Respuesta != null) {
             var json = JSON.parse(Respuesta);
                 var tabla = '';
