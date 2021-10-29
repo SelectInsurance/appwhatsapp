@@ -47,24 +47,24 @@ CREATE TABLE dialogs(
 
 CREATE TABLE messages(
   id VARCHAR(255) PRIMARY KEY,
-  body TEXT NOT NULL,
-  fromMe BOOLEAN NOT NULL,
-  self INT NOT NULL,
-  isForwarded INT NOT NULL,
-  author VARCHAR(100) NOT NULL,
+  body TEXT NULL,
+  fromMe BOOLEAN NULL,
+  self INT NULL,
+  isForwarded INT NULL,
+  author VARCHAR(100) NULL,
   time INT NOT NULL,
-  chatId VARCHAR(100) NOT NULL,
-  messageNumber INT NOT NULL,
-  type VARCHAR(55) NOT NULL,
+  chatId VARCHAR(100) NULL,
+  messageNumber INT NULL,
+  type VARCHAR(55) NULL,
   senderName VARCHAR(255),
-  quotedMsgBody TEXT NOT NULL,
-  quotedMsgId TEXT NOT NULL,
-  quotedMsgType TEXT NOT NULL,
-  metadata TEXT NOT NULL,
-  ack TEXT NOT NULL,
-  chatName VARCHAR(255) NOT NULL,
+  quotedMsgBody TEXT NULL,
+  quotedMsgId TEXT NULL,
+  quotedMsgType TEXT NULL,
+  metadata TEXT NULL,
+  ack TEXT NULL,
+  chatName VARCHAR(255) NULL,
   FechaHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  sender VARCHAR(255) NOT NULL
+  sender VARCHAR(255) NULL
 );
 
 CREATE TABLE MensajeDespedida(

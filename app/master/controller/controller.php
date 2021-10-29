@@ -285,6 +285,7 @@ class controller
                 } else {
                     $sender[$i] = $_SESSION['Master'];
                 }
+                echo $sender[$i]. '</br>';
                 crud::Create(query::CreateAlmacenarMensajes(
                     $data['messages'][$i]['id'],
                     $data['messages'][$i]['body'],
@@ -305,7 +306,6 @@ class controller
                     $data['messages'][$i]['chatName'],
                     $sender[$i]
                 ));
-                echo $sender[$i]. '</br>';
                 $i++;
             }
 
