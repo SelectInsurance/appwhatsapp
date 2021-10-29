@@ -271,7 +271,7 @@ class controller
             $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
             $api = new ChatApi($url['Instance'], $url['Token']);
             $data = $api->messages();
-            //var_dump($data);
+            var_dump($data);
 
             //cambiando ciclo foreach por ciclo while para hacer insercion a la base de datos usando 
             //la cantidad de indices que tiene el array
@@ -331,7 +331,7 @@ class controller
                 $i++;
             }
 
-            print json_encode($Array, JSON_PRETTY_PRINT);
+            //print json_encode($Array, JSON_PRETTY_PRINT);
         //}
     }
 
