@@ -59,8 +59,8 @@ var SettIntervals = function () {
     var interval = setInterval('TablaChatAsignadoAgente()', 30000);
     clearInterval(interval);
 
-    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
-    var interval = setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 500);
+    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 1000);
+    var interval = setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 1000);
     clearInterval(interval);
 
     setInterval('MostrarModalTablaChatAbierto()', 3000);
