@@ -694,9 +694,9 @@ class controller
     //Mostrando Cantidad Chat Asignado a Agentes
     public static function MostrandoChatAsignados()
     {
-        $user = $_SESSION['Master'];
-        $consulta = crud::Read(query::ReadChatAsignados($user));
+        $consulta = crud::Read(query::ReadChatAsignados());
             $row = mysqli_fetch_assoc($consulta);
+            var_dump($row);
             echo $row['count(idAgentes)'];
     }
 

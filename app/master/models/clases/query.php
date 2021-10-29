@@ -163,7 +163,7 @@ class  query
     //Mostrando Chat Asignado a Agentes
     public static function ReadChatAsignados()
     {
-        return "SELECT count(idAgentes) FROM whatsapp.dialogs";
+        return "SELECT count(idAgentes) FROM dialogs";
     }
 
     //Mostrando Agentes con su cantidad de Chat Asignados
