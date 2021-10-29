@@ -87,8 +87,14 @@ var MostrarModalTablaChatAcumulado = function () {
                         consulta => {
                             if (consulta.Asignador == null) {
                                 var SinAsignar = 'Sin Asignar';
-                            }else{
+                            } else {
                                 var SinAsignar = consulta.Asignador;
+                            }
+
+                            if (consulta.idAgentes == null) {
+                                var idAgentes = 'Sin Asignar';
+                            } else {
+                                var idAgentes = consulta.idAgentes;
                             }
                             tbody += `
                                 <tr>
@@ -96,7 +102,7 @@ var MostrarModalTablaChatAcumulado = function () {
                                     <td>${consulta.name}</td>
                                     <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
                                     <td>${SinAsignar}</td>
-                                    <td>${consulta.idAgentes}</td>
+                                    <td>${idAgentes}</td>
                                     <td>
                                     <form action="ConsultandoSalaDesdeModalTotal" method="post">
                                     <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
@@ -1140,7 +1146,7 @@ var MostrarMensajesDespedida = function () {
         url: "MostrandoMensajeDespedida",
         success: function (Respuesta) {
             if (Respuesta != null) {
-            var json = JSON.parse(Respuesta);
+                var json = JSON.parse(Respuesta);
                 var tabla = '';
                 json.forEach(
                     Datos => {
