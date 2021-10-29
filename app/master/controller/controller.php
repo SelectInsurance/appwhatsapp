@@ -382,7 +382,12 @@ class controller
             $Array[$i]['id'] = $row['id'];
             $Array[$i]['name'] = $row['name'];
             $Array[$i]['image'] = $row['image'];
-            $Array[$i]['last_name'] = $row['last_name'];
+            $Array[$i]['last_name'] = '';
+            
+            if (isset($row['last_name'])) {
+                $Array[$i]['last_name'] = $row['last_name'];
+            }
+
             $i++;
         }
         $conteo = count($Array);
@@ -692,6 +697,8 @@ class controller
         if (!empty($consulta)) {
             $row = mysqli_fetch_assoc($consulta);
             echo $row['count(idAgentes)'];
+        }else {
+            echo '0';
         }
     }
 
