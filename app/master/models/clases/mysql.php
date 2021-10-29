@@ -23,7 +23,7 @@ class mysql
     {
         $mysql = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
 
-        error_reporting(0);
+        //error_reporting(0);
         
         if (isset($mysql->mysqli_connect_errno)) {
             echo 'Error de conexion';
