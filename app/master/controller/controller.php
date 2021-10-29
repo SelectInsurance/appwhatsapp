@@ -842,8 +842,14 @@ class controller
     //Consultando los datos recibidos por el input de dialogs mostrados en la tabla
     public static function FiltrarDatosTabla()
     {
-        $valor = $_POST['SearchDialogs'];
-        $id = $_POST['idAgente'];
+        $valor = '';
+        $id = '';
+        if (isset($_POST['SearchDialogs']) && isset($_POST['idAgente'])) {
+            $valor = $_POST['SearchDialogs'];
+            $id = $_POST['idAgente'];
+        }
+
+
         if (!empty($valor)) {
             $resultado = crud::Read(query::ReadFiltrarSala($valor, $id));
             $i = 0;
