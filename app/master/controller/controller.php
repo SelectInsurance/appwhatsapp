@@ -264,10 +264,10 @@ class controller
     //Mostrar Mensajes de chat individual
     public static function MostrarMensajesChat()
     {
-        if (!empty($_POST['chatId'])) {
+        //if (!empty($_POST['chatId'])) {
             $user = $_SESSION['Master'];
-            $id =  $_POST['chatId'];
-            //$id =  '573166857000@c.us';
+            //$id =  $_POST['chatId'];
+            $id =  '573166857000@c.us';
             $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
             $api = new ChatApi($url['Instance'], $url['Token']);
             $data = $api->messages();
@@ -332,7 +332,7 @@ class controller
             }
 
             print json_encode($Array, JSON_PRETTY_PRINT);
-        }
+        //}
     }
 
     //Mostrar si el cliente esta conectado o no
