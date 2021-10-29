@@ -847,6 +847,7 @@ class controller
         if (!empty($valor)) {
             $resultado = crud::Read(query::ReadFiltrarSala($valor, $id));
             $i = 0;
+            $Array = array();
             while ($row = mysqli_fetch_assoc($resultado)) {
                 $Array[$i]['id']        =   $row['id'];
                 $Array[$i]['name']      =   $row['name'];

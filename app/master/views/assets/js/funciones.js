@@ -1142,7 +1142,6 @@ var MostrarMensajesDespedida = function () {
         type: "GET",
         url: "MostrandoMensajeDespedida",
         success: function (Respuesta) {
-            console.log(Respuesta);
             if (Respuesta != null) {
             var json = JSON.parse(Respuesta);
                 var tabla = '';
@@ -1275,6 +1274,7 @@ var SearchDialogs = function () {
         url: "FiltrarDatosTabla",
         data: TeclasPrecionadas,
         success: function (Respuesta) {
+            console.log(Respuesta);
             var json = JSON.parse(Respuesta);
             if (json != null) {
                 var tabla = '';
