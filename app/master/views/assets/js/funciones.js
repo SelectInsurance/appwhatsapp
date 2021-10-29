@@ -150,7 +150,7 @@ var MostrarModalTablaChatAcumulado = function () {
                                 <td>${consulta.name}</td>
                                 <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
                                 <td>${SinAsignar}</td>
-                                <td>${consulta.idAgentes}</td>
+                                <td>${idAgentes}</td>
                                 <td>
                                 <form action="ConsultandoSalaDesdeModalTotal" method="post">
                                 <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
