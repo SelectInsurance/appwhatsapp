@@ -1,4 +1,4 @@
-USE whatsapp;
+USE Whatsapp;
 
 DROP PROCEDURE IF EXISTS SP_ConteoChatAbiertosAdmin;
 DELIMITER //
