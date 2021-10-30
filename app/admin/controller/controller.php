@@ -28,8 +28,6 @@ function Nav()
             $i++;
         }
     }
-
-    $user = $_SESSION['Admin'];
     //Salas de chat almacenadas en base de datos
     $consulta = crud::Read(query::ReadDialogs($user));
 
@@ -233,7 +231,7 @@ class controller
         $user = $_SESSION['Admin'];
         $Resultados = crud::Read(query::ReadChatAbiertos($user));
         $Array = mysqli_fetch_assoc($Resultados);
-        print $Array['v_conteo'];
+        print $Array['abierto'];
     }
 
     //Mostrar si el cliente esta conectado o no
@@ -265,7 +263,7 @@ class controller
         $user = $_SESSION['Admin'];
         $consulta = crud::Read(query::ReadChatAsignados($user));
         $row = mysqli_fetch_assoc($consulta);
-        print $row['v_conteo'];
+        print $row['count(idAgentes)'];
     }
 
     //Tabla para mostrar cantidad de chat asignados a cada agente

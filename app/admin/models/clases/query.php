@@ -56,13 +56,12 @@ class  query
     }
 
     //Consultar Todos los Agentes y usuarios
-    public static function ReadAgentes($creador)
+    public static function ReadAgentes()
     {
         return "
             SELECT * FROM Agentes
             INNER JOIN Usuarios ON 
             Agentes.usuario = Usuarios.usuario
-            WHERE creador = '$creador'
             ";
     }
 
@@ -78,9 +77,39 @@ class  query
         return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
     }
 
-    public static function ReadDialogs($user)
+    //Actualizar Imagen Dialogs
+    public static function UpdateImageDialogs($id, $image){
+        return "UPDATE dialogs SET image = '$image' WHERE id = '$id'";
+    }
+
+    //Buscando dialogs
+    public static function ReadDialogs()
     {
-        return "call SP_CreateDialogs('$user')";
+        return "SELECT * FROM dialogs";
+    }
+
+    //Buscando dialogs filtrando por like chat Total
+    public static function ReadDialogsFiltrando($datos)
+    {
+        return "SELECT * FROM dialogs WHERE name LIKE '$datos%' OR id LIKE '$datos%'";
+    }
+
+    //Buscando dialogs filtrando por like chat Abiertos
+    public static function ReadDialogsFiltrandoAbiertos($datos)
+    {
+        return "CALL SP_FiltrarSalaAbiertos('$datos')";
+    }
+
+    //Buscando dialogs filtrando por like chat Cerrados
+    public static function ReadDialogsFiltrandoCerrados($datos)
+    {
+        return "CALL SP_FiltrarSalaCerrados('$datos')";
+    }
+
+    //Buscando dialogs filtrando por like chat Asignados
+    public static function ReadDialogsFiltrandoAsignados($datos)
+    {
+        return "CALL SP_FiltrarSalaAsignados('$datos')";
     }
 
     //Crear AccesWebToken
@@ -92,13 +121,13 @@ class  query
     //Consultar AccesWebToken
     public static function ReadAwebT($user)
     {
-        return "SELECT * FROM TokenChatApi WHERE User = '$user' ORDER BY idToken DESC Limit 1";
+        return "SELECT * FROM TokenChatApi WHERE user = '$user' ORDER BY idToken DESC Limit 1";
     }
 
     //Modificar Dialogs
-    public static function UpdateDialogs($idAgente, $name, $user)
+    public static function UpdateDialogs($idAgente, $id)
     {
-        return "UPDATE dialogs set idAgentes = '$idAgente', Asignador = '$user' WHERE name = '$name'";
+        return "UPDATE dialogs set idAgentes = '$idAgente' WHERE id = '$id'";
     }
 
     //Consultando imagen de Dialogs
@@ -113,36 +142,34 @@ class  query
         return "UPDATE dialogs SET abierto = true WHERE id = '$id'";
     }
 
-    //TODO LO RELACIONADO CON LOS CONTEOS
-    //Mostrando cantidad de chats asignados de cada agente
-    public static function ReadConteoChatAsignadosAgentes($user)
+    //Update para ingresar mensaje antes de cerrar Chat
+    public static function ReadMensajeDespedidaChat($user)
     {
-        return "CALL SP_ConteoChatAgente('$user')";
+        return "SELECT * FROM MensajeDespedida WHERE usuario = '$user' ORDER BY id DESC LIMIT 1";
+    }
+
+    //Update para cerrar chat
+    public static function UpdateDialogsCerrarChat($id)
+    {
+        return "UPDATE dialogs SET abierto = FALSE  WHERE id = '$id'";
     }
 
     //Mostrando Chat Abiertos
-    public static function ReadChatAbiertos($user)
+    public static function ReadChatAbiertos()
     {
-        return "CALL SP_ConteoChatAbiertosAdmin('$user')";
-    }
-
-    //Mostrando Agentes con su cantidad de Chat Asignados
-    public static function ReadChatAsignadosAgentes($user)
-    {
-        return "SELECT * FROM Agentes WHERE creador = '$user'";
+        return "SELECT abierto FROM dialogs WHERE abierto = TRUE";
     }
 
     //Mostrando Chat Asignado a Agentes
-    public static function ReadChatAsignados($user)
+    public static function ReadChatAsignados()
     {
-        return "CALL SP_ConteoChatAsignadosAdmin('$user')";
+        return "SELECT count(idAgentes) FROM dialogs";
     }
 
-
-    //Mostrando Cantidad de chats cerrados
-    public static function ReadConteoChatCerrados($user)
+    //Mostrando Agentes con su cantidad de Chat Asignados
+    public static function ReadChatAsignadosAgentes()
     {
-        return "CALL SP_ConteoChatCerradosAdmin('$user')";
+        return "SELECT * FROM Agentes";
     }
 
     //Mostrando cantidad de chats asignados de cada agente
@@ -150,10 +177,13 @@ class  query
     {
         return "CALL SP_ConteoChatAgente('$user')";
     }
-    ////////////////////////////////////////////////////
 
+    //Mostrando Cantidad de chats cerrados
+    public static function ReadConteoChatCerrados()
+    {
+        return "CALL SP_ConteoChatCerrados";
+    }
 
-    //TODO LO RELACIONADO CON EL CHAT
     //Insertar Mensajes de la api a la base de datos
     public static function CreateAlmacenarMensajes(
         $id,
@@ -213,7 +243,6 @@ class  query
         return "CALL SP_MostrarConversacionAgente('$id')";
     }
 
-
     //Mostrando salas de chat asignadas a un agente o asistente especifico
     public static function ReadDialogsAgente($id)
     {
@@ -226,22 +255,18 @@ class  query
         return "INSERT INTO MensajeDespedida(cuerpo, usuario) VALUES('$cuerpo','$usuario')";
     }
 
-    //Update para ingresar mensaje antes de cerrar Chat
-    public static function ReadMensajeDespedidaChat($user)
-    {
-        return "SELECT * FROM MensajeDespedida WHERE usuario = '$user' ORDER BY id DESC LIMIT 1";
+    //Mostrando Ultimo Mensaje de Despedida
+    public static function ReadMensajeDespedida(){
+        return "SELECT * FROM MensajeDespedida";
     }
 
-
-    //Mostrando Ultimo Mensaje de Despedida en la tabla
-    public static function ReadMensajeDespedida($user)
-    {
-        return "SELECT * FROM MensajeDespedida WHERE usuario = '$user'";
+    //Eliminando mensaje de despedida
+    public static function DeleteMensajeDespedida($id){
+        return "DELETE FROM mensajedespedida WHERE id = '$id'";
     }
 
-    //Update para cerrar chat
-    public static function UpdateDialogsCerrarChat($id)
-    {
-        return "UPDATE dialogs SET abierto = FALSE  WHERE id = '$id'";
+    //Filtrar dialogs por agente
+    public static function ReadFiltrarSala($datos, $id){
+        return "call SP_FiltrarSala('$datos','$id')";
     }
 }
