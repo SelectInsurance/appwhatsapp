@@ -16,7 +16,7 @@ function Nav()
     $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
     $array = $ChatApi->Dialogs();
 
-    //var_dump($array);
+    var_dump($array);
 
     //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
     foreach ($array as $key => $value) {
@@ -30,7 +30,6 @@ function Nav()
     }
     //Salas de chat almacenadas en base de datos
     $consulta = crud::Read(query::ReadDialogs($user));
-
 
     require_once 'app/admin/views/assets/menu.phtml';
 }
