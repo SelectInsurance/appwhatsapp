@@ -5,7 +5,7 @@ require_once 'app/admin/models/app_autoload.php';
 //Funciones para requerir encabezado, pie de pagina y menu
 function higher()
 {
-    require_once 'app\admin\views\assets\header.html';
+    require_once 'app/admin/views/assets/header.html';
 }
 
 function Nav()
@@ -32,12 +32,12 @@ function Nav()
     $consulta = crud::Read(query::ReadDialogs($user));
 
 
-    require_once 'app\admin\views\assets\menu.phtml';
+    require_once 'app/admin/views/assets/menu.phtml';
 }
 
 function lower()
 {
-    require_once 'app\admin\views\assets\footer.html';
+    require_once 'app/admin/views/assets/footer.html';
 }
 
 
@@ -81,7 +81,7 @@ class controller
             higher();
             Nav();
 
-            require_once 'app\admin\views\modules\dashboard\dashboard.phtml';
+            require_once 'app/admin/views/modules/dashboard/dashboard.phtml';
             lower();
         } else {
             header('Location:Login');
@@ -110,7 +110,7 @@ class controller
         Nav();
         $user = $_SESSION['Admin'];
         $Resultado = crud::Read(query::ReadAgentes($user));
-        require_once 'app\admin\views\modules\Preferencias\preferences.phtml';
+        require_once 'app/admin/views/modules/Preferencias/preferences.phtml';
         lower();
     }
 
@@ -187,7 +187,7 @@ class controller
     {
         higher();
         Nav();
-        require_once 'app\admin\views\modules\config\config.html';
+        require_once 'app/admin/views/modules/config/config.html';
 
         lower();
     }
@@ -432,7 +432,7 @@ class controller
             foreach ($_POST['idAgente'] as $Array) {
                 $idAgente = $Array;
             }
-            require_once 'app\admin\views\modules\conversacion\conversacion.phtml';
+            require_once 'app/admin/views/modules/conversacion/conversacion.phtml';
             lower();
         } else {
             header('Location:Inicio');
@@ -524,7 +524,7 @@ class controller
         higher();
         Nav();
         $usuario = $_SESSION['Admin'];
-        require_once 'app\master\views\modules\mensajefinal\mensajedespedida.phtml';
+        require_once 'app/master/views/modules/mensajefinal/mensajedespedida.phtml';
 
         lower();
     }
