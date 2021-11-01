@@ -1008,6 +1008,24 @@ var CreateTransferirChat = function () {
 
 
 //TODO LO RELACIONADO CON LOS CONTEOS
+
+//Mostrando Cantidad de salas de chat
+var MostrarCantidadSalasChat = function () {
+    $.ajax({
+        type: "POST",
+        url: "CantidadSalasChat",
+        success: function (Respuesta) {
+            $('#CardSalasPendientes').html(Respuesta);
+            //console.log(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
 //Mostrando Cantidad de salas de chat Abiertas
 var MostrarCantidadSalasChatAbiertas = function () {
     $.ajax({

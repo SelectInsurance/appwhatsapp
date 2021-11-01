@@ -221,7 +221,29 @@ class controller
 
 
     //tODO LO RELACIONADO CON LOS CONTEOS DE CHAT
-    //Mostrando Cantidad chat abiertos
+
+    //Cantidad Salas de Chat
+    public static function CantidadSalasChat()
+    {
+        $user = $_SESSION['Admin'];
+        $consulta = crud::Read(query::ReadDialogs($user));
+        $i = 0;
+        while ($row = mysqli_fetch_array($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_name'] = '';
+
+            if (isset($row['last_name'])) {
+                $Array[$i]['last_name'] = $row['last_name'];
+            }
+
+            $i++;
+        }
+        $conteo = count($Array);
+        echo $conteo;
+    }
+
 
     //Mostrar Tabla Dialogs totales
     public static function MostrarTablaChatAcumulado()
