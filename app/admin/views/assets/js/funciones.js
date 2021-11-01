@@ -42,31 +42,33 @@ var SettIntervals = function () {
     var interval = setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
     clearInterval(interval);
 
-
-
-
-
-/*     setInterval('UpdateInstance()', 360000);
-    var interval = setInterval('UpdateInstance()', 360000);
-    clearInterval(interval);
-
-
     setInterval('MostrarCantidadSalasChat()', 3000);
     var interval = setInterval('MostrarCantidadSalasChat()', 3000);
     clearInterval(interval);
 
 
-    setInterval('TablaChatAsignadoAgente()', 30000);
-    var interval = setInterval('TablaChatAsignadoAgente()', 30000);
-    clearInterval(interval);
 
-    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 1000);
-    var interval = setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 1000);
-    clearInterval(interval);
-
-    setInterval('MostrarModalTablaChatAbierto()', 3000);
-    var interval = setInterval('MostrarModalTablaChatAbierto()', 3000);
-    clearInterval(interval); */
+    /*     setInterval('UpdateInstance()', 360000);
+        var interval = setInterval('UpdateInstance()', 360000);
+        clearInterval(interval);
+    
+    
+        setInterval('MostrarCantidadSalasChat()', 3000);
+        var interval = setInterval('MostrarCantidadSalasChat()', 3000);
+        clearInterval(interval);
+    
+    
+        setInterval('TablaChatAsignadoAgente()', 30000);
+        var interval = setInterval('TablaChatAsignadoAgente()', 30000);
+        clearInterval(interval);
+    
+        setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 1000);
+        var interval = setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 1000);
+        clearInterval(interval);
+    
+        setInterval('MostrarModalTablaChatAbierto()', 3000);
+        var interval = setInterval('MostrarModalTablaChatAbierto()', 3000);
+        clearInterval(interval); */
 }
 //
 
