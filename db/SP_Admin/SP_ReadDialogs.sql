@@ -1,8 +1,8 @@
-use whatsapp;
-DROP PROCEDURE IF EXISTS SP_CreateDialogs;
+use Whatsapp;
+DROP PROCEDURE IF EXISTS SP_ReadDialogs;
 DELIMITER //
 
-CREATE PROCEDURE SP_CreateDialogs(IN v_user VARCHAR(255))
+CREATE PROCEDURE SP_ReadDialogs(IN v_user VARCHAR(255))
 BEGIN
 
 DECLARE v_id INT;

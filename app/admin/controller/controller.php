@@ -231,7 +231,7 @@ class controller
         $user = $_SESSION['Admin'];
         $Resultados = crud::Read(query::ReadChatAbiertos($user));
         $Array = mysqli_fetch_assoc($Resultados);
-        print $Array['abierto'];
+        print $Array['v_conteo'];
     }
 
     //Mostrar si el cliente esta conectado o no
@@ -253,8 +253,12 @@ class controller
     {
         $user = $_SESSION['Admin'];
         $Consulta = crud::Read(query::ReadConteoChatCerrados($user));
-        $resultado = mysqli_fetch_assoc($Consulta);
-        echo $resultado['v_conteo'];
+        if ($Consulta == false) {
+            print 0;
+        } else {
+            $Array = mysqli_fetch_assoc($Consulta);
+            print $Array['v_conteo'];
+        }
     }
 
     //Mostrando Cantidad Chat Asignado a Agentes
@@ -302,10 +306,11 @@ class controller
 
     //TODO LO RELACIONADO CON EL CHAT
     //Sala de chat individual
-    public static function SalaChat()
+    public static function AbrirSalaChat()
     {
         //Condicion para obligar a tener si o si una sala de chat
         if (!empty($_POST['btnAbrirChat'])) {
+            $user = $_SESSION['Admin'];
             $id = $_POST['btnAbrirChat'];
             $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
 
@@ -313,13 +318,17 @@ class controller
             $resultado = crud::Read(query::ReadImageDialogs($id));
             $image = mysqli_fetch_assoc($resultado);
 
+            
             //ChatAbiertos
             crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
-
+            
+            
+            //Mostrando mensaje de despedida en el modal de cerrar chat
+            $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
 
             higher();
             Nav();
-            require_once 'app\admin\views\modules\chat\chat.phtml';
+            require_once 'app/admin/views/modules/chat/chat.phtml';
             lower();
         } else {
             header('Location:./');

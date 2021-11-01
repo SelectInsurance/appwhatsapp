@@ -63,7 +63,7 @@
   </div>
   <div class="offcanvas-body ScrollMinimo shadow border">
     <?php while ($rows = mysqli_fetch_assoc($consulta)) : ?>
-      <form action="SalaChat" method="post">
+      <form action="AbrirSalaChat" method="post">
         <div class="d-grid">
 
           <button type="submit" name="btnAbrirChat" value="<?= $rows['id'] ?>" class="btn btn-outline-success rounded-1" target="__blank">

@@ -56,12 +56,13 @@ class  query
     }
 
     //Consultar Todos los Agentes y usuarios
-    public static function ReadAgentes()
+    public static function ReadAgentes($creador)
     {
         return "
             SELECT * FROM Agentes
             INNER JOIN Usuarios ON 
             Agentes.usuario = Usuarios.usuario
+            WHERE creador = '$creador'
             ";
     }
 
@@ -83,9 +84,9 @@ class  query
     }
 
     //Buscando dialogs
-    public static function ReadDialogs()
+    public static function ReadDialogs($user)
     {
-        return "SELECT * FROM dialogs";
+        return "CALL SP_ReadDialogs('$user')";
     }
 
     //Buscando dialogs filtrando por like chat Total
@@ -155,9 +156,9 @@ class  query
     }
 
     //Mostrando Chat Abiertos
-    public static function ReadChatAbiertos()
+    public static function ReadChatAbiertos($user)
     {
-        return "SELECT abierto FROM dialogs WHERE abierto = TRUE";
+        return "CALL SP_ConteoChatAbiertosAdmin('$user')";
     }
 
     //Mostrando Chat Asignado a Agentes
@@ -179,9 +180,9 @@ class  query
     }
 
     //Mostrando Cantidad de chats cerrados
-    public static function ReadConteoChatCerrados()
+    public static function ReadConteoChatCerrados($user)
     {
-        return "CALL SP_ConteoChatCerrados";
+        return "CALL SP_ConteoChatCerrados('$user')";
     }
 
     //Insertar Mensajes de la api a la base de datos
