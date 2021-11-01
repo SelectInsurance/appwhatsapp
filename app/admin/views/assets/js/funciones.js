@@ -50,6 +50,10 @@ var SettIntervals = function () {
     var interval = setInterval('MostrarModalTablaChatAbierto()', 3000);
     clearInterval(interval);
 
+    setInterval('MostrarModalTablaChatCerrados()', 360000);
+    var interval = setInterval('MostrarModalTablaChatCerrados()', 360000);
+    clearInterval(interval);
+
 
 
     /*     setInterval('UpdateInstance()', 360000);

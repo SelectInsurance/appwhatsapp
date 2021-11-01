@@ -102,9 +102,9 @@ class  query
     }
 
     //Buscando dialogs filtrando por like chat Cerrados
-    public static function ReadDialogsFiltrandoCerrados($datos)
+    public static function ReadDialogsFiltrandoCerrados($datos, $user)
     {
-        return "CALL SP_FiltrarSalaCerrados('$datos')";
+        return "CALL SP_FiltrarSalaCerradosAdmin('$datos','$user')";
     }
 
     //Buscando dialogs filtrando por like chat Asignados

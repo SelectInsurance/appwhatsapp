@@ -309,13 +309,14 @@ class controller
     //Mostrar tabla Dialogs Cerrados
     public static function MostrarTablaChatCerrados()
     {
+        $user = $_SESSION['Admin'];
 
         $datos = '';
         if (isset($_POST['FiltroTablaCerrados'])) {
             $datos = $_POST['FiltroTablaCerrados'];
         }
 
-        $consulta = crud::Read(query::ReadDialogsFiltrandoCerrados($datos));
+        $consulta = crud::Read(query::ReadDialogsFiltrandoCerrados($datos, $user));
         $i = 0;
         $Array = array();
         while ($row = mysqli_fetch_assoc($consulta)) {
