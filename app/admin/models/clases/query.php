@@ -168,9 +168,9 @@ class  query
     }
 
     //Mostrando Agentes con su cantidad de Chat Asignados
-    public static function ReadChatAsignadosAgentes()
+    public static function ReadChatAsignadosAgentes($user)
     {
-        return "SELECT * FROM Agentes";
+        return "SELECT * FROM Agentes WHERE creador = '$user' OR usuario = '$user'";
     }
 
     //Mostrando cantidad de chats asignados de cada agente
