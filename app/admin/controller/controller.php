@@ -761,6 +761,7 @@ class controller
         if (!empty($_POST['idAgente'])) {
             higher();
             Nav();
+            var_dump($_POST['idAgente']);
             foreach ($_POST['idAgente'] as $Array) {
                 $idAgente = $Array;
             }
