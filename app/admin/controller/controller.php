@@ -221,7 +221,6 @@ class controller
 
 
     //tODO LO RELACIONADO CON LOS CONTEOS DE CHAT
-
     //Cantidad Salas de Chat
     public static function CantidadSalasChat()
     {
@@ -748,5 +747,182 @@ class controller
         echo 'Prueba';
     }
     ////////////////////////////////////////////
+
+
+
+
+
+
+
+    //TODO LO RELACIONADO CON LOS CHATS ABIERTOS DESDE DASHBOARD
+    //Modulo mostrar dialogs Asignados Agente Seleccionado desde Dashboard
+    public static function MostrandoDialogAsignadoAgente()
+    {
+        if (!empty($_POST['idAgente'])) {
+            higher();
+            Nav();
+            foreach ($_POST['idAgente'] as $Array) {
+                $idAgente = $Array;
+            }
+            require_once 'app/master/views/modules/conversacion/conversacion.phtml';
+            lower();
+        } else {
+            header('Location:Inicio');
+        }
+    }
+
+    //Modulo mostrar conversacion de dialog seleccionado desde conversaciones
+    public static function MostrarConversacionDialogAsignadoAgente()
+    {
+        $id = $_POST['idRadio'];
+        foreach ($id as $indice) {
+            $chatId = $indice;
+        }
+
+
+        $user = $_SESSION['Master'];
+        $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+        $api = new ChatApi($url['Instance'], $url['Token']);
+        $data = $api->messages();
+        //var_dump($data);
+
+        //cambiando ciclo foreach por ciclo while para hacer insercion a la base de datos usando 
+        //la cantidad de indices que tiene el array
+        $contador = count($data['messages']);
+        $i = 0;
+        while ($i < $contador) {
+            if ($data['messages'][$i]['author'] === $data['messages'][$i]['chatId']) {
+                $sender[$i] = $data['messages'][$i]['author'];
+            } elseif ($data['messages'][$i]['author'] != $data['messages'][$i]['chatId']) {
+                $sender[$i] = $_SESSION['Master'];
+            }
+            crud::Create(query::CreateAlmacenarMensajes(
+                $data['messages'][$i]['id'],
+                $data['messages'][$i]['body'],
+                $data['messages'][$i]['fromMe'],
+                $data['messages'][$i]['self'],
+                $data['messages'][$i]['isForwarded'],
+                $data['messages'][$i]['author'],
+                $data['messages'][$i]['time'],
+                $data['messages'][$i]['chatId'],
+                $data['messages'][$i]['messageNumber'],
+                $data['messages'][$i]['type'],
+                $data['messages'][$i]['senderName'],
+                $data['messages'][$i]['quotedMsgBody'],
+                $data['messages'][$i]['quotedMsgId'],
+                $data['messages'][$i]['quotedMsgType'],
+                $data['messages'][$i]['metadata'],
+                $data['messages'][$i]['ack'],
+                $data['messages'][$i]['chatName'],
+                $sender[$i]
+            ));
+            $i++;
+        }
+
+
+
+
+        $consulta = crud::Read(query::ReadMensajesChat($chatId));
+        $i = 0;
+        $Array = array();
+        while ($row = mysqli_fetch_assoc($consulta)) {
+
+            $Array[$i]['id']              =   $row['id'];
+            $Array[$i]['body']            =   $row['body'];
+            $Array[$i]['fromMe']          =   $row['fromMe'];
+            $Array[$i]['isForwarded']     =   $row['isForwarded'];
+            $Array[$i]['author']          =   $row['author'];
+            $Array[$i]['time']            =   $row['time'];
+            $Array[$i]['chatId']          =   $row['chatId'];
+            $Array[$i]['messageNumber']   =   $row['messageNumber'];
+            $Array[$i]['type']            =   $row['type'];
+            $Array[$i]['senderName']      =   $row['senderName'];
+            $Array[$i]['quotedMsgBody']   =   $row['quotedMsgBody'];
+            $Array[$i]['quotedMsgId']     =   $row['quotedMsgId'];
+            $Array[$i]['quotedMsgType']   =   $row['quotedMsgType'];
+            $Array[$i]['metadata']        =   $row['metadata'];
+            $Array[$i]['ack']             =   $row['ack'];
+            $Array[$i]['chatName']        =   $row['chatName'];
+            $Array[$i]['FechaHora']       =   $row['FechaHora'];
+            $Array[$i]['sender']          =   str_replace('@c.us', '', $row['sender']);
+            $i++;
+        }
+
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+
+    //Consultando los datos recibidos por el input de dialogs mostrados en la tabla
+    public static function FiltrarDatosTabla()
+    {
+        $valor = '';
+        $id = '';
+        if (isset($_POST['SearchDialogs']) && isset($_POST['idAgente'])) {
+            $valor = $_POST['SearchDialogs'];
+            $id = $_POST['idAgente'];
+        }
+        if (!empty($valor)) {
+            $resultado = crud::Read(query::ReadFiltrarSala($valor, $id));
+            $i = 0;
+            $Array = array();
+            while ($row = mysqli_fetch_assoc($resultado)) {
+                $Array[$i]['id']        =   $row['id'];
+                $Array[$i]['name']      =   $row['name'];
+                $Array[$i]['image']     =   $row['image'];
+                $Array[$i]['last_time'] =   $row['last_time'];
+                $Array[$i]['abierto']   =   $row['abierto'];
+                $Array[$i]['Asignador'] =   $row['Asignador'];
+                $Array[$i]['idAgentes'] =   $row['idAgentes'];
+                $i++;
+            }
+        } elseif (empty($valor)) {
+            $resultado = crud::Read(query::ReadDialogsAgente($id));
+            $i = 0;
+            $Array = array();
+            while ($row = mysqli_fetch_assoc($resultado)) {
+                $Array[$i]['id']        =   $row['id'];
+                $Array[$i]['name']      =   $row['name'];
+                $Array[$i]['image']     =   $row['image'];
+                $Array[$i]['last_time'] =   $row['last_time'];
+                $Array[$i]['abierto']   =   $row['abierto'];
+                $Array[$i]['Asignador'] =   $row['Asignador'];
+                $Array[$i]['idAgentes'] =   $row['idAgentes'];
+                $i++;
+            }
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+
+    //Consulta para dirigir al DAtatable de mostrar conversaciones
+    public static function MostrarConversacionesConsulta()
+    {
+        if (!empty($_POST['id'])) {
+            $id = $_POST['id'];
+            $Resultados = crud::Read(query::ReadChatAgente($id));
+            $i = 0;
+            while ($conversacion = mysqli_fetch_assoc($Resultados)) {
+                $rows[$i]['chatId']         =    $conversacion['chatId'];
+                $rows[$i]['sender']         =    $conversacion['sender'];
+                $rows[$i]['messageNumber']  =    $conversacion['messageNumber'];
+                $rows[$i]['body']           =    $conversacion['body'];
+                $i++;
+            }
+
+            print json_encode($rows, JSON_PRETTY_PRINT);
+
+            /*   $id = $_POST['id'];
+            $Resultados = crud::Read(query::ReadChatAgente($id));
+            $conversacion = mysqli_fetch_assoc($Resultados);
+            print json_encode($conversacion, JSON_PRETTY_PRINT);
+            $i = 0;
+            while ($conversacion = mysqli_fetch_assoc($Resultados)) {
+                $rows["data"][] = $conversacion;
+            }
+            
+            print json_encode($rows, JSON_PRETTY_PRINT); */
+        } else {
+            header('Location:Inicio');
+        }
+    }
+    ///////////////////////////////////////////
 
 }
