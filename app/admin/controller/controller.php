@@ -764,7 +764,7 @@ class controller
             foreach ($_POST['idAgente'] as $Array) {
                 $idAgente = $Array;
             }
-            require_once 'app/master/views/modules/conversacion/conversacion.phtml';
+            require_once 'app/admin/views/modules/conversacion/conversacion.phtml';
             lower();
         } else {
             header('Location:Inicio');
