@@ -404,7 +404,7 @@ var MostrarModalTablaChatCerrados = function () {
             url: "MostrarTablaChatCerrados",
             data: form,
             success: function (Respuesta) {
-                //console.log(Respuesta);
+                console.log(Respuesta);
                 var json = JSON.parse(Respuesta);
                 if (json !== 'null') {
                     var tbody = '';
