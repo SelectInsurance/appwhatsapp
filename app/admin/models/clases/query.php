@@ -110,7 +110,7 @@ class  query
     //Buscando dialogs filtrando por like chat Asignados
     public static function ReadDialogsFiltrandoAsignados($datos)
     {
-        return "CALL SP_FiltrarSalaAsignados('$datos')";
+        return "CALL SP_FiltrarSalaAsignadosAdmin('$datos')";
     }
 
     //Crear AccesWebToken
