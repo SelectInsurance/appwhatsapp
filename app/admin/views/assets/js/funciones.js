@@ -953,6 +953,7 @@ var ReadSalasChatTransferencia = function () {
         type: "GET",
         url: "ConsultandoSalasChatSelector",
         success: function (Respuesta) {
+            console.log(Respuesta);
             var json = JSON.parse(Respuesta);
             if (json != null) {
                 var select = '';

@@ -707,6 +707,7 @@ class controller
         $consulta = crud::Read(query::ReadMensajeDespedida($user));
 
         $i = 0;
+        $Array = array();
         while ($resultados = mysqli_fetch_assoc($consulta)) {
             $Array[$i]['id'] = $resultados['id'];
             $Array[$i]['cuerpo'] = $resultados['cuerpo'];
