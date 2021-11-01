@@ -69,6 +69,14 @@ var SettIntervals = function () {
 }
 //
 
+
+
+
+
+
+
+
+
 //AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
 //Funcion para Mostrar Tabla en conteo total chat
 var MostrarModalTablaChatAcumulado = function () {
@@ -708,6 +716,14 @@ var ActivarEmotes = function () {
 
 
 
+
+
+
+
+
+
+
+
 //TODO LO RELACIONADO CON LA TRANSFERENCIA DE CHAT
 //Consultar tabla para transferir chat
 var ReadTransferenciaChat = function () {
@@ -943,6 +959,11 @@ var TablaChatAsignadoAgente = function () {
     });
 }
 ///////////////////////////////////////////
+
+
+
+
+
 
 
 

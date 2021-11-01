@@ -1,3 +1,66 @@
+/*Agregando Blur en modal*/
+.modal-open .container-fluid,
+.modal-open .container {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(6px);
+}
+
+/*ToolTip Azul*/
+.TooltipColorAzul .tooltip-inner{
+  background-color: #0051bb !important;
+  color: rgb(255, 255, 255);
+}
+
+.bs-tooltip-top .arrow::before,
+.bs-tooltip-auto[x-placement^="top"] .arrow::before{
+  border-top-color: #0051bb !important;
+}
+
+.bs-tooltip-right .arrow::before,
+.bs-tooltip-auto[x-placement^="right"] .arrow::before{
+  border-top-color: #0051bb !important;
+}
+
+.bs-tooltip-bottom .arrow::before,
+.bs-tooltip-auto[x-placement^="bottom"] .arrow::before{
+  border-top-color: #0051bb !important;
+}
+
+.bs-tooltip-left .arrow::before,
+.bs-tooltip-auto[x-placement^="left"] .arrow::before{
+  border-top-color: #0051bb !important;
+}
+
+/*ToolTip Verde*/
+.TooltipColorVerde .tooltip-inner{
+  background-color: #007558 !important;
+  color: rgb(255, 255, 255);
+}
+
+.bs-tooltip-top .arrow::before,
+.bs-tooltip-auto[x-placement^="top"] .arrow::before{
+  border-top-color: #007558 !important;
+}
+
+.bs-tooltip-right .arrow::before,
+.bs-tooltip-auto[x-placement^="right"] .arrow::before{
+  border-top-color: #007558 !important;
+}
+
+.bs-tooltip-bottom .arrow::before,
+.bs-tooltip-auto[x-placement^="bottom"] .arrow::before{
+  border-top-color: #007558 !important;
+}
+
+.bs-tooltip-left .arrow::before,
+.bs-tooltip-auto[x-placement^="left"] .arrow::before{
+  border-top-color: #007558 !important;
+}
+
+
 /*caja del chat*/
 .CajaChat {
   margin: 1px opx;
@@ -42,6 +105,8 @@
 
 
 
+
+
 /*Scroll pequeño*/
 .ScrollMinimo {
   margin: 1px opx;
@@ -79,14 +144,6 @@
 .ScrollMinimo::-webkit-scrollbar-track {
   border-radius: 10px;
 }
-
-
-
-
-
-
-
-
 
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
