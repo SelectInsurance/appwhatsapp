@@ -108,9 +108,9 @@ class  query
     }
 
     //Buscando dialogs filtrando por like chat Asignados
-    public static function ReadDialogsFiltrandoAsignados($datos)
+    public static function ReadDialogsFiltrandoAsignados($datos, $user)
     {
-        return "CALL SP_FiltrarSalaAsignadosAdmin('$datos')";
+        return "CALL SP_FiltrarSalaAsignadosAdmin('$datos','$user')";
     }
 
     //Crear AccesWebToken

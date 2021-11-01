@@ -335,11 +335,12 @@ class controller
     //Mostrar tabla Dialogs Asignados
     public static function MostrarTablaChatAsignados()
     {
+        $user = $_SESSION['Admin'];
         $datos = '';
         if (isset($_POST['FiltroTablaAsignados'])) {
             $datos = $_POST['FiltroTablaAsignados'];
         }
-        $consulta = crud::Read(query::ReadDialogsFiltrandoAsignados($datos));
+        $consulta = crud::Read(query::ReadDialogsFiltrandoAsignados($datos, $user));
         $i = 0;
         $Array = array();
         while ($row = mysqli_fetch_assoc($consulta)) {
