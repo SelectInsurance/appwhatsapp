@@ -491,6 +491,7 @@ class controller
         $user = $_SESSION['Admin'];
         $consulta = crud::Read(query::ReadDialogs($user));
         $i = 0;
+        $Array = array();
         while ($rows = mysqli_fetch_assoc($consulta)) {
             $Array[$i]['name'] = $rows['name'];
             $i++;

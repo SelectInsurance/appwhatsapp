@@ -19,6 +19,7 @@ $(document).ready(function () {
     ReadAccesWebToken();
     ValidacionCantidadMaximaCaracteres();
     MostrarCantidadSalasChatAbiertas();
+    Tooltip();
 });
 
 
@@ -127,6 +128,499 @@ var ReadAccesWebToken = function () {
         }
     });
 }
+
+
+
+
+//AQUI COMIENZAN LAS FUNCTIONES DE LAS TABLAS DEL MODAL DE LOS CONTEOS
+//Funcion para Mostrar Tabla en conteo total chat
+var MostrarModalTablaChatAcumulado = function () {
+    $('#FiltroTablaTotal').keyup(function (e) {
+        var form = $('#frmFiltrarTotalSala').serialize();
+        $.ajax({
+            type: "POST",
+            url: "MostrarTablaChatAcumulado",
+            data: form,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                if (json !== 'null') {
+                    var tbody = '';
+                    json.forEach(
+                        consulta => {
+                            if (consulta.Asignador == null) {
+                                var SinAsignar = 'Sin Asignar';
+                            } else {
+                                var SinAsignar = consulta.Asignador;
+                            }
+
+                            if (consulta.idAgentes == null) {
+                                var idAgentes = 'Sin Asignar';
+                            } else {
+                                var idAgentes = consulta.idAgentes;
+                            }
+                            tbody += `
+                                <tr>
+                                    <td>${consulta.id}</td>
+                                    <td>${consulta.name}</td>
+                                    <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${SinAsignar}</td>
+                                    <td>${idAgentes}</td>
+                                    <td>
+                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                    </form>
+                                    </td>
+                                </tr>
+                                `;
+                        }
+                    )
+                    $('#TablaChatAcumulado').html(tbody);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "MostrarTablaChatAcumulado",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            if (json !== 'null') {
+                var tbody = '';
+                json.forEach(
+                    consulta => {
+                        if (consulta.Asignador == null) {
+                            var SinAsignar = 'Sin Asignar';
+                        } else {
+                            var SinAsignar = consulta.Asignador;
+                        }
+
+                        if (consulta.idAgentes == null) {
+                            var idAgentes = 'Sin Asignar';
+                        } else {
+                            var idAgentes = consulta.idAgentes;
+                        }
+                        tbody += `
+                            <tr>
+                                <td>${consulta.id}</td>
+                                <td>${consulta.name}</td>
+                                <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${SinAsignar}</td>
+                                <td>${idAgentes}</td>
+                                <td>
+                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                </form>
+                                </td>
+                            </tr>
+                            `;
+                    }
+                )
+                $('#TablaChatAcumulado').html(tbody);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+//Funcion para mostrar Tabla en conteo Abierto chat
+var MostrarModalTablaChatAbierto = function () {
+    $('#FiltroTablaAbiertos').keyup(function (e) {
+        var frm = $('#frmFiltrarAbiertosSala').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "MostrarTablaChatAbiertos",
+            data: frm,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                if (json !== 'null') {
+                    var tbody = '';
+                    json.forEach(
+                        consulta => {
+                            if (consulta.Asignador == null) {
+                                var SinAsignar = 'Sin Asignar';
+                            } else {
+                                var SinAsignar = consulta.Asignador;
+                            }
+
+                            if (consulta.idAgentes == null) {
+                                var SinAgentes = 'Sin Agentes';
+                            } else {
+                                var SinAgentes = consulta.idAgentes;
+                            }
+                            tbody += `
+                                <tr>
+                                    <td>${consulta.id}</td>
+                                    <td>${consulta.name}</td>
+                                    <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${SinAsignar}</td>
+                                    <td>${SinAgentes}</td>
+                                    <td>
+                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                    </form>
+                                    </td>
+                                </tr>
+                                `;
+                        }
+                    )
+                    $('#TablaChatAbiertosAcumulado').html(tbody);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "MostrarTablaChatAbiertos",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            if (json !== 'null') {
+                var tbody = '';
+                json.forEach(
+                    consulta => {
+                        if (consulta.Asignador == null) {
+                            var SinAsignar = 'Sin Asignar';
+                        } else {
+                            var SinAsignar = consulta.Asignador;
+                        }
+
+                        if (consulta.idAgentes == null) {
+                            var SinAgentes = 'Sin Agentes';
+                        } else {
+                            var SinAgentes = consulta.idAgentes;
+                        }
+                        tbody += `
+                            <tr>
+                                <td>${consulta.id}</td>
+                                <td>${consulta.name}</td>
+                                <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${SinAsignar}</td>
+                                <td>${SinAgentes}</td>
+                                <td>
+                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                </form>
+                                </td>
+                            </tr>
+                            `;
+                    }
+                )
+                $('#TablaChatAbiertosAcumulado').html(tbody);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+//Funcion para mostrar Tabla en conteo Cerrados chat
+var MostrarModalTablaChatCerrados = function () {
+    $('#FiltroTablaCerrados').keyup(function (e) {
+        var form = $('#frmFiltrarCerradosSala').serialize();
+        $.ajax({
+            type: "POST",
+            url: "MostrarTablaChatCerrados",
+            data: form,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                if (json !== 'null') {
+                    var tbody = '';
+                    json.forEach(
+                        consulta => {
+                            if (consulta.Asignador == null) {
+                                var SinAsignar = 'Sin Asignar';
+                            } else {
+                                var SinAsignar = consulta.Asignador;
+                            }
+
+                            if (consulta.idAgentes == null) {
+                                var SinAgentes = 'Sin Agentes';
+                            } else {
+                                var SinAgentes = consulta.idAgentes;
+                            }
+                            tbody += `
+                                <tr>
+                                    <td>${consulta.id}</td>
+                                    <td>${consulta.name}</td>
+                                    <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${SinAsignar}</td>
+                                    <td>${SinAgentes}</td>
+                                    <td>
+                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                    </form>
+                                    </td>
+                                </tr>
+                                `;
+
+                        });
+                    $('#TablaChatCerradosAcumulado').html(tbody);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+
+
+    });
+    $.ajax({
+        type: "POST",
+        url: "MostrarTablaChatCerrados",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            if (json !== 'null') {
+                var tbody = '';
+                json.forEach(
+                    consulta => {
+                        if (consulta.Asignador == null) {
+                            var SinAsignar = 'Sin Asignar';
+                        } else {
+                            var SinAsignar = consulta.Asignador;
+                        }
+
+                        if (consulta.idAgentes == null) {
+                            var SinAgentes = 'Sin Agentes';
+                        } else {
+                            var SinAgentes = consulta.idAgentes;
+                        }
+                        tbody += `
+                            <tr>
+                                <td>${consulta.id}</td>
+                                <td>${consulta.name}</td>
+                                <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${SinAsignar}</td>
+                                <td>${SinAgentes}</td>
+                                <td>
+                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                </form>
+                                </td>
+                            </tr>
+                            `;
+
+                    });
+                $('#TablaChatCerradosAcumulado').html(tbody);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+
+//Funcion para mostrar Tabla en conteo Asignados chat
+var MostrarModalTablaChatAsignados = function () {
+    $('#FiltroTablaAsignados').keyup(function (e) {
+        var form = $('#frmFiltrarAsignadosSala').serialize();
+        $.ajax({
+            type: "POST",
+            url: "MostrarTablaChatAsignados",
+            data: form,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                if (json !== 'null') {
+                    var tbody = '';
+                    json.forEach(
+                        consulta => {
+                            if (consulta.Asignador == null) {
+                                var SinAsignar = 'Sin Asignar';
+                            } else {
+                                var SinAsignar = consulta.Asignador;
+                            }
+
+                            if (consulta.idAgentes == null) {
+                                var SinAgentes = 'Sin Agentes';
+                            } else {
+                                var SinAgentes = consulta.idAgentes;
+                            }
+                            tbody += `
+                                <tr>
+                                    <td>${consulta.id}</td>
+                                    <td>${consulta.name}</td>
+                                    <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                    <td>${SinAsignar}</td>
+                                    <td>${SinAgentes}</td>
+                                    <td>
+                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                    </form>
+                                    </td>
+                                </tr>
+                                `;
+
+                        });
+                    $('#TablaChatAsignadosAcumulado').html(tbody);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+
+
+    });
+    $.ajax({
+        type: "POST",
+        url: "MostrarTablaChatAsignados",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            if (json !== 'null') {
+                var tbody = '';
+                json.forEach(
+                    consulta => {
+                        if (consulta.Asignador == null) {
+                            var SinAsignar = 'Sin Asignar';
+                        } else {
+                            var SinAsignar = consulta.Asignador;
+                        }
+
+                        if (consulta.idAgentes == null) {
+                            var SinAgentes = 'Sin Agentes';
+                        } else {
+                            var SinAgentes = consulta.idAgentes;
+                        }
+                        tbody += `
+                            <tr>
+                                <td>${consulta.id}</td>
+                                <td>${consulta.name}</td>
+                                <td><img src="${consulta.image}" class="img-thumbnail rounded" width="40px"></td>
+                                <td>${SinAsignar}</td>
+                                <td>${SinAgentes}</td>
+                                <td>
+                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
+                                </form>
+                                </td>
+                            </tr>
+                            `;
+
+                    });
+                $('#TablaChatAsignadosAcumulado').html(tbody);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
+//
+
+
+
+
+
+
+//Funcion para personalizar el tooltip
+var Tooltip = function () {
+
+    //ToolTips de las Cards del Dashboard
+    var cardTotal = document.getElementById('cardTotal')
+    if (cardTotal != null) {
+        var tooltip = new bootstrap.Tooltip(cardTotal, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+
+    var cardAbiertos = document.getElementById('cardAbiertos')
+    if (cardAbiertos != null) {
+        var tooltip = new bootstrap.Tooltip(cardAbiertos, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+
+
+    var cardCerrados = document.getElementById('cardCerrados')
+    if (cardCerrados != null) {
+        var tooltip = new bootstrap.Tooltip(cardCerrados, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+
+    var cardAsignados = document.getElementById('cardAsignados')
+    if (cardAsignados != null) {
+        var tooltip = new bootstrap.Tooltip(cardAsignados, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+
+    var carSeguimiento = document.getElementById('carSeguimiento')
+    if (carSeguimiento != null) {
+        var tooltip = new bootstrap.Tooltip(carSeguimiento, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColorVerde" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+    //
+
+    //Tooltips de el menu de la Derecha
+    var OpcionDashBoardMenu = document.getElementById('OpcionDashBoardMenu')
+    if (OpcionDashBoardMenu != null) {
+        var tooltip = new bootstrap.Tooltip(OpcionDashBoardMenu, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColorAzul" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+
+    var OpcionMensajeFinalMenu = document.getElementById('OpcionMensajeFinalMenu')
+    if (OpcionMensajeFinalMenu != null) {
+        var tooltip = new bootstrap.Tooltip(OpcionMensajeFinalMenu, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColorAzul" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+
+    var OpcionAddWhatsappMenu = document.getElementById('OpcionAddWhatsappMenu')
+    if (OpcionAddWhatsappMenu != null) {
+        var tooltip = new bootstrap.Tooltip(OpcionAddWhatsappMenu, {
+            boundary: document.body, // or document.querySelector('#boundary')
+            template: '<div class="tooltip TooltipColorAzul" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        });
+    }
+    //
+
+}
+
+
 
 
 

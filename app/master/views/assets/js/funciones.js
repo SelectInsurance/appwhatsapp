@@ -486,6 +486,9 @@ var MostrarModalTablaChatAsignados = function () {
 }
 //
 
+
+
+
 //Funcion para personalizar el tooltip
 var Tooltip = function () {
 
