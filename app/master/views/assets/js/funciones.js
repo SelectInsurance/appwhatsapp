@@ -189,7 +189,7 @@ var MostrarModalTablaChatAbierto = function () {
             url: "MostrarTablaChatAbiertos",
             data: frm,
             success: function (Respuesta) {
-                //console.log(Respuesta);
+                console.log(Respuesta);
                 var json = JSON.parse(Respuesta);
                 if (json !== 'null') {
                     var tbody = '';
