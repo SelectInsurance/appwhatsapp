@@ -182,7 +182,7 @@ class  query
     //Mostrando Cantidad de chats cerrados
     public static function ReadConteoChatCerrados($user)
     {
-        return "CALL SP_ConteoChatCerrados('$user')";
+        return "CALL SP_ConteoChatCerradosAdmin('$user')";
     }
 
     //Insertar Mensajes de la api a la base de datos
