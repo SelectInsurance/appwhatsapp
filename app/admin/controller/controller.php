@@ -282,13 +282,14 @@ class controller
 
     //Mostrar Tabla Dialogs Abiertos
     public static function MostrarTablaChatAbiertos()
-    {
+    {   
+        $user = $_SESSION['Admin'];
         //echo $_POST['FiltroTablaAbiertos'];
         $datos = '';
         if (isset($_POST['FiltroTablaAbiertos'])) {
             $datos = $_POST['FiltroTablaAbiertos'];
         }
-        $consulta = crud::Read(query::ReadDialogsFiltrandoAbiertos($datos));
+        $consulta = crud::Read(query::ReadDialogsFiltrandoAbiertos($datos, $user));
         $i = 0;
 
         $Array = array();

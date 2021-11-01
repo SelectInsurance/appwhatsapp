@@ -587,12 +587,11 @@ class controller
     public static function MostrarTablaChatAbiertos()
     {
         //echo $_POST['FiltroTablaAbiertos'];
-        $user = $_SESSION['Admin'];
         $datos = '';
         if (isset($_POST['FiltroTablaAbiertos'])) {
             $datos = $_POST['FiltroTablaAbiertos'];
         }
-        $consulta = crud::Read(query::ReadDialogsFiltrandoAbiertos($datos, $user));
+        $consulta = crud::Read(query::ReadDialogsFiltrandoAbiertos($datos));
         $i = 0;
 
         $Array = array();
