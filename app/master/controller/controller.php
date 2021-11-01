@@ -60,7 +60,6 @@ class controller
 
                 $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
                 $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
-                $Phone = $_POST['chatId'];
                 $message = $mensajeDespedida['cuerpo'];
                 $Phone = $_POST['btnCerrarChatConMensaje'];
                 $Api->SendMenssage($Phone, $message);
