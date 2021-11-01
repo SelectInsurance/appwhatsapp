@@ -28,7 +28,6 @@ function Nav()
     }
     //Salas de chat almacenadas en base de datos
     $consulta = crud::Read(query::ReadDialogs($user));
-    var_dump($consulta);
 
     require_once 'app/admin/views/assets/menu.phtml';
 }
