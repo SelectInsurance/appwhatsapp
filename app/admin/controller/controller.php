@@ -226,6 +226,116 @@ class controller
 
     //tODO LO RELACIONADO CON LOS CONTEOS DE CHAT
     //Mostrando Cantidad chat abiertos
+
+    //Mostrar Tabla Dialogs totales
+    public static function MostrarTablaChatAcumulado()
+    {
+        $user = $_SESSION['Admin'];
+        $datos = '';
+        if (isset($_POST['FiltroTablaTotal'])) {
+            $datos = $_POST['FiltroTablaTotal'];
+        }
+        //echo $datos;
+        if (!empty($datos)) {
+            $consulta = crud::Read(query::ReadDialogsFiltrando($datos, $user));
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($consulta)) {
+                $Array[$i]['id'] = $row['id'];
+                $Array[$i]['name'] = $row['name'];
+                $Array[$i]['image'] = $row['image'];
+                $Array[$i]['Asignador'] = $row['Asignador'];
+                $Array[$i]['idAgentes'] = $row['idAgentes'];
+                $i++;
+            }
+        } else if (empty($datos)) {
+            $consulta = crud::Read(query::ReadDialogs($user));
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($consulta)) {
+                $Array[$i]['id'] = $row['id'];
+                $Array[$i]['name'] = $row['name'];
+                $Array[$i]['image'] = $row['image'];
+                $Array[$i]['Asignador'] = $row['Asignador'];
+                $Array[$i]['idAgentes'] = $row['idAgentes'];
+                $i++;
+            }
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+
+    //Mostrar Tabla Dialogs Abiertos
+    public static function MostrarTablaChatAbiertos()
+    {
+        //echo $_POST['FiltroTablaAbiertos'];
+        $datos = '';
+        if (isset($_POST['FiltroTablaAbiertos'])) {
+            $datos = $_POST['FiltroTablaAbiertos'];
+        }
+        $consulta = crud::Read(query::ReadDialogsFiltrandoAbiertos($datos));
+        $i = 0;
+
+        $Array = array();
+        while ($row = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_time'] = $row['last_time'];
+            $Array[$i]['abierto'] = $row['abierto'];
+            $Array[$i]['Asignador'] = $row['Asignador'];
+            $Array[$i]['idAgentes'] = $row['idAgentes'];
+            $i++;
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+
+    //Mostrar tabla Dialogs Cerrados
+    public static function MostrarTablaChatCerrados()
+    {
+
+        $datos = '';
+        if (isset($_POST['FiltroTablaCerrados'])) {
+            $datos = $_POST['FiltroTablaCerrados'];
+        }
+
+        $consulta = crud::Read(query::ReadDialogsFiltrandoCerrados($datos));
+        $i = 0;
+        $Array = array();
+        while ($row = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_time'] = $row['last_time'];
+            $Array[$i]['abierto'] = $row['abierto'];
+            $Array[$i]['Asignador'] = $row['Asignador'];
+            $Array[$i]['idAgentes'] = $row['idAgentes'];
+            $i++;
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+
+    //Mostrar tabla Dialogs Asignados
+    public static function MostrarTablaChatAsignados()
+    {
+        $datos = '';
+        if (isset($_POST['FiltroTablaAsignados'])) {
+            $datos = $_POST['FiltroTablaAsignados'];
+        }
+        $consulta = crud::Read(query::ReadDialogsFiltrandoAsignados($datos));
+        $i = 0;
+        $Array = array();
+        while ($row = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['id'] = $row['id'];
+            $Array[$i]['name'] = $row['name'];
+            $Array[$i]['image'] = $row['image'];
+            $Array[$i]['last_time'] = $row['last_time'];
+            $Array[$i]['abierto'] = $row['abierto'];
+            $Array[$i]['Asignador'] = $row['Asignador'];
+            $Array[$i]['idAgentes'] = $row['idAgentes'];
+            $i++;
+        }
+        print json_encode($Array, JSON_PRETTY_PRINT);
+    }
+
+
     public static function MostrandoChatAbiertos()
     {
         $user = $_SESSION['Admin'];
@@ -233,6 +343,48 @@ class controller
         $Array = mysqli_fetch_assoc($Resultados);
         print $Array['v_conteo'];
     }
+
+
+    //Mostrar Sala Chat por Id desde Modal
+    public static function ConsultandoSalaDesdeModalTotal()
+    {
+        if (!empty($_POST['btnIdConsultarSala'])) {
+            $id = $_POST['btnIdConsultarSala'];
+
+            //sacando el indice usando foreach
+            foreach ($id as $indice) {
+                $id =  $indice;
+            }
+
+
+
+            $user = $_SESSION['Admin'];
+            $id = $indice;
+            $SalaChat = str_replace('@c.us', '', $indice);
+
+            //Imagen Guardada
+            $resultado = crud::Read(query::ReadImageDialogs($id));
+            $image = mysqli_fetch_assoc($resultado);
+
+            //Mostrando mensaje de despedida en el modal de cerrar chat
+            $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
+
+
+            higher();
+            Nav();
+            require_once 'app/admin/views/modules/chat/chat.phtml';
+            lower();
+        } else {
+            header('Location:Inicio');
+        }
+    }
+
+
+
+
+
+
+
 
     //Mostrar si el cliente esta conectado o no
     public static function MostrarEstadoConectado()
@@ -318,11 +470,11 @@ class controller
             $resultado = crud::Read(query::ReadImageDialogs($id));
             $image = mysqli_fetch_assoc($resultado);
 
-            
+
             //ChatAbiertos
             crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
-            
-            
+
+
             //Mostrando mensaje de despedida en el modal de cerrar chat
             $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
 
@@ -338,24 +490,30 @@ class controller
     //Mostrar Mensajes de chat individual
     public static function MostrarMensajesChat()
     {
-        if (!empty($_POST['chatId'])) {
+        //if (!empty($_POST['chatId'])) {
             $user = $_SESSION['Admin'];
-            $id =  $_POST['chatId'];
+            //$id =  $_POST['chatId'];
+            $id =  '573166857000@c.us';
             $url = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
             $api = new ChatApi($url['Instance'], $url['Token']);
             $data = $api->messages();
+            //var_dump($data['messages']);
 
             //cambiando ciclo foreach por ciclo while para hacer insercion a la base de datos usando 
             //la cantidad de indices que tiene el array
             $contador = count($data['messages']);
             $i = 0;
+            $sender = array();
             while ($i < $contador) {
-                if ($data['messages'][$i]['author'] === $data['messages'][$i]['chatId']) {
-                    $sender[$i] = $data['messages'][$i]['author'];
-                } elseif ($data['messages'][$i]['author'] != $data['messages'][$i]['chatId']) {
+                    $author = trim($data['messages'][$i]['author']);
+                    $chatId = trim($data['messages'][$i]['chatId']);
+                if ($author == $chatId) {
+                    $sender[$i] = $author;
+                } else {
                     $sender[$i] = $_SESSION['Admin'];
                 }
-                crud::Create(query::CreateAlmacenarMensajes(
+                
+                $resultado[$i] =crud::Create(query::CreateAlmacenarMensajes(
                     $data['messages'][$i]['id'],
                     $data['messages'][$i]['body'],
                     $data['messages'][$i]['fromMe'],
@@ -402,9 +560,8 @@ class controller
                 $Array[$i]['sender']          =   str_replace('@c.us', '', $row['sender']);
                 $i++;
             }
-
             print json_encode($Array, JSON_PRETTY_PRINT);
-        }
+        //}
     }
 
     //Enviar Mensajes de chat individual

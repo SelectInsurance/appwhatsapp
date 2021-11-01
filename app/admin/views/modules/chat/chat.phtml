@@ -21,42 +21,27 @@
             </div>
         </div>
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2 mt-3">
-            <form action="Inicio" method="POST">
 
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="far fa-times-circle"></i>
+            </button>
 
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="far fa-times-circle"></i>
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="ModalEnviarMensajeDespedida" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="ModalEnviarMensajeDespedida">¿Seguro quiere finalizar el Chat?</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <?= $consulta['cuerpo']; ?>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button class="btn btn-outline-success" value="<?= $SalaChat; ?>" name="btnCerrarChatConMensaje" type="submit">Resolver Chat con mensaje</button>
-                                <button class="btn btn-outline-danger" value="<?= $SalaChat; ?>" name="btnCerrarChat" type="submit">Resolver Chat</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
     <div class="row mb-5">
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
         <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8 shadow border">
-            <div class="CajaChat border my-2" id="datos_chat">
+            <div class="CajaChat border my-2" style="background-color: #4f5962;" id="datos_chat">
 
+
+
+                <!--Agregando Imagen de Carga-->
+                <center>
+                    <div class="spinner-border text-secondary m-5" style="width: 250px; height: 250px;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </center>
 
 
             </div>
@@ -81,3 +66,24 @@
         <div class="col-12 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
     </div>
 </div>
+<form action="Inicio" method="POST">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="ModalEnviarMensajeDespedida" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalEnviarMensajeDespedida">¿Seguro quiere finalizar el Chat?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?= $consulta['cuerpo']; ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-outline-success" value="<?= $SalaChat; ?>" name="btnCerrarChatConMensaje" type="submit">Resolver Chat con mensaje</button>
+                    <button class="btn btn-outline-danger" value="<?= $SalaChat; ?>" name="btnCerrarChat" type="submit">Resolver Chat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

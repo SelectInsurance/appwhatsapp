@@ -1,10 +1,6 @@
 $(document).ready(function () {
     console.log('Hola desde jquery seccion admin');
     EnviarMensajesChat();
-    setInterval('MostrarMensajesChat()', 3000);
-    setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
-    setInterval('MostrarCantidadSalasChatCerradas()', 3000);
-    setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
     TablaChatAsignadoAgente();
     InsertarMensajeDespedida();
     MostrarMensajesDespedida();
@@ -18,9 +14,62 @@ $(document).ready(function () {
     IngresoAccessWebToken();
     ReadAccesWebToken();
     ValidacionCantidadMaximaCaracteres();
-    MostrarCantidadSalasChatAbiertas();
     Tooltip();
+    MostrarModalTablaChatAcumulado();
+    SettIntervals();
 });
+
+
+
+//AQUI ENCONTRARAS TODOS LOS SETINTERVAL
+var SettIntervals = function () {
+
+    setInterval('MostrarMensajesChat()', 3000);
+    var interval = setInterval('MostrarMensajesChat()', 3000);
+    clearInterval(interval);
+
+
+    setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
+    var interval = setInterval('MostrarCantidadSalasChatAbiertas()', 3000);
+    clearInterval(interval);
+
+    setInterval('MostrarCantidadSalasChatCerradas()', 3000);
+    var interval = setInterval('MostrarCantidadSalasChatCerradas()', 3000);
+    clearInterval(interval);
+
+
+    setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
+    var interval = setInterval('MostrarCantidadSalasChatAsignadas()', 3000);
+    clearInterval(interval);
+
+
+
+
+
+/*     setInterval('UpdateInstance()', 360000);
+    var interval = setInterval('UpdateInstance()', 360000);
+    clearInterval(interval);
+
+
+    setInterval('MostrarCantidadSalasChat()', 3000);
+    var interval = setInterval('MostrarCantidadSalasChat()', 3000);
+    clearInterval(interval);
+
+
+    setInterval('TablaChatAsignadoAgente()', 30000);
+    var interval = setInterval('TablaChatAsignadoAgente()', 30000);
+    clearInterval(interval);
+
+    setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 1000);
+    var interval = setInterval('ReadConversacionDialogSeleccionadoTablaConversaciones()', 1000);
+    clearInterval(interval);
+
+    setInterval('MostrarModalTablaChatAbierto()', 3000);
+    var interval = setInterval('MostrarModalTablaChatAbierto()', 3000);
+    clearInterval(interval); */
+}
+//
+
 
 
 //Funcion para mostrar Datatable por Ajax
@@ -628,6 +677,77 @@ var Tooltip = function () {
 
 //TODO LO RELACIONADO CON EL CHAT
 //Enviar mensajes de chat
+
+
+//Mostrar Mensajes de chat individual
+var MostrarMensajesChat = function () {
+
+    let form = $('#frmMostrarChat').serialize();
+
+    if (form != '') {
+        $.ajax({
+            type: "POST",
+            url: "MostrarMensajesChat",
+            data: form,
+            success: function (Respuesta) {
+                let json = JSON.parse(Respuesta);
+                if (json !== null) {
+                    //console.log(json);
+                    let conversacion = '';
+                    json.forEach(
+                        Datos => {
+                            if (Datos.sender == 'master' || Datos.sender == 'admin' || Datos.sender == 'regular') {
+                                conversacion += `                            
+                                    <div class="m-2">
+                                        <span style="color:#82ccdd;">${Datos.sender}</span>
+                                        <span class="shadow" style="background-color:#dfe4ea; padding:5px; border-radius:10px;">${Datos.body}</span></br>
+                                        <span class="text-white" style="font-size: 11px;">${Datos.FechaHora}</span></br>
+                                    </div>
+                                    `
+                            } else {
+                                conversacion += `
+                                <div class="m-2">
+                                    <span style="color:#e55039;">${Datos.sender}</span>
+                                    <span class="shadow" style="background-color:#dfe4ea; padding:5px; border-radius:10px;">${Datos.body}</span></br>
+                                    <span class="text-white" style="font-size: 11px;">${Datos.FechaHora}</span></br>
+                                </div>
+                                `
+                            }
+                        });
+                    $('#datos_chat').html(conversacion);
+                    //
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+
+        //Mostrar Cliente Conectado
+        $.ajax({
+            type: "POST",
+            url: "MostrarEstadoConectado",
+            data: form,
+            success: function (Respuesta) {
+                //var json = JSON.parse(Respuesta);
+                if (Respuesta === 'available') {
+                    $('#statusCliente').css('color', 'green').html('•');
+                } else if (Respuesta === 'unavailable') {
+                    $('#statusCliente').css('color', 'red').html('•');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+
+            }
+        });
+    }
+};
+
 var EnviarMensajesChat = function () {
     $('#btnEnviarMensajeWhatsapp').click(function (e) {
         e.preventDefault();
@@ -674,74 +794,6 @@ var ValidacionCantidadMaximaCaracteres = function () {
         }
     });
 }
-
-//Mostrar Mensajes de chat individual
-var MostrarMensajesChat = function () {
-
-    let form = $('#frmMostrarChat').serialize();
-
-    if (form != '') {
-        $.ajax({
-            type: "POST",
-            url: "MostrarMensajesChat",
-            data: form,
-            success: function (Respuesta) {
-                //console.log(Respuesta);
-                let json = JSON.parse(Respuesta);
-                //console.log(json);
-                let conversacion = '';
-                json.forEach(
-                    Datos => {
-                        if (Datos.sender == 'master' || Datos.sender == 'admin' || Datos.sender == 'regular') {
-                            conversacion += `                            
-                                <div class="m-2">
-                                    <span class="text text-success">${Datos.sender}</span>
-                                    <span>${Datos.body}</span>
-                                    <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
-                                </div>
-                                `
-                        } else {
-                            conversacion += `
-                            <div class="m-2">
-                                <span class="text text-danger">${Datos.sender}</span>
-                                <span>${Datos.body}</span>
-                                <span style="float: right; font-size: 11px;">${Datos.FechaHora}</span><hr>
-                            </div>
-                            `
-                        }
-                    });
-                $('#datos_chat').html(conversacion);
-                //
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
-            }
-        });
-
-
-        $.ajax({
-            type: "POST",
-            url: "MostrarEstadoConectado",
-            data: form,
-            success: function (Respuesta) {
-                //var json = JSON.parse(Respuesta);
-                if (Respuesta === 'available') {
-                    $('#statusCliente').css('color','green').html('•');
-                }else if(Respuesta === 'unavailable'){
-                    $('#statusCliente').css('color','red').html('•');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
-
-            }
-        });
-    }
-};
 
 //Enviar mensajes de chat con Enter
 var EnviarMensajesDesdeEnter = function () {

@@ -90,9 +90,9 @@ class  query
     }
 
     //Buscando dialogs filtrando por like chat Total
-    public static function ReadDialogsFiltrando($datos)
+    public static function ReadDialogsFiltrando($datos, $user)
     {
-        return "SELECT * FROM dialogs WHERE name LIKE '$datos%' OR id LIKE '$datos%'";
+        return "call SP_FiltrarSalaAdmin('$datos', '$user')";
     }
 
     //Buscando dialogs filtrando por like chat Abiertos
