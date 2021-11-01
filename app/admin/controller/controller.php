@@ -1,6 +1,6 @@
 <?php
 
-require_once 'app\admin\models\app_autoload.php';
+require_once 'app/admin/models/app_autoload.php';
 
 //Funciones para requerir encabezado, pie de pagina y menu
 function higher()
