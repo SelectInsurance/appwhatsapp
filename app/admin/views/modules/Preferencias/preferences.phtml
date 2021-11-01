@@ -78,6 +78,31 @@
                                                         Cambiar Contraseña
                                                     </button>
                                                     <!-- Modal -->
+                                                    <div class="modal fade" id="Modal<?= $rows['usuario'] ?>">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="FormularioModificarPass">Modificar Contraseña</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <center>
+                                                                        <p id="MensajeCoincidencia" style="font-size: 16px;"></p>
+                                                                    </center>
+                                                                    <label for="UsuarioAgenteCambioContraseña">Usuario</label>
+                                                                    <input type="text" name="UsuarioAgenteCambioContrasena" id="UsuarioAgenteCambioContrasena" class="form-control" value="<?= $rows['usuario'] ?>" readonly><br>
+                                                                    <label for="NuevaContrasena" class="form-label">Ingrese Nueva Contraseña</label>
+                                                                    <input type="password" name="NuevaContrasena" id="NuevaContrasena" class="form-control" placeholder="Ingrese nueva pass" required="required"><br>
+                                                                    <label for="ConfirmarNuevaContrasena" class="form-label">Confirme Nueva Contraseña</label>
+                                                                    <input type="password" name="ConfirmarNuevaContrasena" id="ConfirmarNuevaContrasena" class="form-control" placeholder="Confirme nueva pass" required="required">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" name="btnCambiarContrasenaAgente" class="btn btn-success" id="btnCambiarContrasenaAgente">Cambiar Contraseña</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </form>
@@ -129,32 +154,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="Modal<?= $rows['usuario'] ?>">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="FormularioModificarPass">Modificar Contraseña</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <center>
-                    <p id="MensajeCoincidencia" style="font-size: 16px;"></p>
-                </center>
-                <label for="UsuarioAgenteCambioContraseña">Usuario</label>
-                <input type="text" name="UsuarioAgenteCambioContrasena" id="UsuarioAgenteCambioContrasena" class="form-control" value="<?= $rows['usuario'] ?>" readonly><br>
-                <label for="NuevaContrasena" class="form-label">Ingrese Nueva Contraseña</label>
-                <input type="password" name="NuevaContrasena" id="NuevaContrasena" class="form-control" placeholder="Ingrese nueva pass" required="required"><br>
-                <label for="ConfirmarNuevaContrasena" class="form-label">Confirme Nueva Contraseña</label>
-                <input type="password" name="ConfirmarNuevaContrasena" id="ConfirmarNuevaContrasena" class="form-control" placeholder="Confirme nueva pass" required="required">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="btnCambiarContrasenaAgente" class="btn btn-success" id="btnCambiarContrasenaAgente">Cambiar Contraseña</button>
             </div>
         </div>
     </div>

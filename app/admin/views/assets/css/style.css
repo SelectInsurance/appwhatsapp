@@ -1,5 +1,5 @@
 /*Agregando Blur en modal*/
-.modal-open .container-fluid,
+/* .modal-open .container-fluid,
 .modal-open .container {
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
@@ -7,7 +7,7 @@
   -ms-filter: blur(2px);
   filter: blur(6px);
 }
-
+ */
 /*ToolTip Azul*/
 .TooltipColorAzul .tooltip-inner{
   background-color: #0051bb !important;
