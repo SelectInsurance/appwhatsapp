@@ -15,21 +15,21 @@ function Nav()
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
     $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
 
-    if (!empty($ChatApi) && !empty($AwebT)) {
+    if (!empty($ChatApi) && $AwebT != null) {
         $array = $ChatApi->Dialogs();
-    }else {
-        echo 'No existe Acces Web Token';
-    }
 
-    //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
-    foreach ($array as $key => $value) {
-        $j = count($value);
-        $i = 0;
+        //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
+        foreach ($array as $key => $value) {
+            $j = count($value);
+            $i = 0;
 
-        while ($i < $j) {
-            crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
-            $i++;
+            while ($i < $j) {
+                crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
+                $i++;
+            }
         }
+    } else {
+        echo 'No existe Acces Web Token';
     }
 
     //Modificanco propietario de los dialogs
@@ -291,7 +291,7 @@ class controller
 
     //Mostrar Tabla Dialogs Abiertos
     public static function MostrarTablaChatAbiertos()
-    {   
+    {
         $user = $_SESSION['Admin'];
         //echo $_POST['FiltroTablaAbiertos'];
         $datos = '';
