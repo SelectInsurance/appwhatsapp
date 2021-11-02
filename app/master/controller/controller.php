@@ -62,14 +62,17 @@ class controller
 
                 //Envio de mensaje pregrabado
                 $resultados = crud::Read(query::ReadMensajeDespedidaChat($user));
-                $mensajeDespedida = mysqli_fetch_assoc($resultados);
 
-                $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
-                $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
-                $message = $mensajeDespedida['cuerpo'];
-                $Phone = $_POST['btnCerrarChatConMensaje'];
-                $Api->SendMenssage($Phone, $message);
+                if (isset($resultados)) {
+                    $mensajeDespedida = mysqli_fetch_assoc($resultados);
+    
+                    $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+                    $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
+                    $message = $mensajeDespedida['cuerpo'];
+                    $Phone = $_POST['btnCerrarChatConMensaje'];
+                    $Api->SendMenssage($Phone, $message);
 
+                }    
 
 
 
