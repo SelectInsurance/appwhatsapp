@@ -50,7 +50,6 @@ if (isset($_SESSION['Master'])) {
 
     //Login
 } else {
-    echo "ss";
 
     require_once 'app/Login/controller/controller.php';
     //exit();
