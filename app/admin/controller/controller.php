@@ -18,7 +18,7 @@ function Nav()
         $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
         $array = $ChatApi->Dialogs();
 
-        var_dump($array['name']);
+        var_dump($array[1]['name']);
 
         //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
         foreach ($array as $key => $value) {
