@@ -62,7 +62,7 @@
     </div>
   </div>
   <div class="offcanvas-body ScrollMinimo shadow border">
-    <?php if ($consulta != false): ?>
+    <?php if (!is_string($consulta)): ?>
     <?php while ($rows = mysqli_fetch_assoc($consulta)) : ?>
       <form action="AbrirSalaChat" method="post">
         <div class="d-grid">
