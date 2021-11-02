@@ -62,6 +62,7 @@
     </div>
   </div>
   <div class="offcanvas-body ScrollMinimo shadow border">
+    <?php if ($consulta != false): ?>
     <?php while ($rows = mysqli_fetch_assoc($consulta)) : ?>
       <form action="AbrirSalaChat" method="post">
         <div class="d-grid">
@@ -98,5 +99,6 @@
         </div>
       </form>
     <?php endwhile; ?>
+    <?php endif; ?>
   </div>
 </div>
