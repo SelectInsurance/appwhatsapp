@@ -18,15 +18,14 @@ function Nav()
         $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
         $array = $ChatApi->Dialogs();
 
-        var_dump($array[1]['name']);
-
         //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
         foreach ($array as $key => $value) {
             $j = count($value);
             $i = 0;
 
             while ($i < $j) {
-                crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time'], $user));
+                $value[$i]['user']=$user;
+                crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time'], $value[$i]['user']));
                 $i++;
             }
         }
