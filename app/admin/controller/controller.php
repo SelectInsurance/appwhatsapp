@@ -213,6 +213,7 @@ class controller
         $user = $_SESSION['Admin'];
         $Consulta = crud::Read(query::ReadAwebT($user));
         $i = 0;
+        $Array = array();
         while ($rows = mysqli_fetch_assoc($Consulta)) {
 
             $Array[$i]['idToken'] = $rows['idToken'];
