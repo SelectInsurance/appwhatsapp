@@ -4,7 +4,7 @@ $(document).ready(function () {
     setInterval('MostrarMensajesChat()', 3000);
     ValidacionCantidadMaximaCaracteres();
 
-    PruebaToastDesdeJquery();//Toast
+    //PruebaToastDesdeJquery();//Toast
 });
 
 
