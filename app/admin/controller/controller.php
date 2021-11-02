@@ -14,22 +14,22 @@ function Nav()
     //Recibiendo Salas de chat abiertas desde la app de whatsapp
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
     $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
+    var_dump($ChatApi);
+    var_dump($AwebT);
 
-    if (!empty($ChatApi) && $AwebT != null) {
-        $array = $ChatApi->Dialogs();
 
-        //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
-        foreach ($array as $key => $value) {
-            $j = count($value);
-            $i = 0;
 
-            while ($i < $j) {
-                crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
-                $i++;
-            }
+    $array = $ChatApi->Dialogs();
+
+    //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
+    foreach ($array as $key => $value) {
+        $j = count($value);
+        $i = 0;
+
+        while ($i < $j) {
+            crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
+            $i++;
         }
-    } else {
-        echo 'No existe Acces Web Token';
     }
 
     //Modificanco propietario de los dialogs
