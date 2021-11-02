@@ -33,7 +33,8 @@ function Nav()
         $consulta = crud::Read(query::ReadDialogs($user));
 
     } else {
-        echo '<center>No existe Token</center>';
+        $consulta = '<center>No existe Token</center>';
+        echo $consulta;
     }
 
     require_once 'app/admin/views/assets/menu.phtml';
