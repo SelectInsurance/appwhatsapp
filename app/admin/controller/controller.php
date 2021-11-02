@@ -26,6 +26,10 @@ function Nav()
             $i++;
         }
     }
+
+    //Modificanco propietario de los dialogs
+
+
     //Salas de chat almacenadas en base de datos
     $consulta = crud::Read(query::ReadDialogs($user));
 
@@ -227,6 +231,7 @@ class controller
         $user = $_SESSION['Admin'];
         $consulta = crud::Read(query::ReadDialogs($user));
         $i = 0;
+        $Array = array();
         while ($row = mysqli_fetch_array($consulta)) {
             $Array[$i]['id'] = $row['id'];
             $Array[$i]['name'] = $row['name'];
