@@ -14,7 +14,12 @@ function Nav()
     //Recibiendo Salas de chat abiertas desde la app de whatsapp
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
     $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
-    $array = $ChatApi->Dialogs();
+
+    if (!empty($ChatApi) && !empty($AwebT)) {
+        $array = $ChatApi->Dialogs();
+    }else {
+        echo 'No existe Acces Web Token';
+    }
 
     //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
     foreach ($array as $key => $value) {

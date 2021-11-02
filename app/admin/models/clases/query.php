@@ -73,9 +73,9 @@ class  query
     }
 
     //Insertar dialogs
-    public static function CreateDialogs($id, $name, $image, $last_time)
+    public static function CreateDialogs($id, $name, $image, $last_time, $user)
     {
-        return "INSERT INTO dialogs(id,name,image,last_time) VALUES('$id','$name','$image','$last_time')";
+        return "CALL SP_CreateDialogsAdmin('$id','$name','$image','$last_time','$user')";
     }
 
     //Actualizar Imagen Dialogs
