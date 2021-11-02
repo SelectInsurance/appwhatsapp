@@ -24,7 +24,6 @@ function Nav()
             $i = 0;
 
             while ($i < $j) {
-                var_dump($value[$i]['id']);
                 crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
                 crud::Update(query::UpdateImageDialogs($value[$i]['id'], $value[$i]['image']));
                 $i++;
