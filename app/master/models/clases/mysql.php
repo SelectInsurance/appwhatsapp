@@ -21,7 +21,7 @@ class mysql
 
     public function Conexion()
     {
-        $mysql = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
+        $mysql = new mysqli($this->host, $this->user, $this->pass, $this->db);
 
         //error_reporting(0);
         
