@@ -7,6 +7,6 @@ DECLARE v_id INT;
 
 SET v_id = (SELECT id FROM Agentes WHERE usuario = v_user);
 
-INSERT INTO Dialogs (id_agente, nombre, imagen, last_time, idAgentes) VALUES (v_id, v_name, v_image, v_last_time, v_id);
+INSERT INTO dialogs (id_agente, nombre, imagen, last_time, idAgentes) VALUES (v_id, v_name, v_image, v_last_time, v_id);
 
 END $$
