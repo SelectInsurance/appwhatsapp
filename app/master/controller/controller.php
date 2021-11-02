@@ -11,25 +11,31 @@ function Nav()
     $user = $_SESSION['Master'];
     //Recibiendo Salas de chat abiertas desde la app de whatsapp
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
-    $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
-    $array = $ChatApi->Dialogs();
 
-    //var_dump($array);
+    if (isset($AwebT['Instance']) && isset($AwebT['Token'])) {
+        $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
+        $array = $ChatApi->Dialogs();
 
-    //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
-    foreach ($array as $key => $value) {
-        $j = count($value);
-        $i = 0;
+        //var_dump($array);
 
-        while ($i < $j) {
-            crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
-            crud::Update(query::UpdateImageDialogs($value[$i]['id'], $value[$i]['image']));
-            $i++;
+        //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
+        foreach ($array as $key => $value) {
+            $j = count($value);
+            $i = 0;
+
+            while ($i < $j) {
+                crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
+                crud::Update(query::UpdateImageDialogs($value[$i]['id'], $value[$i]['image']));
+                $i++;
+            }
+            //Salas de chat almacenadas en base de datos
+            $consulta = crud::Read(query::ReadDialogs());
         }
+    } else {
+        $consulta = '<center>No existe Token</center>';
+        echo $consulta;
     }
 
-    //Salas de chat almacenadas en base de datos
-    $consulta = crud::Read(query::ReadDialogs());
     require_once 'app/master/views/assets/menu.phtml';
     require_once 'app/master/views/assets/contentheader.phtml';
 }
@@ -274,15 +280,15 @@ class controller
             $i = 0;
             $sender = array();
             while ($i < $contador) {
-                    $author = trim($data['messages'][$i]['author']);
-                    $chatId = trim($data['messages'][$i]['chatId']);
+                $author = trim($data['messages'][$i]['author']);
+                $chatId = trim($data['messages'][$i]['chatId']);
                 if ($author == $chatId) {
                     $sender[$i] = $author;
                 } else {
                     $sender[$i] = $_SESSION['Master'];
                 }
-                
-                $resultado[$i] =crud::Create(query::CreateAlmacenarMensajes(
+
+                $resultado[$i] = crud::Create(query::CreateAlmacenarMensajes(
                     $data['messages'][$i]['id'],
                     $data['messages'][$i]['body'],
                     $data['messages'][$i]['fromMe'],
@@ -420,17 +426,17 @@ class controller
     public static function MostrandoMensajeDespedida()
     {
         $consulta = crud::Read(query::ReadMensajeDespedida());
-            $i = 0;
-            $Array = array();
-            while ($resultados = mysqli_fetch_assoc($consulta)) {
-                $Array[$i]['id'] = $resultados['id'];
-                $Array[$i]['cuerpo'] = $resultados['cuerpo'];
-                $Array[$i]['usuario'] = $resultados['usuario'];
-                $Array[$i]['fecha'] = $resultados['fecha'];
-                $i++;
-            }
-    
-            print json_encode($Array, JSON_PRETTY_PRINT);
+        $i = 0;
+        $Array = array();
+        while ($resultados = mysqli_fetch_assoc($consulta)) {
+            $Array[$i]['id'] = $resultados['id'];
+            $Array[$i]['cuerpo'] = $resultados['cuerpo'];
+            $Array[$i]['usuario'] = $resultados['usuario'];
+            $Array[$i]['fecha'] = $resultados['fecha'];
+            $i++;
+        }
+
+        print json_encode($Array, JSON_PRETTY_PRINT);
     }
 
     //Eliminar Mensaje de Despedida
@@ -694,8 +700,8 @@ class controller
     public static function MostrandoChatAsignados()
     {
         $consulta = crud::Read(query::ReadChatAsignados());
-            $row = mysqli_fetch_assoc($consulta);
-            echo $row['count(idAgentes)'];
+        $row = mysqli_fetch_assoc($consulta);
+        echo $row['count(idAgentes)'];
     }
 
     //Mostrando Cantidad Chat Cerrados
