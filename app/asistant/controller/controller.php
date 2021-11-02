@@ -13,26 +13,29 @@ function Nav()
     $user = $_SESSION['Asistant'];
     //Recibiendo Salas de chat abiertas desde la app de whatsapp
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
-    $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
-    $array = $ChatApi->Dialogs();
 
-    //var_dump($array);
+    if (isset($AwebT['Instance']) && isset($AwebT['Token'])) {
+        $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
+        $array = $ChatApi->Dialogs();
 
-    //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
-    foreach ($array as $key => $value) {
-        $j = count($value);
-        $i = 0;
+        //var_dump($array);
 
-        while ($i < $j) {
-            crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
-            $i++;
+        //logica para sacar cantidad de indices y recorrer el array con la cantidad de indices
+        foreach ($array as $key => $value) {
+            $j = count($value);
+            $i = 0;
+
+            while ($i < $j) {
+                crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
+                $i++;
+            }
         }
+        //Salas de chat almacenadas en base de datos
+        $consulta = crud::Read(query::ReadDialogs($user));
+    } else {
+        $consulta = '<center>No existe Token</center>';
+        echo $consulta;
     }
-
-    $user = $_SESSION['Asistant'];
-    //Salas de chat almacenadas en base de datos
-    $consulta = crud::Read(query::ReadDialogs($user));
-
 
 
 
