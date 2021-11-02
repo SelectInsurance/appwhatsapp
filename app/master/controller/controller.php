@@ -315,6 +315,7 @@ class controller
 
             $consulta = crud::Read(query::ReadMensajesChat($id));
             $i = 0;
+            $Array = array();
             while ($row = mysqli_fetch_assoc($consulta)) {
 
                 $Array[$i]['id']              =   $row['id'];
