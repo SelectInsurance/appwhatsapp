@@ -267,6 +267,7 @@ class controller
         if (!empty($datos)) {
             $consulta = crud::Read(query::ReadDialogsFiltrando($datos, $user));
             $i = 0;
+            $Array = array();
             while ($row = mysqli_fetch_assoc($consulta)) {
                 $Array[$i]['id'] = $row['id'];
                 $Array[$i]['name'] = $row['name'];
