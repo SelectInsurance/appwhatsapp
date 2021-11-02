@@ -24,7 +24,7 @@ function Nav()
             $i = 0;
 
             while ($i < $j) {
-                crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time']));
+                crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time'], $user));
                 $i++;
             }
         }
