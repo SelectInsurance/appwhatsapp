@@ -248,7 +248,9 @@ class controller
             $image = mysqli_fetch_assoc($resultado);
 
             //ChatAbiertos
-            crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
+            if (isset($_POST['btnAbrirChat'])) {
+                crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
+            }
 
             //Mostrando mensaje de despedida en el modal de cerrar chat
             $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
