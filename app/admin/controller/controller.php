@@ -10,7 +10,7 @@ function higher()
 
 function Nav()
 {
-    $user = $_SESSION['Admin'];
+    $user = $_SESSION['Asistant'];
     //Recibiendo Salas de chat abiertas desde la app de whatsapp
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
 
