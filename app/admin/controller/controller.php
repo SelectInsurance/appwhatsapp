@@ -28,24 +28,13 @@ function Nav()
                 $i++;
             }
         }
-        
+
         //Salas de chat almacenadas en base de datos
         $consulta = crud::Read(query::ReadDialogs($user));
 
     } else {
         echo '<center>No existe Token</center>';
     }
-
-
-    var_dump($ChatApi);
-    var_dump($AwebT);
-
-
-
-    //Modificanco propietario de los dialogs
-
-
-
 
     require_once 'app/admin/views/assets/menu.phtml';
 }
