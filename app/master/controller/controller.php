@@ -64,14 +64,13 @@ class controller
                 $resultados = crud::Read(query::ReadMensajeDespedidaChat($user));
                 $mensajeDespedida = mysqli_fetch_assoc($resultados);
                 if (isset($mensajeDespedida)) {
-    
+
                     $UrlToken = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
                     $Api = new ChatApi($UrlToken['Instance'], $UrlToken['Token']);
                     $message = $mensajeDespedida['cuerpo'];
                     $Phone = $_POST['btnCerrarChatConMensaje'];
                     $Api->SendMenssage($Phone, $message);
-
-                }    
+                }
 
 
 
@@ -146,8 +145,16 @@ class controller
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $documento = $_POST['documento'];
-        $admin = boolval($_POST['admin']);
-        $master = boolval($_POST['master']);
+
+        $admin = '';
+        if (isset($_POST['admin'])) {
+            $admin = boolval($_POST['admin']);
+        }
+        $master = '';
+        if ($_POST['master']) {
+            $master = boolval($_POST['master']);
+        }
+        
         $telefono = $_POST['telefono'];
         $direccion = $_POST['direccion'];
         $correo = $_POST['correo'];

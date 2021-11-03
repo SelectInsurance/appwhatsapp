@@ -1,3 +1,35 @@
+/* Agregando estilo del sendFile */
+.ContenedorsendFile {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+
+.ParrafosendFile{
+  text-align: center;
+}
+
+.sendFile {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
 /*Agregando Blur en modal*/
 .modal-open .container-fluid,
 .modal-open .container {
@@ -9,57 +41,56 @@
 }
 
 /*ToolTip Azul*/
-.TooltipColorAzul .tooltip-inner{
+.TooltipColorAzul .tooltip-inner {
   background-color: #0051bb !important;
   color: rgb(255, 255, 255);
 }
 
 .bs-tooltip-top .arrow::before,
-.bs-tooltip-auto[x-placement^="top"] .arrow::before{
+.bs-tooltip-auto[x-placement^="top"] .arrow::before {
   border-top-color: #0051bb !important;
 }
 
 .bs-tooltip-right .arrow::before,
-.bs-tooltip-auto[x-placement^="right"] .arrow::before{
+.bs-tooltip-auto[x-placement^="right"] .arrow::before {
   border-top-color: #0051bb !important;
 }
 
 .bs-tooltip-bottom .arrow::before,
-.bs-tooltip-auto[x-placement^="bottom"] .arrow::before{
+.bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
   border-top-color: #0051bb !important;
 }
 
 .bs-tooltip-left .arrow::before,
-.bs-tooltip-auto[x-placement^="left"] .arrow::before{
+.bs-tooltip-auto[x-placement^="left"] .arrow::before {
   border-top-color: #0051bb !important;
 }
 
 /*ToolTip Verde*/
-.TooltipColorVerde .tooltip-inner{
+.TooltipColorVerde .tooltip-inner {
   background-color: #007558 !important;
   color: rgb(255, 255, 255);
 }
 
 .bs-tooltip-top .arrow::before,
-.bs-tooltip-auto[x-placement^="top"] .arrow::before{
+.bs-tooltip-auto[x-placement^="top"] .arrow::before {
   border-top-color: #007558 !important;
 }
 
 .bs-tooltip-right .arrow::before,
-.bs-tooltip-auto[x-placement^="right"] .arrow::before{
+.bs-tooltip-auto[x-placement^="right"] .arrow::before {
   border-top-color: #007558 !important;
 }
 
 .bs-tooltip-bottom .arrow::before,
-.bs-tooltip-auto[x-placement^="bottom"] .arrow::before{
+.bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
   border-top-color: #007558 !important;
 }
 
 .bs-tooltip-left .arrow::before,
-.bs-tooltip-auto[x-placement^="left"] .arrow::before{
+.bs-tooltip-auto[x-placement^="left"] .arrow::before {
   border-top-color: #007558 !important;
 }
-
 
 /*caja del chat*/
 .CajaChat {
@@ -98,14 +129,6 @@
 .CajaChat::-webkit-scrollbar-track {
   border-radius: 10px;
 }
-
-
-
-
-
-
-
-
 
 /*Scroll pequeño*/
 .ScrollMinimo {
