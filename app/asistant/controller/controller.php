@@ -111,14 +111,52 @@ class controller
     //TODO LO RELACIONADO CON EL CHAT
     //Sala de chat individual
 
-        // add Sala de chat individual
-        public static function AddSala()
-        {
+    // add Sala de chat individual
+    public static function AddSala()
+    {
+        higher();
+        Nav();
+        require_once 'app/asistant/views/modules/addChat/addChat.phtml';
+        lower();
+    }
+
+    //Abrir Sala de chat individual
+    public static function AbrirSalaChat()
+    {
+        //Condicion para obligar a tener si o si una sala de chat
+        if (!empty($_POST['btnAbrirChat']) || isset($_POST['btnAddSalaChat'])) {
+
+            //Condicion para Agregar nuevo chat o no
+            if (!empty($_POST['NumeroCliente'])) {
+                $user = $_SESSION['Asistant'];
+                $id = $_POST['CodigoPais'] . $_POST['NumeroCliente'] . '@c.us';
+                $SalaChat = $_POST['CodigoPais'] . $_POST['NumeroCliente'];
+            } else {
+                $user = $_SESSION['Asistant'];
+                $id = $_POST['btnAbrirChat'];
+                $SalaChat = str_replace('@c.us', '', $_POST['btnAbrirChat']);
+            }
+
+            //Imagen Guardada
+            $resultado = crud::Read(query::ReadImageDialogs($id));
+            $image = mysqli_fetch_assoc($resultado);
+
+            //ChatAbiertos
+            if (isset($_POST['btnAbrirChat'])) {
+                crud::Update(query::UpdateDialogsAbrirChat($_POST['btnAbrirChat']));
+            }
+
+            //Mostrando mensaje de despedida en el modal de cerrar chat
+            $consulta = mysqli_fetch_assoc(crud::Read(query::ReadMensajeDespedidaChat($user)));
+
             higher();
             Nav();
-            require_once 'app/asistant/views/modules/addChat/addChat.phtml';
+            require_once 'app/asistant/views/modules/chat/chat.phtml';
             lower();
+        } else {
+            header('Location:./');
         }
+    }
 
     public static function SalaChat()
     {
