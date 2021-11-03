@@ -151,10 +151,10 @@ class controller
             $admin = boolval($_POST['admin']);
         }
         $master = '';
-        if ($_POST['master']) {
+        if (isset($_POST['master'])) {
             $master = boolval($_POST['master']);
         }
-        
+
         $telefono = $_POST['telefono'];
         $direccion = $_POST['direccion'];
         $correo = $_POST['correo'];
