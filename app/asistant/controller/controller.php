@@ -110,6 +110,16 @@ class controller
 
     //TODO LO RELACIONADO CON EL CHAT
     //Sala de chat individual
+
+        // add Sala de chat individual
+        public static function AddSala()
+        {
+            higher();
+            Nav();
+            require_once 'app/asistant/views/modules/addChat/addChat.phtml';
+            lower();
+        }
+
     public static function SalaChat()
     {
         //Condicion para obligar a tener si o si una sala de chat

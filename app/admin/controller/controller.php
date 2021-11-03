@@ -24,7 +24,7 @@ function Nav()
             $i = 0;
 
             while ($i < $j) {
-                $value[$i]['user']=$user;
+                $value[$i]['user'] = $user;
                 crud::Create(query::CreateDialogs($value[$i]['id'], $value[$i]['name'], $value[$i]['image'], $value[$i]['last_time'], $value[$i]['user']));
                 $i++;
             }
@@ -32,7 +32,6 @@ function Nav()
 
         //Salas de chat almacenadas en base de datos
         $consulta = crud::Read(query::ReadDialogs($user));
-
     } else {
         $consulta = '<center>No existe Token</center>';
         echo $consulta;
@@ -490,6 +489,15 @@ class controller
 
 
     //TODO LO RELACIONADO CON EL CHAT
+    // add Sala de chat individual
+    public static function AddSala()
+    {
+        higher();
+        Nav();
+        require_once 'app/admin/views/modules/addChat/addChat.phtml';
+        lower();
+    }
+
     //Sala de chat individual
     public static function AbrirSalaChat()
     {

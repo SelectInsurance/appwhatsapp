@@ -1,5 +1,7 @@
 $(document).ready(function () {
     console.log('Hola desde Jquery usando rol Asistente');
+
+    $('#CodigoPais').select2({ tags: true });
     EnviarMensajesChat();
     setInterval('MostrarMensajesChat()', 3000);
     ValidacionCantidadMaximaCaracteres();
