@@ -696,7 +696,7 @@ var FiltrandoSalaNav = function () {
             url: "FiltrandoSalaNav",
             data: frm,
             success: function (Respuesta) {
-                //console.log(Respuesta);
+                console.log(Respuesta);
                 var json = JSON.parse(Respuesta);
 
                 if (json.name === 'No existe Token') {
