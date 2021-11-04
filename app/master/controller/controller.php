@@ -63,7 +63,7 @@ class controller
 
             if (!isset($_POST['filtrarNav'])) {
                 echo $json;
-            } elseif (isset($_POST['filtrarNav'])) {
+            } else {
                 $filtrarNav = $_POST['filtrarNav'];
 
                 //Salas de chat almacenadas en base de datos
