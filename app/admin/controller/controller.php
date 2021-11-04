@@ -705,6 +705,7 @@ class controller
         $consulta = crud::Read(query::ReadDialogsAgente($id));
 
         $i = 0;
+        $array = array();
         while ($row = mysqli_fetch_assoc($consulta)) {
             $array[$i]['id']        =  str_replace('@c.us', '', $row['id']);
             $array[$i]['name']      =   $row['name'];

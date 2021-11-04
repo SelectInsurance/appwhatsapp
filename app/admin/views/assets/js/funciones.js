@@ -1296,14 +1296,7 @@ var ReadDialogsAsignadosAgente = function () {
                     }
                 );
                 $('#tabladialogs').html(tabla);
-
-
-
-
                 console.log(json);
-
-
-
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
