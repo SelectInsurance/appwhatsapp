@@ -567,39 +567,34 @@ var Tooltip = function () {
 //Funcion para filtrar salas desde el Nav
 var FiltrandoSalaNav = function () {
     $('#filtrarNav').keyup(function (e) {
-
         var frm = $('#frmFiltroDialogNav').serialize();
+        $.ajax({
+            type: "POST",
+            url: "FiltrandoSalaNav",
+            data: frm,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    })
 
-        if (frm != '') {
-            $.ajax({
-                type: "POST",
-                url: "FiltrandoSalaNav",
-                data: frm,
-                success: function (Respuesta) {
-                    console.log(Respuesta);
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(error);
-                }
-            });
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "FiltrandoSalaNav",
-                success: function (Respuesta) {
-                    console.log(Respuesta);
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(error);
-                }
-            });
+    $.ajax({
+        type: "POST",
+        url: "FiltrandoSalaNav",
+        success: function (Respuesta) {
+            console.log(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
         }
     });
-
 }
 
 
