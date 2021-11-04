@@ -576,7 +576,7 @@ var FiltrandoSalaNav = function () {
                 //console.log(Respuesta);
                 var json = JSON.parse(Respuesta);
                 var tbody = '';
-                $.each(json.dialogs, function (i, consulta) {
+                $.each(json, function (i, consulta) {
                     tbody += `
                     <form action="AbrirSalaChat" method="post">
                     <div class="d-grid">
@@ -624,7 +624,7 @@ var FiltrandoSalaNav = function () {
             //console.log(Respuesta);
             var json = JSON.parse(Respuesta);
             var tbody = '';
-            console.log(json);
+            //console.log(json);
             $.each(json.dialogs, function (i, consulta) {
                 tbody += `
                 <form action="AbrirSalaChat" method="post">
