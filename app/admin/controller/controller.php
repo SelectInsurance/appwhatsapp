@@ -78,12 +78,18 @@ class controller
                         $i++;
                     }
                 }
+            }else {
+                $name = array();
+                $name = [
+                    'name' => 'No existe Token'
+                ];
+                print json_encode($name);
             }
         } else {
             $filtrarNav = $_POST['filtrarNav'];
 
             //Salas de chat almacenadas en base de datos
-            $consulta = crud::Read(query::ReadDialogsByName($filtrarNav));
+            $consulta = crud::Read(query::ReadDialogsByName($filtrarNav, $user));
             $i = 0;
             $Array = array();
             while ($rows = mysqli_fetch_assoc($consulta)) {

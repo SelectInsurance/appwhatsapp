@@ -78,8 +78,15 @@ class  query
         return "CALL SP_CreateDialogsAdmin('$id','$name','$image','$last_time','$user')";
     }
 
+    //Filtrando dialogs por name
+    public static function ReadDialogsByName($name, $user)
+    {
+        return "CALL SP_ReadDialogsByNameAdmin('$name','$user')";
+    }
+
     //Actualizar Imagen Dialogs
-    public static function UpdateImageDialogs($id, $image){
+    public static function UpdateImageDialogs($id, $image)
+    {
         return "UPDATE dialogs SET image = '$image' WHERE id = '$id'";
     }
 
@@ -257,17 +264,20 @@ class  query
     }
 
     //Mostrando Ultimo Mensaje de Despedida
-    public static function ReadMensajeDespedida(){
+    public static function ReadMensajeDespedida()
+    {
         return "SELECT * FROM MensajeDespedida";
     }
 
     //Eliminando mensaje de despedida
-    public static function DeleteMensajeDespedida($id){
+    public static function DeleteMensajeDespedida($id)
+    {
         return "DELETE FROM mensajedespedida WHERE id = '$id'";
     }
 
     //Filtrar dialogs por agente
-    public static function ReadFiltrarSala($datos, $id){
+    public static function ReadFiltrarSala($datos, $id)
+    {
         return "call SP_FiltrarSala('$datos','$id')";
     }
 }

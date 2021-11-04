@@ -77,6 +77,12 @@ class controller
                         $i++;
                     }
                 }
+            } else {
+                $name = array();
+                $name = [
+                    'name' => 'No existe Token'
+                ];
+                print json_encode($name);
             }
         } else {
             $filtrarNav = $_POST['filtrarNav'];

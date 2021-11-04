@@ -46,8 +46,8 @@ class ChatApi
     {
         $url = $this->instance . 'dialogs?token=' . $this->token . '&page=1&order=desc';
         $result = file_get_contents($url);
-        $Dialogs = json_decode($result, true);
-        return $Dialogs;
+        //$Dialogs = json_decode($result, true);
+        return $result;
     }
 
     //Metodo para consultar todos los mensajes

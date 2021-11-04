@@ -575,9 +575,12 @@ var FiltrandoSalaNav = function () {
             success: function (Respuesta) {
                 //console.log(Respuesta);
                 var json = JSON.parse(Respuesta);
-                var tbody = '';
-                $.each(json, function (i, consulta) {
-                    tbody += `
+                if (json.name === 'No existe Token') {
+                    alert(json.name);
+                } else {
+                    var tbody = '';
+                    $.each(json, function (i, consulta) {
+                        tbody += `
                     <form action="AbrirSalaChat" method="post">
                     <div class="d-grid">
                         <button type="submit" name="btnAbrirChat" value="${consulta.id}" class="btn btn-outline-success m-0 p-0 rounded-1" target="__blank">
@@ -606,8 +609,9 @@ var FiltrandoSalaNav = function () {
                     </div>
                 </form>
                                 `;
-                });
-                $('#tbodySala').html(tbody);
+                    });
+                    $('#tbodySala').html(tbody);
+                }
             },
             error: function (xhr, status, error) {
                 console.log(xhr);
@@ -623,10 +627,14 @@ var FiltrandoSalaNav = function () {
         success: function (Respuesta) {
             //console.log(Respuesta);
             var json = JSON.parse(Respuesta);
-            var tbody = '';
-            //console.log(json);
-            $.each(json.dialogs, function (i, consulta) {
-                tbody += `
+
+            if (json.name === 'No existe Token') {
+                alert(json.name);
+            } else {
+                var tbody = '';
+                //console.log(json);
+                $.each(json.dialogs, function (i, consulta) {
+                    tbody += `
                 <form action="AbrirSalaChat" method="post">
                 <div class="d-grid">
                     <button type="submit" name="btnAbrirChat" value="${consulta.id}" class="btn btn-outline-success rounded-1" target="__blank">
@@ -656,8 +664,9 @@ var FiltrandoSalaNav = function () {
             </form>
                             `;
 
-            });
-            $('#tbodySala').html(tbody);
+                });
+                $('#tbodySala').html(tbody);
+            }
         },
         error: function (xhr, status, error) {
             console.log(xhr);
