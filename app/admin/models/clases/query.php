@@ -81,7 +81,7 @@ class  query
     //Filtrando dialogs por name
     public static function ReadDialogsByName($name, $user)
     {
-        return "CALL SP_ReadDialogsByNameAdmin('$name','$user')";
+        return "CALL SP_ReadDialogsByName('$name','$user')";
     }
 
     //Actualizar Imagen Dialogs
