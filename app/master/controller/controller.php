@@ -60,9 +60,8 @@ class controller
         if (isset($AwebT['Instance']) && isset($AwebT['Token'])) {
             $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
             $json = $ChatApi->Dialogs();
-            if (!isset($_POST['filtrarNav'])) {
                 print $json;
-            } elseif ($_POST['filtrarNav'] != '') {
+            if ($_POST['filtrarNav'] != '') {
                 $filtrarNav = $_POST['filtrarNav'];
 
                 //Salas de chat almacenadas en base de datos
