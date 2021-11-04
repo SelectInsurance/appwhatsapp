@@ -20,6 +20,7 @@ $(document).ready(function () {
     Tooltip();
     MostrarModalTablaChatAcumulado();
     SettIntervals();
+    FiltrandoSalaNav();
 });
 
 
@@ -686,6 +687,108 @@ var Tooltip = function () {
 
 }
 
+//Funcion para filtrar salas desde el Nav
+var FiltrandoSalaNav = function () {
+    $('#filtrarNav').keyup(function (e) {
+        var frm = $('#frmFiltroDialogNav').serialize();
+        $.ajax({
+            type: "POST",
+            url: "FiltrandoSalaNav",
+            data: frm,
+            success: function (Respuesta) {
+                //console.log(Respuesta);
+                var json = JSON.parse(Respuesta);
+                var tbody = '';
+                $.each(json, function (i, consulta) {
+                    tbody += `
+                    <form action="AbrirSalaChat" method="post">
+                    <div class="d-grid">
+                        <button type="submit" name="btnAbrirChat" value="${consulta.id}" class="btn btn-outline-success m-0 p-0 rounded-1" target="__blank">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-3 col-md-3 col-lg-3 col-xl-3">
+                                        <img src="${consulta.image}" class="img-thumbnail rounded float-start" width="40px">
+                                    </div>
+                                    <div class="col-6 col-md-6 col-lg-6 col-xl-6">
+                                    ${consulta.name}
+                                    </div>
+                                    <div class="col-3 col-md-3 col-lg-3 col-xl-3">
+                                        <div class="dropdown">
+                                            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-cog fa-1x"></i>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="index.php?controller=TransferirChat&Id=${consulta.id}">Transferir</a></li>
+                                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+                                `;
+                });
+                $('#tbodySala').html(tbody);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+    })
+
+    $.ajax({
+        type: "POST",
+        url: "FiltrandoSalaNav",
+        success: function (Respuesta) {
+            //console.log(Respuesta);
+            var json = JSON.parse(Respuesta);
+            var tbody = '';
+            //console.log(json);
+            $.each(json.dialogs, function (i, consulta) {
+                tbody += `
+                <form action="AbrirSalaChat" method="post">
+                <div class="d-grid">
+                    <button type="submit" name="btnAbrirChat" value="${consulta.id}" class="btn btn-outline-success rounded-1" target="__blank">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-3 col-md-3 col-lg-3 col-xl-3">
+                                    <img src="${consulta.image}" class="img-thumbnail rounded float-start" width="40px">
+                                </div>
+                                <div class="col-6 col-md-6 col-lg-6 col-xl-6">
+                                ${consulta.name}
+                                </div>
+                                <div class="col-3 col-md-3 col-lg-3 col-xl-3">
+                                    <div class="dropdown">
+                                        <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-cog fa-1x"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item" href="index.php?controller=TransferirChat&Id=${consulta.id}">Transferir</a></li>
+                                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </form>
+                            `;
+
+            });
+            $('#tbodySala').html(tbody);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
+}
 
 
 
@@ -693,9 +796,6 @@ var Tooltip = function () {
 
 
 //TODO LO RELACIONADO CON EL CHAT
-//Enviar mensajes de chat
-
-
 //Mostrar Mensajes de chat individual
 var MostrarMensajesChat = function () {
 

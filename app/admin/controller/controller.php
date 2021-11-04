@@ -10,7 +10,7 @@ function higher()
 
 function Nav()
 {
-    $user = $_SESSION['Admin'];
+/*     $user = $_SESSION['Admin'];
     //Recibiendo Salas de chat abiertas desde la app de whatsapp
     $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
 
@@ -35,7 +35,7 @@ function Nav()
     } else {
         $consulta = '<center>No existe Token</center>';
         echo $consulta;
-    }
+    } */
 
     require_once 'app/admin/views/assets/menu.phtml';
 }
@@ -48,6 +48,60 @@ function lower()
 
 class controller
 {
+
+    //Filtrando Sala desde Nav
+    public static function FiltrandoSalaNav()
+    {
+        $filtrarNav = '';
+        $user = $_SESSION['Admin'];
+        if (!isset($_POST['filtrarNav'])) {
+
+            //Recibiendo Salas de chat abiertas desde la app de whatsapp
+            $AwebT = mysqli_fetch_assoc(crud::Read(query::ReadAwebT($user)));
+            if (isset($AwebT['Instance']) && isset($AwebT['Token'])) {
+                $ChatApi = new ChatApi($AwebT['Instance'], $AwebT['Token']);
+                $json = $ChatApi->Dialogs();
+                echo $json;
+
+                //Insercion a la base de Datos de los dialogs consultados a la APi de Whatsapp
+                $array = array();
+                $array = json_decode($json, true);
+                foreach ($array as $key => $value) {
+                    $j = count($value);
+                    $i = 0;
+                    $name = array();
+                    while ($i < $j) {
+                        $value[$i]['user'] = $user;
+                        $name[$i]['name'] = str_replace(' ', '', $value[$i]['name']);
+                        crud::Create(query::CreateDialogs($value[$i]['id'], $name[$i]['name'], $value[$i]['image'], $value[$i]['last_time'], $value[$i]['user']));
+                        crud::Update(query::UpdateImageDialogs($value[$i]['id'], $value[$i]['image']));
+                        $i++;
+                    }
+                }
+            }
+        } else {
+            $filtrarNav = $_POST['filtrarNav'];
+
+            //Salas de chat almacenadas en base de datos
+            $consulta = crud::Read(query::ReadDialogsByName($filtrarNav));
+            $i = 0;
+            $Array = array();
+            while ($rows = mysqli_fetch_assoc($consulta)) {
+                $Array[$i]['id'] = $rows['id'];
+                $Array[$i]['name'] = $rows['name'];
+                $Array[$i]['image'] = $rows['image'];
+                $Array[$i]['last_time'] = $rows['last_time'];
+                $Array[$i]['abierto'] = $rows['abierto'];
+                $Array[$i]['seguimiento'] = $rows['seguimiento'];
+                $Array[$i]['Asignador'] = $rows['Asignador'];
+                $Array[$i]['idAgentes'] = $rows['idAgentes'];
+                $i++;
+            }
+            print  json_encode($Array, JSON_PRETTY_PRINT);
+        }
+    }
+
+
     //DashBoard
     public static function Inicio()
     {
