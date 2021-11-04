@@ -589,6 +589,19 @@ var FiltrandoSalaNav = function () {
 
 
     });
+
+    $.ajax({
+        type: "POST",
+        url: "FiltrandoSalaNav",
+        success: function (Respuesta) {
+            console.log(Respuesta);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }
+    });
 }
 
 
