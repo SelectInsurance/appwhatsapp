@@ -26,6 +26,7 @@ $(document).ready(function () {
     MostrarModalTablaChatAcumulado();
     MostrarModalTablaChatCerrados();
     MostrarModalTablaChatAsignados();
+    FiltrandoSalaNav();
 });
 
 //AQUI ENCONTRARAS TODOS LOS SETINTERVAL
@@ -65,10 +66,6 @@ var SettIntervals = function () {
 
     setInterval('MostrarModalTablaChatAbierto()', 3000);
     var interval = setInterval('MostrarModalTablaChatAbierto()', 3000);
-    clearInterval(interval);
-
-    setInterval('FiltrandoSalaNav();', 3000);
-    var interval = setInterval('FiltrandoSalaNav();', 3000);
     clearInterval(interval);
 }
 //
