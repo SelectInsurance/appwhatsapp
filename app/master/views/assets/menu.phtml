@@ -8,10 +8,10 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <form action="" method="post">
+                    <form id="frmFiltroDialogNav">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="Filtro" id="floatingInput" placeholder="Usuario" autocomplete="off">
-                            <label for="floatingInput"><i class="fas fa-search"></i> Filtrar</label>
+                            <input type="text" class="form-control" name="filtrarNav" id="filtrarNav" placeholder="Usuario" autocomplete="off">
+                            <label for="filtrarNav"><i class="fas fa-search"></i> Filtrar</label>
                         </div>
                     </form>
                 </div>
@@ -19,40 +19,32 @@
         </div>
     </div>
     <div class="offcanvas-body ScrollMinimo shadow border">
-        <?php if (!is_string($consulta)) : ?>
-            <?php while ($rows = mysqli_fetch_assoc($consulta)) : ?>
-                <form action="AbrirSalaChat" method="post">
-                    <div class="d-grid">
-                        <button type="submit" name="btnAbrirChat" value="<?= $rows['id'] ?>" class="btn btn-outline-success rounded-1" target="__blank">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-3 col-md-3 col-lg-3 col-xl-3">
-                                        <img src="<?php if (!empty($rows['image'])) {
-                                                        print $rows['image'];
-                                                    } else {
-                                                        print 'app\master\views\assets\css\images\sinfoto.webp';
-                                                    }  ?>" class="img-thumbnail rounded float-start" width="40px">
-                                    </div>
-                                    <div class="col-6 col-md-6 col-lg-6 col-xl-6">
-                                        <?= $rows['name'] ?>
-                                    </div>
-                                    <div class="col-3 col-md-3 col-lg-3 col-xl-3">
-                                        <div class="dropdown">
-                                            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-cog fa-1x"></i>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="index.php?controller=TransferirChat&Id=<?= $rows['id'] ?>">Transferir</a></li>
-                                                <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+        <form action="AbrirSalaChat" method="post">
+            <div class="d-grid">
+                <button type="submit" name="btnAbrirChat" value="" class="btn btn-outline-success rounded-1" target="__blank">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-3 col-md-3 col-lg-3 col-xl-3">
+                                <img src="" class="img-thumbnail rounded float-start" width="40px">
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-6 col-xl-6">
+
+                            </div>
+                            <div class="col-3 col-md-3 col-lg-3 col-xl-3">
+                                <div class="dropdown">
+                                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-cog fa-1x"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="index.php?controller=TransferirChat&Id=">Transferir</a></li>
+                                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                        </button>
+                        </div>
                     </div>
-                </form>
-            <?php endwhile; ?>
-        <?php endif; ?>
+                </button>
+            </div>
+        </form>
     </div>
 </div>

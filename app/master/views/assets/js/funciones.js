@@ -26,6 +26,7 @@ $(document).ready(function () {
     MostrarModalTablaChatAcumulado();
     MostrarModalTablaChatCerrados();
     MostrarModalTablaChatAsignados();
+    FiltrandoSalaNav();
 });
 
 //AQUI ENCONTRARAS TODOS LOS SETINTERVAL
@@ -562,6 +563,32 @@ var Tooltip = function () {
     //
 
 }
+
+//Funcion para filtrar salas desde el Nav
+var FiltrandoSalaNav = function () {
+    $('#filtrarNav').keyup(function (e) {
+
+        var frm = $('#frmFiltroDialogNav').serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "FiltrandoSalaNav",
+            data: frm,
+            success: function (Respuesta) {
+                console.log(Respuesta);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
+        });
+
+
+    });
+}
+
+
 //Function para reiniciar instancia de whatsapp para actualizar todos los perfiles y fotos
 var UpdateInstance = function () {
     $.ajax({
