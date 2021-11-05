@@ -10,7 +10,6 @@ $(document).ready(function () {
     DeleteMensajeDespedida();
     CreateTransferirChat();
     ReadTransferenciaChat();
-    ReadSalasChatTransferencia();
     ReadDialogsAsignadosAgente();
     ReadAgentes();
     IngresarAgente();
@@ -1069,29 +1068,6 @@ var ReadTransferenciaChat = function () {
         }
     });*/
 };
-
-
-//Consultar salas de chat para transferir
-var ReadSalasChatTransferencia = function () {
-    $.ajax({
-        type: "GET",
-        url: "ConsultandoSalasChatSelector",
-        success: function (Respuesta) {
-            var json = JSON.parse(Respuesta);
-            if (json != null) {
-                var select = '';
-                json.forEach(
-                    consulta => {
-                        select += `
-                        <option value="${consulta.name}">${consulta.name}</option>
-                        `
-                    }
-                );
-                $('#SeleccionSalaChat').html(select);
-            }
-        }
-    });
-}
 
 
 //Transferir Sala a Agente

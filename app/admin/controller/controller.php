@@ -727,11 +727,15 @@ class controller
     //Modulo Transferir chat
     public static function TransferirChat()
     {
+        $id = str_replace('@c.us', '', $_GET['Id']);
         higher();
         Nav();
+
+
         require_once 'app/admin/views/modules/TransferenciaChat/TransferenciaChat.phtml';
         lower();
     }
+
 
     //Consultando Datos del Modulo Transferir
     public static function ConsultandoUsuarioATransferir()
@@ -742,23 +746,6 @@ class controller
             $rows["data"][] = $Resultado;
         }
         echo json_encode($rows);
-    }
-
-    //Consultando Salas de chat en etiqueta Select
-    public static function ConsultandoSalasChatSelector()
-    {
-        $user = $_SESSION['Admin'];
-        $consulta = crud::Read(query::ReadDialogs($user));
-        if (!empty($consulta)) {
-            $i = 0;
-            $Array = array();
-            while ($rows = mysqli_fetch_assoc($consulta)) {
-                $Array[$i]['name'] = $rows['name'];
-                $i++;
-            }
-            $json = json_encode($Array, JSON_PRETTY_PRINT);
-            print $json;
-        }
     }
 
     //Transfiriendo Sala Chat a un Agente
