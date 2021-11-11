@@ -85,7 +85,7 @@ var MostrarModalTablaChatAcumulado = function () {
         var form = $('#frmFiltrarTotalSala').serialize();
         $.ajax({
             type: "POST",
-            url: "MostrarTablaChatAcumulado",
+            url: "?controller=MostrarTablaChatAcumulado",
             data: form,
             success: function (Respuesta) {
                 //console.log(Respuesta);
@@ -134,7 +134,7 @@ var MostrarModalTablaChatAcumulado = function () {
 
     $.ajax({
         type: "POST",
-        url: "MostrarTablaChatAcumulado",
+        url: "?controller=MostrarTablaChatAcumulado",
         success: function (Respuesta) {
             //console.log(Respuesta);
             var json = JSON.parse(Respuesta);
@@ -187,7 +187,7 @@ var MostrarModalTablaChatAbierto = function () {
 
         $.ajax({
             type: "POST",
-            url: "MostrarTablaChatAbiertos",
+            url: "?controller=MostrarTablaChatAbiertos",
             data: frm,
             success: function (Respuesta) {
                 //console.log(Respuesta);
@@ -236,7 +236,7 @@ var MostrarModalTablaChatAbierto = function () {
 
     $.ajax({
         type: "POST",
-        url: "MostrarTablaChatAbiertos",
+        url: "?controller=MostrarTablaChatAbiertos",
         success: function (Respuesta) {
             //console.log(Respuesta);
             var json = JSON.parse(Respuesta);
@@ -288,7 +288,7 @@ var MostrarModalTablaChatCerrados = function () {
         var form = $('#frmFiltrarCerradosSala').serialize();
         $.ajax({
             type: "POST",
-            url: "MostrarTablaChatCerrados",
+            url: "?controller=MostrarTablaChatCerrados",
             data: form,
             success: function (Respuesta) {
                 //console.log(Respuesta);
@@ -338,7 +338,7 @@ var MostrarModalTablaChatCerrados = function () {
     });
     $.ajax({
         type: "POST",
-        url: "MostrarTablaChatCerrados",
+        url: "?controller=MostrarTablaChatCerrados",
         success: function (Respuesta) {
             //console.log(Respuesta);
             var json = JSON.parse(Respuesta);
@@ -390,7 +390,7 @@ var MostrarModalTablaChatAsignados = function () {
         var form = $('#frmFiltrarAsignadosSala').serialize();
         $.ajax({
             type: "POST",
-            url: "MostrarTablaChatAsignados",
+            url: "?controller=MostrarTablaChatAsignados",
             data: form,
             success: function (Respuesta) {
                 //console.log(Respuesta);
@@ -440,7 +440,7 @@ var MostrarModalTablaChatAsignados = function () {
     });
     $.ajax({
         type: "POST",
-        url: "MostrarTablaChatAsignados",
+        url: "?controller=MostrarTablaChatAsignados",
         success: function (Respuesta) {
             //console.log(Respuesta);
             var json = JSON.parse(Respuesta);
@@ -570,7 +570,7 @@ var FiltrandoSalaNav = function () {
         var frm = $('#frmFiltroDialogNav').serialize();
         $.ajax({
             type: "POST",
-            url: "FiltrandoSalaNav",
+            url: "?controller=FiltrandoSalaNav",
             data: frm,
             success: function (Respuesta) {
                 //console.log(Respuesta);
@@ -623,7 +623,7 @@ var FiltrandoSalaNav = function () {
 
     $.ajax({
         type: "POST",
-        url: "FiltrandoSalaNav",
+        url: "?controller=FiltrandoSalaNav",
         success: function (Respuesta) {
             //console.log(Respuesta);
             var json = JSON.parse(Respuesta);
@@ -681,7 +681,7 @@ var FiltrandoSalaNav = function () {
 var UpdateInstance = function () {
     $.ajax({
         type: "POST",
-        url: "ReiniciarEstancia",
+        url: "?controller=ReiniciarEstancia",
         success: function (Respuesta) {
             console.log('Reinicio Exitoso de la instancia ' + Respuesta);
         },
@@ -720,7 +720,7 @@ let IngresarAgente = function () {
         let Formulario = $('#frmIngresarAgente').serialize();
         $.ajax({
             type: "POST",
-            url: "AgregarAgente",
+            url: "?controller=AgregarAgente",
             data: Formulario,
             success: function (Respuesta) {
                 $('#RespuestaIngresoAgentes').css('color', 'Green').html(Respuesta);
@@ -768,7 +768,7 @@ var CambiarContrasena = function () {
 var ReadAccesWebToken = function () {
     $.ajax({
         type: "GET",
-        url: "ReadAccesWebToken",
+        url: "?controller=ReadAccesWebToken",
         success: function (Respuesta) {
             let json = JSON.parse(Respuesta);
             let tbody = '';
@@ -801,7 +801,7 @@ var IngresoAccessWebToken = function () {
 
         $.ajax({
             type: "POST",
-            url: "InsertAccesWebToken",
+            url: "?controller=InsertAccesWebToken",
             data: form,
             success: function (Respuesta) {
                 $('#RespuestaIngresoToken').html(Respuesta)
@@ -860,7 +860,7 @@ var ReadTransferenciaChat = function () {
     });
     /*$.ajax({
         type: "GET",
-        url: "ConsultandoUsuarioATransferir",
+        url: "?controller=ConsultandoUsuarioATransferir",
         success: function (Respuesta) {
             var json = JSON.parse(Respuesta);
             var tbody = '';
@@ -892,7 +892,7 @@ var CreateTransferirChat = function () {
 
         $.ajax({
             type: "POST",
-            url: "UpdateDialogs",
+            url: "?controller=UpdateDialogs",
             data: form,
             dataType: "text",
             success: function (Respuesta) {
@@ -942,7 +942,7 @@ var DatatableDialogAgente = function () {
 var MostrarCantidadSalasChat = function () {
     $.ajax({
         type: "POST",
-        url: "CantidadSalasChat",
+        url: "?controller=CantidadSalasChat",
         success: function (Respuesta) {
             $('#CardSalasPendientes').html(Respuesta);
             //console.log(Respuesta);
@@ -959,7 +959,7 @@ var MostrarCantidadSalasChat = function () {
 var MostrarCantidadSalasChatAbiertas = function () {
     $.ajax({
         type: "POST",
-        url: "MostrandoChatAbiertos",
+        url: "?controller=MostrandoChatAbiertos",
         success: function (Respuesta) {
             $('#CardSalasAbiertas').html(Respuesta);
         },
@@ -976,7 +976,7 @@ var MostrarCantidadSalasChatAbiertas = function () {
 var MostrarCantidadSalasChatCerradas = function () {
     $.ajax({
         type: "POST",
-        url: "MostrandoChatCerrados",
+        url: "?controller=MostrandoChatCerrados",
         dataType: "text",
         success: function (Respuesta) {
             //console.log(Respuesta);
@@ -995,7 +995,7 @@ var MostrarCantidadSalasChatCerradas = function () {
 var MostrarCantidadSalasChatAsignadas = function () {
     $.ajax({
         type: "POST",
-        url: "MostrandoChatAsignados",
+        url: "?controller=MostrandoChatAsignados",
         success: function (Respuesta) {
             //console.log(Respuesta);
             $('#CardSalasAsignadas').html(Respuesta);
@@ -1013,7 +1013,7 @@ var MostrarCantidadSalasChatAsignadas = function () {
 var TablaChatAsignadoAgente = function () {
     $.ajax({
         type: "POST",
-        url: "TablaChatAsignadoAgente",
+        url: "?controller=TablaChatAsignadoAgente",
         success: function (Respuesta) {
             let json = JSON.parse(Respuesta);
             //console.log();
@@ -1097,7 +1097,7 @@ var MostrarMensajesChat = function () {
     if (form != '') {
         $.ajax({
             type: "POST",
-            url: "MostrarMensajesChat",
+            url: "?controller=MostrarMensajesChat",
             data: form,
             success: function (Respuesta) {
                 let json = JSON.parse(Respuesta);
@@ -1138,7 +1138,7 @@ var MostrarMensajesChat = function () {
         //Mostrar Cliente Conectado
         $.ajax({
             type: "POST",
-            url: "MostrarEstadoConectado",
+            url: "?controller=MostrarEstadoConectado",
             data: form,
             success: function (Respuesta) {
                 //var json = JSON.parse(Respuesta);
@@ -1165,7 +1165,7 @@ var EnviarMensajesChat = function () {
         var form = $('#frmMostrarChat').serialize();
         $.ajax({
             type: "POST",
-            url: "EnviarMensajesChat",
+            url: "?controller=EnviarMensajesChat",
             data: form,
             success: function (Respuesta) {
                 console.log(Respuesta);
@@ -1186,7 +1186,7 @@ var EnviarMensajesChat = function () {
         var form = $('#frmMostrarChat').serialize();
         $.ajax({
             type: "POST",
-            url: "EnviarMensajesChat",
+            url: "?controller=EnviarMensajesChat",
             data: form,
             success: function (Respuesta) {
                 console.log(Respuesta);
@@ -1246,7 +1246,7 @@ var Typing = function () {
         //console.log(Escritura);
         $.ajax({
             type: "POST",
-            url: "MostrarEscribiendoaCliente",
+            url: "?controller=MostrarEscribiendoaCliente",
             data: form,
             success: function (response) {
                 console.log(response);
@@ -1269,7 +1269,7 @@ var InsertarMensajeDespedida = function () {
 
         $.ajax({
             type: "POST",
-            url: "CreateMensajeDespedida",
+            url: "?controller=CreateMensajeDespedida",
             data: form,
             success: function (Respuesta) {
                 console.log(Respuesta);
@@ -1290,7 +1290,7 @@ var InsertarMensajeDespedida = function () {
 var MostrarMensajesDespedida = function () {
     $.ajax({
         type: "GET",
-        url: "MostrandoMensajeDespedida",
+        url: "?controller=MostrandoMensajeDespedida",
         success: function (Respuesta) {
             if (Respuesta != null) {
                 var json = JSON.parse(Respuesta);
@@ -1322,7 +1322,7 @@ var DeleteMensajeDespedida = function () {
         var form = $('#form_MensajeDespedida').serialize();
         $.ajax({
             type: "POST",
-            url: "DeleteMensajeDespedida",
+            url: "?controller=DeleteMensajeDespedida",
             data: form,
             success: function (Respuesta) {
                 console.log(Respuesta);
@@ -1351,7 +1351,7 @@ var ReadConversacionDialogSeleccionadoTablaConversaciones = function () {
 
         $.ajax({
             type: "POST",
-            url: "MostrarConversacionDialogAsignadoAgente",
+            url: "?controller=MostrarConversacionDialogAsignadoAgente",
             data: form,
             success: function (Respuesta) {
                 var json = JSON.parse(Respuesta);
@@ -1421,7 +1421,7 @@ var SearchDialogs = function () {
     var TeclasPrecionadas = $('#frmFiltrarSearchDialogs').serialize();
     $.ajax({
         type: "POST",
-        url: "FiltrarDatosTabla",
+        url: "?controller=FiltrarDatosTabla",
         data: TeclasPrecionadas,
         success: function (Respuesta) {
             //console.log(Respuesta);
@@ -1469,7 +1469,7 @@ var SearchDialogs = function () {
         var TeclasPrecionadas = $('#frmFiltrarSearchDialogs').serialize();
         $.ajax({
             type: "POST",
-            url: "FiltrarDatosTabla",
+            url: "?controller=FiltrarDatosTabla",
             data: TeclasPrecionadas,
             success: function (Respuesta) {
                 var json = JSON.parse(Respuesta);
@@ -1532,7 +1532,7 @@ var SearchDialogs = function () {
     if (form != '') {
         $.ajax({
             type: "POST",
-            url: "MostrarConversacionesConsulta",
+            url: "?controller=MostrarConversacionesConsulta",
             data: form,
             success: function (Respuesta) {
                 console.log(Respuesta);

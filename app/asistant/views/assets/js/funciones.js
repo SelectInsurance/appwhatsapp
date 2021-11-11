@@ -23,7 +23,7 @@ var EnviarMensajesChat = function () {
         var form = $('#frmMostrarChat').serialize();
         $.ajax({
             type: "POST",
-            url: "EnviarMensajesChat",
+            url: "?controller=EnviarMensajesChat",
             data: form,
             success: function (Respuesta) {
                 console.log(Respuesta);
@@ -71,7 +71,7 @@ var MostrarMensajesChat = function () {
     if (form != '') {
         $.ajax({
             type: "POST",
-            url: "MostrarMensajesChat",
+            url: "?controller=MostrarMensajesChat",
             data: form,
             success: function (Respuesta) {
                 //console.log(Respuesta);
@@ -125,7 +125,7 @@ var EnviarMensajesDesdeEnter = function () {
         var form = $('#frmMostrarChat').serialize();
         $.ajax({
             type: "POST",
-            url: "EnviarMensajesChat",
+            url: "?controller=EnviarMensajesChat",
             data: form,
             success: function (Respuesta) {
                 console.log(Respuesta);

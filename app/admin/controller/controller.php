@@ -148,7 +148,7 @@ class controller
             require_once 'app/admin/views/modules/dashboard/dashboard.phtml';
             lower();
         } else {
-            header('Location:Login');
+            header('Location:?controller=Login');
         }
     }
 
@@ -156,7 +156,7 @@ class controller
     //Validacion cuando ingresan al login logeados
     public static function Login()
     {
-        header('Location:Inicio');
+        header('Location:?controller=Inicio');
     }
 
 

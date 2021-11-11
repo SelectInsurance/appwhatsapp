@@ -90,14 +90,14 @@ class controller
             require_once 'app/asistant/views/modules/dashboard/dashboard.phtml';
             lower();
         } else {
-            header('Location:Login');
+            header('Location:?controller=Login');
         }
     }
 
     //Validacion cuando ingresan al login logeados
     public static function Login()
     {
-        header('Location:Inicio');
+        header('Location:?controller=Inicio');
     }
 
     //Cerrar Session
