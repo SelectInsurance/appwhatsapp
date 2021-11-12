@@ -698,7 +698,7 @@ var ReadAgentes = function () {
     var table = $('#TablaAgentes').DataTable({
         "ajax": {
             "method": "POST",
-            "url": "Datatable"
+            "url": "?controller=Datatable"
         },
         "columns": [
             { "data": "usuario" },
