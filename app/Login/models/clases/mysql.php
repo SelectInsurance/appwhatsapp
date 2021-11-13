@@ -13,10 +13,10 @@ class mysql
         $this->user = 'root';
         $this->pass = 'Clau32290398';
         $this->db = 'Whatsapp';  */
-        $this->host = HOST;
-        $this->user = USER;
-        $this->pass = PASSWORD ;
-        $this->db = DB;
+        $this->host = 'localhost';
+        $this->user = 'root';
+        $this->pass = 'Seguros2022.';   //Clau32290398
+        $this->db = 'Whatsapp';
     }
 
     public function Conexion()
