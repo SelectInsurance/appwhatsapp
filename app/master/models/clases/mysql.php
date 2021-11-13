@@ -11,7 +11,7 @@ class mysql
     {
 /*         $this->host = 'appwhatsapp.crzqomk2sbtp.us-east-2.rds.amazonaws.com';
         $this->user = 'root';
-        $this->pass = 'Clau32290398';
+        $this->pass = 'Clau32299803';
         $this->db = 'Whatsapp';  */
        $this->host = HOST;
         $this->user = USER;

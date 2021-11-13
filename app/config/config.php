@@ -43,14 +43,13 @@ define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);
  * 
  */
 
-define('HOST', 'localhost');
+define('HOST', 'appwhatsapp.crzqomk2sbtp.us-east-2.rds.amazonaws.com');
 define('DB', 'Whatsapp');
-define('USER', 'pma');
-define('PASSWORD', 'Seguros2022.');
+define('USER', 'root');
+define('PASSWORD', 'Clau32299803');
 define('CHARSET', 'utf8mb4');
 
-define('COMPANY_NAME', "Store");
+
 
 define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 // set a constant that holds the project's "application" folder, like "/var/www/application".
-define('APP', ROOT . 'store-app' . DIRECTORY_SEPARATOR);
