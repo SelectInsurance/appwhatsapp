@@ -14,7 +14,7 @@ class mysql
         $this->pass = 'Clau32290398';
         $this->db = 'Whatsapp';  */
         $this->host = 'localhost';
-        $this->user = 'root';
+        $this->user = 'pma';
         $this->pass = 'Seguros2022.';   //Clau32290398
         $this->db = 'Whatsapp';
     }
