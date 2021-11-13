@@ -43,7 +43,13 @@ define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);
  * 
  */
 
+define('HOST', 'localhost');
+define('DB', 'Whatsapp');
+define('USER', 'root');
+define('PASSWORD', 'Seguros2022.');
+define('CHARSET', 'utf8mb4');
 
+define('COMPANY_NAME', "Store");
 
 define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 // set a constant that holds the project's "application" folder, like "/var/www/application".

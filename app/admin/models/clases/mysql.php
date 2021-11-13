@@ -9,14 +9,14 @@ class mysql
 
     public function __construct()
     {
-        $this->host = 'appwhatsapp.crzqomk2sbtp.us-east-2.rds.amazonaws.com';
+        /* $this->host = 'appwhatsapp.crzqomk2sbtp.us-east-2.rds.amazonaws.com';
         $this->user = 'root';
         $this->pass = 'Clau32290398';
-        $this->db = 'Whatsapp'; 
-/*         $this->host = 'localhost';
-        $this->user = 'root';
-        $this->pass = '';
-        $this->db = 'whatsapp'; */
+        $this->db = 'Whatsapp';  */
+        $this->host = HOST;
+        $this->user = USER;
+        $this->pass = PASSWORD ;
+        $this->db = DB;
     }
 
     public function Conexion()
