@@ -190,7 +190,7 @@ class controller
         $correo = $_POST['correo'];
         $password = md5($_POST['password']);
         $ConfirmacionPassword = md5($_POST['ConfirmacionPassword']);
-        
+
         //Validacion de pass identica
         if ($password === $ConfirmacionPassword) {
 
@@ -214,12 +214,12 @@ class controller
                     $creador,
                     $user
                 ));
-            } elseif ($admin === TRUE && $master === FALSE) {
+            } elseif ($admin == TRUE && $master == FALSE) {
                 crud::Create(query::CreateUsuario(
                     $user,
                     $password,
-                    true,
-                    false
+                    1,
+                    0
                 ));
 
                 crud::Create(query::CreateAgente(
