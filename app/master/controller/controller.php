@@ -236,8 +236,8 @@ class controller
                 crud::Create(query::CreateUsuario(
                     $user,
                     $password,
-                    false,
-                    false
+                    0,
+                    0
                 ));
 
                 crud::Create(query::CreateAgente(
@@ -253,30 +253,7 @@ class controller
             }
 
             echo 'Agente Registrado Correctamente';
-            echo $user;
-            echo "<br>";
-            echo $password;
-            echo "<br>";
-            echo $admin;
-            echo "<br>";
-            echo $master;
-            echo "<br>";
-            echo    $nombre;
-            echo "<br>";
-            echo        $apellido;
-            echo "<br>";
-            echo        $documento;
-            echo "<br>";
-            echo        $telefono;
-            echo "<br>";
-            echo        $direccion;
-            echo "<br>";
-            echo        $correo;
-            echo "<br>";
-            echo        $creador;
-            echo "<br>";
-            echo        $user;
-            echo "<br>";
+            
         } else {
             echo 'Las contraseñas no coinciden';
         }
