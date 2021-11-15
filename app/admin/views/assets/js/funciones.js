@@ -704,7 +704,7 @@ var FiltrandoSalaNav = function () {
                     var tbody = '';
                     $.each(json, function (i, consulta) {
                         tbody += `
-                                    <form action="AbrirSalaChat" method="post">
+                                    <form action="?controller=AbrirSalaChat" method="post">
                                         <div class="d-grid">
                                             <button type="submit" name="btnAbrirChat" value="${consulta.id}" class="btn btn-outline-success m-0 p-0 rounded-1" target="__blank">
                                                 <div class="container-fluid">
@@ -756,7 +756,7 @@ var FiltrandoSalaNav = function () {
                 var tbody = '';
                 $.each(json.dialogs, function (i, consulta) {
                     tbody += `
-                                <form action="AbrirSalaChat" method="post">
+                                <form action="?controller=AbrirSalaChat" method="post">
                                     <div class="d-grid">
                                         <button type="submit" name="btnAbrirChat" value="${consulta.id}" class="btn btn-outline-success rounded-1" target="__blank">
                                             <div class="container-fluid">
