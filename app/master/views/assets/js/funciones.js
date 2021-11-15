@@ -113,7 +113,7 @@ var MostrarModalTablaChatAcumulado = function () {
                                     <td>${SinAsignar}</td>
                                     <td>${idAgentes}</td>
                                     <td>
-                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <form action="?controller=ConsultandoSalaDesdeModalTotal" method="post">
                                     <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                     </form>
                                     </td>
@@ -161,7 +161,7 @@ var MostrarModalTablaChatAcumulado = function () {
                                 <td>${SinAsignar}</td>
                                 <td>${idAgentes}</td>
                                 <td>
-                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <form action="?controller=ConsultandoSalaDesdeModalTotal" method="post">
                                 <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                 </form>
                                 </td>
@@ -215,7 +215,7 @@ var MostrarModalTablaChatAbierto = function () {
                                     <td>${SinAsignar}</td>
                                     <td>${SinAgentes}</td>
                                     <td>
-                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <form action="?controller=ConsultandoSalaDesdeModalTotal" method="post">
                                     <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                     </form>
                                     </td>
@@ -263,7 +263,7 @@ var MostrarModalTablaChatAbierto = function () {
                                 <td>${SinAsignar}</td>
                                 <td>${SinAgentes}</td>
                                 <td>
-                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <form action="?controller=ConsultandoSalaDesdeModalTotal" method="post">
                                 <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                 </form>
                                 </td>
@@ -316,7 +316,7 @@ var MostrarModalTablaChatCerrados = function () {
                                     <td>${SinAsignar}</td>
                                     <td>${SinAgentes}</td>
                                     <td>
-                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <form action="?controller=ConsultandoSalaDesdeModalTotal" method="post">
                                     <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                     </form>
                                     </td>
@@ -365,7 +365,7 @@ var MostrarModalTablaChatCerrados = function () {
                                 <td>${SinAsignar}</td>
                                 <td>${SinAgentes}</td>
                                 <td>
-                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <form action="?controller=ConsultandoSalaDesdeModalTotal" method="post">
                                 <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                 </form>
                                 </td>
@@ -418,7 +418,7 @@ var MostrarModalTablaChatAsignados = function () {
                                     <td>${SinAsignar}</td>
                                     <td>${SinAgentes}</td>
                                     <td>
-                                    <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                    <form action="?controller=ConsultandoSalaDesdeModalTotal" method="post">
                                     <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                     </form>
                                     </td>
@@ -467,7 +467,7 @@ var MostrarModalTablaChatAsignados = function () {
                                 <td>${SinAsignar}</td>
                                 <td>${SinAgentes}</td>
                                 <td>
-                                <form action="ConsultandoSalaDesdeModalTotal" method="post">
+                                <form action="?controller=ConsultandoSalaDesdeModalTotal" method="post">
                                 <button type="submit" value="${consulta.id}" class="btn btn-success btn-sm" name="btnIdConsultarSala[]"><i class="far fa-share-square"></i></button></input>
                                 </form>
                                 </td>
