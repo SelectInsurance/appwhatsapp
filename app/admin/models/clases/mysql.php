@@ -12,7 +12,8 @@ class mysql
         /* $this->host = 'appwhatsapp.crzqomk2sbtp.us-east-2.rds.amazonaws.com';
         $this->user = 'root';
         $this->pass = 'Clau32290398';
-        $this->db = 'Whatsapp';  */
+        $this->db = 'Whatsapp';  *r
+        
         $this->host = 'localhost';
         $this->user = 'pma';
         $this->pass = 'Seguros2022.';
