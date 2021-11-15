@@ -214,12 +214,30 @@ class controller
                     $creador,
                     $user
                 ));
-            } else {
+            } elseif ($admin === TRUE && $master === FALSE) {
                 crud::Create(query::CreateUsuario(
                     $user,
                     $password,
                     $admin,
-                    $master
+                    false
+                ));
+
+                crud::Create(query::CreateAgente(
+                    $nombre,
+                    $apellido,
+                    $documento,
+                    $telefono,
+                    $direccion,
+                    $correo,
+                    $creador,
+                    $user
+                ));
+            } else {
+                crud::Create(query::CreateUsuario(
+                    $user,
+                    $password,
+                    false,
+                    false
                 ));
 
                 crud::Create(query::CreateAgente(
@@ -233,31 +251,32 @@ class controller
                     $user
                 ));
             }
+
             echo 'Agente Registrado Correctamente';
             echo $user;
-            echo"<br>";
+            echo "<br>";
             echo $password;
-            echo"<br>";
+            echo "<br>";
             echo $admin;
-            echo"<br>";
+            echo "<br>";
             echo $master;
-            echo"<br>";
+            echo "<br>";
             echo    $nombre;
-            echo"<br>";
+            echo "<br>";
             echo        $apellido;
-            echo"<br>";
+            echo "<br>";
             echo        $documento;
-            echo"<br>";
+            echo "<br>";
             echo        $telefono;
-            echo"<br>";
+            echo "<br>";
             echo        $direccion;
-            echo"<br>";
+            echo "<br>";
             echo        $correo;
-            echo"<br>";
+            echo "<br>";
             echo        $creador;
-            echo"<br>";
+            echo "<br>";
             echo        $user;
-            echo"<br>";
+            echo "<br>";
         } else {
             echo 'Las contraseñas no coinciden';
         }
