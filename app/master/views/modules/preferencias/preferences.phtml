@@ -69,7 +69,7 @@
                             <div class="row">
                                 <?php while ($rows = mysqli_fetch_assoc($Resultado)) : ?>
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                                        <form action="CambiarContrasena" method="post">
+                                        <form action="?controller=CambiarContrasena" method="post">
                                             <div class="card" style="width: 18rem;">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center"><?= $rows['nombre'] ?></h5>
