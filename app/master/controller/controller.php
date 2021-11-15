@@ -190,7 +190,7 @@ class controller
         $correo = $_POST['correo'];
         $password = md5($_POST['password']);
         $ConfirmacionPassword = md5($_POST['ConfirmacionPassword']);
-
+        //haga un echo aca de todas las variables que obtiene datos de post
         //Validacion de pass identica
         if ($password === $ConfirmacionPassword) {
 
@@ -234,7 +234,18 @@ class controller
                 ));
             }
             echo 'Agente Registrado Correctamente';
-            
+            echo $user;
+            echo $password;
+            echo $admin;
+            echo $master;
+            echo    $nombre;
+            echo        $apellido;
+            echo        $documento;
+            echo        $telefono;
+            echo        $direccion;
+            echo        $correo;
+            echo        $creador;
+            echo        $user;
         } else {
             echo 'Las contraseñas no coinciden';
         }
