@@ -234,6 +234,7 @@ class controller
                 ));
             }
             echo 'Agente Registrado Correctamente';
+            
         } else {
             echo 'Las contraseñas no coinciden';
         }
