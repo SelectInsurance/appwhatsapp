@@ -268,7 +268,7 @@ class controller
             $confirmarNuevaContrasena = $_POST['ConfirmarNuevaContrasena'];
             if ($NuevaContrasena === $confirmarNuevaContrasena) {
                 crud::Update(query::UpdatePassword($User, md5($NuevaContrasena)));
-                header('Location:./Preferences');
+                header('Location:./?controller=Preferences');
             }
         }
     }
