@@ -848,7 +848,7 @@ var ReadTransferenciaChat = function () {
     var table = $('#TablaTransferirChat').DataTable({
         "ajax": {
             "method": "POST",
-            "url": "ConsultandoUsuarioATransferir"
+            "url": "?controller=ConsultandoUsuarioATransferir"
         },
         "columns": [
             { "data": "id" },

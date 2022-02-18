@@ -182,6 +182,7 @@ class  query
     public static function ReadConteoChatPendientes($user)
     {
         return "CALL SP_ConteoChatAgente('$user')";
+
     }
 
     //Mostrando Cantidad de chats cerrados
